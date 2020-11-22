@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Gill Sans";
+    src: url("/fonts/GillSans.ttc")
+}
+
 :root {
     --offwhite: #E3E2DF;
     --burgundy: #5D001E;
@@ -27,13 +32,16 @@ body {
 
 .map_bg {
     background-color: var(--burgundy);
+}
+
+.map {
     width: 40%;
     min-width: 500px;
 }
 
 .logo {
     font-size: 24px;
-    font-family: "Gill Sans";
+    font-family: "Gill Sans", arial, helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
     opacity: 80%;
@@ -86,7 +94,7 @@ body {
     line-height: 40px;
     font-size: 18px;
     color: var(--burgundy);
-    font-family: "Gill Sans";
+    font-family: "Gill Sans", arial, helvetica, sans-serif;
 }
 
 #fp-nav ul li .fp-tooltip {
