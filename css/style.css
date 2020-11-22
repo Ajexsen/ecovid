@@ -1,0 +1,94 @@
+:root {
+    --offwhite: #E3E2DF;
+    --burgundy: #5D001E;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.full {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.bg {
+    background-color: var(--offwhite);
+    position: fixed;
+}
+
+.fullheight {
+    height: 100%;
+    position: absolute;
+}
+
+.map_bg {
+    background-color: var(--burgundy);
+    width: 40%;
+    min-width: 500px;
+}
+
+.logo {
+    font-size: 24px;
+    font-family: "Gill Sans";
+    font-weight: bold;
+    position: absolute;
+    opacity: 80%;
+    left: 35px;
+    top: 35px;
+}
+
+.burgundy-text {
+    color: var(--burgundy);
+}
+
+.white-text {
+    color: var(--offwhite);
+}
+
+#fp-nav {
+    right: 12px !important;
+}
+
+#fp-nav ul li,
+.fp-slidesNav ul li {
+    width: 3px;
+    height: 40px !important;
+    margin: 8px 0 8px 0 !important;
+}
+
+#fp-nav ul li a.active span,
+#fp-nav ul li:hover a.active span{
+    height: 40px !important;
+    width: 4px !important;
+    border-radius: 0 !important;
+    margin: -20px 0 0 0 !important;
+    background: var(--burgundy);
+    border: solid var(--burgundy) 1px;
+    opacity: 70%;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    border-radius: 0 !important;
+    height: 40px !important;
+    width: 4px !important;
+    margin: -20px 0 0 0 !important;
+    background: none;
+    border: solid var(--burgundy) 1px;
+    opacity: 70%;
+}
+
+#fp-nav ul li .fp-tooltip {
+    line-height: 40px;
+    font-size: 18px;
+    color: var(--burgundy);
+    font-family: "Gill Sans";
+}
+
+#fp-nav ul li .fp-tooltip {
+    right: 10px;
+}
