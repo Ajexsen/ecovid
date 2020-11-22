@@ -1,2 +1,2 @@
-# infoVis14
-Information Visualization for COVID-19 (group 14)
+# InfoVis14
+Information Visualization for COVID-19 (Group 14)
