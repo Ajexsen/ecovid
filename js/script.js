@@ -9,7 +9,7 @@ new fullpage('#fullpage', {
 //opacity of background
 $(window).scroll(function() {
     let scrollTop = $(this).scrollTop();
-    $('.map_bg').css({
+    $('#map_bg').css({
         opacity: function() {
             let elementHeight = $(this).height();
             return (elementHeight - scrollTop) / elementHeight;
@@ -17,3 +17,10 @@ $(window).scroll(function() {
     });
 });
 
+//map
+jQuery('#map_svg').vectorMap({
+    map: 'germany_en',
+    backgroundColor: null,
+    enableZoom: false,
+    showTooltip: false
+});

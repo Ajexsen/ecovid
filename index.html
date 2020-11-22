@@ -10,24 +10,63 @@
 
 <div id="bg" class="full bg">
     <div id="logo_burgundy" class="logo burgundy-text">XIV.</div>
-    <div id="map_bg" class="fullheight map_bg map">
+    <div id="map_bg" class="fullheight map_bg map_container">
         <div id="logo_white" class="logo white-text">XIV.</div>
     </div>
 </div>
-<div id="fullpage">
-    <div id="section0" class="section">
-        <div id="map" class="fullheight map"></div>
+<div id="fullpage" class="fullwidth">
+    <div id="section0" class="section fullheight flexrow_parent">
+        <div id="oneleft" class="fullheight map_container flexleft">
+            <div id="map" class="map">
+                <svg id="map_svg" class="map_svg"></svg>
+            </div>
+        </div>
+        <div id="onerightcontainter" class="fullheight flexright onerightcontainter">
+            <div id="oneright" class="flexcolumn oneright">
+                <div id="onerighttop" class="flexnone flexrow">
+                    <div id="stat1" class="flex1 flexcolumn stat stat_left">
+                        <div class="stat_title">Total Cases</div>
+                        <div class="stat_value">000000</div>
+                    </div>
+                    <div id="stat2" class="flex1 stat stat_left">
+                        <div class="stat_title">New Cases</div>
+                        <div class="stat_value">000000</div>
+                    </div>
+                    <div id="stat3" class="flex1 stat stat_left">
+                        <div class="stat_title">Total Deaths</div>
+                        <div class="stat_value">000000</div>
+                    </div>
+                    <div id="stat4" class="flex1 stat stat_left">
+                        <div class="stat_title">New Deaths</div>
+                        <div class="stat_value">000000</div>
+                    </div>
+                    <div id="stat5" class="flex1 stat">
+                        <div class="stat_title">Death Rate</div>
+                        <div class="stat_value">00.00%</div>
+                    </div>
+                </div>
+                <div id="onerightmiddle" class="flex2">
+
+                </div>
+                <div id="onerightbottom" class="flex3">
+
+                </div>
+            </div>
+        </div>
     </div>
     <div id="section1" class="section">
-
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="js/jquery.vmap.js"></script>
+<script src="js/jquery.vmap.germany.js"></script>
 <script src="js/fullpage.js"></script>
 <script src="js/script.js"></script>
 <script>
+
 </script>
+
 </body>
 </html>

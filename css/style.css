@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Gill Sans";
-    src: url("/fonts/GillSans.ttc")
+    src: local("fonts/GillSans.ttc");
 }
 
 :root {
@@ -12,6 +12,7 @@ body {
     margin: 0;
     height: 100%;
     overflow: hidden !important;
+    font-family: "Gill Sans", arial, helvetica, sans-serif;
 }
 
 .full {
@@ -26,22 +27,77 @@ body {
 }
 
 .fullheight {
-    height: 100%;
-    position: absolute;
+    height: 100% !important;
+    /*position: absolute;*/
+}
+
+.fullwidth {
+    width: 100% !important;
 }
 
 .map_bg {
     background-color: var(--burgundy);
 }
 
-.map {
+.map_container {
     width: 40%;
     min-width: 500px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.map {
+    width: 80%;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.map_svg {
+    width: 100%;
+    height: 100%;
+    pointer-events:none;
+}
+
+.map_svg .jqvmap-region {
+    stroke: var(--burgundy);
+    stroke-width: 5px;
+    stroke-opacity: 100%;
+    fill: var(--offwhite);
+    fill-opacity: 90%;
+    pointer-events:auto;
+}
+
+.map_svg:hover .jqvmap-region {
+    fill-opacity: 50%;
+}
+
+.map_svg .jqvmap-region:hover {
+    fill-opacity: 90% !important;
+}
+
+.jqvmap-label {
+    position: absolute;
+    display: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #292929;
+    color: white;
+    font-family: sans-serif, Verdana;
+    font-size: smaller;
+    padding: 3px;
+    pointer-events:none;
+}
+
+.jqvmap-region {
+    cursor: pointer;
 }
 
 .logo {
     font-size: 24px;
-    font-family: "Gill Sans", arial, helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
     opacity: 80%;
@@ -57,13 +113,92 @@ body {
     color: var(--offwhite);
 }
 
-#fp-nav {
-    right: 12px !important;
+.onerightcontainter {
+    position: relative;
 }
 
-#fp-nav ul li,
-.fp-slidesNav ul li {
-    width: 3px;
+.oneright {
+    display: block;
+    position: absolute;
+    margin: 35px;
+    height: auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+}
+
+.flexrow,
+.flexrow_parent > div {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+}
+
+.flexcolumn {
+    display: flex;
+    flex-flow: column;
+}
+
+.flexleft,
+.flexnone {
+    flex: none;
+}
+
+.flexright,
+.flex1 {
+    flex: 1;
+}
+
+.flex2 {
+    flex: 2;
+}
+
+.flex3 {
+    flex: 3;
+}
+
+.stat {
+    /*background-color: cadetblue;*/
+    height: fit-content;
+    margin: 30px 0 30px 20px;
+    color: var(--burgundy);
+}
+
+.stat_left {
+    border-right: solid var(--burgundy) 1px;
+}
+
+.stat_title {
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.stat_value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#onerighttop {
+    /*background-color: coral;*/
+}
+
+#onerightmiddle {
+    /*background-color: aqua;*/
+    /*border: solid var(--burgundy) 1px;*/
+}
+
+#onerightbottom {
+    /*background-color: darkorchid;*/
+    /*border: solid var(--burgundy) 1px;*/
+}
+
+#fp-nav {
+    right: 15px !important;
+}
+
+#fp-nav ul li {
+    width: auto;
     height: 40px !important;
     margin: 8px 0 8px 0 !important;
 }
@@ -79,8 +214,7 @@ body {
     opacity: 70%;
 }
 
-#fp-nav ul li a span,
-.fp-slidesNav ul li a span {
+#fp-nav ul li a span {
     border-radius: 0 !important;
     height: 40px !important;
     width: 4px !important;
@@ -94,9 +228,8 @@ body {
     line-height: 40px;
     font-size: 18px;
     color: var(--burgundy);
-    font-family: "Gill Sans", arial, helvetica, sans-serif;
 }
 
 #fp-nav ul li .fp-tooltip {
-    right: 10px;
+    right: 10px !important;
 }
