@@ -120,7 +120,7 @@ body {
 .oneright {
     display: block;
     position: absolute;
-    margin: 35px;
+    margin: 35px 35px 35px 50px;
     height: auto;
     bottom:0;
     top:0;
@@ -161,12 +161,10 @@ body {
 .stat {
     /*background-color: cadetblue;*/
     height: fit-content;
-    margin: 30px 0 30px 30px;
+    margin: 30px 0 30px 0;
+    padding-left: 20px;
     color: var(--burgundy);
-}
-
-.stat_left {
-    border-right: solid var(--burgundy) 1px;
+    border-left: solid var(--burgundy) 2px;
 }
 
 .stat_title {
