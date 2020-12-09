@@ -5,23 +5,29 @@
     <title>InfoVis Group 14</title>
     <link rel="stylesheet" href="css/fullpage.css">
     <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+        /* 13. Basic Styling with CSS */
+
+        /* Style the lines by removing the fill and applying a stroke */
+
+    </style>
 </head>
 <body>
 
-<div id="bg" class="full bg">
+<div id="bg" class="full_v bg">
     <div id="logo_burgundy" class="logo burgundy-text">XIV.</div>
-    <div id="map_bg" class="fullheight map_bg map_container">
+    <div id="map_bg" class="fullheight_v map_bg map_container">
         <div id="logo_white" class="logo white-text">XIV.</div>
     </div>
 </div>
-<div id="fullpage" class="fullwidth">
-    <div id="section0" class="section fullheight flexrow_parent">
-        <div id="oneleft" class="fullheight map_container flexleft">
+<div id="fullpage" class="fullwidth_v">
+    <div id="section0" class="section fullheight_v flexrow_parent">
+        <div id="oneleft" class="fullheight_v map_container flexleft">
             <div id="map" class="map">
                 <svg id="map_svg" class="map_svg"></svg>
             </div>
         </div>
-        <div id="onerightcontainter" class="fullheight flexright onerightcontainter">
+        <div id="onerightcontainter" class="fullheight_v flexright onerightcontainter">
             <div id="oneright" class="flexcolumn oneright">
                 <div id="onerighttop" class="flexnone flexrow">
                     <div id="stat1" class="flex1 flexcolumn stat">
@@ -45,11 +51,12 @@
                         <div class="stat_value">00.00%</div>
                     </div>
                 </div>
-                <div id="onerightmiddle" class="flex2">
-
+                <div id="onerightmiddle" class="flex2 flexrow">
+                    <div id="case_hist" class="flex1"></div>
+                    <div id="death_hist" class="flex1"></div>
                 </div>
                 <div id="onerightbottom" class="flex3">
-
+                    <div id="line_chart_slider" class="full_p"></div>
                 </div>
             </div>
         </div>
@@ -64,9 +71,7 @@
 <script src="js/jquery.vmap.germany.js"></script>
 <script src="js/fullpage.js"></script>
 <script src="js/script.js"></script>
-<script>
-
-</script>
+<script src="js/diagrams.js"></script>
 
 </body>
 </html>

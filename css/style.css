@@ -6,19 +6,26 @@
 :root {
     --offwhite: #E3E2DF;
     --burgundy: #5D001E;
+    --pink: #E3AFBC;
+    --magenta :#9A1750
 }
 
 body {
     margin: 0;
-    height: 100%;
+    height: 100vh;
     overflow: hidden !important;
     font-family: "Gill Sans", arial, helvetica, sans-serif;
 }
 
-.full {
+.full_v {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+
+.full_p {
     height: 100%;
     width: 100%;
-    position: absolute;
 }
 
 .bg {
@@ -26,13 +33,13 @@ body {
     position: fixed;
 }
 
-.fullheight {
-    height: 100% !important;
+.fullheight_v {
+    height: 100vh !important;
     /*position: absolute;*/
 }
 
-.fullwidth {
-    width: 100% !important;
+.fullwidth_v {
+    width: 100vw !important;
 }
 
 .map_bg {
@@ -40,7 +47,8 @@ body {
 }
 
 .map_container {
-    width: 40%;
+    width: 40vw;
+    height: 100vh !important;
     /*min-width: 400px;*/
     align-items: center;
     justify-content: center;
@@ -120,7 +128,8 @@ body {
 .oneright {
     display: block;
     position: absolute;
-    margin: 35px 35px 35px 50px;
+    /*margin: 35px 50px 35px 55px;*/
+    margin: 3.5vw 4vw 3.5vw 4vw;
     height: auto;
     bottom:0;
     top:0;
@@ -161,8 +170,8 @@ body {
 .stat {
     /*background-color: cadetblue;*/
     height: fit-content;
-    margin: 30px 0 30px 0;
-    padding-left: 1.6vw;
+    /*margin: 0 0 10px 0;*/
+    padding: 0 1.5vw 0 1.5vw;
     color: var(--burgundy);
     border-left: solid var(--burgundy) 2px;
     /*min-width: 100px;*/
@@ -180,11 +189,13 @@ body {
 
 #onerighttop {
     /*background-color: coral;*/
+    margin-bottom: 2.5vw;
 }
 
 #onerightmiddle {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
+    margin-bottom: 2.5vw;
 }
 
 #onerightbottom {
@@ -231,4 +242,28 @@ body {
 
 #fp-nav ul li .fp-tooltip {
     right: 10px !important;
+}
+
+.line {
+    fill: none;
+    stroke: var(--magenta);
+    stroke-width: 1.5;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+.dot {
+    fill: #ffab00;
+    stroke: #fff;
+}
+
+.focus circle {
+    fill: none;
+    stroke: steelblue;
+}
+
+.frame {
+    border: solid magenta 1px;
 }
