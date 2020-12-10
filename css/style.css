@@ -65,7 +65,7 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden !important;
-    font-family: "Gill Sans MT Pro", helvetica, sans-serif;
+    font-family: "Gill Sans MT Pro", helvetica, sans-serif !important;
 }
 
 .full_v {
@@ -304,6 +304,11 @@ body {
     fill: none;
     stroke: var(--magenta);
     stroke-width: 1.5;
+}
+
+.tick {
+    color: var(--burgundy);
+    font-weight: 100;
 }
 
 .overlay {

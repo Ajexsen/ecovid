@@ -2,13 +2,10 @@ function draw() {
     d3.selectAll('#line_chart_slider > *').remove();
 
     const container = $("#line_chart_slider")
-    const margin = {top: 5, right: 5, bottom: 20, left: 40}
+    const margin = {top: 5, right: 5, bottom: 18, left: 18}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
-    // const parseDate = d3.timeFormat("%d-%b-%y");
-    // const n = 100;
-    // let data = null
     let svg = d3.select("#line_chart_slider")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -25,12 +22,14 @@ function draw() {
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
+            .attr("class", "tick")
             .call(d3.axisBottom(x));
 
         let y = d3.scaleLinear()
             .domain([0, d3.max(data, function(d) { return +d.value; })])
             .range([ height, 0 ]);
         svg.append("g")
+            .attr("class", "tick")
             .call(d3.axisLeft(y));
 
         svg.append("path")
