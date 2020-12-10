@@ -17,8 +17,8 @@ function draw() {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("data/data.csv", function (d) {
-        return {date: d3.timeParse("%Y-%m-%d")(d.date), value: d.value}
+    d3.dsv(';',"data//destatis_air-passengers-german-airports_2008-2020.csv", function (d) {
+        return {date: d3.timeParse("%Y-%m")(d['Month']), value: d['Embarking passengers']}
     }).then(data => {
         let x = d3.scaleTime()
             .domain(d3.extent(data, function(d) { return d.date; }))
