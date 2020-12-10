@@ -311,6 +311,17 @@ body {
     font-weight: 100;
 }
 
+.tick > .domain {
+    stroke-width: 3px;
+    stroke-opacity: 0.3;
+    /*opacity: 0.3;*/
+}
+
+.chart_title {
+    font-size: 12px;
+    fill: var(--burgundy);
+}
+
 .overlay {
     fill: none;
     pointer-events: all;
