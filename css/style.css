@@ -1,7 +1,11 @@
 @font-face {
     font-family: "Gill Sans";
-    src: url("../fonts/GillSans/Gill Sans Bold.otf") format("opentype"),
-    url("../fonts/GillSans/Gill Sans Light.otf") format("opentype");
+    src: url("../fonts/GillSans/GillSansMTPro-Bold.OTF") format("opentype"),
+    url("../fonts/GillSans/GillSansMTPro-ExtraBold.OTF") format("opentype"),
+    url("../fonts/GillSans/GillSansMTPro-Heavy.OTF") format("opentype"),
+    url("../fonts/GillSans/GillSansMTPro-Light.OTF") format("opentype"),
+    url("../fonts/GillSans/GillSansMTPro-Medium.OTF") format("opentype"),
+    url("../fonts/GillSans/GillSansMTPro-UltraBold.OTF") format("opentype");
 }
 
 :root {
