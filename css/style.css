@@ -1,6 +1,7 @@
 @font-face {
     font-family: "Gill Sans";
-    src: local("fonts/GillSans.ttc");
+    src: local("fonts/GillSans/GillSansMTPro-Bold"),
+    local("fonts/GillSans/GillSansMTPro-Light");
 }
 
 :root {
@@ -29,7 +30,7 @@ body {
 }
 
 .bg {
-    background-color: var(--offwhite);
+    /*background-color: var(--offwhite);*/
     position: fixed;
 }
 
@@ -185,6 +186,10 @@ body {
 .stat_value {
     font-size: 2vw;
     font-weight: bold;
+}
+
+#line_chart_slider {
+    position: relative;
 }
 
 #onerighttop {
