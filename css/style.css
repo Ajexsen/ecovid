@@ -1,31 +1,57 @@
 @font-face {
-    font-family: "Gill Sans";
-    src: url("../fonts/GillSans/GillSansMTPro-Light.OTF") format("opentype");
-    font-weight: 100;
-}
-
-@font-face {
-    font-family: "Gill Sans";
-    src: url("../fonts/GillSans/GillSansMTPro-Medium.OTF") format("opentype");
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: "Gill Sans";
-    src: url("../fonts/GillSans/GillSansMTPro-Bold.OTF") format("opentype");
+    font-family: 'Gill Sans MT Pro';
+    src: url('../fonts/GillSans/GillSansMTPro-Medium.eot');
+    src: local('Gill Sans MT Pro Medium'), local('GillSansMTPro-Medium'),
+    url('../fonts/GillSans/GillSansMTPro-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GillSans/GillSansMTPro-Medium.woff2') format('woff2'),
+    url('../fonts/GillSans/GillSansMTPro-Medium.woff') format('woff'),
+    url('../fonts/GillSans/GillSansMTPro-Medium.ttf') format('truetype'),
+    url('../fonts/GillSans/GillSansMTPro-Medium.svg#GillSansMTPro-Medium') format('svg');
     font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Gill Sans";
-    src: url("../fonts/GillSans/GillSansMTPro-ExtraBold.OTF") format("opentype");
-    font-weight: 700;
+    font-family: 'Gill Sans MT Pro';
+    src: url('../fonts/GillSans/GillSansMTPro-Bold.eot');
+    src: local('Gill Sans MT Pro Bold'), local('GillSansMTPro-Bold'),
+    url('../fonts/GillSans/GillSansMTPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GillSans/GillSansMTPro-Bold.woff2') format('woff2'),
+    url('../fonts/GillSans/GillSansMTPro-Bold.woff') format('woff'),
+    url('../fonts/GillSans/GillSansMTPro-Bold.ttf') format('truetype'),
+    url('../fonts/GillSans/GillSansMTPro-Bold.svg#GillSansMTPro-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Gill Sans";
-    src: url("../fonts/GillSans/GillSansMTPro-UltraBold.OTF") format("opentype");
-    font-weight: 900;
+    font-family: 'Gill Sans MT Pro';
+    src: url('../fonts/GillSans/GillSansMTPro-ExtraBold.eot');
+    src: local('Gill Sans MT Pro ExtraBold'), local('GillSansMTPro-ExtraBold'),
+    url('../fonts/GillSans/GillSansMTPro-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GillSans/GillSansMTPro-ExtraBold.woff2') format('woff2'),
+    url('../fonts/GillSans/GillSansMTPro-ExtraBold.woff') format('woff'),
+    url('../fonts/GillSans/GillSansMTPro-ExtraBold.ttf') format('truetype'),
+    url('../fonts/GillSans/GillSansMTPro-ExtraBold.svg#GillSansMTPro-ExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gill Sans MT Pro';
+    src: url('../fonts/GillSans/GillSansMTPro-Light.eot');
+    src: local('Gill Sans MT Pro Light'), local('GillSansMTPro-Light'),
+    url('../fonts/GillSans/GillSansMTPro-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GillSans/GillSansMTPro-Light.woff2') format('woff2'),
+    url('../fonts/GillSans/GillSansMTPro-Light.woff') format('woff'),
+    url('../fonts/GillSans/GillSansMTPro-Light.ttf') format('truetype'),
+    url('../fonts/GillSans/GillSansMTPro-Light.svg#GillSansMTPro-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
 }
 
 :root {
@@ -39,7 +65,7 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden !important;
-    font-family: "Gill Sans", arial, helvetica, sans-serif;
+    font-family: "Gill Sans MT Pro", helvetica, sans-serif;
 }
 
 .full_v {
@@ -119,7 +145,7 @@ body {
     border-radius: 3px;
     background: #292929;
     color: white;
-    font-family: sans-serif, Verdana;
+    /*font-family: sans-serif, Verdana;*/
     font-size: smaller;
     padding: 3px;
     pointer-events:none;
@@ -131,7 +157,7 @@ body {
 
 .logo {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 800;
     position: absolute;
     opacity: 80%;
     left: 35px;
@@ -204,13 +230,13 @@ body {
 
 .stat_title {
     font-size: 1.2vw;
-    font-weight: 100;
+    font-weight: 300;
     white-space: nowrap;
 }
 
 .stat_value {
     font-size: 2vw;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 #line_chart_slider {
