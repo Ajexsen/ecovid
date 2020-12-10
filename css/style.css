@@ -1,7 +1,7 @@
 @font-face {
     font-family: "Gill Sans";
-    src: local("fonts/GillSans/GillSansMTPro-Bold"),
-    local("fonts/GillSans/GillSansMTPro-Light");
+    src: url("../fonts/GillSans/Gill Sans Bold.otf") format("opentype"),
+    url("../fonts/GillSans/Gill Sans Light.otf") format("opentype");
 }
 
 :root {
