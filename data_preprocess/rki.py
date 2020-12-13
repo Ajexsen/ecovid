@@ -48,7 +48,7 @@ data_end_date = '12/07/2020'
 indices = pd.date_range(start=data_start_date, end=data_end_date).date
 del data_start_date, data_end_date
 
-col_name_general = ['AnzahlFall', 'AnzahlTodesfall', 'NeuerFall', 'NeuerTodesfall']
+col_name_general = ['AnzahlFall', 'AnzahlTodesfall']
 
 col_name_M_c = ['M_A00-A04_c', 'M_A05-A14_c', 'M_A15-A34_c', 'M_A35-A59_c', 'M_A60-A79_c', 'M_A80+_c', 'M_un_c']
 col_name_M_d = ['M_A00-A04_d', 'M_A05-A14_d', 'M_A15-A34_d', 'M_A35-A59_d', 'M_A60-A79_d', 'M_A80+_d', 'M_un_d']
