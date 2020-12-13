@@ -6,7 +6,7 @@ import datetime
 
 # load data
 save_path = '..//data//rki//'
-data = pd.read_csv(save_path + 'RKI_COVID19.csv')
+data = pd.read_csv("{}RKI_COVID19.csv".format(save_path))
 
 # remove unnecessary column
 data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis', 
@@ -14,13 +14,26 @@ data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis',
                           'Altersgruppe2'])
 data = data.drop(columns=['NeuGenesen', 'AnzahlGenesen', 'IstErkrankungsbeginn'])
 
+
+# date formating
+data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%Y/%m/%d')).dt.date
+
+# Data Beschreibung:
+# Anzahl Fälle der aktuellen Publikation als Summe(AnzahlFall), wenn NeuerFall in (0,1)
+# Anzahl Todesfälle der aktuellen Publikation als Summe(AnzahlTodesfall) wenn NeuerTodesfall in (0,1)
+data['AnzahlFall'] = data['AnzahlFall'] * (0 <= data['NeuerFall'])
+data['AnzahlTodesfall'] = data['AnzahlTodesfall'] * (0 <= data['NeuerTodesfall'])
+data = data.drop(columns=['NeuerFall', 'NeuerTodesfall'])
+
+
+
 # merge gender and age index
 data['gender_age'] = data['Geschlecht'] + "_" + data['Altersgruppe']
 data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
 # group data by age, gender and province
 data_de_total = data.drop(columns=['IdBundesland']).groupby(by=['Meldedatum']).sum()
-data_de_gender = data.drop(columns=['IdBundesland']).groupby(by=['Meldedatum', 'gender_age']).sum().drop(columns=['NeuerFall', 'NeuerTodesfall'])
+data_de_gender = data.drop(columns=['IdBundesland']).groupby(by=['Meldedatum', 'gender_age']).sum()
 
 
 # data_land = data.groupby(by=['Meldedatum', 'IdBundesland', 'gender_age']).sum()
@@ -32,7 +45,7 @@ data_de_gender = data.drop(columns=['IdBundesland']).groupby(by=['Meldedatum', '
 
 data_start_date = '01/02/2020'
 data_end_date = '12/07/2020'
-indices = pd.date_range(start=data_start_date, end=data_end_date)
+indices = pd.date_range(start=data_start_date, end=data_end_date).date
 del data_start_date, data_end_date
 
 col_name_general = ['AnzahlFall', 'AnzahlTodesfall', 'NeuerFall', 'NeuerTodesfall']
@@ -53,4 +66,18 @@ df = pd.DataFrame(index=indices, columns=column_names)
 del indices, column_names
 df = df.fillna(0)
 
-# ----------
+# fill date into table
+
+for _, row in data_de_total.iterrows():
+    index = row.name
+    df.loc[index]['AnzahlFall'] = row['AnzahlFall']
+    df.loc[index]['AnzahlTodesfall'] = row['AnzahlTodesfall']
+    
+for _, row in data_de_gender.iterrows():
+    index = row.name[0]
+    gender_age = row.name[1]
+    df.loc[index][gender_age + "_c"] = row['AnzahlFall']
+    df.loc[index][gender_age + "_d"] = row['AnzahlTodesfall']
+    
+df.to_csv("{}RKI_COVID19_DE.csv".format(save_path))
+    
