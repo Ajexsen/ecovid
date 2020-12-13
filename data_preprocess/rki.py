@@ -40,13 +40,16 @@ STATE_ID_ISONAME_MAP = {
        16: "DE-TH",
 }
 
-def get_cvs_land(df, bundesland_id):
+def get_csv_bundesland(df, bundesland_id):
     file_name = "rki_.csv"
+    
+    # if bundesland id exist, filter out for given id
+    # else nation-wide (no filtering)
     if 1 <= bundesland_id <= 16:
         df = df[df["IdBundesland"] == bundesland_id]
         file_name = "bundesland//rki_{}.csv".format(STATE_ID_ISONAME_MAP[bundesland_id])
     else:
-        file_name = "DE_all.csv"
+        file_name = "rki_DE-all.csv"
     
     # group data by age, gender and province
     data_total = df.drop(columns=['IdBundesland']).groupby(by=['Meldedatum']).sum()
@@ -62,39 +65,40 @@ def get_cvs_land(df, bundesland_id):
     
     col_name_general = ['AnzahlFall', 'AnzahlTodesfall']
     
-    col_name_M_c = ['M_A00-A04_c', 'M_A05-A14_c', 'M_A15-A34_c', 'M_A35-A59_c', 'M_A60-A79_c', 'M_A80+_c', 'M_un_c']
-    col_name_M_d = ['M_A00-A04_d', 'M_A05-A14_d', 'M_A15-A34_d', 'M_A35-A59_d', 'M_A60-A79_d', 'M_A80+_d', 'M_un_d']
+    col_name_M_c = ['M_A00-A04_c', 'M_A05-A14_c', 'M_A15-A34_c', 'M_A35-A59_c', 'M_A60-A79_c', 'M_A80+_c', 'M_unbekannt_c']
+    col_name_M_d = ['M_A00-A04_d', 'M_A05-A14_d', 'M_A15-A34_d', 'M_A35-A59_d', 'M_A60-A79_d', 'M_A80+_d', 'M_unbekannt_d']
     
-    col_name_W_c = ['W_A00-A04_c', 'W_A05-A14_c', 'W_A15-A34_c', 'W_A35-A59_c', 'W_A60-A79_c', 'W_A80+_c', 'W_un_c']
-    col_name_W_d = ['W_A00-A04_d', 'W_A05-A14_d', 'W_A15-A34_d', 'W_A35-A59_d', 'W_A60-A79_d', 'W_A80+_d', 'W_un_d']
+    col_name_W_c = ['W_A00-A04_c', 'W_A05-A14_c', 'W_A15-A34_c', 'W_A35-A59_c', 'W_A60-A79_c', 'W_A80+_c', 'W_unbekannt_c']
+    col_name_W_d = ['W_A00-A04_d', 'W_A05-A14_d', 'W_A15-A34_d', 'W_A35-A59_d', 'W_A60-A79_d', 'W_A80+_d', 'W_unbekannt_d']
     
-    col_name_un_c = ['un_A00-A04_c', 'un_A05-A14_c', 'un_A15-A34_c', 'un_A35-A59_c', 'un_A60-A79_c', 'un_A80+_c', 'un_un_c']
-    col_name_un_d = ['un_A00-A04_d', 'un_A05-A14_d', 'un_A15-A34_d', 'un_A35-A59_d', 'un_A60-A79_d', 'un_A80+_d', 'un_un_d']
+    col_name_un_c = ['unbekannt_A00-A04_c', 'unbekannt_A05-A14_c', 'unbekannt_A15-A34_c', 'unbekannt_A35-A59_c', 'unbekannt_A60-A79_c', 'unbekannt_A80+_c', 'unbekannt_unbekannt_c']
+    col_name_un_d = ['unbekannt_A00-A04_d', 'unbekannt_A05-A14_d', 'unbekannt_A15-A34_d', 'unbekannt_A35-A59_d', 'unbekannt_A60-A79_d', 'unbekannt_A80+_d', 'unbekannt_unbekannt_d']
     
     column_names = col_name_general + col_name_M_c + col_name_M_d + col_name_W_c + col_name_W_d + col_name_un_c + col_name_un_d
     del col_name_general, col_name_M_c, col_name_M_d, col_name_W_c, col_name_W_d, col_name_un_c, col_name_un_d
     
+    # generate empty DataFrame with all cells 0 zero
     df = pd.DataFrame(index=indices, columns=column_names)
     del indices, column_names
     df = df.fillna(0)
     
-    # fill date into table
+    # --- 
     
+    # fill group data into table
     for _, row in data_total.iterrows():
         index = row.name
-        df.loc[index]['AnzahlFall'] = row['AnzahlFall']
-        df.loc[index]['AnzahlTodesfall'] = row['AnzahlTodesfall']
+        df.loc[index]['AnzahlFall'] += row['AnzahlFall']
+        df.loc[index]['AnzahlTodesfall'] += row['AnzahlTodesfall']
         
     for _, row in data_gender_age.iterrows():
         index = row.name[0]
         gender_age = row.name[1]
-        df.loc[index][gender_age + "_c"] = row['AnzahlFall']
-        df.loc[index][gender_age + "_d"] = row['AnzahlTodesfall']
+        df.loc[index][gender_age + "_c"] += row['AnzahlFall']
+        df.loc[index][gender_age + "_d"] += row['AnzahlTodesfall']
         
     df.to_csv("{}{}".format(save_path, file_name))
 
-# download & update data (once per day)
-# TODO
+# TODO: download & update data (once per day)
 
 # load data
 save_path = '..//data//rki//'
@@ -122,10 +126,9 @@ data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
 # generate csv for all states
 for i in range(17):
-    get_cvs_land(data, i)
+    get_csv_bundesland(data, i)
 
 
-# accumulate data (by date)?
-# TODO
+# TODO: accumulate data (by date)?
         
     
