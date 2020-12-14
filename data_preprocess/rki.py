@@ -95,12 +95,21 @@ def get_csv_bundesland(df, bundesland_id):
         gender_age = row.name[1]
         df.loc[index][gender_age + "_c"] += row['AnzahlFall']
         df.loc[index][gender_age + "_d"] += row['AnzahlTodesfall']
-        
+    
+    # cumulative cases & death, death rate
+    new_case = df['AnzahlFall']
+    new_death = df['AnzahlTodesfall']
+    df = df.cumsum()
+    df['NeuerFall'] = new_case
+    df['NeuerTodesfall'] = new_death
+    df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
     df.to_csv("{}{}".format(save_path, file_name))
+    print("{} saved in path: {}".format(file_name, save_path))
 
 # TODO: download & update data (once per day)
+# https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv
 
-# load data
+# load data: don't upload full csv
 save_path = '..//data//rki//'
 data = pd.read_csv("{}RKI_COVID19.csv".format(save_path))
 
@@ -128,7 +137,5 @@ data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 for i in range(17):
     get_csv_bundesland(data, i)
 
-
-# TODO: accumulate data (by date)?
         
     
