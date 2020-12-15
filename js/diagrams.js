@@ -23,7 +23,6 @@ function draw(param) {
             .attr("class", "tick")
             .call(d3.axisBottom(x)
                 .ticks(6)
-                // .tickSize(2)
                 .tickSizeInner(0)
                 .tickSizeOuter(2)
                 .tickPadding(10)
@@ -36,7 +35,6 @@ function draw(param) {
             .attr("class", "tick")
             .call(d3.axisLeft(y_left)
                 .ticks(6)
-                // .tickSize(2)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -50,7 +48,6 @@ function draw(param) {
             .attr("class", "tick")
             .call(d3.axisRight(y_right)
                 .ticks(8)
-                // .tickSize(2)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -67,7 +64,6 @@ function draw(param) {
 
         svg.append('text')
             .attr('class', 'chart_title')
-            // .attr("transform", "")
             .attr('x', - height / 2)
             .attr('y', 0)
             .attr("transform", "translate(-30, 0) rotate(-90)")
@@ -80,24 +76,25 @@ function refresh() {
     d3.selectAll('#onerightbottom > div > *').remove();
     const param1 = {
         target: "#line_chart_slider_top",
-        src: "data/destatis_air-passengers-german-airports_2008-2020.csv",
-        delimiter: ";",
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
         title: "Deaths",
-        x: "Month",
-        x_date_format: "%Y-%m",
-        y: "Embarking passengers",
+        x: "date",
+        x_date_format: "%d/%m/%Y",
+        y: "NeuerTodesfall",
         y_scale: 1
     };
     draw(param1)
     const param2 = {
         target: "#line_chart_slider_bottom",
-        src: "data/flightradar24_number-of-commercial-fli.csv",
+        src: "data/rki/rki_DE-all.csv",
         delimiter: ",",
-        title: "Cases",
-        x: "DateTime",
-        x_date_format: "%Y-%m-%d",
-        y: "2019 7-day moving average",
-        y_scale: 1000
+        title: "Deaths",
+        x: "date",
+        x_date_format: "%d/%m/%Y",
+        y: "NeuerFall",
+        y_scale: 1
+
     };
     draw(param2)
 }
