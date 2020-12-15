@@ -309,16 +309,17 @@ body {
 .tick {
     color: var(--burgundy);
     font-weight: 100;
+    /*visibility: hidden;*/
 }
 
-.tick > .domain {
+.domain {
     stroke-width: 3px;
     stroke-opacity: 0.3;
     /*opacity: 0.3;*/
 }
 
 .chart_title {
-    font-size: 12px;
+    font-size: 14px;
     fill: var(--burgundy);
 }
 

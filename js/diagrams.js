@@ -1,10 +1,10 @@
-function draw(svg_target, data_src, title) {
-    const container = $(svg_target)
-    const margin = {top: 5, right: 40, bottom: 18, left: 40}
+function draw(param) {
+    const container = $(param.target)
+    const margin = {top: 5, right: 35, bottom: 18, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
-    let svg = d3.select(svg_target)
+    let svg = d3.select(param.target)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -12,8 +12,8 @@ function draw(svg_target, data_src, title) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.dsv(';', data_src, function (d) {
-        return {date: d3.timeParse("%Y-%m")(d['Month']), value: d['Embarking passengers']}
+    d3.dsv(param.delimiter, param.src, function (d) {
+        return {date: d3.timeParse(param.x_date_format)(d[param.x]), value: d[param.y] / param.y_scale}
     }).then(data => {
         let x = d3.scaleTime()
             .domain(d3.extent(data, function(d) { return d.date; }))
@@ -23,7 +23,10 @@ function draw(svg_target, data_src, title) {
             .attr("class", "tick")
             .call(d3.axisBottom(x)
                 .ticks(6)
+                // .tickSize(2)
                 .tickSizeInner(0)
+                .tickSizeOuter(2)
+                .tickPadding(10)
             );
 
         let y_left = d3.scaleLinear()
@@ -33,7 +36,10 @@ function draw(svg_target, data_src, title) {
             .attr("class", "tick")
             .call(d3.axisLeft(y_left)
                 .ticks(6)
+                // .tickSize(2)
                 .tickSizeInner(0)
+                .tickSizeOuter(0)
+                .tickPadding(10)
             );
 
         let y_right = d3.scaleLinear()
@@ -42,9 +48,12 @@ function draw(svg_target, data_src, title) {
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
-            .call(d3.axisRight(y_right).tickSizeInner(0)
+            .call(d3.axisRight(y_right)
                 .ticks(8)
+                // .tickSize(2)
                 .tickSizeInner(0)
+                .tickSizeOuter(0)
+                .tickPadding(10)
             );
 
         svg.append("path")
@@ -59,24 +68,38 @@ function draw(svg_target, data_src, title) {
         svg.append('text')
             .attr('class', 'chart_title')
             // .attr("transform", "")
-            .attr('x', -height / 2)
+            .attr('x', - height / 2)
             .attr('y', 0)
-            .attr("transform", "translate(-20, 0) rotate(-90)")
+            .attr("transform", "translate(-30, 0) rotate(-90)")
             .attr('text-anchor', 'middle')
-            .text(title);
+            .text(param.title);
     });
 }
 
 function refresh() {
     d3.selectAll('#onerightbottom > div > *').remove();
-    const target1 = "#line_chart_slider_top"
-    const src1 = "data/destatis_air-passengers-german-airports_2008-2020.csv"
-    const title1 = "Title1"
-    draw(target1, src1, title1)
-    const target2 = "#line_chart_slider_bottom"
-    const src2 = "data/destatis_air-passengers-german-airports_2008-2020.csv"
-    const title2 = "Title2"
-    draw(target2, src2, title2)
+    const param1 = {
+        target: "#line_chart_slider_top",
+        src: "data/destatis_air-passengers-german-airports_2008-2020.csv",
+        delimiter: ";",
+        title: "Deaths",
+        x: "Month",
+        x_date_format: "%Y-%m",
+        y: "Embarking passengers",
+        y_scale: 1
+    };
+    draw(param1)
+    const param2 = {
+        target: "#line_chart_slider_bottom",
+        src: "data/flightradar24_number-of-commercial-fli.csv",
+        delimiter: ",",
+        title: "Cases",
+        x: "DateTime",
+        x_date_format: "%Y-%m-%d",
+        y: "2019 7-day moving average",
+        y_scale: 1000
+    };
+    draw(param2)
 }
 
 refresh()
