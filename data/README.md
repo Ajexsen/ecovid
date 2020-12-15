@@ -1,1 +1,2 @@
-/raw_data: 
+# Folder rki
+# raw_data
