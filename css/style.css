@@ -80,7 +80,7 @@ body {
 }
 
 .bg {
-    /*background-color: var(--offwhite);*/
+    background-color: var(--offwhite);
     position: fixed;
 }
 
@@ -91,6 +91,10 @@ body {
 
 .fullwidth_v {
     width: 100vw !important;
+}
+
+.fullwidth_p {
+    width: 100% !important;
 }
 
 .map_bg {
@@ -218,6 +222,10 @@ body {
     flex: 3;
 }
 
+.flex4 {
+    flex: 4;
+}
+
 .stat {
     /*background-color: cadetblue;*/
     height: fit-content;
@@ -257,6 +265,46 @@ body {
 #onerightbottom {
     /*background-color: darkorchid;*/
     /*border: solid var(--burgundy) 1px;*/
+}
+
+.center_parent {
+    position: relative;
+}
+
+.content_sec {
+    height: 85vh;
+    width: 50vw;
+}
+
+.center_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content_title {
+    /*margin-top: 10px;*/
+    margin-bottom: 0.5vh;
+    font-size: 3.8vh;
+    font-weight: bold;
+    color: var(--burgundy);
+}
+
+.content_subtitle {
+    /*margin-top: 5px;*/
+    font-size: 2.3vh;
+    font-weight: 100;
+    color: var(--burgundy);
+}
+
+.content_titles {
+    margin-bottom: 3vh;
+}
+
+.content_middle {
+    margin-top: 6vh;
+    margin-bottom: 6vh;
 }
 
 #fp-nav {
@@ -309,16 +357,17 @@ body {
 .tick {
     color: var(--burgundy);
     font-weight: 100;
+    /*visibility: hidden;*/
 }
 
-.tick > .domain {
+.domain {
     stroke-width: 3px;
     stroke-opacity: 0.3;
     /*opacity: 0.3;*/
 }
 
 .chart_title {
-    font-size: 12px;
+    font-size: 14px;
     fill: var(--burgundy);
 }
 
@@ -338,4 +387,8 @@ body {
 
 .frame {
     border: solid magenta 1px;
+}
+
+.block_bg {
+    background-color: #789875;
 }

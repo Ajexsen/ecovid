@@ -2,7 +2,7 @@
 new fullpage('#fullpage', {
     navigation: true,
     navigationPosition: 'right',
-    navigationTooltips: ['Overview', 'Impact'],
+    navigationTooltips: ['Overview', 'Travel', 'Economy'],
     scrollBar: true
 });
 
