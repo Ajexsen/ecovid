@@ -354,6 +354,14 @@ body {
     stroke-width: 1.5;
 }
 
+.line1 {
+    stroke: var(--magenta);
+}
+
+.line2 {
+    stroke: var(--pink);
+}
+
 .tick {
     color: var(--burgundy);
     font-weight: 100;
@@ -367,7 +375,7 @@ body {
 }
 
 .chart_title {
-    font-size: 14px;
+    font-size: 16px;
     fill: var(--burgundy);
 }
 
