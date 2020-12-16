@@ -303,7 +303,7 @@ body {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
     margin-bottom: 2.5vw;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
 }
 
 #onerightbottom {
