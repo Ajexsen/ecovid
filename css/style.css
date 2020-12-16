@@ -397,6 +397,10 @@ body {
     border: solid magenta 1px;
 }
 
+.bar {
+    fill: var(--burgundy) !important;
+}
+
 .block_bg {
     background-color: #789875;
 }

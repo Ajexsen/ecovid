@@ -100,48 +100,21 @@ function draw_line(param) {
     });
 }
 
-function draw_bar() {
-    // set the dimensions and margins of the graph
-    const container = $("#case_hist")
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = container.innerWidth() - margin.left - margin.right,
-        height = container.innerHeight() - margin.top - margin.bottom;
-
-// set the ranges
-    var x = d3.scaleBand()
-        .range([0, width])
-        .padding(0.1);
-    var y = d3.scaleLinear()
-        .range([height, 0]);
-
-// append the svg object to the body of the page
-// append a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-    var svg = d3.select("#case_hist").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-// get the data
-    d3.csv("data/rki/rki_DE-all.csv", function (data) {
+function draw_bar_single_side(param) {
+    d3.csv(param.src, function (data) {
         return {
             date: data.Meldedatum,
-            "0-4": +data["M_A00-A04_c"],
-            "5-14": +data["M_A05-A14_c"],
-            "15-34": +data["M_A15-A34_c"],
-            "35-59": +data["M_A35-A59_c"],
-            "60-79": +data["M_A60-A79_c"],
-            "80+": +data["M_A80+_c"]
+            "0-4": +data[param.gender + "_A00-A04_" + param.type],
+            "5-14": +data[param.gender + "_A05-A14_" + param.type],
+            "15-34": +data[param.gender + "_A15-A34_" + param.type],
+            "35-59": +data[param.gender + "_A35-A59_" + param.type],
+            "60-79": +data[param.gender + "_A60-A79_" + param.type],
+            "80+": +data[param.gender + "_A80+_" + param.type]
         }
     }).then(function (data) {
         let row = d3.index(data, d => d.date)
-        // console.log(row)
-        // console.log(slice)
-        let select_date = row.get("2020-12-12")
+        let select_date = row.get(param.date)
         delete select_date.date
-        // console.log(select_date)
         let array = []
         Object.entries(select_date).forEach(ele => {
             array.push({
@@ -151,36 +124,73 @@ function draw_bar() {
         })
         return array
     }).then(function (data) {
-        console.log(data)
-            // Scale the range of the data in the domains
-            x.domain(data.map(function (d) {
-                return d.age;
-            }));
-            y.domain([0, d3.max(data, function (d) {
-                return d.value;
-            })]);
+        // Scale the range of the data in the domains
+        param.svg.x.domain([0, d3.max(data, function (d) {
+            return d.value;
+        })]);
+        param.svg.y.domain(data.map(function (d) {
+            return d.age;
+        }));
 
-            // append the rectangles for the bar chart
-            svg.selectAll(".bar")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function (d) {
-                    return x(d.age);
-                })
-                .attr("width", x.bandwidth())
-                .attr("y", function (d) {
-                    return y(d.value);
-                })
-                .attr("height", function (d) {
-                    return height - y(d.value);
-                });
+        // append the rectangles for the bar chart
+        param.svg.svg.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) {
+                return param.svg.x(d.value);
+            })
+            .attr("height", param.svg.y.bandwidth())
+            .attr("y", function (d) {
+                return param.svg.y(d.age);
+            })
+            .attr("width", function (d) {
+                return param.svg.bar_width - param.svg.x(d.value);
+            });
 
-            // add the x Axis
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-        });
+        // add the x Axis
+        param.svg.svg.append("g")
+            .attr("transform", "translate(" + param.svg.bar_width + ", 0)")
+            .call(d3.axisRight(param.svg.y));
+    });
+}
+
+function draw_bar() {
+    // set the dimensions and margins of the graph
+    const container = $("#case_hist")
+    const margin = {top: 20, right: 0, bottom: 30, left: 0},
+        width = container.innerWidth() - margin.left - margin.right,
+        height = container.innerHeight() - margin.top - margin.bottom,
+        gap = 40,
+        bar_width = (width - gap) / 2;
+
+// set the ranges
+    let x = d3.scaleLinear()
+        .range([bar_width, 0]);
+    let y = d3.scaleBand()
+        .range([height, 0])
+        .padding(0.1);
+
+    let svg = d3.select("#case_hist").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    const param1 = {
+        svg: {
+            svg: svg,
+            x: x,
+            y: y,
+            bar_width: bar_width
+        },
+        src: "data/rki/rki_DE-all.csv",
+        gender: "M",
+        type: "c",
+        date: "2020-12-12"
+    };
+    draw_bar_single_side(param1);
 }
 
 function refresh() {
