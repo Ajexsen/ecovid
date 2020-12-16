@@ -56,6 +56,7 @@
 
 :root {
     --offwhite: #E3E2DF;
+    --offwhite2: #dddbd7;
     --burgundy: #5D001E;
     --pink: #E3AFBC;
     --magenta :#9A1750
@@ -227,13 +228,18 @@ body {
 }
 
 .stat {
-    /*background-color: cadetblue;*/
+    /*background-color: var(--offwhite2);*/
     height: fit-content;
     /*margin: 0 0 10px 0;*/
     padding: 0 1.5vw 0 1.5vw;
     color: var(--burgundy);
-    border-left: solid var(--burgundy) 2px;
+    /*border-left: solid var(--burgundy) 2px;*/
+    border-right: solid var(--burgundy) 2px;
     /*min-width: 100px;*/
+}
+
+.stat_last {
+    border-right: none;
 }
 
 .stat_title {
@@ -248,7 +254,7 @@ body {
 }
 
 .hist_label {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 100;
     white-space: nowrap;
     color: var(--burgundy);
