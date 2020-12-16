@@ -282,6 +282,22 @@ const line_param_case = {
 
 };
 
+function step() {
+    let targetValue = 300
+    currentValue = document.getElementById("date_slider").value
+    updateBarData(currentValue);
+    document.getElementById("date_slider").value = parseInt(currentValue) + 1
+    
+    if (currentValue > targetValue) {
+        moving = false;
+        currentValue = 0;
+        clearInterval(timer);
+        // timer = 0;
+        playButton.text("Play");
+        console.log("Slider moving: " + moving);
+    }
+}
+
 function updateBarData(value) {
     d3.selectAll('#onerightmiddle svg').remove();
     let start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
@@ -306,6 +322,21 @@ function refresh() {
     draw_bar(bar_param_case_w)
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
+    
+    d3.select("#play-button").on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Pause") {
+      moving = false;
+      clearInterval(timer);
+      // timer = 0;
+      button.text("Play");
+    } else {
+      moving = true;
+      timer = setInterval(step, 200);
+      button.text("Pause");
+    }
+    console.log("Slider moving: " + moving);
+  })
 }
 
 refresh()
