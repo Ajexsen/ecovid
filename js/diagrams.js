@@ -143,7 +143,7 @@ function draw_bar(param) {
     let x = d3.scaleLinear().range([start, end]);
     let y = d3.scaleBand()
         .range([height, 0])
-        .padding(0.1);
+        .padding(0.07);
 
     let svg = d3.select(param.target).append("svg")
         .attr("width", width + margin.left + margin.right)

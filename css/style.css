@@ -126,7 +126,7 @@ body {
 
 .map_svg .jqvmap-region {
     stroke: var(--burgundy);
-    stroke-width: 5px;
+    stroke-width: 4px;
     stroke-opacity: 100%;
     fill: var(--offwhite);
     fill-opacity: 90%;
@@ -257,11 +257,14 @@ body {
 }
 
 .hist_labels {
-    align-items: center;
-    justify-content: center;
     width: 45px;
     border: solid var(--burgundy);
     border-width: 0 2px 0 2px;
+}
+
+.hist_label_center {
+    align-items: center;
+    justify-content: center;
 }
 
 .hist_label_text {
@@ -270,6 +273,16 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.hist_parent {
+    margin: 0 20px 0 20px;
+}
+
+.bar_center_container {
+    height: 65%;
+    width: 100%;
+}
+
 
 #line_chart_slider {
     position: relative;
