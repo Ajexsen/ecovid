@@ -66,27 +66,51 @@ function draw_line(param) {
 
         svg.append("path")
             .datum(data)
-            .attr("class", "line line1")
-            .attr("fill", "none")
-            .attr("d", d3.line()
+            .attr("class", "area_total")
+            .attr("d", d3.area()
                 .x(function (d) {
-                    return x(d.date1)
+                    return x(d.date2)
                 })
-                .y(function (d) {
-                    return y_left(d.value1)
+                .y0(height)
+                .y1(function (d) {
+                    return y_right(d.value2)
                 })
-            )
+            );
 
         svg.append("path")
             .datum(data)
-            .attr("class", "line line2")
-            .attr("fill", "none")
+            .attr("class", "line line_total")
             .attr("d", d3.line()
                 .x(function (d) {
                     return x(d.date2)
                 })
                 .y(function (d) {
                     return y_right(d.value2)
+                })
+            );
+
+        svg.append("path")
+            .datum(data)
+            .attr("class", "area_new")
+            .attr("d", d3.area()
+                .x(function (d) {
+                    return x(d.date1)
+                })
+                .y0(height)
+                .y1(function (d) {
+                    return y_left(d.value1)
+                })
+            );
+
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line line_new")
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return x(d.date1)
+                })
+                .y(function (d) {
+                    return y_left(d.value1)
                 })
             )
 
@@ -106,6 +130,7 @@ function draw_bar(param) {
     const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
+    console.log(height)
 
 // set the ranges
     let start = 0, end = 0, direction = 1;
@@ -124,8 +149,7 @@ function draw_bar(param) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv(param.src, function (data) {
         return {
@@ -171,16 +195,11 @@ function draw_bar(param) {
                 return (start - x(d.value)) * direction;
             });
 
-        let y_axis = svg.append("g")
-            .attr("transform", "translate(" + start + ", 0)")
-
         if (param.direction === "left") {
-            y_axis.call(d3.axisRight(y));
             bar.attr("x", function (d) {
                 return x(d.value);
             })
         } else {
-            y_axis.call(d3.axisLeft(y));
             bar.attr("x", function () {
                 return start;
             })
@@ -233,6 +252,7 @@ function refresh() {
 
     };
     draw_line(param2)
+
 
     const param_case_m = {
         src: "data/rki/rki_DE-all.csv",

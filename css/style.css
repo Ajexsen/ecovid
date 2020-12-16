@@ -253,12 +253,15 @@ body {
     white-space: nowrap;
     color: var(--burgundy);
     position: relative;
+    height: 16.667%;
 }
 
 .hist_labels {
     align-items: center;
     justify-content: center;
     width: 45px;
+    border: solid var(--burgundy);
+    border-width: 0 2px 0 2px;
 }
 
 .hist_label_text {
@@ -281,6 +284,7 @@ body {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
     margin-bottom: 2.5vw;
+    overflow-y: hidden;
 }
 
 #onerightbottom {
@@ -371,16 +375,25 @@ body {
 
 .line {
     fill: none;
-    stroke: var(--magenta);
     stroke-width: 1.5;
 }
 
-.line1 {
+.line_new {
     stroke: var(--magenta);
 }
 
-.line2 {
+.area_new {
+    fill: var(--magenta);
+    opacity: 5%;
+}
+
+.line_total {
     stroke: var(--pink);
+}
+
+.area_total {
+    fill: var(--pink);
+    opacity: 5%;
 }
 
 .tick {
