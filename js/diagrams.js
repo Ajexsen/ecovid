@@ -130,7 +130,6 @@ function draw_bar(param) {
     const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
-    console.log(height)
 
 // set the ranges
     let start = 0, end = 0, direction = 1;
@@ -204,152 +203,140 @@ function draw_bar(param) {
                 return start;
             })
         }
+        
     });
 }
 
-function draw_histogramm(param){
-    const container = $(param.target)
-    const margin = {top: 0, right: 0, bottom: 0, left: 0},
-        width = container.innerWidth() - margin.left - margin.right,
-        height = container.innerHeight() - margin.top - margin.bottom;
-    console.log(height)
+const bar_param_case_m = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#case_hist_left",
+    gender: "M",
+    type: "c",
+    date: "2020-12-12",
+    direction: "left"
+};
+const bar_param_case_w = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#case_hist_right",
+    gender: "W",
+    type: "c",
+    date: "2020-12-12",
+    direction: "right"
+};
+const bar_param_death_m = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#death_hist_left",
+    gender: "M",
+    type: "d",
+    date: "2020-12-12",
+    direction: "left"
+};
+const bar_param_death_w = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#death_hist_right",
+    gender: "W",
+    type: "d",
+    date: "2020-12-12",
+    direction: "right"
+};
 
-    let dataset = [ 5, 10, 13, 19, 21 ];
-    let barPadding = 1;
-    let svg = d3.select(param.target)
-        .append('svg')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    let xScale = d3.scaleBand()
-        .domain(d3.range(dataset.length))
-        .range([0, width]);
-
-    let yScale = d3.scaleLinear()
-        .domain([0, d3.max(dataset)])
-        .range([height, 0]);
-
-    let xAxis = d3.axisBottom().scale(xScale)
-
-    let yAxis = d3.axisLeft().scale(yScale)
-    
-    // svg.selectAll("rect")
-    //     .data(dataset)
-    //     .enter()
-    //     .append("rect")
-    //     .attr("x", function(d, i){return xScale(i)})
-    //     .attr("y", function(d){return height - yScale(d)})
-    //     .attr("fill", "#5D001E")
-    //     .attr("width", width / dataset.length - barPadding)
-    //     .attr("height", function(d){return yScale(d);});
-
-    svg.append("g")
-        .attr("transform", "translate(0, " + margin.top  +")")
-        .call(xAxis);
-    
-    svg.append("g")
-        .attr("transform", "translate( 0, 0)")
-        .call(yAxis)
+const line_param_death = {
+    target: "#line_chart_slider_top",
+    title: "Deaths",
+    data1: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "NeuerTodesfall",
+        y_scale: 1
+    },
+    data2: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "AnzahlTodesfall",
+        y_scale: 1
     }
+};
+const line_param_case = {
+    target: "#line_chart_slider_bottom",
+    title: "Cases",
+    data1: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "NeuerFall",
+        y_scale: 1000
+    },
+    data2: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "AnzahlFall",
+        y_scale: 1000
+    }
+
+};
+
+function step() {
+    let targetValue = 300
+    currentValue = document.getElementById("date_slider").value
+    updateBarData(currentValue);
+    document.getElementById("date_slider").value = parseInt(currentValue) + 1
+    
+    if (currentValue > targetValue) {
+        moving = false;
+        currentValue = 0;
+        clearInterval(timer);
+        // timer = 0;
+        playButton.text("Play");
+        console.log("Slider moving: " + moving);
+    }
+}
+
+function updateBarData(value) {
+    d3.selectAll('#onerightmiddle svg').remove();
+    let start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
+    let date = d3.timeFormat("%Y-%m-%d")(d3.timeDay.offset(start_date, value))
+    // console.log(start_date)
+    // console.log(date)
+    bar_param_case_m.date = date
+    bar_param_case_w.date = date
+    bar_param_death_m.date = date
+    bar_param_death_w.date = date
+    draw_bar(bar_param_case_m)
+    draw_bar(bar_param_case_w)
+    draw_bar(bar_param_death_m)
+    draw_bar(bar_param_death_w)
+}
 
 function refresh() {
     d3.selectAll('#oneright svg').remove();
-    const param1 = {
-        target: "#line_chart_slider_top",
-        title: "Deaths",
-        data1: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "NeuerTodesfall",
-            y_scale: 1
-        },
-        data2: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "AnzahlTodesfall",
-            y_scale: 1
-        }
-    };
-    draw_line(param1)
-    const param2 = {
-        target: "#line_chart_slider_bottom",
-        title: "Cases",
-        data1: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "NeuerFall",
-            y_scale: 1000
-        },
-        data2: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "AnzahlFall",
-            y_scale: 1000
-        }
-
-    };
-    draw_line(param2)
-
-
-    const param_case_m = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#case_hist_left",
-        gender: "M",
-        type: "c",
-        date: "2020-12-12",
-        direction: "left"
-    };
-    draw_bar(param_case_m)
-
-    const param_case_w = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#case_hist_right",
-        gender: "W",
-        type: "c",
-        date: "2020-12-12",
-        direction: "right"
-    };
-    draw_bar(param_case_w)
-
-    const param_death_m = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#death_hist_left",
-        gender: "M",
-        type: "d",
-        date: "2020-12-12",
-        direction: "left"
-    };
-    draw_bar(param_death_m)
-
-    const param_death_w = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#death_hist_right",
-        gender: "W",
-        type: "d",
-        date: "2020-12-12",
-        direction: "right"
-    };
-    draw_bar(param_death_w)
-
-    const param_histogramm = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#his_sec2",
-        gender: "W",
-        type: "d",
-        date: "2020-12-12",
-        direction: "right"
-    };
-    draw_histogramm(param_histogramm)
+    draw_line(line_param_death)
+    draw_line(line_param_case)
+    draw_bar(bar_param_case_m)
+    draw_bar(bar_param_case_w)
+    draw_bar(bar_param_death_m)
+    draw_bar(bar_param_death_w)
+    
+    d3.select("#play-button").on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Pause") {
+      moving = false;
+      clearInterval(timer);
+      // timer = 0;
+      button.text("Play");
+    } else {
+      moving = true;
+      timer = setInterval(step, 200);
+      button.text("Pause");
+    }
+    console.log("Slider moving: " + moving);
+  })
 }
 
 refresh()
