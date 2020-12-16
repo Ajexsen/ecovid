@@ -204,6 +204,7 @@ function draw_bar(param) {
                 return start;
             })
         }
+        
     });
 }
 
@@ -293,6 +294,30 @@ function refresh() {
         direction: "right"
     };
     draw_bar(param_death_w)
+    
+
+    function updateBarData(value) {
+        d3.selectAll('#onerightmiddle svg').remove();
+        start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
+        date = d3.timeFormat("%Y-%m-%d")(d3.timeDay.offset(start_date, value))
+        console.log(start_date)
+        console.log(date)
+        param_case_m.date = date
+        param_case_w.date = date
+        param_death_m.date = date
+        param_death_w.date = date
+        draw_bar(param_case_m)
+        draw_bar(param_case_w)
+        draw_bar(param_death_m)
+        draw_bar(param_death_w)
+    }
+        
+    // Listen to the slider
+    d3.select("#date_slider").on("change", function(d){
+        selectedValue = this.value
+        updateBarData(selectedValue)
+    })
+    
 }
 
 refresh()
