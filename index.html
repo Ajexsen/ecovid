@@ -108,7 +108,12 @@
                         </div>
                     </div>
                 </div>
-                <input type="range" id="date_slider" min="1" max="300" value="1" oninput="updateBarData(this.value)">
+
+                <div id="tools">
+                    <input type="range" name="date_slider" id="date_slider" min="1" max="300" value="1" oninput="updateBarData(this.value)">
+                    <button id="play-button">Play</button>
+                </div>
+
                 <div id="onerightbottom" class="flex3 flexcolumn ">
                     <div id="line_chart_slider_top" class="flex1"></div>
                     <div id="line_chart_slider_bottom" class="flex1"></div>
@@ -117,19 +122,30 @@
         </div>
     </div>
     <div id="section1" class="section center_parent">
-        <div id="content_sec2" class="content_sec center_box flexcolumn">
+        <div id="content_sec1" class="content_sec center_box flexcolumn">
             <div id="twotop" class="flexnone flexcolumn content_titles">
                 <div class="content_title fullwidth_p flexnone">COVID-19</div>
                 <div class="content_subtitle fullwidth_p flexnone">is affectinig the travel and tourism in Germany ...
                 </div>
             </div>
-            <div id="twomiddle" class="flex3 frame content_middle">
+            <div id="lc_sec2"  class="flex3 frame content_middle">
             </div>
-            <div id="twobottom" class="flex1 frame">
+            <div id="his_sec2" class="flex1 frame">
             </div>
         </div>
     </div>
-    <div id="section2" class="section">
+    <div id="section2" class="section center_parent">
+        <div id="content_sec2" class="content_sec center_box flexcolumn">
+            <div id="prologue_sec2" class="flexnone flexcolumn content_titles">
+                <div class="content_title fullwidth_p flexnone">COVID-19</div>
+                <div class="content_subtitle fullwidth_p flexnone">is also affecting other econoimic indicators in Germany ...
+                </div>
+            </div>
+            <div id="lc_sec3" class="flex3 frame content_middle">
+            </div>
+            <div id="his_sec3"  class="flex1 frame">
+            </div>
+        </div>
     </div>
 </div>
 
