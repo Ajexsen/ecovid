@@ -130,7 +130,6 @@ function draw_bar(param) {
     const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
-    console.log(height)
 
 // set the ranges
     let start = 0, end = 0, direction = 1;
@@ -208,116 +207,105 @@ function draw_bar(param) {
     });
 }
 
+const bar_param_case_m = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#case_hist_left",
+    gender: "M",
+    type: "c",
+    date: "2020-12-12",
+    direction: "left"
+};
+const bar_param_case_w = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#case_hist_right",
+    gender: "W",
+    type: "c",
+    date: "2020-12-12",
+    direction: "right"
+};
+const bar_param_death_m = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#death_hist_left",
+    gender: "M",
+    type: "d",
+    date: "2020-12-12",
+    direction: "left"
+};
+const bar_param_death_w = {
+    src: "data/rki/rki_DE-all.csv",
+    target: "#death_hist_right",
+    gender: "W",
+    type: "d",
+    date: "2020-12-12",
+    direction: "right"
+};
+
+const line_param_death = {
+    target: "#line_chart_slider_top",
+    title: "Deaths",
+    data1: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "NeuerTodesfall",
+        y_scale: 1
+    },
+    data2: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "AnzahlTodesfall",
+        y_scale: 1
+    }
+};
+const line_param_case = {
+    target: "#line_chart_slider_bottom",
+    title: "Cases",
+    data1: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "NeuerFall",
+        y_scale: 1000
+    },
+    data2: {
+        src: "data/rki/rki_DE-all.csv",
+        delimiter: ",",
+        x: "Meldedatum",
+        x_date_format: "%Y-%m-%d",
+        y: "AnzahlFall",
+        y_scale: 1000
+    }
+
+};
+
+function updateBarData(value) {
+    d3.selectAll('#onerightmiddle svg').remove();
+    let start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
+    let date = d3.timeFormat("%Y-%m-%d")(d3.timeDay.offset(start_date, value))
+    // console.log(start_date)
+    // console.log(date)
+    bar_param_case_m.date = date
+    bar_param_case_w.date = date
+    bar_param_death_m.date = date
+    bar_param_death_w.date = date
+    draw_bar(bar_param_case_m)
+    draw_bar(bar_param_case_w)
+    draw_bar(bar_param_death_m)
+    draw_bar(bar_param_death_w)
+}
+
 function refresh() {
     d3.selectAll('#oneright svg').remove();
-    const param1 = {
-        target: "#line_chart_slider_top",
-        title: "Deaths",
-        data1: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "NeuerTodesfall",
-            y_scale: 1
-        },
-        data2: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "AnzahlTodesfall",
-            y_scale: 1
-        }
-    };
-    draw_line(param1)
-    const param2 = {
-        target: "#line_chart_slider_bottom",
-        title: "Cases",
-        data1: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "NeuerFall",
-            y_scale: 1000
-        },
-        data2: {
-            src: "data/rki/rki_DE-all.csv",
-            delimiter: ",",
-            x: "Meldedatum",
-            x_date_format: "%Y-%m-%d",
-            y: "AnzahlFall",
-            y_scale: 1000
-        }
-
-    };
-    draw_line(param2)
-
-
-    const param_case_m = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#case_hist_left",
-        gender: "M",
-        type: "c",
-        date: "2020-12-12",
-        direction: "left"
-    };
-    draw_bar(param_case_m)
-
-    const param_case_w = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#case_hist_right",
-        gender: "W",
-        type: "c",
-        date: "2020-12-12",
-        direction: "right"
-    };
-    draw_bar(param_case_w)
-
-    const param_death_m = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#death_hist_left",
-        gender: "M",
-        type: "d",
-        date: "2020-12-12",
-        direction: "left"
-    };
-    draw_bar(param_death_m)
-
-    const param_death_w = {
-        src: "data/rki/rki_DE-all.csv",
-        target: "#death_hist_right",
-        gender: "W",
-        type: "d",
-        date: "2020-12-12",
-        direction: "right"
-    };
-    draw_bar(param_death_w)
-    
-
-    function updateBarData(value) {
-        d3.selectAll('#onerightmiddle svg').remove();
-        start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
-        date = d3.timeFormat("%Y-%m-%d")(d3.timeDay.offset(start_date, value))
-        console.log(start_date)
-        console.log(date)
-        param_case_m.date = date
-        param_case_w.date = date
-        param_death_m.date = date
-        param_death_w.date = date
-        draw_bar(param_case_m)
-        draw_bar(param_case_w)
-        draw_bar(param_death_m)
-        draw_bar(param_death_w)
-    }
-        
-    // Listen to the slider
-    d3.select("#date_slider").on("change", function(d){
-        selectedValue = this.value
-        updateBarData(selectedValue)
-    })
-    
+    draw_line(line_param_death)
+    draw_line(line_param_case)
+    draw_bar(bar_param_case_m)
+    draw_bar(bar_param_case_w)
+    draw_bar(bar_param_death_m)
+    draw_bar(bar_param_death_w)
 }
 
 refresh()
