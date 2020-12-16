@@ -101,6 +101,15 @@ function draw_line(param) {
 }
 
 function draw_bar_single_side(param) {
+    const bar_width = (param.svg.svg_width - param.svg.gap) / 2
+    const start = bar_width
+    const end = 0;
+
+    // const start = 0
+    // const end = bar_width;
+
+    let x = d3.scaleLinear().range([start, end]);
+
     d3.csv(param.src, function (data) {
         return {
             date: data.Meldedatum,
@@ -125,7 +134,7 @@ function draw_bar_single_side(param) {
         return array
     }).then(function (data) {
         // Scale the range of the data in the domains
-        param.svg.x.domain([0, d3.max(data, function (d) {
+        x.domain([0, d3.max(data, function (d) {
             return d.value;
         })]);
         param.svg.y.domain(data.map(function (d) {
@@ -138,19 +147,19 @@ function draw_bar_single_side(param) {
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function (d) {
-                return param.svg.x(d.value);
+                return x(d.value);
             })
             .attr("height", param.svg.y.bandwidth())
             .attr("y", function (d) {
                 return param.svg.y(d.age);
             })
             .attr("width", function (d) {
-                return param.svg.bar_width - param.svg.x(d.value);
+                return start - x(d.value);
             });
 
         // add the x Axis
         param.svg.svg.append("g")
-            .attr("transform", "translate(" + param.svg.bar_width + ", 0)")
+            .attr("transform", "translate(" + start + ", 0)")
             .call(d3.axisRight(param.svg.y));
     });
 }
@@ -161,12 +170,9 @@ function draw_bar() {
     const margin = {top: 20, right: 0, bottom: 30, left: 0},
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom,
-        gap = 40,
-        bar_width = (width - gap) / 2;
+        gap = 40;
 
 // set the ranges
-    let x = d3.scaleLinear()
-        .range([bar_width, 0]);
     let y = d3.scaleBand()
         .range([height, 0])
         .padding(0.1);
@@ -181,9 +187,9 @@ function draw_bar() {
     const param1 = {
         svg: {
             svg: svg,
-            x: x,
             y: y,
-            bar_width: bar_width
+            svg_width: width,
+            gap: gap
         },
         src: "data/rki/rki_DE-all.csv",
         gender: "M",
