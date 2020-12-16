@@ -79,6 +79,7 @@ def get_csv_bundesland(df, bundesland_id):
     
     # generate empty DataFrame with all cells 0 zero
     df = pd.DataFrame(index=indices, columns=column_names)
+    df.index.name='Meldedatum'
     del indices, column_names
     df = df.fillna(0)
     
