@@ -100,15 +100,32 @@ function draw_line(param) {
     });
 }
 
-function draw_bar_single_side(param) {
-    const bar_width = (param.svg.svg_width - param.svg.gap) / 2
-    const start = bar_width
-    const end = 0;
+function draw_bar(param) {
+    // set the dimensions and margins of the graph
+    const container = $(param.target)
+    const margin = {top: 0, right: 0, bottom: 0, left: 0},
+        width = container.innerWidth() - margin.left - margin.right,
+        height = container.innerHeight() - margin.top - margin.bottom;
 
-    // const start = 0
-    // const end = bar_width;
-
+// set the ranges
+    let start = 0, end = 0, direction = 1;
+    if (param.direction === "left") {
+        start = width;
+    } else {
+        end = width;
+        direction = -1;
+    }
     let x = d3.scaleLinear().range([start, end]);
+    let y = d3.scaleBand()
+        .range([height, 0])
+        .padding(0.1);
+
+    let svg = d3.select(param.target).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv(param.src, function (data) {
         return {
@@ -137,66 +154,38 @@ function draw_bar_single_side(param) {
         x.domain([0, d3.max(data, function (d) {
             return d.value;
         })]);
-        param.svg.y.domain(data.map(function (d) {
+        y.domain(data.map(function (d) {
             return d.age;
         }));
 
         // append the rectangles for the bar chart
-        param.svg.svg.selectAll(".bar")
+        let bar = svg.selectAll(".bar")
             .data(data)
             .enter().append("rect")
             .attr("class", "bar")
-            .attr("x", function (d) {
-                return x(d.value);
-            })
-            .attr("height", param.svg.y.bandwidth())
+            .attr("height", y.bandwidth())
             .attr("y", function (d) {
-                return param.svg.y(d.age);
+                return y(d.age);
             })
             .attr("width", function (d) {
-                return start - x(d.value);
+                return (start - x(d.value)) * direction;
             });
 
-        // add the x Axis
-        param.svg.svg.append("g")
+        let y_axis = svg.append("g")
             .attr("transform", "translate(" + start + ", 0)")
-            .call(d3.axisRight(param.svg.y));
+
+        if (param.direction === "left") {
+            y_axis.call(d3.axisRight(y));
+            bar.attr("x", function (d) {
+                return x(d.value);
+            })
+        } else {
+            y_axis.call(d3.axisLeft(y));
+            bar.attr("x", function () {
+                return start;
+            })
+        }
     });
-}
-
-function draw_bar() {
-    // set the dimensions and margins of the graph
-    const container = $("#case_hist")
-    const margin = {top: 20, right: 0, bottom: 30, left: 0},
-        width = container.innerWidth() - margin.left - margin.right,
-        height = container.innerHeight() - margin.top - margin.bottom,
-        gap = 40;
-
-// set the ranges
-    let y = d3.scaleBand()
-        .range([height, 0])
-        .padding(0.1);
-
-    let svg = d3.select("#case_hist").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    const param1 = {
-        svg: {
-            svg: svg,
-            y: y,
-            svg_width: width,
-            gap: gap
-        },
-        src: "data/rki/rki_DE-all.csv",
-        gender: "M",
-        type: "c",
-        date: "2020-12-12"
-    };
-    draw_bar_single_side(param1);
 }
 
 function refresh() {
@@ -244,7 +233,46 @@ function refresh() {
 
     };
     draw_line(param2)
-    draw_bar()
+
+    const param_case_m = {
+        src: "data/rki/rki_DE-all.csv",
+        target: "#case_hist_left",
+        gender: "M",
+        type: "c",
+        date: "2020-12-12",
+        direction: "left"
+    };
+    draw_bar(param_case_m)
+
+    const param_case_w = {
+        src: "data/rki/rki_DE-all.csv",
+        target: "#case_hist_right",
+        gender: "W",
+        type: "c",
+        date: "2020-12-12",
+        direction: "right"
+    };
+    draw_bar(param_case_w)
+
+    const param_death_m = {
+        src: "data/rki/rki_DE-all.csv",
+        target: "#death_hist_left",
+        gender: "M",
+        type: "d",
+        date: "2020-12-12",
+        direction: "left"
+    };
+    draw_bar(param_death_m)
+
+    const param_death_w = {
+        src: "data/rki/rki_DE-all.csv",
+        target: "#death_hist_right",
+        gender: "W",
+        type: "d",
+        date: "2020-12-12",
+        direction: "right"
+    };
+    draw_bar(param_death_w)
 }
 
 refresh()
