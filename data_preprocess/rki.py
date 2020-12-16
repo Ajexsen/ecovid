@@ -40,7 +40,7 @@ STATE_ID_ISONAME_MAP = {
        16: "DE-TH",
 }
 
-def get_csv_bundesland(df, bundesland_id):
+def get_csv_bundesland(df, bundesland_id, path):
     file_name = "rki_.csv"
     
     # if bundesland id exist, filter out for given id
@@ -104,15 +104,15 @@ def get_csv_bundesland(df, bundesland_id):
     df['NeuerFall'] = new_case
     df['NeuerTodesfall'] = new_death
     df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
-    df.to_csv("{}{}".format(save_path, file_name))
-    print("{} saved in path: {}".format(file_name, save_path))
+    df.to_csv("{}{}".format(path, file_name))
+    print("{} saved in path: {}".format(file_name, path))
 
 # TODO: download & update data (once per day)
 # https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv
 
 # load data: don't upload full csv
+data = pd.read_csv("RKI_COVID19.csv")
 save_path = '..//data//rki//'
-data = pd.read_csv("{}RKI_COVID19.csv".format(save_path))
 
 # remove unnecessary column
 data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis', 
@@ -134,9 +134,11 @@ data = data.drop(columns=['NeuerFall', 'NeuerTodesfall'])
 data['gender_age'] = data['Geschlecht'] + "_" + data['Altersgruppe']
 data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
-# generate csv for all states
-for i in range(17):
-    get_csv_bundesland(data, i)
+# generate csv for all states (include DE_all)
+# for i in range(17):
+#     get_csv_bundesland(data, i, save_path)
 
+# generate nation-wide csv (DE_all)
+get_csv_bundesland(data, 0, save_path)
         
     
