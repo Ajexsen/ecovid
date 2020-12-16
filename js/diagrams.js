@@ -127,7 +127,7 @@ function draw_bar() {
 // get the data
     d3.csv("data/rki/rki_DE-all.csv", function (data) {
         return {
-            date: data.date,
+            date: data.Meldedatum,
             "0-4": +data["M_A00-A04_c"],
             "5-14": +data["M_A05-A14_c"],
             "15-34": +data["M_A15-A34_c"],
@@ -139,7 +139,7 @@ function draw_bar() {
         let row = d3.index(data, d => d.date)
         // console.log(row)
         // console.log(slice)
-        let select_date = row.get("12/12/2020")
+        let select_date = row.get("2020-12-12")
         delete select_date.date
         // console.log(select_date)
         let array = []
@@ -191,16 +191,16 @@ function refresh() {
         data1: {
             src: "data/rki/rki_DE-all.csv",
             delimiter: ",",
-            x: "date",
-            x_date_format: "%d/%m/%Y",
+            x: "Meldedatum",
+            x_date_format: "%Y-%m-%d",
             y: "NeuerTodesfall",
             y_scale: 1
         },
         data2: {
             src: "data/rki/rki_DE-all.csv",
             delimiter: ",",
-            x: "date",
-            x_date_format: "%d/%m/%Y",
+            x: "Meldedatum",
+            x_date_format: "%Y-%m-%d",
             y: "AnzahlTodesfall",
             y_scale: 1
         }
@@ -212,16 +212,16 @@ function refresh() {
         data1: {
             src: "data/rki/rki_DE-all.csv",
             delimiter: ",",
-            x: "date",
-            x_date_format: "%d/%m/%Y",
+            x: "Meldedatum",
+            x_date_format: "%Y-%m-%d",
             y: "NeuerFall",
             y_scale: 1000
         },
         data2: {
             src: "data/rki/rki_DE-all.csv",
             delimiter: ",",
-            x: "date",
-            x_date_format: "%d/%m/%Y",
+            x: "Meldedatum",
+            x_date_format: "%Y-%m-%d",
             y: "AnzahlFall",
             y_scale: 1000
         }
