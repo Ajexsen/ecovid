@@ -387,22 +387,31 @@ function refresh() {
     draw_bar(bar_param_case_w)
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
-    
-    d3.select("#play-button").on("click", function() {
-    var button = d3.select(this);
-    if (button.text() == "Pause") {
-      moving = false;
-      clearInterval(timer);
-      // timer = 0;
-      button.text("Play");
+
+    let thumb_height = $("#slider_containter").innerHeight()
+    // $(".slider_thumb").attr("height", "100px")
+    for(let j = 0; j < document.styleSheets[1].rules.length; j++) {
+        let rule = document.styleSheets[1].rules[j];
+        if (rule.cssText.match(".slider_thumb")) {
+            rule.style.height = thumb_height + "px";
+        }
+    }
+}
+
+d3.select("#play-button").on("click", function() {
+    let button = d3.select(this);
+    let moving = false, timer = 0;
+    if (button.text() === "Pause") {
+        clearInterval(timer);
+        // timer = 0;
+        button.text("Play");
     } else {
-      moving = true;
-      timer = setInterval(step, 200);
-      button.text("Pause");
+        moving = true;
+        timer = setInterval(step, 200);
+        button.text("Pause");
     }
     console.log("Slider moving: " + moving);
-  })
-}
+})
 
 refresh()
 d3.select(window).on('resize', refresh);
