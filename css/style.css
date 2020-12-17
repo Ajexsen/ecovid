@@ -58,8 +58,11 @@
     --offwhite: #E3E2DF;
     --offwhite2: #dddbd7;
     --burgundy: #5D001E;
+    --burgundy40: #5D001E40;
     --pink: #E3AFBC;
-    --magenta :#9A1750
+    --magenta:#9A1750;
+    --axis-width: 3px;
+    --slider-thumb-width: 6px;
 }
 
 body {
@@ -67,6 +70,10 @@ body {
     height: 100vh;
     overflow: hidden !important;
     font-family: "Gill Sans MT Pro", helvetica, sans-serif !important;
+}
+
+#fullpage {
+    z-index: 10;
 }
 
 .full_v {
@@ -83,11 +90,15 @@ body {
 .bg {
     background-color: var(--offwhite);
     position: fixed;
+    z-index: -200;
 }
 
 .fullheight_v {
     height: 100vh !important;
-    /*position: absolute;*/
+}
+
+.fullheight_p {
+    height: 100% !important;
 }
 
 .fullwidth_v {
@@ -96,6 +107,14 @@ body {
 
 .fullwidth_p {
     width: 100% !important;
+}
+
+.float {
+    position: relative;
+}
+
+.flex_stretch {
+    align-items: stretch;
 }
 
 .map_bg {
@@ -227,30 +246,53 @@ body {
     flex: 4;
 }
 
+.dateblock {
+    margin-right: 1.5vw;
+}
+
+#month {
+    background: var(--burgundy);
+    padding: 0 6px 0 6px;
+    color: var(--offwhite);
+    font-size: 1.1vw;
+    text-align: center;
+    font-weight: 100;
+}
+
+#day {
+    border: solid var(--burgundy) 1px;
+    font-size: 1.9vw;
+    padding: 0 6px 0 6px;
+    color: var(--burgundy);
+    /*font-weight: bold;*/
+}
+
 .stat {
     /*background-color: var(--offwhite2);*/
     height: fit-content;
     /*margin: 0 0 10px 0;*/
     padding: 0 1.5vw 0 1.5vw;
     color: var(--burgundy);
-    /*border-left: solid var(--burgundy) 2px;*/
-    border-right: solid var(--burgundy) 2px;
+    border-left: solid var(--burgundy) 2px;
+    /*border-right: solid var(--burgundy) 2px;*/
     /*min-width: 100px;*/
+    overflow: hidden;
 }
 
-.stat_last {
-    border-right: none;
-}
+/*.stat_last {*/
+/*    border-right: none;*/
+/*}*/
 
 .stat_title {
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     font-weight: 300;
     white-space: nowrap;
 }
 
 .stat_value {
-    font-size: 2vw;
+    font-size: 1.9vw;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .hist_label {
@@ -289,6 +331,46 @@ body {
     width: 100%;
 }
 
+.slider_containter {
+    margin: 40px 55px 18px 60px;
+    overflow: hidden;
+}
+
+.slider {
+    transform: translateY(-100%);
+}
+
+#date_slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    /*height: 100%; !* Specified height *!*/
+    background: none; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.5; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider_thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--slider-thumb-width);
+    /*height: 100px;*/
+    background: #7e0010;
+    cursor: ew-resize;
+    box-shadow: -2000px 0 0 2000px var(--burgundy40);
+}
+
+.slider_thumb::-moz-range-thumb {
+    width: var(--slider-thumb-width);
+    background: #7e0010;
+    cursor: ew-resize;
+}
+
+.slider_thumb::-moz-range-progress {
+    background-color: #666;
+}
 
 #line_chart_slider {
     position: relative;
@@ -302,8 +384,31 @@ body {
 #onerightmiddle {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
-    margin-bottom: 2.5vw;
+    margin-bottom: 2vw;
     /*overflow-y: hidden;*/
+}
+
+#onerightbottom {
+    overflow-y: hidden;
+}
+
+.bar_title {
+    margin-top: 0.5vw;
+    /*margin-bottom: 2vw;*/
+    font-size: 14px;
+    color: var(--burgundy);
+    text-align: center;
+}
+
+.gender {
+    /*margin-bottom: 2vw;*/
+    font-size: 14px;
+    color: var(--burgundy);
+    text-align: center;
+}
+
+.gender_text {
+    margin: 0 10px 0 10px;
 }
 
 #onerightbottom {
@@ -403,7 +508,7 @@ body {
 
 .area_new {
     fill: var(--magenta);
-    opacity: 5%;
+    opacity: 30%;
 }
 
 .line_total {
@@ -412,7 +517,7 @@ body {
 
 .area_total {
     fill: var(--pink);
-    opacity: 5%;
+    opacity: 30%;
 }
 
 .tick {
@@ -422,7 +527,7 @@ body {
 }
 
 .domain {
-    stroke-width: 3px;
+    stroke-width: var(--axis-width);
     stroke-opacity: 0.3;
     /*opacity: 0.3;*/
 }
@@ -447,7 +552,7 @@ body {
 }
 
 .frame {
-    border: solid magenta 1px;
+    border: solid #d949c6 1px;
 }
 
 .bar {
@@ -456,4 +561,19 @@ body {
 
 .block_bg {
     background-color: #789875;
+}
+
+.axis_label {
+    background: var(--burgundy);
+    font-size: 10px;
+    font-weight: bold;
+    fill: var(--burgundy);
+}
+
+.legend_new {
+    fill: var(--magenta);
+}
+
+.legend_total {
+    fill: var(--pink);
 }
