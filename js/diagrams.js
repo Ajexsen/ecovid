@@ -474,7 +474,7 @@ const line_param_case = {
 };
 
 const line_param_bike = {
-    target: "#line_chart_transport",
+    target: "#lc_sec2",
     title: "test", 
     src: "data/transport/bicycle/",
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
@@ -535,8 +535,8 @@ function refresh() {
     draw_bar(bar_param_death_w)
     set_text_statistic(text_stat_para)
     
-    d3.selectAll('#content_sec1 svg').remove();
-    draw_lines(line_param_bike)
+    // d3.selectAll('#content_sec1 svg').remove();
+    // draw_lines(line_param_bike)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
