@@ -25,7 +25,7 @@ function set_text_statistic(param) {
 }
 
 function draw_lines(param) {
-
+    
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -38,11 +38,11 @@ function draw_lines(param) {
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-
+            
     const n_data = param.data_files.length
     const div_width = width / n_data
     //const n_data = 1
-
+    
     for(let i = 0; i < n_data; i++){
         path = param.src + param.data_files[i]
         d3.dsv(param.delimiter, path, function (d) {
@@ -52,13 +52,13 @@ function draw_lines(param) {
             }
         }).then(data =>{
             // let x = d3.scaleTime()
-
+            
             let x = d3.scaleLinear()
                 .domain(d3.extent(data, function (d) {
                     return d.date;
                 }))
                 .range([0, width]);
-
+ 
             let y = d3.scaleLinear()
                 .domain([0, d3.max(data, function (d) {
                     return +d.value;
@@ -71,9 +71,9 @@ function draw_lines(param) {
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", 1.5)
                 .attr("d", d3.line()
-                    .x(function(d) { return x(d.date) })
-                    .y(function(d) { return y(d.value) })
-                )
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+            )
             //console.log("i=" + i)
             //console.log("n_data=" + n_data)
             if(i == 0){
@@ -93,9 +93,9 @@ function draw_lines(param) {
                         //.tickSizeInner(0)
                         //.tickSizeOuter(0)
                         //.tickPadding(10)
-                    );
+                    );                    
             }
-
+            
             svg.append("rect")
                 .attr('class', 'legend_line')
                 .attr("width", 10)
@@ -107,17 +107,17 @@ function draw_lines(param) {
                 //.attr("cx",200)
                 //.attr("cy",130)
                 .attr("r", 6)
-
+                
             svg.append("text")
                 .attr('class', 'legend_text')
                 .text(param.line_legends[i])
                 .style("font-size", "15px")
                 .attr('x', div_width*i + 20 + 10)
-                .attr('y', height + 8 - 20)
-            //.attr("alignment-baseline","middle")
-            //.attr("x", 220)
-            //.attr("y", 160)
-
+                .attr('y', height + 8 - 20)              
+                //.attr("alignment-baseline","middle")
+                //.attr("x", 220)
+                //.attr("y", 160)
+                
         })
     }
 }
@@ -167,10 +167,10 @@ function draw_line(param) {
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y_left)
-                    .ticks(5)
-                    .tickSizeInner(0)
-                    .tickSizeOuter(0)
-                    .tickPadding(10)
+                .ticks(5)
+                .tickSizeInner(0)
+                .tickSizeOuter(0)
+                .tickPadding(10)
                 // .tickFormat(d3.format("s"))
             );
 
@@ -183,10 +183,10 @@ function draw_line(param) {
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
             .call(d3.axisRight(y_right)
-                    .ticks(5)
-                    .tickSizeInner(0)
-                    .tickSizeOuter(0)
-                    .tickPadding(10)
+                .ticks(5)
+                .tickSizeInner(0)
+                .tickSizeOuter(0)
+                .tickPadding(10)
                 // .tickFormat(d3.format("s"))
             );
 
@@ -475,7 +475,7 @@ const line_param_case = {
 
 const line_param_bike = {
     target: "#lc_sec2",
-    title: "test",
+    title: "test", 
     src: "data/transport/bicycle/",
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -534,8 +534,8 @@ function refresh() {
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
     set_text_statistic(text_stat_para)
-
-    d3.selectAll('#content_sec1 svg').remove();
+    
+    // d3.selectAll('#content_sec1 svg').remove();
     // draw_lines(line_param_bike)
 
     let thumb_height = $("#slider_containter").innerHeight()
@@ -616,3 +616,4 @@ d3.csv(data_source, function (data) {
     });
     refresh();
 })
+
