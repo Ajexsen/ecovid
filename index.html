@@ -135,9 +135,9 @@
                     </div>
                 </div>
 
-                <!--                <div id="tools">-->
-                <!--                    <button id="play-button">Play</button>-->
-                <!--                </div>-->
+                                <div id="tools">
+                                    <button id="play-button">Play</button>
+                                </div>
 
                 <div id="onerightbottom" class="flex3">
                     <div class="float fullheight_p fullwidth_p flexcolumn">
@@ -147,7 +147,7 @@
                     <div class="fullheight_p fullwidth_p flexcolumn">
                         <div id="slider_containter" class="slider_containter flex1">
                             <input type="range" class="slider_thumb" id="date_slider" min="0" max="347" value="0"
-                                   oninput="updateBarData(this.value)">
+                                   oninput="refresh_on_date_change(this.value)">
                         </div>
                     </div>
                 </div>
@@ -195,9 +195,14 @@
 <script src="js/jquery.vmap.js"></script>
 <script src="js/jquery.vmap.germany.js"></script>
 <script src="js/fullpage.js"></script>
-<script src="js/script.js"></script>
-<script src="js/diagrams.js"></script>
-<script src="js/draw_lines.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/graphs/config.js"></script>
+<script src="js/graphs/draw_bar.js"></script>
+<script src="js/graphs/draw_histogram.js"></script>
+<script src="js/graphs/draw_line.js"></script>
+<script src="js/graphs/draw_lines.js"></script>
+<script src="js/graphs/refresh_text.js"></script>
+<script src="js/graphs.js"></script>
 
 </body>
 </html>
