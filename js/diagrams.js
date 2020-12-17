@@ -29,7 +29,7 @@ function draw_lines(param) {
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
-        height = 500 //container.innerHeight() - margin.top - margin.bottom;
+        height = container.innerHeight() - margin.top - margin.bottom;
     //console.log(container.innerHeight())
     let svg = d3.select(param.target)
         .append("svg")
@@ -81,18 +81,18 @@ function draw_lines(param) {
                     .attr("transform", "translate(0, " + height + ")")
                     .attr("class", "tick")
                     .call(d3.axisBottom(x)
-                        //.tickSizeInner(0)
-                        //.tickSizeOuter(2)
-                        //.tickPadding(10)
+                        .tickSizeInner(0)
+                        .tickSizeOuter(2)
+                        .tickPadding(10)
                         //.tickFormat(d3.timeFormat("%b"))
                     );
                 svg.append("g")
                     .attr("class", "tick")
                     .call(d3.axisLeft(y)
-                        //.ticks(6)
-                        //.tickSizeInner(0)
-                        //.tickSizeOuter(0)
-                        //.tickPadding(10)
+                        .ticks(6)
+                        .tickSizeInner(0)
+                        .tickSizeOuter(0)
+                        .tickPadding(10)
                     );                    
             }
             
@@ -102,21 +102,16 @@ function draw_lines(param) {
                 .attr("height", 3)
                 .style("fill", param.line_colors[i])
                 .attr('class', 'axis_label')
-                .attr('x', div_width*i + 10)
-                .attr('y', height - 20)
-                //.attr("cx",200)
-                //.attr("cy",130)
+                .attr('x', div_width*i + 50)
+                .attr('y', height - 30)
                 .attr("r", 6)
                 
             svg.append("text")
                 .attr('class', 'legend_text')
                 .text(param.line_legends[i])
                 .style("font-size", "15px")
-                .attr('x', div_width*i + 20 + 10)
-                .attr('y', height + 8 - 20)              
-                //.attr("alignment-baseline","middle")
-                //.attr("x", 220)
-                //.attr("y", 160)
+                .attr('x', div_width*i + 20 + 50)
+                .attr('y', height + 8 - 30)              
                 
         })
     }
@@ -474,7 +469,7 @@ const line_param_case = {
 };
 
 const line_param_bike = {
-    target: "#line_chart_transport",
+    target: "#lc_sec2",
     title: "test", 
     src: "data/transport/bicycle/",
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
