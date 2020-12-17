@@ -25,7 +25,6 @@ function set_text_statistic(param) {
 }
 
 function draw_lines(param) {
-    
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -535,8 +534,8 @@ function refresh() {
     draw_bar(bar_param_death_w)
     set_text_statistic(text_stat_para)
     
-    // d3.selectAll('#content_sec1 svg').remove();
-    // draw_lines(line_param_bike)
+    d3.selectAll('#content_sec1 svg').remove();
+    draw_lines(line_param_bike)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
@@ -546,6 +545,8 @@ function refresh() {
         }
     }
 }
+
+
 
 d3.select("#play-button").on("click", function () {
     let button = d3.select(this);
@@ -562,58 +563,77 @@ d3.select("#play-button").on("click", function () {
     // console.log("Slider moving: " + moving);
 })
 
-d3.select(window).on('resize', refresh);
+function init() {
+    // let params = getParams
 
-d3.csv(data_source, function (data) {
-    let rki_data = {
-        date: data.Meldedatum,
-        total_cases: data["AnzahlFall"],
-        new_cases: data["NeuerFall"],
-        total_deaths: data["AnzahlTodesfall"],
-        new_deaths: data["NeuerTodesfall"],
-        death_rate: Math.round(data["Todesrate"] * 100) / 100
-    }
+    d3.select("#play-button").on("click", function () {
+        let button = d3.select(this);
+        let moving = false, timer = 0;
+        if (button.text() === "Pause") {
+            clearInterval(timer);
+            // timer = 0;
+            button.text("Play");
+        } else {
+            moving = true;
+            timer = setInterval(step, 200);
+            button.text("Pause");
+        }
+        // console.log("Slider moving: " + moving);
+    })
 
-    genders.forEach(gender => {
-        types.forEach(type => {
-            rki_data[gender + type] = {
-                "0-4": +data[gender + "_A00-A04_" + type],
-                "5-14": +data[gender + "_A05-A14_" + type],
-                "15-34": +data[gender + "_A15-A34_" + type],
-                "35-59": +data[gender + "_A35-A59_" + type],
-                "60-79": +data[gender + "_A60-A79_" + type],
-                "80+": +data[gender + "_A80+_" + type]
-            };
-        })
-    });
-    return rki_data
-}).then(function (data) {
-    data_rows = d3.index(data, d => d.date);
-}).then(function () {
-    const dates = Array.from(data_rows.keys())
-    const last_day = dates[dates.length - 1]
-    let select_last_day = data_rows.get(last_day)
-    genders.forEach(gender => {
-        types.forEach(type => {
-            let array = []
-            Object.entries(select_last_day[gender + type]).forEach(ele => {
-                array.push({
-                    age: ele[0],
-                    value: ele[1]
+    d3.select(window).on('resize', refresh);
+
+    d3.csv(data_source, function (data) {
+        let rki_data = {
+            date: data.Meldedatum,
+            total_cases: data["AnzahlFall"],
+            new_cases: data["NeuerFall"],
+            total_deaths: data["AnzahlTodesfall"],
+            new_deaths: data["NeuerTodesfall"],
+            death_rate: Math.round(data["Todesrate"] * 100) / 100
+        }
+        genders.forEach(gender => {
+            types.forEach(type => {
+                rki_data[gender + type] = {
+                    "0-4": +data[gender + "_A00-A04_" + type],
+                    "5-14": +data[gender + "_A05-A14_" + type],
+                    "15-34": +data[gender + "_A15-A34_" + type],
+                    "35-59": +data[gender + "_A35-A59_" + type],
+                    "60-79": +data[gender + "_A60-A79_" + type],
+                    "80+": +data[gender + "_A80+_" + type]
+                };
+            })
+        });
+        return rki_data
+    }).then(function (data) {
+        data_rows = d3.index(data, d => d.date);
+    }).then(function () {
+        const dates = Array.from(data_rows.keys())
+        const last_day = dates[dates.length - 1]
+        let select_last_day = data_rows.get(last_day)
+        genders.forEach(gender => {
+            types.forEach(type => {
+                let array = []
+                Object.entries(select_last_day[gender + type]).forEach(ele => {
+                    array.push({
+                        age: ele[0],
+                        value: ele[1]
+                    });
+                    bar_chart_config[gender + type] = {
+                        x: d3.scaleLinear()
+                            .domain([0, d3.max(array, function (d) {
+                                return d.value;
+                            })]),
+                        y: d3.scaleBand()
+                            .domain(array.map(function (d) {
+                                return d.age;
+                            }))
+                    }
                 });
-                bar_chart_config[gender + type] = {
-                    x: d3.scaleLinear()
-                        .domain([0, d3.max(array, function (d) {
-                            return d.value;
-                        })]),
-                    y: d3.scaleBand()
-                        .domain(array.map(function (d) {
-                            return d.age;
-                        }))
-                }
-            });
-        })
-    });
-    refresh();
-})
+            })
+        });
+        refresh();
+    })
+}
 
+init();
