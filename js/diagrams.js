@@ -2,6 +2,31 @@ const report_date = "2020-12-12";
 const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 
+function set_text_statistic(param){
+
+        d3.csv(param.src, function (data) {
+        return {
+            date: data.Meldedatum,
+            total_cases: data["AnzahlFall"],
+            new_cases: data["NeuerFall"],
+            total_deaths: data["AnzahlTodesfall"],
+            new_deaths: data["NeuerTodesfall"],
+            death_rate: Math.round(data["Todesrate"] * 100) / 100
+        }
+    }).then(function (data) {
+        let row = d3.index(data, d => d.date)
+        let select_date = row.get(param.date)
+        return select_date
+    }).then(function (data) {
+        $("#data_date").html(data.date);
+        $("#total_cases").html(data.total_cases);
+        $("#new_cases").html(data.new_cases);
+        $("#total_deaths").html(data.total_deaths);
+        $("#new_deaths").html(data.new_deaths);
+        $("#death_rate").html(data.death_rate + "%");
+    })
+}
+
 function draw_line(param) {
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
@@ -347,6 +372,11 @@ const line_param_case = {
 
 };
 
+const text_stat_para = {
+    src: data_source,
+    date: report_date
+}
+
 function step() {
     let targetValue = 300
     currentValue = document.getElementById("date_slider").value
@@ -373,10 +403,12 @@ function updateBarData(value) {
     bar_param_case_w.date = date
     bar_param_death_m.date = date
     bar_param_death_w.date = date
+    text_stat_para.date = date
     draw_bar(bar_param_case_m)
     draw_bar(bar_param_case_w)
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
+    set_text_statistic(text_stat_para)
 }
 
 function refresh() {
@@ -387,6 +419,7 @@ function refresh() {
     draw_bar(bar_param_case_w)
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
+    set_text_statistic(text_stat_para)
 
     let thumb_height = $("#slider_containter").innerHeight()
     // $(".slider_thumb").attr("height", "100px")
@@ -399,19 +432,12 @@ function refresh() {
 }
 
 d3.select("#play-button").on("click", function() {
-    let button = d3.select(this);
-    let moving = false, timer = 0;
-    if (button.text() === "Pause") {
+    var button = d3.select(this);
+    if (button.text() == "Pause") {
+        moving = false;
         clearInterval(timer);
         // timer = 0;
         button.text("Play");
-    } else {
-        moving = true;
-        timer = setInterval(step, 200);
-        button.text("Pause");
-    }
-    console.log("Slider moving: " + moving);
-})
 
 refresh()
 d3.select(window).on('resize', refresh);
