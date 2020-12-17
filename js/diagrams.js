@@ -1,3 +1,7 @@
+const report_date = "2020-12-12";
+const data_source = "data/rki/rki_DE-all.csv";
+const rki_dateFormat = "%Y-%m-%d";
+
 function draw_line(param) {
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
@@ -269,35 +273,35 @@ function draw_histogramm(param){
     }
 
 const bar_param_case_m = {
-    src: "data/rki/rki_DE-all.csv",
+    src: data_source,
     target: "#case_hist_left",
     gender: "M",
     type: "c",
-    date: "2020-12-12",
+    date: report_date,
     direction: "left"
 };
 const bar_param_case_w = {
-    src: "data/rki/rki_DE-all.csv",
+    src: data_source,
     target: "#case_hist_right",
     gender: "W",
     type: "c",
-    date: "2020-12-12",
+    date: report_date,
     direction: "right"
 };
 const bar_param_death_m = {
-    src: "data/rki/rki_DE-all.csv",
+    src: data_source,
     target: "#death_hist_left",
     gender: "M",
     type: "d",
-    date: "2020-12-12",
+    date: report_date,
     direction: "left"
 };
 const bar_param_death_w = {
-    src: "data/rki/rki_DE-all.csv",
+    src: data_source,
     target: "#death_hist_right",
     gender: "W",
     type: "d",
-    date: "2020-12-12",
+    date: report_date,
     direction: "right"
 };
 
@@ -305,18 +309,18 @@ const line_param_death = {
     target: "#line_chart_slider_top",
     title: "Deaths",
     data1: {
-        src: "data/rki/rki_DE-all.csv",
+        src: data_source,
         delimiter: ",",
         x: "Meldedatum",
-        x_date_format: "%Y-%m-%d",
+        x_date_format: rki_dateFormat,
         y: "NeuerTodesfall",
         y_scale: 1
     },
     data2: {
-        src: "data/rki/rki_DE-all.csv",
+        src: data_source,
         delimiter: ",",
         x: "Meldedatum",
-        x_date_format: "%Y-%m-%d",
+        x_date_format: rki_dateFormat,
         y: "AnzahlTodesfall",
         y_scale: 1
     }
@@ -325,18 +329,18 @@ const line_param_case = {
     target: "#line_chart_slider_bottom",
     title: "Cases",
     data1: {
-        src: "data/rki/rki_DE-all.csv",
+        src: data_source,
         delimiter: ",",
         x: "Meldedatum",
-        x_date_format: "%Y-%m-%d",
+        x_date_format: rki_dateFormat,
         y: "NeuerFall",
         y_scale: 1000
     },
     data2: {
-        src: "data/rki/rki_DE-all.csv",
+        src: data_source,
         delimiter: ",",
         x: "Meldedatum",
-        x_date_format: "%Y-%m-%d",
+        x_date_format: rki_dateFormat,
         y: "AnzahlFall",
         y_scale: 1000
     }
@@ -361,8 +365,8 @@ function step() {
 
 function updateBarData(value) {
     d3.selectAll('#onerightmiddle svg').remove();
-    let start_date = d3.timeParse("%Y-%m-%d")("2020-01-02")
-    let date = d3.timeFormat("%Y-%m-%d")(d3.timeDay.offset(start_date, value))
+    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
+    let date = d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
     // console.log(start_date)
     // console.log(date)
     bar_param_case_m.date = date
