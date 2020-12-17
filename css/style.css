@@ -497,6 +497,14 @@ body {
     right: 10px !important;
 }
 
+#transport_buttons{
+    margin: 0vw 0vw 3vw 0vw;
+}
+
+.transport_button{
+    margin: 0vw 0vw 0.5vw 0vw;
+}
+
 .line {
     fill: none;
     stroke-width: 1.5;

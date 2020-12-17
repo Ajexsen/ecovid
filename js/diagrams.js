@@ -3,6 +3,7 @@ const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
 const types = ["c", "d"]
+const line_colors = ["#5E0922", "#4BBDAD", "#FD4A1E", "#515D93", "#F7B732", "#707070"]
 
 let data_rows = {};
 let bar_chart_config = {};
@@ -25,9 +26,8 @@ function set_text_statistic(param) {
 }
 
 function draw_lines(param) {
-    
     const container = $(param.target)
-    const margin = {top: 40, right: 55, bottom: 18, left: 60}
+    const margin = {top: 40, right: 55, bottom: 60, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
     //console.log(container.innerHeight())
@@ -41,9 +41,10 @@ function draw_lines(param) {
             
     const n_data = param.data_files.length
     const div_width = width / n_data
-    //const n_data = 1
     
-    for(let i = 0; i < n_data; i++){
+    let x = d3.scaleLinear()
+    let y = d3.scaleLinear()
+    for(let i = 0; i < n_data ; i++){
         path = param.src + param.data_files[i]
         d3.dsv(param.delimiter, path, function (d) {
             return {
@@ -51,32 +52,39 @@ function draw_lines(param) {
                 value: d.count
             }
         }).then(data =>{
-            // let x = d3.scaleTime()
-            
-            let x = d3.scaleLinear()
-                .domain(d3.extent(data, function (d) {
-                    return d.date;
-                }))
-                .range([0, width]);
- 
-            let y = d3.scaleLinear()
-                .domain([0, d3.max(data, function (d) {
-                    return +d.value;
-                })])
-                .range([height, 0]);
-
-            svg.append("path")
-                .datum(data)
-                .attr("fill", "none")
-                .attr("stroke", param.line_colors[i])
-                .attr("stroke-width", 1.5)
-                .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.value) })
-            )
-            //console.log("i=" + i)
-            //console.log("n_data=" + n_data)
-            if(i == 0){
+       
+            if(i === 0){
+                x = d3.scaleLinear()
+                    .domain(d3.extent(data, function (d) {
+                        return d.date;
+                    }))
+                    .range([0, width]);
+     
+                y = d3.scaleLinear()
+                    .domain([0, d3.max(data, function (d) {
+                        return +d.value;
+                    })])
+                    .range([height, 0]);
+                
+                svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", param.line_colors[i])
+                    .attr("stroke-width", 3)
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.value) }))
+            } else {
+                svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", param.line_colors[i])
+                    .attr("stroke-width", 1.5)
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.value) }))
+            }
+            if(i == n_data-1){
                 svg.append("g")
                     .attr("transform", "translate(0, " + height + ")")
                     .attr("class", "tick")
@@ -87,31 +95,37 @@ function draw_lines(param) {
                         //.tickFormat(d3.timeFormat("%b"))
                     );
                 svg.append("g")
+                    .attr("transform", "translate(" + width + ", 0)")
                     .attr("class", "tick")
-                    .call(d3.axisLeft(y)
-                        .ticks(6)
+                    .call(d3.axisRight(y)
+                        .ticks(5)
                         .tickSizeInner(0)
                         .tickSizeOuter(0)
                         .tickPadding(10)
+                    );            
+                svg.append("g")
+                    .attr("class", "tick")
+                    .call(d3.axisLeft(y)
+                        .ticks(0)
                     );                    
             }
             
             svg.append("rect")
                 .attr('class', 'legend_line')
-                .attr("width", 10)
-                .attr("height", 3)
+                .attr("width", 20)
+                .attr("height", 2)
                 .style("fill", param.line_colors[i])
                 .attr('class', 'axis_label')
-                .attr('x', div_width*i + 50)
-                .attr('y', height - 30)
+                .attr('x', div_width*i + 70)
+                .attr('y', height + 45)
                 .attr("r", 6)
                 
             svg.append("text")
                 .attr('class', 'legend_text')
                 .text(param.line_legends[i])
                 .style("font-size", "15px")
-                .attr('x', div_width*i + 20 + 50)
-                .attr('y', height + 8 - 30)              
+                .attr('x', div_width*i + 70 + 30)
+                .attr('y', height + 51)              
                 
         })
     }
@@ -468,17 +482,42 @@ const line_param_case = {
 
 };
 
-const line_param_bike = {
-    target: "#lc_sec2",
+// use bike as dummy
+const line_param_flight = {
+    target: "#line_chart_transport",
     title: "test", 
     src: "data/transport/bicycle/",
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
-    line_colors: d3.schemePaired,
+    line_colors: line_colors,
     delimiter: ",",
     x: "month",
-    y: "count",
-    y_scale: 1
+    y: "count"
+};
+
+// use bike as dummy
+const line_param_rail = {
+    target: "#line_chart_transport",
+    title: "test", 
+    src: "data/transport/bicycle/",
+    data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
+    line_legends: ["2018", "2020", "2017", "2019"],
+    line_colors: line_colors,
+    delimiter: ",",
+    x: "month",
+    y: "count"
+};
+
+const line_param_bike = {
+    target: "#line_chart_transport",
+    title: "test", 
+    src: "data/transport/bicycle/",
+    data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
+    line_legends: ["2020", "2019", "2018", "2017"],
+    line_colors: line_colors,
+    delimiter: ",",
+    x: "month",
+    y: "count"
 };
 
 const text_stat_para = {
@@ -500,6 +539,19 @@ function step() {
         playButton.text("Play");
         console.log("Slider moving: " + moving);
     }
+}
+
+function update_transport_chart(type){
+    d3.selectAll('#line_chart_transport svg').remove();
+    
+    if ( type === "flight" ){
+        transport_parm = line_param_flight
+    } else if (type === "rail"){
+        transport_parm = line_param_rail
+    } else if (type === "bike"){
+        transport_parm = line_param_bike
+    }
+    draw_lines(transport_parm)
 }
 
 function updateBarData(value) {
@@ -531,7 +583,7 @@ function refresh() {
     set_text_statistic(text_stat_para)
     
     d3.selectAll('#content_sec1 svg').remove();
-    draw_lines(line_param_bike)
+    draw_lines(transport_parm)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
@@ -542,6 +594,7 @@ function refresh() {
     }
 }
 
+let transport_parm = line_param_flight
 d3.select("#play-button").on("click", function () {
     let button = d3.select(this);
     let moving = false, timer = 0;

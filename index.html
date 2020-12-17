@@ -156,8 +156,14 @@
                 <div class="content_subtitle fullwidth_p flexnone">is affectinig the travel and tourism in Germany ...
                 </div>
             </div>
-            <div id="lc_sec2" class="flex3 frame content_middle">
-<!--                <div id="line_chart_transport" class="flex1"></div>-->
+            <div id="lc_sec2" class="flex3 frame content_middle flexrow">
+                <div id="transport_buttons" class="flexcolumn">
+                    <div class="flex1"></div>
+                    <img src="images/flight_inctive.png" class="transport_button flexrow flexnone" onclick="update_transport_chart('flight');">
+                    <img src="images/rail_inactive.png" class="transport_button flexrow flexnone" onclick="update_transport_chart('rail');">
+                    <img src="images/bike_inactive.png" class="transport_button flexrow flexnone" onclick="update_transport_chart('bike');">
+                </div>
+                <div id="line_chart_transport" class="flex1"></div>
             </div>
             <div id="his_sec2" class="flex1 frame">
             </div>
