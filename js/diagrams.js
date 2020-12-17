@@ -2,9 +2,10 @@ const report_date = "2020-12-12";
 const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 
-function set_text_statistic(param){
+let rki_data = {}
 
-        d3.csv(param.src, function (data) {
+function set_text_statistic(param) {
+    d3.csv(param.src, function (data) {
         return {
             date: data.Meldedatum,
             total_cases: data["AnzahlFall"],
@@ -150,14 +151,14 @@ function draw_line(param) {
             .attr("transform", "translate(-45, 0) rotate(-90)")
             .attr('text-anchor', 'middle')
             .text(param.title);
-            
+
         svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', 0)
             .attr('y', 0)
             .attr("transform", "translate(-12, -20)")
             .text("New");
-            
+
         svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', width)
@@ -191,7 +192,7 @@ function draw_bar(param) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv(param.src, function (data) {
         return {
@@ -246,18 +247,18 @@ function draw_bar(param) {
                 return start;
             })
         }
-        
+
     });
 }
 
-function draw_histogramm(param){
+function draw_histogramm(param) {
     const container = $(param.target)
     const margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
     console.log(height)
 
-    let dataset = [ 5, 10, 13, 19, 21 ];
+    let dataset = [5, 10, 13, 19, 21];
     let barPadding = 1;
     let svg = d3.select(param.target)
         .append('svg')
@@ -277,7 +278,7 @@ function draw_histogramm(param){
     let xAxis = d3.axisBottom().scale(xScale)
 
     let yAxis = d3.axisLeft().scale(yScale)
-    
+
     // svg.selectAll("rect")
     //     .data(dataset)
     //     .enter()
@@ -289,13 +290,13 @@ function draw_histogramm(param){
     //     .attr("height", function(d){return yScale(d);});
 
     svg.append("g")
-        .attr("transform", "translate(0, " + margin.top  +")")
+        .attr("transform", "translate(0, " + margin.top + ")")
         .call(xAxis);
-    
+
     svg.append("g")
         .attr("transform", "translate( 0, 0)")
         .call(yAxis)
-    }
+}
 
 const bar_param_case_m = {
     src: data_source,
@@ -382,7 +383,7 @@ function step() {
     currentValue = document.getElementById("date_slider").value
     updateBarData(currentValue);
     document.getElementById("date_slider").value = parseInt(currentValue) + 1
-    
+
     if (currentValue > targetValue) {
         moving = false;
         currentValue = 0;
@@ -422,8 +423,7 @@ function refresh() {
     set_text_statistic(text_stat_para)
 
     let thumb_height = $("#slider_containter").innerHeight()
-    // $(".slider_thumb").attr("height", "100px")
-    for(let j = 0; j < document.styleSheets[1].rules.length; j++) {
+    for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
         let rule = document.styleSheets[1].rules[j];
         if (rule.cssText.match(".slider_thumb")) {
             rule.style.height = thumb_height + "px";
@@ -431,7 +431,7 @@ function refresh() {
     }
 }
 
-d3.select("#play-button").on("click", function() {
+d3.select("#play-button").on("click", function () {
     let button = d3.select(this);
     let moving = false, timer = 0;
     if (button.text() === "Pause") {
@@ -446,5 +446,6 @@ d3.select("#play-button").on("click", function() {
     console.log("Slider moving: " + moving);
 })
 
-refresh()
 d3.select(window).on('resize', refresh);
+
+refresh()
