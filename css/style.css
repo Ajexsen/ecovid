@@ -332,7 +332,7 @@ body {
 }
 
 .slider_containter {
-    margin: 40px 55px 18px calc(60px - var(--slider-thumb-width));
+    margin: 40px 55px 18px 60px;
     overflow: hidden;
 }
 
