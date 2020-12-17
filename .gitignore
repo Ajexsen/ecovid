@@ -1,2 +1,3 @@
 data/rki/RKI_COVID19.csv
 data_preprocess/RKI_COVID19.csv
+.DS_Store
