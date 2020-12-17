@@ -72,6 +72,7 @@ function draw_line(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
+                // .tickFormat(d3.format("s"))
             );
 
         let y_right = d3.scaleLinear()
@@ -87,6 +88,7 @@ function draw_line(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
+                // .tickFormat(d3.format("s"))
             );
 
         svg.append("path")
@@ -167,14 +169,14 @@ function draw_line(param) {
                 .attr("x", -12)
                 .attr("y", -14)
                 .attr("width", 20)
-                .attr("height", 4);
+                .attr("height", 3);
 
             svg.append("rect")
                 .attr('class', 'legend_total')
                 .attr("x", width - 12)
                 .attr("y", -14)
                 .attr("width", 22)
-                .attr("height", 4);
+                .attr("height", 3);
         }
     });
 }
@@ -227,7 +229,16 @@ function draw_bar(param) {
         })
         .attr("width", function (d) {
             return (start - x(d.value)) * direction;
-        });
+        })
+    bar.append('text')
+        .attr('class', 'axis_label')
+        .attr("x", (width / 2))
+        .attr("y", height / 2)
+        .attr("text-anchor", "middle")
+        // .attr('x', 20)
+        // .attr('y', 20)
+        // .attr("transform", "translate(-12, -20)")
+        .text("Male");
 
     if (param.direction === "left") {
         bar.attr("x", function (d) {

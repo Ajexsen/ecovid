@@ -384,12 +384,31 @@ body {
 #onerightmiddle {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
-    margin-bottom: 2.5vw;
+    margin-bottom: 2vw;
     /*overflow-y: hidden;*/
 }
 
 #onerightbottom {
     overflow-y: hidden;
+}
+
+.bar_title {
+    margin-top: 0.5vw;
+    /*margin-bottom: 2vw;*/
+    font-size: 14px;
+    color: var(--burgundy);
+    text-align: center;
+}
+
+.gender {
+    /*margin-bottom: 2vw;*/
+    font-size: 14px;
+    color: var(--burgundy);
+    text-align: center;
+}
+
+.gender_text {
+    margin: 0 10px 0 10px;
 }
 
 #onerightbottom {
