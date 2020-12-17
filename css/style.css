@@ -58,10 +58,11 @@
     --offwhite: #E3E2DF;
     --offwhite2: #dddbd7;
     --burgundy: #5D001E;
+    --burgundy40: #5D001E40;
     --pink: #E3AFBC;
     --magenta:#9A1750;
     --axis-width: 3px;
-    --slider-thumb-width: 8px;
+    --slider-thumb-width: 6px;
 }
 
 body {
@@ -331,7 +332,8 @@ body {
 }
 
 .slider_containter {
-    margin: 40px calc(55px + var(--axis-width)) 18px calc(60px - var(--slider-thumb-width));
+    margin: 40px 55px 18px calc(60px - var(--slider-thumb-width));
+    overflow: hidden;
 }
 
 .slider {
@@ -357,13 +359,17 @@ body {
     /*height: 100px;*/
     background: #7e0010;
     cursor: ew-resize;
+    box-shadow: -2000px 0 0 2000px var(--burgundy40);
 }
 
 .slider_thumb::-moz-range-thumb {
     width: var(--slider-thumb-width);
-    /*height: 20px;*/
     background: #7e0010;
     cursor: ew-resize;
+}
+
+.slider_thumb::-moz-range-progress {
+    background-color: #666;
 }
 
 #line_chart_slider {
