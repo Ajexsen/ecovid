@@ -85,31 +85,32 @@ function draw_lines(param) {
                     .y(function(d) { return y(d.value) }))
             }
             if(i == n_data-1){
-            // let x = d3.scaleTime()
+                // let x = d3.scaleTime()
 
-            let x = d3.scaleLinear()
-                .domain(d3.extent(data, function (d) {
-                    return d.date;
-                }))
-                .range([0, width]);
+                let x = d3.scaleLinear()
+                    .domain(d3.extent(data, function (d) {
+                        return d.date;
+                    }))
+                    .range([0, width]);
 
-            let y = d3.scaleLinear()
-                .domain([0, d3.max(data, function (d) {
-                    return +d.value;
-                })])
-                .range([height, 0]);
+                let y = d3.scaleLinear()
+                    .domain([0, d3.max(data, function (d) {
+                        return +d.value;
+                    })])
+                    .range([height, 0]);
 
-            svg.append("path")
-                .datum(data)
-                .attr("fill", "none")
-                .attr("stroke", param.line_colors[i])
-                .attr("stroke-width", 1.5)
-                .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.value) })
-            )
-            //console.log("i=" + i)
-            //console.log("n_data=" + n_data)
+                svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", param.line_colors[i])
+                    .attr("stroke-width", 1.5)
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.value) })
+                )
+            }
+                //console.log("i=" + i)
+                //console.log("n_data=" + n_data)
             if(i === 0){
                 svg.append("g")
                     .attr("transform", "translate(0, " + height + ")")
@@ -135,7 +136,7 @@ function draw_lines(param) {
                         .ticks(0)
                     );
             }
-            
+
             svg.append("rect")
                 .attr('class', 'legend_line')
                 .attr("width", 20)
@@ -145,14 +146,14 @@ function draw_lines(param) {
                 .attr('x', div_width*i + 70)
                 .attr('y', height + 45)
                 .attr("r", 6)
-                
+
             svg.append("text")
                 .attr('class', 'legend_text')
                 .text(param.line_legends[i])
                 .style("font-size", "15px")
                 .attr('x', div_width*i + 70 + 30)
                 .attr('y', height + 51)
-                
+
         })
     }
 }
