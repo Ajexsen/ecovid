@@ -110,7 +110,7 @@ body {
 }
 
 .float {
-    position: relative;
+    position: absolute;
 }
 
 .flex_stretch {
@@ -324,6 +324,7 @@ body {
 
 .hist_parent {
     margin: 0 20px 0 20px;
+    position: relative;
 }
 
 .bar_center_container {
@@ -334,10 +335,6 @@ body {
 .slider_containter {
     margin: 40px 55px 18px 60px;
     overflow: hidden;
-}
-
-.slider {
-    transform: translateY(-100%);
 }
 
 #date_slider {
@@ -390,6 +387,7 @@ body {
 
 #onerightbottom {
     overflow-y: hidden;
+    position: relative;
 }
 
 .bar_title {
@@ -402,6 +400,7 @@ body {
 
 .gender {
     /*margin-bottom: 2vw;*/
+    /*position: relative;*/
     font-size: 14px;
     color: var(--burgundy);
     text-align: center;
