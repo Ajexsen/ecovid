@@ -27,7 +27,7 @@ function set_text_statistic(param) {
 
 function draw_lines(param) {
     const container = $(param.target)
-    const margin = {top: 40, right: 55, bottom: 60, left: 60}
+    const margin = {top: 40, right: 55, bottom: 60, left: 20}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
     //console.log(container.innerHeight())
