@@ -58,7 +58,7 @@
     --offwhite: #E3E2DF;
     --offwhite2: #dddbd7;
     --burgundy: #5D001E;
-    --burgundy40: #5D001E40;
+    --burgundy30: #5D001E30;
     --pink: #E3AFBC;
     --magenta:#9A1750;
     --axis-width: 3px;
@@ -356,7 +356,7 @@ body {
     /*height: 100px;*/
     background: #7e0010;
     cursor: ew-resize;
-    box-shadow: -2000px 0 0 2000px var(--burgundy40);
+    box-shadow: -2000px 0 0 2000px var(--burgundy30);
 }
 
 .slider_thumb::-moz-range-thumb {
