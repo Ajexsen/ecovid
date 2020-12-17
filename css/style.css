@@ -245,30 +245,53 @@ body {
     flex: 4;
 }
 
+.dateblock {
+    margin-right: 1.5vw;
+}
+
+#month {
+    background: var(--burgundy);
+    padding: 0 6px 0 6px;
+    color: var(--offwhite);
+    font-size: 1.1vw;
+    text-align: center;
+    font-weight: 100;
+}
+
+#day {
+    border: solid var(--burgundy) 1px;
+    font-size: 1.9vw;
+    padding: 0 6px 0 6px;
+    color: var(--burgundy);
+    /*font-weight: bold;*/
+}
+
 .stat {
     /*background-color: var(--offwhite2);*/
     height: fit-content;
     /*margin: 0 0 10px 0;*/
     padding: 0 1.5vw 0 1.5vw;
     color: var(--burgundy);
-    /*border-left: solid var(--burgundy) 2px;*/
-    border-right: solid var(--burgundy) 2px;
+    border-left: solid var(--burgundy) 2px;
+    /*border-right: solid var(--burgundy) 2px;*/
     /*min-width: 100px;*/
+    overflow: hidden;
 }
 
-.stat_last {
-    border-right: none;
-}
+/*.stat_last {*/
+/*    border-right: none;*/
+/*}*/
 
 .stat_title {
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     font-weight: 300;
     white-space: nowrap;
 }
 
 .stat_value {
-    font-size: 2vw;
+    font-size: 1.9vw;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .hist_label {
@@ -460,7 +483,7 @@ body {
 
 .area_new {
     fill: var(--magenta);
-    opacity: 5%;
+    opacity: 30%;
 }
 
 .line_total {
@@ -469,7 +492,7 @@ body {
 
 .area_total {
     fill: var(--pink);
-    opacity: 5%;
+    opacity: 30%;
 }
 
 .tick {
@@ -520,6 +543,12 @@ body {
     font-size: 10px;
     font-weight: bold;
     fill: var(--burgundy);
-    border: solid var(--magenta) 5px;
-    font-weight: bold;
+}
+
+.legend_new {
+    fill: var(--magenta);
+}
+
+.legend_total {
+    fill: var(--pink);
 }

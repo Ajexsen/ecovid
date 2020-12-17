@@ -1,31 +1,26 @@
-const report_date = "2020-12-12";
+const report_date = "2020-01-02";
 const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
+const genders = ["M", "W"]
+const types = ["c", "d"]
 
-let rki_data = {}
+let data_rows = {};
+let bar_chart_config = {};
 
 function set_text_statistic(param) {
-    d3.csv(param.src, function (data) {
-        return {
-            date: data.Meldedatum,
-            total_cases: data["AnzahlFall"],
-            new_cases: data["NeuerFall"],
-            total_deaths: data["AnzahlTodesfall"],
-            new_deaths: data["NeuerTodesfall"],
-            death_rate: Math.round(data["Todesrate"] * 100) / 100
-        }
-    }).then(function (data) {
-        let row = d3.index(data, d => d.date)
-        let select_date = row.get(param.date)
-        return select_date
-    }).then(function (data) {
-        $("#data_date").html(data.date);
-        $("#total_cases").html(data.total_cases);
-        $("#new_cases").html(data.new_cases);
-        $("#total_deaths").html(data.total_deaths);
-        $("#new_deaths").html(data.new_deaths);
-        $("#death_rate").html(data.death_rate + "%");
-    })
+    let select_date = data_rows.get(param.date)
+    let date = d3.timeParse(rki_dateFormat)(select_date.date)
+    let month_format = d3.timeFormat("%b")
+    let month = month_format(date)
+    let day_fomat = d3.timeFormat("%d")
+    let day = day_fomat(date)
+    $("#month").html(month);
+    $("#day").html(day);
+    $("#total_cases").html(select_date.total_cases);
+    $("#new_cases").html(select_date.new_cases);
+    $("#total_deaths").html(select_date.total_deaths);
+    $("#new_deaths").html(select_date.new_deaths);
+    $("#death_rate").html(select_date.death_rate + "%");
 }
 
 function draw_line(param) {
@@ -73,7 +68,7 @@ function draw_line(param) {
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y_left)
-                .ticks(6)
+                .ticks(5)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -88,7 +83,7 @@ function draw_line(param) {
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
             .call(d3.axisRight(y_right)
-                .ticks(6)
+                .ticks(5)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -152,19 +147,35 @@ function draw_line(param) {
             .attr('text-anchor', 'middle')
             .text(param.title);
 
-        svg.append('text')
-            .attr('class', 'axis_label')
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr("transform", "translate(-12, -20)")
-            .text("New");
+        if (param.legend) {
+            svg.append('text')
+                .attr('class', 'axis_label')
+                .attr('x', 0)
+                .attr('y', 0)
+                .attr("transform", "translate(-12, -20)")
+                .text("New");
 
-        svg.append('text')
-            .attr('class', 'axis_label')
-            .attr('x', width)
-            .attr('y', 0)
-            .attr("transform", "translate(-12, -20)")
-            .text("Total");
+            svg.append('text')
+                .attr('class', 'axis_label')
+                .attr('x', width)
+                .attr('y', 0)
+                .attr("transform", "translate(-12, -20)")
+                .text("Total");
+
+            svg.append("rect")
+                .attr('class', 'legend_new')
+                .attr("x", -12)
+                .attr("y", -14)
+                .attr("width", 20)
+                .attr("height", 4);
+
+            svg.append("rect")
+                .attr('class', 'legend_total')
+                .attr("x", width - 12)
+                .attr("y", -14)
+                .attr("width", 22)
+                .attr("height", 4);
+        }
     });
 }
 
@@ -183,10 +194,6 @@ function draw_bar(param) {
         end = width;
         direction = -1;
     }
-    let x = d3.scaleLinear().range([start, end]);
-    let y = d3.scaleBand()
-        .range([height, 0])
-        .padding(0.07);
 
     let svg = d3.select(param.target).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -194,61 +201,43 @@ function draw_bar(param) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv(param.src, function (data) {
-        return {
-            date: data.Meldedatum,
-            "0-4": +data[param.gender + "_A00-A04_" + param.type],
-            "5-14": +data[param.gender + "_A05-A14_" + param.type],
-            "15-34": +data[param.gender + "_A15-A34_" + param.type],
-            "35-59": +data[param.gender + "_A35-A59_" + param.type],
-            "60-79": +data[param.gender + "_A60-A79_" + param.type],
-            "80+": +data[param.gender + "_A80+_" + param.type]
-        }
-    }).then(function (data) {
-        let row = d3.index(data, d => d.date)
-        let select_date = row.get(param.date)
-        delete select_date.date
-        let array = []
-        Object.entries(select_date).forEach(ele => {
-            array.push({
-                age: ele[0],
-                value: ele[1]
-            });
-        })
-        return array
-    }).then(function (data) {
-        // Scale the range of the data in the domains
-        x.domain([0, d3.max(data, function (d) {
-            return d.value;
-        })]);
-        y.domain(data.map(function (d) {
-            return d.age;
-        }));
-
-        // append the rectangles for the bar chart
-        let bar = svg.selectAll(".bar")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("height", y.bandwidth())
-            .attr("y", function (d) {
-                return y(d.age);
-            })
-            .attr("width", function (d) {
-                return (start - x(d.value)) * direction;
-            });
-
-        if (param.direction === "left") {
-            bar.attr("x", function (d) {
-                return x(d.value);
-            })
-        } else {
-            bar.attr("x", function () {
-                return start;
-            })
-        }
-
+    let select_date = data_rows.get(param.date)
+    let array = []
+    Object.entries(select_date[param.gender + param.type]).forEach(ele => {
+        array.push({
+            age: ele[0],
+            value: ele[1]
+        });
     });
+    // Scale the range of the data in the domains
+    x = bar_chart_config[param.gender + param.type].x;
+    y = bar_chart_config[param.gender + param.type].y;
+    x.range([start, end]);
+    y.range([height, 0])
+        .padding(0.07);
+
+    // append the rectangles for the bar chart
+    let bar = svg.selectAll(".bar")
+        .data(array)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("height", y.bandwidth())
+        .attr("y", function (d) {
+            return y(d.age);
+        })
+        .attr("width", function (d) {
+            return (start - x(d.value)) * direction;
+        });
+
+    if (param.direction === "left") {
+        bar.attr("x", function (d) {
+            return x(d.value);
+        })
+    } else {
+        bar.attr("x", function () {
+            return start;
+        })
+    }
 }
 
 function draw_histogramm(param) {
@@ -276,7 +265,6 @@ function draw_histogramm(param) {
         .range([height, 0]);
 
     let xAxis = d3.axisBottom().scale(xScale)
-
     let yAxis = d3.axisLeft().scale(yScale)
 
     // svg.selectAll("rect")
@@ -334,6 +322,7 @@ const bar_param_death_w = {
 const line_param_death = {
     target: "#line_chart_slider_top",
     title: "Deaths",
+    legend: true,
     data1: {
         src: data_source,
         delimiter: ",",
@@ -354,6 +343,7 @@ const line_param_death = {
 const line_param_case = {
     target: "#line_chart_slider_bottom",
     title: "Cases",
+    legend: false,
     data1: {
         src: data_source,
         delimiter: ",",
@@ -380,7 +370,7 @@ const text_stat_para = {
 
 function step() {
     let targetValue = 300
-    currentValue = document.getElementById("date_slider").value
+    let currentValue = document.getElementById("date_slider").value
     updateBarData(currentValue);
     document.getElementById("date_slider").value = parseInt(currentValue) + 1
 
@@ -443,9 +433,61 @@ d3.select("#play-button").on("click", function () {
         timer = setInterval(step, 200);
         button.text("Pause");
     }
-    console.log("Slider moving: " + moving);
+    // console.log("Slider moving: " + moving);
 })
 
 d3.select(window).on('resize', refresh);
 
-refresh()
+d3.csv(data_source, function (data) {
+    let rki_data = {
+        date: data.Meldedatum,
+        total_cases: data["AnzahlFall"],
+        new_cases: data["NeuerFall"],
+        total_deaths: data["AnzahlTodesfall"],
+        new_deaths: data["NeuerTodesfall"],
+        death_rate: Math.round(data["Todesrate"] * 100) / 100
+    }
+
+    genders.forEach(gender => {
+        types.forEach(type => {
+            rki_data[gender + type] = {
+                "0-4": +data[gender + "_A00-A04_" + type],
+                "5-14": +data[gender + "_A05-A14_" + type],
+                "15-34": +data[gender + "_A15-A34_" + type],
+                "35-59": +data[gender + "_A35-A59_" + type],
+                "60-79": +data[gender + "_A60-A79_" + type],
+                "80+": +data[gender + "_A80+_" + type]
+            };
+        })
+    });
+    return rki_data
+}).then(function (data) {
+    data_rows = d3.index(data, d => d.date);
+}).then(function () {
+    const dates = Array.from(data_rows.keys())
+    const last_day = dates[dates.length - 1]
+    let select_last_day = data_rows.get(last_day)
+    genders.forEach(gender => {
+        types.forEach(type => {
+            let array = []
+            Object.entries(select_last_day[gender + type]).forEach(ele => {
+                array.push({
+                    age: ele[0],
+                    value: ele[1]
+                });
+                bar_chart_config[gender + type] = {
+                    x: d3.scaleLinear()
+                        .domain([0, d3.max(array, function (d) {
+                            return d.value;
+                        })]),
+                    y: d3.scaleBand()
+                        .domain(array.map(function (d) {
+                            return d.age;
+                        }))
+                }
+            });
+        })
+    });
+    refresh();
+})
+
