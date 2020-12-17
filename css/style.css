@@ -60,6 +60,7 @@
     --burgundy: #5D001E;
     --pink: #E3AFBC;
     --magenta :#9A1750
+    
 }
 
 body {
@@ -447,7 +448,7 @@ body {
 }
 
 .frame {
-    border: solid magenta 1px;
+    border: solid  1px;
 }
 
 .bar {
@@ -456,4 +457,13 @@ body {
 
 .block_bg {
     background-color: #789875;
+}
+
+.axis_label {
+    background: var(--burgundy);
+    font-size: 10px;
+    font-weight: bold;
+    fill: var(--burgundy);
+    border: solid var(--magenta) 5px;
+    font-weight: bold;
 }

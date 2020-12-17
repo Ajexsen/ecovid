@@ -121,6 +121,20 @@ function draw_line(param) {
             .attr("transform", "translate(-45, 0) rotate(-90)")
             .attr('text-anchor', 'middle')
             .text(param.title);
+            
+        svg.append('text')
+            .attr('class', 'axis_label')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr("transform", "translate(-12, -20)")
+            .text("New");
+            
+        svg.append('text')
+            .attr('class', 'axis_label')
+            .attr('x', width)
+            .attr('y', 0)
+            .attr("transform", "translate(-12, -20)")
+            .text("Total");
     });
 }
 
