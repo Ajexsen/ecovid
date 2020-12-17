@@ -1,4 +1,4 @@
-const report_date = "2020-01-02";
+//const report_date = "2020-01-02";
 const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
@@ -52,20 +52,20 @@ function draw_lines(param) {
                 value: d.count
             }
         }).then(data =>{
-       
+
             if(i === 0){
                 x = d3.scaleLinear()
                     .domain(d3.extent(data, function (d) {
                         return d.date;
                     }))
                     .range([0, width]);
-     
+
                 y = d3.scaleLinear()
                     .domain([0, d3.max(data, function (d) {
                         return +d.value;
                     })])
                     .range([height, 0]);
-                
+
                 svg.append("path")
                     .datum(data)
                     .attr("fill", "none")
@@ -85,6 +85,32 @@ function draw_lines(param) {
                     .y(function(d) { return y(d.value) }))
             }
             if(i == n_data-1){
+            // let x = d3.scaleTime()
+
+            let x = d3.scaleLinear()
+                .domain(d3.extent(data, function (d) {
+                    return d.date;
+                }))
+                .range([0, width]);
+
+            let y = d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) {
+                    return +d.value;
+                })])
+                .range([height, 0]);
+
+            svg.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", param.line_colors[i])
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+            )
+            //console.log("i=" + i)
+            //console.log("n_data=" + n_data)
+            if(i === 0){
                 svg.append("g")
                     .attr("transform", "translate(0, " + height + ")")
                     .attr("class", "tick")
@@ -102,12 +128,12 @@ function draw_lines(param) {
                         .tickSizeInner(0)
                         .tickSizeOuter(0)
                         .tickPadding(10)
-                    );            
+                    );
                 svg.append("g")
                     .attr("class", "tick")
                     .call(d3.axisLeft(y)
                         .ticks(0)
-                    );                    
+                    );
             }
             
             svg.append("rect")
@@ -125,7 +151,7 @@ function draw_lines(param) {
                 .text(param.line_legends[i])
                 .style("font-size", "15px")
                 .attr('x', div_width*i + 70 + 30)
-                .attr('y', height + 51)              
+                .attr('y', height + 51)
                 
         })
     }
@@ -320,8 +346,8 @@ function draw_bar(param) {
         });
     });
     // Scale the range of the data in the domains
-    x = bar_chart_config[param.gender + param.type].x;
-    y = bar_chart_config[param.gender + param.type].y;
+    let x = bar_chart_config[param.gender + param.type].x;
+    let y = bar_chart_config[param.gender + param.type].y;
     x.range([start, end]);
     y.range([height, 0])
         .padding(0.07);
@@ -410,7 +436,7 @@ const bar_param_case_m = {
     target: "#case_hist_left",
     gender: "M",
     type: "c",
-    date: report_date,
+    // date: report_date,
     direction: "left"
 };
 const bar_param_case_w = {
@@ -418,7 +444,7 @@ const bar_param_case_w = {
     target: "#case_hist_right",
     gender: "W",
     type: "c",
-    date: report_date,
+    // date: report_date,
     direction: "right"
 };
 const bar_param_death_m = {
@@ -426,7 +452,7 @@ const bar_param_death_m = {
     target: "#death_hist_left",
     gender: "M",
     type: "d",
-    date: report_date,
+    // date: report_date,
     direction: "left"
 };
 const bar_param_death_w = {
@@ -434,7 +460,7 @@ const bar_param_death_w = {
     target: "#death_hist_right",
     gender: "W",
     type: "d",
-    date: report_date,
+    // date: report_date,
     direction: "right"
 };
 
@@ -498,7 +524,7 @@ const line_param_flight = {
 // use bike as dummy
 const line_param_rail = {
     target: "#line_chart_transport",
-    title: "test", 
+    title: "test",
     src: "data/transport/bicycle/",
     data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
     line_legends: ["2018", "2020", "2017", "2019"],
@@ -510,7 +536,7 @@ const line_param_rail = {
 
 const line_param_bike = {
     target: "#line_chart_transport",
-    title: "test", 
+    title: "test",
     src: "data/transport/bicycle/",
     data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
     line_legends: ["2020", "2019", "2018", "2017"],
@@ -522,7 +548,7 @@ const line_param_bike = {
 
 const text_stat_para = {
     src: data_source,
-    date: report_date
+    // date: report_date
 }
 
 function step() {
@@ -541,9 +567,14 @@ function step() {
     }
 }
 
+function getDate(value) {
+    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
+    return d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
+}
+
 function update_transport_chart(type){
     d3.selectAll('#line_chart_transport svg').remove();
-    
+
     if ( type === "flight" ){
         transport_parm = line_param_flight
     } else if (type === "rail"){
@@ -556,10 +587,7 @@ function update_transport_chart(type){
 
 function updateBarData(value) {
     d3.selectAll('#onerightmiddle svg').remove();
-    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
-    let date = d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
-    // console.log(start_date)
-    // console.log(date)
+    let date = getDate(value);
     bar_param_case_m.date = date
     bar_param_case_w.date = date
     bar_param_death_m.date = date
@@ -609,59 +637,90 @@ d3.select("#play-button").on("click", function () {
     }
     // console.log("Slider moving: " + moving);
 })
+function getArg(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
-d3.select(window).on('resize', refresh);
+function init() {
+    d3.select("#play-button").on("click", function () {
+        let button = d3.select(this);
+        let moving = false, timer = 0;
+        if (button.text() === "Pause") {
+            clearInterval(timer);
+            // timer = 0;
+            button.text("Play");
+        } else {
+            moving = true;
+            timer = setInterval(step, 200);
+            button.text("Pause");
+        }
+        // console.log("Slider moving: " + moving);
+    })
 
-d3.csv(data_source, function (data) {
-    let rki_data = {
-        date: data.Meldedatum,
-        total_cases: data["AnzahlFall"],
-        new_cases: data["NeuerFall"],
-        total_deaths: data["AnzahlTodesfall"],
-        new_deaths: data["NeuerTodesfall"],
-        death_rate: Math.round(data["Todesrate"] * 100) / 100
-    }
+    d3.select(window).on('resize', refresh);
 
-    genders.forEach(gender => {
-        types.forEach(type => {
-            rki_data[gender + type] = {
-                "0-4": +data[gender + "_A00-A04_" + type],
-                "5-14": +data[gender + "_A05-A14_" + type],
-                "15-34": +data[gender + "_A15-A34_" + type],
-                "35-59": +data[gender + "_A35-A59_" + type],
-                "60-79": +data[gender + "_A60-A79_" + type],
-                "80+": +data[gender + "_A80+_" + type]
-            };
-        })
-    });
-    return rki_data
-}).then(function (data) {
-    data_rows = d3.index(data, d => d.date);
-}).then(function () {
-    const dates = Array.from(data_rows.keys())
-    const last_day = dates[dates.length - 1]
-    let select_last_day = data_rows.get(last_day)
-    genders.forEach(gender => {
-        types.forEach(type => {
-            let array = []
-            Object.entries(select_last_day[gender + type]).forEach(ele => {
-                array.push({
-                    age: ele[0],
-                    value: ele[1]
+    d3.csv(data_source, function (data) {
+        let rki_data = {
+            date: data.Meldedatum,
+            total_cases: data["AnzahlFall"],
+            new_cases: data["NeuerFall"],
+            total_deaths: data["AnzahlTodesfall"],
+            new_deaths: data["NeuerTodesfall"],
+            death_rate: Math.round(data["Todesrate"] * 100) / 100
+        }
+        genders.forEach(gender => {
+            types.forEach(type => {
+                rki_data[gender + type] = {
+                    "0-4": +data[gender + "_A00-A04_" + type],
+                    "5-14": +data[gender + "_A05-A14_" + type],
+                    "15-34": +data[gender + "_A15-A34_" + type],
+                    "35-59": +data[gender + "_A35-A59_" + type],
+                    "60-79": +data[gender + "_A60-A79_" + type],
+                    "80+": +data[gender + "_A80+_" + type]
+                };
+            })
+        });
+        return rki_data
+    }).then(function (data) {
+        data_rows = d3.index(data, d => d.date);
+    }).then(function () {
+        const dates = Array.from(data_rows.keys())
+        const last_day = dates[dates.length - 1]
+        let select_last_day = data_rows.get(last_day)
+        genders.forEach(gender => {
+            types.forEach(type => {
+                let array = []
+                Object.entries(select_last_day[gender + type]).forEach(ele => {
+                    array.push({
+                        age: ele[0],
+                        value: ele[1]
+                    });
+                    bar_chart_config[gender + type] = {
+                        x: d3.scaleLinear()
+                            .domain([0, d3.max(array, function (d) {
+                                return d.value;
+                            })]),
+                        y: d3.scaleBand()
+                            .domain(array.map(function (d) {
+                                return d.age;
+                            }))
+                    }
                 });
-                bar_chart_config[gender + type] = {
-                    x: d3.scaleLinear()
-                        .domain([0, d3.max(array, function (d) {
-                            return d.value;
-                        })]),
-                    y: d3.scaleBand()
-                        .domain(array.map(function (d) {
-                            return d.age;
-                        }))
-                }
-            });
-        })
-    });
-    refresh();
-})
+            })
+        });
 
+        let day_pick = +getArg('d');
+        $("#date_slider").val(day_pick);
+        // report_date = getDate(day_pick);
+        updateBarData(day_pick);
+
+        refresh();
+    })
+}
+
+init();
