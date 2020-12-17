@@ -1,8 +1,8 @@
-const report_date = "2020-01-02";
 const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
 const types = ["c", "d"]
+const report_date = getDate(0);
 
 let data_rows = {};
 let bar_chart_config = {};
@@ -501,12 +501,14 @@ function step() {
     }
 }
 
+function getDate(value) {
+    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
+    return d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
+}
+
 function updateBarData(value) {
     d3.selectAll('#onerightmiddle svg').remove();
-    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
-    let date = d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
-    // console.log(start_date)
-    // console.log(date)
+    let date  = getDate(value);
     bar_param_case_m.date = date
     bar_param_case_w.date = date
     bar_param_death_m.date = date
@@ -541,25 +543,18 @@ function refresh() {
     }
 }
 
-
-
-d3.select("#play-button").on("click", function () {
-    let button = d3.select(this);
-    let moving = false, timer = 0;
-    if (button.text() === "Pause") {
-        clearInterval(timer);
-        // timer = 0;
-        button.text("Play");
-    } else {
-        moving = true;
-        timer = setInterval(step, 200);
-        button.text("Pause");
-    }
-    // console.log("Slider moving: " + moving);
-})
+function getArg(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 function init() {
-    // let params = getParams
+    let day_pick = +getArg('d');
+    $("#date_slider").val(day_pick);
 
     d3.select("#play-button").on("click", function () {
         let button = d3.select(this);
