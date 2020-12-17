@@ -25,6 +25,7 @@ function set_text_statistic(param) {
 }
 
 function draw_lines(param) {
+    
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 18, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -497,6 +498,8 @@ function refresh() {
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
     set_text_statistic(text_stat_para)
+    
+    d3.selectAll('#content_sec1 svg').remove();
     draw_lines(line_param_bike)
 
     let thumb_height = $("#slider_containter").innerHeight()
