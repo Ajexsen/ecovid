@@ -2,8 +2,8 @@ const data_source = "data/rki/rki_DE-all.csv";
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
 const types = ["c", "d"]
-const report_date = getDate(0);
 
+// let report_date = "";
 let data_rows = {};
 let bar_chart_config = {};
 
@@ -75,7 +75,7 @@ function draw_lines(param) {
             )
             //console.log("i=" + i)
             //console.log("n_data=" + n_data)
-            if(i == 0){
+            if(i === 0){
                 svg.append("g")
                     .attr("transform", "translate(0, " + height + ")")
                     .attr("class", "tick")
@@ -305,8 +305,8 @@ function draw_bar(param) {
         });
     });
     // Scale the range of the data in the domains
-    x = bar_chart_config[param.gender + param.type].x;
-    y = bar_chart_config[param.gender + param.type].y;
+    let x = bar_chart_config[param.gender + param.type].x;
+    let y = bar_chart_config[param.gender + param.type].y;
     x.range([start, end]);
     y.range([height, 0])
         .padding(0.07);
@@ -395,7 +395,7 @@ const bar_param_case_m = {
     target: "#case_hist_left",
     gender: "M",
     type: "c",
-    date: report_date,
+    // date: report_date,
     direction: "left"
 };
 const bar_param_case_w = {
@@ -403,7 +403,7 @@ const bar_param_case_w = {
     target: "#case_hist_right",
     gender: "W",
     type: "c",
-    date: report_date,
+    // date: report_date,
     direction: "right"
 };
 const bar_param_death_m = {
@@ -411,7 +411,7 @@ const bar_param_death_m = {
     target: "#death_hist_left",
     gender: "M",
     type: "d",
-    date: report_date,
+    // date: report_date,
     direction: "left"
 };
 const bar_param_death_w = {
@@ -419,7 +419,7 @@ const bar_param_death_w = {
     target: "#death_hist_right",
     gender: "W",
     type: "d",
-    date: report_date,
+    // date: report_date,
     direction: "right"
 };
 
@@ -482,7 +482,7 @@ const line_param_bike = {
 
 const text_stat_para = {
     src: data_source,
-    date: report_date
+    // date: report_date
 }
 
 function step() {
@@ -508,7 +508,7 @@ function getDate(value) {
 
 function updateBarData(value) {
     d3.selectAll('#onerightmiddle svg').remove();
-    let date  = getDate(value);
+    let date = getDate(value);
     bar_param_case_m.date = date
     bar_param_case_w.date = date
     bar_param_death_m.date = date
@@ -553,9 +553,6 @@ function getArg(name, url = window.location.href) {
 }
 
 function init() {
-    let day_pick = +getArg('d');
-    $("#date_slider").val(day_pick);
-
     d3.select("#play-button").on("click", function () {
         let button = d3.select(this);
         let moving = false, timer = 0;
@@ -622,6 +619,12 @@ function init() {
                 });
             })
         });
+
+        let day_pick = +getArg('d');
+        $("#date_slider").val(day_pick);
+        // report_date = getDate(day_pick);
+        updateBarData(day_pick);
+
         refresh();
     })
 }
