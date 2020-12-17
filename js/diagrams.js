@@ -40,6 +40,7 @@ function draw_lines(param) {
             "translate(" + margin.left + "," + margin.top + ")");
             
     const n_data = param.data_files.length
+    const div_width = width / n_data
     //const n_data = 1
     
     for(let i = 0; i < n_data; i++){
@@ -67,14 +68,14 @@ function draw_lines(param) {
             svg.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", "steelblue")
+                .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", 1.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
             )
-            console.log("i=" + i)
-            console.log("n_data=" + n_data)
+            //console.log("i=" + i)
+            //console.log("n_data=" + n_data)
             if(i == 0){
                 svg.append("g")
                     .attr("transform", "translate(0, " + height + ")")
@@ -94,6 +95,28 @@ function draw_lines(param) {
                         //.tickPadding(10)
                     );                    
             }
+            
+            svg.append("rect")
+                .attr('class', 'legend_line')
+                .attr("width", 10)
+                .attr("height", 3)
+                .style("fill", param.line_colors[i])
+                .attr('class', 'axis_label')
+                .attr('x', div_width*i + 10)
+                .attr('y', height - 20)
+                //.attr("cx",200)
+                //.attr("cy",130)
+                .attr("r", 6)
+                
+            svg.append("text")
+                .attr('class', 'legend_text')
+                .text(param.line_legends[i])
+                .style("font-size", "15px")
+                .attr('x', div_width*i + 20 + 10)
+                .attr('y', height + 8 - 20)              
+                //.attr("alignment-baseline","middle")
+                //.attr("x", 220)
+                //.attr("y", 160)
                 
         })
     }
@@ -444,6 +467,8 @@ const line_param_bike = {
     title: "test", 
     src: "data/transport/bicycle/",
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
+    line_colors: d3.schemePaired,
     delimiter: ",",
     x: "month",
     y: "count",
