@@ -14,13 +14,112 @@ function set_text_statistic(param) {
     let month = month_format(date)
     let day_fomat = d3.timeFormat("%d")
     let day = day_fomat(date)
+    let death_rate = Math.round(100 * 100 * select_date.total_deaths / select_date.total_cases) / 100
     $("#month").html(month);
     $("#day").html(day);
     $("#total_cases").html(select_date.total_cases);
     $("#new_cases").html(select_date.new_cases);
     $("#total_deaths").html(select_date.total_deaths);
     $("#new_deaths").html(select_date.new_deaths);
-    $("#death_rate").html(select_date.death_rate + "%");
+    $("#death_rate").html(death_rate + "%");
+}
+
+function draw_lines(param) {
+    
+    const container = $(param.target)
+    const margin = {top: 40, right: 55, bottom: 18, left: 60}
+    let width = container.innerWidth() - margin.left - margin.right,
+        height = 500 //container.innerHeight() - margin.top - margin.bottom;
+    //console.log(container.innerHeight())
+    let svg = d3.select(param.target)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+            
+    const n_data = param.data_files.length
+    const div_width = width / n_data
+    //const n_data = 1
+    
+    for(let i = 0; i < n_data; i++){
+        path = param.src + param.data_files[i]
+        d3.dsv(param.delimiter, path, function (d) {
+            return {
+                date: d.month, //d3.timeParse("%m")(d.month),
+                value: d.count
+            }
+        }).then(data =>{
+            // let x = d3.scaleTime()
+            
+            let x = d3.scaleLinear()
+                .domain(d3.extent(data, function (d) {
+                    return d.date;
+                }))
+                .range([0, width]);
+ 
+            let y = d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) {
+                    return +d.value;
+                })])
+                .range([height, 0]);
+
+            svg.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", param.line_colors[i])
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+            )
+            //console.log("i=" + i)
+            //console.log("n_data=" + n_data)
+            if(i == 0){
+                svg.append("g")
+                    .attr("transform", "translate(0, " + height + ")")
+                    .attr("class", "tick")
+                    .call(d3.axisBottom(x)
+                        //.tickSizeInner(0)
+                        //.tickSizeOuter(2)
+                        //.tickPadding(10)
+                        //.tickFormat(d3.timeFormat("%b"))
+                    );
+                svg.append("g")
+                    .attr("class", "tick")
+                    .call(d3.axisLeft(y)
+                        //.ticks(6)
+                        //.tickSizeInner(0)
+                        //.tickSizeOuter(0)
+                        //.tickPadding(10)
+                    );                    
+            }
+            
+            svg.append("rect")
+                .attr('class', 'legend_line')
+                .attr("width", 10)
+                .attr("height", 3)
+                .style("fill", param.line_colors[i])
+                .attr('class', 'axis_label')
+                .attr('x', div_width*i + 10)
+                .attr('y', height - 20)
+                //.attr("cx",200)
+                //.attr("cy",130)
+                .attr("r", 6)
+                
+            svg.append("text")
+                .attr('class', 'legend_text')
+                .text(param.line_legends[i])
+                .style("font-size", "15px")
+                .attr('x', div_width*i + 20 + 10)
+                .attr('y', height + 8 - 20)              
+                //.attr("alignment-baseline","middle")
+                //.attr("x", 220)
+                //.attr("y", 160)
+                
+        })
+    }
 }
 
 function draw_line(param) {
@@ -374,6 +473,19 @@ const line_param_case = {
 
 };
 
+const line_param_bike = {
+    target: "#line_chart_transport",
+    title: "test", 
+    src: "data/transport/bicycle/",
+    data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
+    line_colors: d3.schemePaired,
+    delimiter: ",",
+    x: "month",
+    y: "count",
+    y_scale: 1
+};
+
 const text_stat_para = {
     src: data_source,
     date: report_date
@@ -422,6 +534,9 @@ function refresh() {
     draw_bar(bar_param_death_m)
     draw_bar(bar_param_death_w)
     set_text_statistic(text_stat_para)
+    
+    d3.selectAll('#content_sec1 svg').remove();
+    draw_lines(line_param_bike)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
