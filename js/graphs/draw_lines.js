@@ -216,7 +216,7 @@ function draw_lines(param) {
                     tooltip_html += '</p>'
                     
                     tooltip.html(tooltip_html)
-                        .style("left", (p_month + 1.3) * month_width + "px")
+                        .style("left", f_x_pos[p_month] + 1.3 * f_width[p_month] + "px")
                         .style("top", y0 + 60 + "px")
                         .transition().delay(200).style("opacity", 1);
                                                 
