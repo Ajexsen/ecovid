@@ -75,7 +75,6 @@ const line_param_flight = {
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    delimiter: ",",
     x: "month",
     y: "count"
 };
@@ -88,7 +87,6 @@ const line_param_rail = {
     data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
     line_legends: ["2018", "2020", "2017", "2019"],
     line_colors: line_colors,
-    delimiter: ",",
     x: "month",
     y: "count"
 };
@@ -100,7 +98,6 @@ const line_param_bike = {
     data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
     line_legends: ["2020", "2019", "2018", "2017"],
     line_colors: line_colors,
-    delimiter: ",",
     x: "month",
     y: "count"
 };
@@ -113,7 +110,6 @@ const line_param_import = {
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    delimiter: ",",
     x: "month",
     y: "count"
 };
@@ -126,7 +122,6 @@ const line_param_export = {
     data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
     line_legends: ["2018", "2020", "2017", "2019"],
     line_colors: line_colors,
-    delimiter: ",",
     x: "month",
     y: "count"
 };

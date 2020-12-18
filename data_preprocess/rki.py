@@ -104,7 +104,7 @@ def get_csv_bundesland(df, bundesland_id, path):
     df['NeuerFall'] = new_case
     df['NeuerTodesfall'] = new_death
     # df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
-    df.to_csv("{}{}".format(path, file_name))
+    df.to_csv("{}{}".format(path,     ))
     print("{} saved in path: {}".format(file_name, path))
     return df
 
