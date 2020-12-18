@@ -165,20 +165,27 @@ function draw_lines(param) {
                 .attr('y', height + 51)
         }
         
-        month_width = width / 12        
+        month_width = width / 11
+        let f_width = new Array(12).fill(month_width)
+        f_width[0] = f_width[11] = 0.5 * month_width
+        let f_x_pos = f_width.slice(0)
+        f_x_pos.pop()
+        f_x_pos.unshift(0)
+        f_x_pos = d3.cumsum(f_x_pos)
+        /*console.log("f_width")
+        console.log(f_width)
+        console.log("f_x_pos")
+        console.log(f_x_pos)*/
+        
         
         let focus = svg
             .append('g')
             .append('rect')
             .style("fill", "#5D001E30")
-            .attr("width", month_width)
-            .attr("height", height)
             .style("opacity", 0)
         
         //console.log(param.target)
         let tooltip = d3.select(param.target).append("div")
-            .attr("width", month_width)
-            .attr("height", "100px")
             .attr("class", "tooltip")
             .style("opacity", 0);
         
@@ -189,11 +196,20 @@ function draw_lines(param) {
             })
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
+                y0 = d3.pointer(event)[1]
                 const p_month = Math.round(x0 / month_width) 
                 if(p_month < 12){
-                    let values = Array.from({length: n_data}, (_, n) => Math.round(data[n][p_month].value * 100) / 100) 
+                    let values = []
+                    for(n = 0; n < n_data; n++){
+                        data_point = data[n][p_month]
+                        if(data_point === undefined){
+                            values[n] = "N/A"
+                        } else {
+                            values[n] = Math.round(data_point.value * 100) / 100
+                        }
+                    }  
                                         
-                    let tooltip_html = '<p class="tooltip">'
+                    let tooltip_html = '<p id="tip-' + p_month + '" class="tooltip">' + (p_month+1) + '<br>'
                     for(let i = 0; i < n_data; i++){
                         tooltip_html += "<b>" +param.line_legends[i] + "</b>: " + values[i] + "<br>"
                     }
@@ -201,11 +217,13 @@ function draw_lines(param) {
                     
                     tooltip.html(tooltip_html)
                         .style("left", (p_month + 1.3) * month_width + "px")
-                        .style("top", 40 + "vh")
+                        .style("top", y0 + 60 + "px")
                         .transition().delay(200).style("opacity", 1);
                                                 
                     focus
-                        .attr("x", p_month * month_width)
+                        .attr("width", f_width[p_month])
+                        .attr("height", height)
+                        .attr("x", f_x_pos[p_month])
                         .attr("y", 0)
 
                 }
@@ -214,6 +232,7 @@ function draw_lines(param) {
             .on('mouseout', (event) => {
                 focus.style("opacity", 0)
                 tooltip.transition().delay(0).style("opacity", 0);
+                
             })
 
         

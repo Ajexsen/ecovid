@@ -628,7 +628,7 @@ div.tooltip {
     /*height: 110px;*/
     color: #EEE;
     border-radius: 3px;
-    background: #00000080;
+    background: #44444490;
     border: 2px solid #696969;
     position: absolute;
     padding: 0 8px 0 8px;
@@ -637,4 +637,8 @@ div.tooltip {
 p.tooltip {
     font-size: 10px;
     font-weight: 50;
+}
+
+.tooltip:not(.tip-4){
+    /*display:none;*/
 }
