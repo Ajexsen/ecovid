@@ -33,6 +33,7 @@ function update_econ_chart(type){
     draw_lines(econ_param)
 }
 
+
 function draw_lines(param) {
     const container = $(param.target)
     const margin = {top: 40, right: 55, bottom: 60, left: 20}
@@ -45,6 +46,13 @@ function draw_lines(param) {
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
+            
+    // Fill up svg for mouse event
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .style("opacity", 0)
+        .attr("fill", "black")
             
     const n_data = param.data_files.length
     const div_width = width / n_data
@@ -84,9 +92,9 @@ function draw_lines(param) {
                     .range([0, width]);
         const y = d3.scaleLinear()
                     .domain([min-buf, max+buf])
-                    .range([height, 0]);
+                    .range([height, 0]);    
 
-        //svg.transition(); 
+        function test() {console.log("test")}
         
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
@@ -113,7 +121,7 @@ function draw_lines(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(0)                        
             ); 
-
+      
         for(let i = n_data-1, k = 0 ; i >= 0 ; i--, k++){
             if(i === 0){
                 svg.append("path")
@@ -137,6 +145,7 @@ function draw_lines(param) {
                         .y(function(d) { return y(d.value) })
                     )
             }
+                       
             
             svg.append("rect")
                 .attr('class', 'legend_line')
@@ -154,6 +163,59 @@ function draw_lines(param) {
                 .style("font-size", "15px")
                 .attr('x', div_width*k + 60 + 30)
                 .attr('y', height + 51)
-        }        
+        }
+        
+        month_width = width / 12        
+        
+        let focus = svg
+            .append('g')
+            .append('rect')
+            .style("fill", "#5D001E30")
+            .attr("width", month_width)
+            .attr("height", height)
+            .style("opacity", 0)
+        
+        //console.log(param.target)
+        let tooltip = d3.select(param.target).append("div")
+            .attr("width", month_width)
+            .attr("height", "100px")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+        
+        svg
+            .on('mouseover', (event) => {
+                focus.style("opacity", 1)
+                tooltip.transition().delay(0).style("opacity", 1);
+            })
+            .on('mousemove', (event) => {
+                x0 = d3.pointer(event)[0]
+                const p_month = Math.round(x0 / month_width) 
+                if(p_month < 12){
+                    let values = Array.from({length: n_data}, (_, n) => Math.round(data[n][p_month].value * 100) / 100) 
+                                        
+                    let tooltip_html = '<p class="tooltip">'
+                    for(let i = 0; i < n_data; i++){
+                        tooltip_html += "<b>" +param.line_legends[i] + "</b>: " + values[i] + "<br>"
+                    }
+                    tooltip_html += '</p>'
+                    
+                    tooltip.html(tooltip_html)
+                        .style("left", p_month * month_width + "px")
+                        .style("top", 25 + "vh")
+                        .transition().delay(200).style("opacity", 1);
+                                                
+                    focus
+                        .attr("x", p_month * month_width)
+                        .attr("y", 0)
+
+                }
+             
+            })
+            .on('mouseout', (event) => {
+                focus.style("opacity", 0)
+                tooltip.transition().delay(0).style("opacity", 0);
+            })
+
+        
     }) 
 }

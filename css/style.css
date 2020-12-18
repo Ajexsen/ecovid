@@ -611,3 +611,29 @@ body {
 .legend_total {
     fill: var(--pink);
 }
+
+.chart_bar {
+    box-shadow: -2000px 0 0 2000px var(--burgundy30);
+    background: repeating-linear-gradient(
+            0deg,
+            #7e0010,
+            #7e0010 7px,
+            transparent 7px,
+            transparent 14px
+    )
+}
+
+div.tooltip {
+    width: 80px;
+    height: 110px;
+    color: #EEE;
+    background: #00000080;
+    border: 1px solid #333;
+    position: absolute;
+}
+
+p.tooltip {
+    font-size: 10px;
+    font-weight: 50;
+    text-align: center;
+}
