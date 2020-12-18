@@ -10,7 +10,15 @@ function update_transport_chart(type){
     draw_lines(transport_param)
 }
 
-let transport_param = line_param_flight
+function update_econ_chart(type){
+    d3.selectAll('#line_chart_econ svg').remove();
+    if ( type === "import" ){
+        econ_param = line_param_import
+    } else if (type === "export"){
+        econ_param = line_param_export
+    }
+    draw_lines(econ_param)
+}
 
 function draw_lines(param) {
     const container = $(param.target)

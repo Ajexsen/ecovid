@@ -119,3 +119,33 @@ const line_param_bike = {
     x: "month",
     y: "count"
 };
+
+// use bike as dummy
+const line_param_import = {
+    target: "#line_chart_econ",
+    title: "test",
+    src: "data/transport/bicycle/",
+    data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
+    line_colors: line_colors,
+    delimiter: ",",
+    x: "month",
+    y: "count"
+};
+
+// use bike as dummy
+const line_param_export = {
+    target: "#line_chart_econ",
+    title: "test",
+    src: "data/transport/bicycle/",
+    data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
+    line_legends: ["2018", "2020", "2017", "2019"],
+    line_colors: line_colors,
+    delimiter: ",",
+    x: "month",
+    y: "count"
+};
+
+// remeber which data is currently used
+let transport_param = line_param_flight
+let econ_param = line_param_import
