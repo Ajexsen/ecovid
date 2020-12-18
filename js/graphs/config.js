@@ -10,33 +10,27 @@ let data_rows = {};
 let bar_chart_config = {};
 let data_source = de_data_source;
 
-const text_stat_para = {
-    // src: data_source,
-};
+const text_stat_para = {};
 
 const bar_param_case_m = {
-    // src: data_source,
     target: "#case_hist_left",
     gender: "M",
     type: "c",
     direction: "left"
 };
 const bar_param_case_w = {
-    // src: data_source,
     target: "#case_hist_right",
     gender: "W",
     type: "c",
     direction: "right"
 };
 const bar_param_death_m = {
-    // src: data_source,
     target: "#death_hist_left",
     gender: "M",
     type: "d",
     direction: "left"
 };
 const bar_param_death_w = {
-    // src: data_source,
     target: "#death_hist_right",
     gender: "W",
     type: "d",
@@ -48,17 +42,11 @@ const line_param_death = {
     title: "Deaths",
     legend: true,
     x: "date_parse",
-    // src: data_all,
     data1: {
-        // delimiter: ",",
-        // x_date_format: rki_dateFormat,
         y: "new_deaths",
         y_scale: 1
     },
     data2: {
-        // src: data_source,
-        // delimiter: ",",
-        // x_date_format: rki_dateFormat,
         y: "total_deaths",
         y_scale: 1
     }
@@ -68,18 +56,11 @@ const line_param_case = {
     title: "Cases",
     legend: false,
     x: "date_parse",
-    // src: data_all,
     data1: {
-        // delimiter: ",",
-        // x_date_format: rki_dateFormat,
         y: "new_cases",
         y_scale: 1000
     },
     data2: {
-        // src: data_source,
-        // delimiter: ",",
-        // x: "Meldedatum",
-        // x_date_format: rki_dateFormat,
         y: "total_cases",
         y_scale: 1000
     }
@@ -150,6 +131,6 @@ const line_param_export = {
     y: "count"
 };
 
-// remeber which data is currently used
+// remember which data is currently used
 let transport_param = line_param_flight
 let econ_param = line_param_import

@@ -93,8 +93,7 @@ function draw_lines(param) {
             ); 
 
         for(let i = n_data-1, k = 0 ; i >= 0 ; i--, k++){
-            
-            if(i == 0){
+            if(i === 0){
                 svg.append("path")
                     .datum(data[i])
                     .attr("fill", "none")
@@ -131,7 +130,6 @@ function draw_lines(param) {
                 .style("font-size", "15px")
                 .attr('x', div_width*k + 60 + 30)
                 .attr('y', height + 51)
-
         }        
     }) 
 }
