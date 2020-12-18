@@ -78,7 +78,7 @@ function draw_lines(param) {
         const buf = (max - min) * 0.1
         
         const x = d3.scaleTime()
-                    .domain(d3.extent(data[0], function (d) {
+                    .domain(d3.extent(data[1], function (d) {
                         return d.date;
                     }))
                     .range([0, width]);
