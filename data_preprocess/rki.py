@@ -36,12 +36,18 @@ STATE_ID_ISONAME_MAP = {
        12: "DE-BB", 
        13: "DE-MV", 
        14: "DE-SN", 
-       15: "DE-SH", 
+       15: "DE-ST", 
        16: "DE-TH",
 }
 
 def get_csv_bundesland(df, bundesland_id, path):
     file_name = "rki_.csv"
+    
+    # date index: from first date (min) to last date (max) in data
+    data_start_date = df['Meldedatum'].min()
+    data_end_date = df['Meldedatum'].max()
+    indices = pd.date_range(start=data_start_date, end=data_end_date).date
+    del data_start_date, data_end_date
     
     # if bundesland id exist, filter out for given id
     # else nation-wide (no filtering)
@@ -56,12 +62,6 @@ def get_csv_bundesland(df, bundesland_id, path):
     data_gender_age = df.drop(columns=['IdBundesland']).groupby(by=['Meldedatum', 'gender_age']).sum()
     
     # --- prepare data table
-    
-    # date index: from first date (min) to last date (max) in data
-    data_start_date = data_total.index.min()
-    data_end_date = data_total.index.max()
-    indices = pd.date_range(start=data_start_date, end=data_end_date).date
-    del data_start_date, data_end_date
     
     col_name_general = ['AnzahlFall', 'AnzahlTodesfall']
     
@@ -103,9 +103,10 @@ def get_csv_bundesland(df, bundesland_id, path):
     df = df.cumsum()
     df['NeuerFall'] = new_case
     df['NeuerTodesfall'] = new_death
-    df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
+    # df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
     df.to_csv("{}{}".format(path, file_name))
     print("{} saved in path: {}".format(file_name, path))
+    return df
 
 # TODO: download & update data (once per day)
 # https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv
@@ -121,7 +122,7 @@ data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis',
 data = data.drop(columns=['NeuGenesen', 'AnzahlGenesen', 'IstErkrankungsbeginn'])
 
 # date formating
-data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%Y/%m/%d')).dt.date
+data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%Y-%m-%d')).dt.date
 
 # Data Beschreibung:
 # --- Anzahl Fälle der aktuellen Publikation als Summe(AnzahlFall), wenn NeuerFall in (0,1)
@@ -135,10 +136,10 @@ data['gender_age'] = data['Geschlecht'] + "_" + data['Altersgruppe']
 data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
 # generate csv for all states (include DE_all)
-# for i in range(17):
-#     get_csv_bundesland(data, i, save_path)
+for i in range(17):
+    get_csv_bundesland(data, i, save_path)
 
 # generate nation-wide csv (DE_all)
-get_csv_bundesland(data, 0, save_path)
+# df = get_csv_bundesland(data, 0, save_path)
         
     
