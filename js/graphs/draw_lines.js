@@ -1,5 +1,5 @@
 function update_transport_chart(type){
-    d3.selectAll('#line_chart_transport svg').remove();
+    //d3.selectAll('#line_chart_transport svg').remove();
     if ( type === "flight" ){
         $("#flight_button").attr("src","images/flight_active.png")
         $("#rail_button").attr("src","images/rail_inactive.png")
@@ -44,15 +44,16 @@ function draw_lines(param) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
+            "translate(" + margin.left + "," + margin.top + ")")
+            
     const n_data = param.data_files.length
     const div_width = width / n_data
     let datasets = []
     
+    
     for(let i = 0; i < n_data; i++){
         path = param.src + param.data_files[i]
-        datasets[i] = d3.dsv(param.delimiter, path, function (d) {
+        datasets[i] = d3.csv(path, function (d) {
             return {
                 date: d3.timeParse("%m")(d.month),
                 value: d.count
@@ -78,7 +79,9 @@ function draw_lines(param) {
         const y = d3.scaleLinear()
                     .domain([0, max])
                     .range([height, 0]);
-                    
+
+        svg.transition(); 
+        
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
             .attr("class", "tick")
