@@ -134,14 +134,14 @@ function draw_line(param) {
 
         svg.append("rect")
             .attr('class', 'legend_new')
-            .attr("x", -12)
+            .attr("x", -10)
             .attr("y", -14)
             .attr("width", 20)
             .attr("height", 3);
 
         svg.append("rect")
             .attr('class', 'legend_total')
-            .attr("x", width - 12)
+            .attr("x", width - 10)
             .attr("y", -14)
             .attr("width", 22)
             .attr("height", 3);
