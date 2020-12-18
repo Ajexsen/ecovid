@@ -1,5 +1,4 @@
-let data_rows = {};
-let bar_chart_config = {};
+
 
 function getDate(value) {
     let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
@@ -47,15 +46,25 @@ function refresh_on_resize() {
     }
 }
 
+function refresh_on_state_change() {
+    bar_param_case_m.src = data_rows;
+    bar_param_case_w.src = data_rows;
+    bar_param_death_m.src = data_rows;
+    bar_param_death_w.src = data_rows;
+    text_stat_para.src = data_rows;
+    line_param_death.src = data_all;
+    line_param_case.src = data_all;
+}
+
 function init_graph() {
-    d3.select(window).on('resize', refresh_on_resize);
     d3.csv(data_source, function (data) {
         let rki_data = {
             date: data.Meldedatum,
-            total_cases: data["AnzahlFall"],
-            new_cases: data["NeuerFall"],
-            total_deaths: data["AnzahlTodesfall"],
-            new_deaths: data["NeuerTodesfall"],
+            date_parse: d3.timeParse(rki_dateFormat)(data.Meldedatum),
+            total_cases: +data["AnzahlFall"],
+            new_cases: +data["NeuerFall"],
+            total_deaths: +data["AnzahlTodesfall"],
+            new_deaths: +data["NeuerTodesfall"],
             death_rate: Math.round(data["Todesrate"] * 100) / 100
         }
         genders.forEach(gender => {
@@ -72,7 +81,9 @@ function init_graph() {
         });
         return rki_data
     }).then(function (data) {
+        data_all = data
         data_rows = d3.index(data, d => d.date);
+        // console.log(data_rows)
     }).then(function () {
         const dates = Array.from(data_rows.keys())
         const last_day = dates[dates.length - 1]
@@ -99,10 +110,9 @@ function init_graph() {
             })
         });
 
-        let day_pick = +getArg('d');
-        $("#date_slider").val(day_pick);
-        refresh_on_date_change(day_pick);
-
+        let date = $("#date_slider").val()
+        updateDate(date);
+        refresh_on_state_change();
         refresh_on_resize();
     })
 }

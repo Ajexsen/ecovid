@@ -5,7 +5,7 @@ function draw_bar(param) {
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
-// set the ranges
+    // set the ranges
     let start = 0, end = 0, direction = 1;
     if (param.direction === "left") {
         start = width;
@@ -20,7 +20,7 @@ function draw_bar(param) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    let select_date = data_rows.get(param.date)
+    let select_date = param.src.get(param.date)
     let array = []
     Object.entries(select_date[param.gender + param.type]).forEach(ele => {
         array.push({
@@ -47,15 +47,6 @@ function draw_bar(param) {
         .attr("width", function (d) {
             return (start - x(d.value)) * direction;
         })
-    bar.append('text')
-        .attr('class', 'axis_label')
-        .attr("x", (width / 2))
-        .attr("y", height / 2)
-        .attr("text-anchor", "middle")
-        // .attr('x', 20)
-        // .attr('y', 20)
-        // .attr("transform", "translate(-12, -20)")
-        .text("Male");
 
     if (param.direction === "left") {
         bar.attr("x", function (d) {

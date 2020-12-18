@@ -48,23 +48,15 @@ function init_page() {
         map: 'germany_en',
         backgroundColor: null,
         enableZoom: false,
-        showTooltip: false
+        showTooltip: false,
+        onRegionClick: function (element, code, region) {
+            data_source = state_data_prefix + code.toUpperCase() + '.csv';
+            init_graph();
+        }
     });
 
-    d3.select("#play-button").on("click", function () {
-        let button = d3.select(this);
-        let moving = false, timer = 0;
-        if (button.text() === "Pause") {
-            clearInterval(timer);
-            // timer = 0;
-            button.text("Play");
-        } else {
-            moving = true;
-            timer = setInterval(step, 200);
-            button.text("Pause");
-        }
-        // console.log("Slider moving: " + moving);
-    })
+    let day_pick = +getArg('d');
+    $("#date_slider").val(day_pick);
 }
 
 init_page();
