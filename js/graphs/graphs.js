@@ -113,7 +113,9 @@ function init_graph() {
             })
         });
 
-        let date = $("#date_slider").val()
+        const slider = $("#date_slider");
+        slider.attr('max', data_all.length - 1);
+        let date = slider.val()
         updateDate(date);
         refresh_on_state_change();
         refresh_on_resize();

@@ -552,6 +552,13 @@ body {
     /*visibility: hidden;*/
 }
 
+.tick line {
+    opacity: 20%;
+    /*stroke-width: 2px;*/
+    stroke-dasharray: 2.2;
+    stroke: var(--burgundy);
+}
+
 .domain {
     stroke-width: var(--axis-width);
     stroke-opacity: 0.3;

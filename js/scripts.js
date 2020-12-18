@@ -56,7 +56,9 @@ function init_page() {
     });
 
     let day_pick = +getArg('d');
-    $("#date_slider").val(day_pick);
+    const slider = $("#date_slider");
+    // slider.attr('max', data_all.length - 1);
+    slider.val(day_pick);
 }
 
 init_page();

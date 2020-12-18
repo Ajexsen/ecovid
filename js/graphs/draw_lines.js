@@ -80,7 +80,7 @@ function draw_lines(param) {
             .attr("class", "tick")
             .call(d3.axisRight(y)
                 .ticks(5)
-                .tickSizeInner(0)
+                .tickSizeInner(-width)
                 .tickSizeOuter(0)
                 .tickPadding(10)
             );
