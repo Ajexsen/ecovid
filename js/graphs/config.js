@@ -3,7 +3,8 @@ const state_data_prefix = "data/rki/bundesland/rki_DE-"
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
 const types = ["c", "d"]
-const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
+//const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
+const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 
 let data_all = {}
 let data_rows = {};
@@ -102,28 +103,30 @@ const line_param_bike = {
     y: "count"
 };
 
-// use bike as dummy
 const line_param_import = {
     target: "#line_chart_econ",
     title: "test",
-    src: "data/transport/bicycle/",
-    data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
-    line_legends: ["2017", "2018", "2019", "2020"],
+    src: "data/econ/import/",
+    data_files: ["im_2017.csv", "im_2018.csv", "im_2019.csv", "im_2020.csv"],
+    data_files: ["im_2008.csv", "im_2009.csv", "im_2010.csv", "im_2011.csv", "im_2012.csv", "im_2013.csv", "im_2014.csv", "im_2015.csv", "im_2016.csv", "im_2017.csv", "im_2018.csv", "im_2019.csv", "im_2020.csv"],
+    //line_legends:  ["2017", "2018", "2019", "2020"],
+    line_legends:  ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    x: "month",
-    y: "count"
+    x: "Monat",
+    y: "Import"
 };
 
-// use bike as dummy
 const line_param_export = {
     target: "#line_chart_econ",
     title: "test",
-    src: "data/transport/bicycle/",
-    data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
-    line_legends: ["2018", "2020", "2017", "2019"],
+    src: "data/econ/export/",
+    data_files: ["ex_2017.csv", "ex_2018.csv", "ex_2019.csv", "ex_2020.csv"],
+    data_files: ["ex_2008.csv", "ex_2009.csv", "ex_2010.csv", "ex_2011.csv", "ex_2012.csv", "ex_2013.csv", "ex_2014.csv", "ex_2015.csv", "ex_2016.csv", "ex_2017.csv", "ex_2018.csv", "ex_2019.csv", "ex_2020.csv"],
+    //line_legends:  ["2017", "2018", "2019", "2020"],
+    line_legends:  ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    x: "month",
-    y: "count"
+    x: "Monat",
+    y: "Export"
 };
 
 // remember which data is currently used
