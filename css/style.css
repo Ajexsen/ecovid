@@ -624,16 +624,17 @@ body {
 }
 
 div.tooltip {
-    width: 80px;
-    height: 110px;
+    /*width: 80px;*/
+    /*height: 110px;*/
     color: #EEE;
+    border-radius: 3px;
     background: #00000080;
-    border: 1px solid #333;
+    border: 2px solid #696969;
     position: absolute;
+    padding: 0 8px 0 8px;
 }
 
 p.tooltip {
     font-size: 10px;
     font-weight: 50;
-    text-align: center;
 }

@@ -200,8 +200,8 @@ function draw_lines(param) {
                     tooltip_html += '</p>'
                     
                     tooltip.html(tooltip_html)
-                        .style("left", p_month * month_width + "px")
-                        .style("top", 25 + "vh")
+                        .style("left", (p_month + 1.3) * month_width + "px")
+                        .style("top", 40 + "vh")
                         .transition().delay(200).style("opacity", 1);
                                                 
                     focus
