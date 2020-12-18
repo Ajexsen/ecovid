@@ -12,5 +12,10 @@ function set_text_statistic(param) {
     $("#new_cases").html(select_date.new_cases);
     $("#total_deaths").html(select_date.total_deaths);
     $("#new_deaths").html(select_date.new_deaths);
-    $("#death_rate").html(death_rate + "%");
+    if(isNaN(death_rate)){
+        $("#death_rate").html("N/A");
+    } else {
+        $("#death_rate").html(death_rate + "%");
+    }
+    
 }
