@@ -36,6 +36,9 @@ function refresh_on_resize() {
     
     d3.selectAll('#content_sec1 svg').remove();
     draw_lines(transport_param)
+    
+    d3.selectAll('#content_sec2 svg').remove();
+    draw_lines(econ_param)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
