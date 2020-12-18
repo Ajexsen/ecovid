@@ -1,10 +1,19 @@
 function update_transport_chart(type){
     d3.selectAll('#line_chart_transport svg').remove();
     if ( type === "flight" ){
+        $("#flight_button").attr("src","images/flight_active.png")
+        $("#rail_button").attr("src","images/rail_inactive.png")
+        $("#bike_button").attr("src","images/bike_inactive.png")     
         transport_param = line_param_flight
     } else if (type === "rail"){
+        $("#flight_button").attr("src","images/flight_inactive.png")
+        $("#rail_button").attr("src","images/rail_active.png")
+        $("#bike_button").attr("src","images/bike_inactive.png")       
         transport_param = line_param_rail
     } else if (type === "bike"){
+        $("#flight_button").attr("src","images/flight_inactive.png")
+        $("#rail_button").attr("src","images/rail_inactive.png")
+        $("#bike_button").attr("src","images/bike_active.png")                 
         transport_param = line_param_bike
     }
     draw_lines(transport_param)
@@ -13,8 +22,12 @@ function update_transport_chart(type){
 function update_econ_chart(type){
     d3.selectAll('#line_chart_econ svg').remove();
     if ( type === "import" ){
+        $("#import_button").attr("src","images/import_active.png")
+        $("#export_button").attr("src","images/export_inactive.png")      
         econ_param = line_param_import
     } else if (type === "export"){
+        $("#import_button").attr("src","images/import_inactive.png")
+        $("#export_button").attr("src","images/export_active.png")       
         econ_param = line_param_export
     }
     draw_lines(econ_param)

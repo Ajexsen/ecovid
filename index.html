@@ -162,11 +162,11 @@
                 </div>
             </div>
             <div id="lc_sec2" class="flex3 content_middle flexrow">
-                <div id="transport_buttons" class="flexcolumn">
+                <div id="transport_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <img src="images/flight_inctive.png" class="line_button flexrow flexnone" onclick="update_transport_chart('flight');">
-                    <img src="images/rail_inactive.png" class="line_button flexrow flexnone" onclick="update_transport_chart('rail');">
-                    <img src="images/bike_inactive.png" class="line_button flexrow flexnone" onclick="update_transport_chart('bike');">
+                    <img src="images/flight_active.png" id="flight_button" class="line_button flexrow flexnone" onclick="update_transport_chart('flight');">
+                    <img src="images/rail_inactive.png" id="rail_button" class="line_button flexrow flexnone" onclick="update_transport_chart('rail');">
+                    <img src="images/bike_inactive.png" id="bike_button" class="line_button flexrow flexnone" onclick="update_transport_chart('bike');">
                 </div>
                 <div id="line_chart_transport" class="flex1"></div>
             </div>
@@ -183,10 +183,10 @@
                 </div>
             </div>
             <div id="lc_sec3" class="flex3 frame content_middle flexrow">
-                <div id="economy_buttons" class="flexcolumn">
+                <div id="econ_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <img src="images/flight_inctive.png" class="line_button flexrow flexnone" onclick="update_econ_chart('import');">
-                    <img src="images/rail_inactive.png" class="line_button flexrow flexnone" onclick="update_econ_chart('export');">
+                    <img src="images/import_active.png" id="import_button" class="line_button flexrow flexnone" onclick="update_econ_chart('import');">
+                    <img src="images/export_inactive.png" id="export_button" class="line_button flexrow flexnone" onclick="update_econ_chart('export');">
                 </div>
                 <div id="line_chart_econ" class="flex1"></div>
             </div>
