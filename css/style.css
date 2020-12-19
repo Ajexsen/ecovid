@@ -557,10 +557,10 @@ body {
 }
 
 .tick line {
-    opacity: 20%;
+    opacity: 70%;
     /*stroke-width: 2px;*/
     stroke-dasharray: 2.2;
-    stroke: var(--burgundy);
+    stroke: var(--offwhite);
 }
 
 .domain {
@@ -671,6 +671,8 @@ div.tooltip {
     left: 0;
     right: 0;
     margin: 0 55px 60px 10px;
+    background-color: var(--burgundy);
+    opacity: 85%;
 }
 
 .line_chart_impact {
