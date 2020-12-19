@@ -135,9 +135,9 @@
                     </div>
                 </div>
 
-<!--                                <div id="tools">-->
-<!--                                    <button id="play-button">Play</button>-->
-<!--                                </div>-->
+                <!--                                <div id="tools">-->
+                <!--                                    <button id="play-button">Play</button>-->
+                <!--                                </div>-->
 
                 <div id="onerightbottom" class="flex3">
                     <div class="float fullheight_p fullwidth_p flexcolumn">
@@ -164,11 +164,21 @@
             <div id="lc_sec2" class="flex3 content_middle flexrow">
                 <div id="transport_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <img src="images/flight_active.png" id="flight_button" class="line_button flexrow flexnone" onclick="update_transport_chart('flight');">
-                    <img src="images/rail_inactive.png" id="rail_button" class="line_button flexrow flexnone" onclick="update_transport_chart('rail');">
-                    <img src="images/bike_inactive.png" id="bike_button" class="line_button flexrow flexnone" onclick="update_transport_chart('bike');">
+                    <img src="images/flight_active.png" id="flight_button" class="line_button flexrow flexnone"
+                         onclick="update_transport_chart('flight');" alt="flight">
+                    <img src="images/rail_inactive.png" id="rail_button" class="line_button flexrow flexnone"
+                         onclick="update_transport_chart('rail');" alt="rail">
+                    <img src="images/bike_inactive.png" id="bike_button" class="line_button flexrow flexnone"
+                         onclick="update_transport_chart('bike');" alt="bike">
                 </div>
-                <div id="line_chart_transport" class="flex1"></div>
+                <div id="transport_container" class="line_chart_impact_container flex1">
+                    <div id="line_chart_transport_container" class="float focus_container flexrow">
+                        <div id="line_chart_transport_focus" class="focus"></div>
+                        <div id="line_chart_transport_tooltip" class="tooltip"></div>
+                    </div>
+                    <div id="line_chart_transport" class="fullwidth_p fullheight_p line_chart_impact float">
+                    </div>
+                </div>
             </div>
             <div id="his_sec2" class="flex1 frame">
             </div>
@@ -182,13 +192,20 @@
                     Germany ...
                 </div>
             </div>
-            <div id="lc_sec3" class="flex3 frame content_middle flexrow">
+            <div id="lc_sec3" class="flex3 content_middle flexrow">
                 <div id="econ_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <img src="images/import_active.png" id="import_button" class="line_button flexrow flexnone" onclick="update_econ_chart('import');">
-                    <img src="images/export_inactive.png" id="export_button" class="line_button flexrow flexnone" onclick="update_econ_chart('export');">
+                    <img src="images/import_active.png" id="import_button" class="line_button flexrow flexnone"
+                         onclick="update_econ_chart('import');" alt="import">
+                    <img src="images/export_inactive.png" id="export_button" class="line_button flexrow flexnone"
+                         onclick="update_econ_chart('export');" alt="export">
                 </div>
-                <div id="line_chart_econ" class="flex1"></div>
+                <div id="economy_container" class="line_chart_impact_container flex1">
+                    <div class="float focus_container">
+                        <div id="line_chart_econ_focus" class=""></div>
+                    </div>
+                    <div id="line_chart_econ" class="ullwidth_p fullheight_p line_chart_impact"></div>
+                </div>
             </div>
             <div id="his_sec3" class="flex1 frame">
             </div>
