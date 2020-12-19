@@ -6,6 +6,9 @@ const types = ["c", "d"]
 const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 //const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 
+const month_format = d3.timeFormat("%b");
+const day_fomat = d3.timeFormat("%d");
+
 let data_all = {}
 let data_rows = {};
 let bar_chart_config = {};

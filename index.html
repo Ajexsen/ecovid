@@ -201,10 +201,12 @@
                          onclick="update_econ_chart('export');" alt="export">
                 </div>
                 <div id="economy_container" class="line_chart_impact_container flex1">
-                    <div class="float focus_container">
-                        <div id="line_chart_econ_focus" class=""></div>
+                    <div id="line_chart_econ_container" class="float focus_container flexrow">
+                        <div id="line_chart_econ_focus" class="focus"></div>
+                        <div id="line_chart_econ_tooltip" class="tooltip"></div>
                     </div>
-                    <div id="line_chart_econ" class="ullwidth_p fullheight_p line_chart_impact"></div>
+                    <div id="line_chart_econ" class="fullwidth_p fullheight_p line_chart_impact float">
+                    </div>
                 </div>
             </div>
             <div id="his_sec3" class="flex1 frame">

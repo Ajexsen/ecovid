@@ -206,7 +206,6 @@ function draw_lines(param) {
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
-                console.log(x0)
                 const p_month = Math.round(x0 / month_width)
                 if (p_month < 12) {
                     let values = []
@@ -220,17 +219,18 @@ function draw_lines(param) {
                     }
 
                     // let tooltip_html = '<p id="tip-' + p_month + '" class="tooltip">' + (p_month + 1) + '<br>'
-                    let tooltip_html = (p_month + 1) + '<br>'  // new
+                    let tooltip_html = (month_format(d3.timeParse("%m")(p_month + 1))) + '<br>'  // new
                     for (let i = 0; i < n_data; i++) {
                         tooltip_html += "<b>" + param.line_legends[i] + "</b>: " + values[i] + "<br>"
                     }
                     // tooltip_html += '</p>'
 
-                    tooltip.html(tooltip_html)
+                    tooltip.html(tooltip_html);
+                    tooltip  // new
                         // .style("left", f_x_pos[p_month] + 1.3 * f_width[p_month] + "px")
                         .style("left", f_x_pos[p_month] + 0.2 * f_width[p_month] + "px")  // new
                         // .style("top", y0 + 60 + "px")
-                        .style("top", y0 - 100 + "px")  // new
+                        .style("top", y0 - $(param.target + "_tooltip").innerHeight() - 30 + "px")  // new
                         // .transition().delay(200).style("opacity", 1);
 
                     focus
