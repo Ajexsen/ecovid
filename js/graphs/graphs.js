@@ -45,6 +45,9 @@ function refresh_on_resize() {
             rule.style.height = thumb_height + "px";
         }
     }
+
+    d3.selectAll('#line_chart_transport_legend *').remove();
+    d3.selectAll('#line_chart_econ_legend *').remove();
 }
 
 function refresh_on_state_change() {

@@ -171,12 +171,16 @@
                     <img src="images/bike_inactive.png" id="bike_button" class="line_button flexrow flexnone"
                          onclick="update_transport_chart('bike');" alt="bike">
                 </div>
-                <div id="transport_container" class="line_chart_impact_container flex1">
-                    <div id="line_chart_transport_container" class="float focus_container flexrow">
-                        <div id="line_chart_transport_focus" class="focus"></div>
-                        <div id="line_chart_transport_tooltip" class="tooltip"></div>
+                <div class="flexcolumn flex1">
+                    <div id="transport_container" class="line_chart_impact_container flex1">
+                        <div id="line_chart_transport_container" class="float focus_container flexrow">
+                            <div id="line_chart_transport_focus" class="focus"></div>
+                            <div id="line_chart_transport_tooltip" class="tooltip"></div>
+                        </div>
+                        <div id="line_chart_transport" class="fullwidth_p fullheight_p line_chart_impact float"></div>
                     </div>
-                    <div id="line_chart_transport" class="fullwidth_p fullheight_p line_chart_impact float">
+                    <div class="flexnone legend_box center_parent">
+                        <div id="line_chart_transport_legend" class="legend center_box flexrow"></div>
                     </div>
                 </div>
             </div>
@@ -200,12 +204,17 @@
                     <img src="images/export_inactive.png" id="export_button" class="line_button flexrow flexnone"
                          onclick="update_econ_chart('export');" alt="export">
                 </div>
-                <div id="economy_container" class="line_chart_impact_container flex1">
-                    <div id="line_chart_econ_container" class="float focus_container flexrow">
-                        <div id="line_chart_econ_focus" class="focus"></div>
-                        <div id="line_chart_econ_tooltip" class="tooltip"></div>
+                <div class="flexcolumn flex1">
+                    <div id="economy_container" class="line_chart_impact_container flex1">
+                        <div id="line_chart_econ_container" class="float focus_container flexrow">
+                            <div id="line_chart_econ_focus" class="focus"></div>
+                            <div id="line_chart_econ_tooltip" class="tooltip"></div>
+                        </div>
+                        <div id="line_chart_econ" class="fullwidth_p fullheight_p line_chart_impact float">
+                        </div>
                     </div>
-                    <div id="line_chart_econ" class="fullwidth_p fullheight_p line_chart_impact float">
+                    <div class="flexnone legend_box center_parent">
+                        <div id="line_chart_econ_legend" class="legend center_box flexrow"></div>
                     </div>
                 </div>
             </div>

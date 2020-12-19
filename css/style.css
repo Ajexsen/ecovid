@@ -557,10 +557,10 @@ body {
 }
 
 .tick line {
-    opacity: 70%;
+    opacity: 20%;
     /*stroke-width: 2px;*/
     stroke-dasharray: 2.2;
-    stroke: var(--offwhite);
+    stroke: var(--burgundy);
 }
 
 .domain {
@@ -630,7 +630,7 @@ body {
 div.tooltip {
     color: #EEE;
     border-radius: 3px;
-    background: #44444490;
+    background: #444444BB;
     border: 2px solid #696969;
     position: absolute;
     padding: 4px 8px 4px 8px;
@@ -659,7 +659,7 @@ div.tooltip {
 }
 
 .focus:hover {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .focus_container {
@@ -670,9 +670,7 @@ div.tooltip {
     top: 0;
     left: 0;
     right: 0;
-    margin: 0 55px 60px 10px;
-    background-color: var(--burgundy);
-    opacity: 85%;
+    margin: 0 50px 25px 10px;
 }
 
 .line_chart_impact {
@@ -682,4 +680,51 @@ div.tooltip {
 .line_chart_impact_container {
     position: relative;
     box-sizing: border-box;
+}
+
+.legend_box {
+    height: 35px;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.legend_line_box {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.legend_block {
+    /*background-color: #678989;*/
+    width: fit-content;
+    /*display: inline-block;*/
+    margin: 0 12px 0 12px;
+    color: var(--burgundy);
+}
+
+.legend {
+    /*display: inline-block;*/
+    font-size: 12px;
+    width: fit-content;
+}
+
+.legend_line {
+    height: 2px;
+    width: 100%;
+}
+
+.legend_line_main {
+    height: 2px;
+    width: 100%;
+}
+
+.legend_dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.legend_dot_main {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
 }

@@ -1,5 +1,6 @@
 function update_transport_chart(type) {
     d3.selectAll('#line_chart_transport svg').remove();
+    d3.selectAll('#line_chart_transport_legend *').remove();
     if (type === "flight") {
         $("#flight_button").attr("src", "images/flight_active.png")
         $("#rail_button").attr("src", "images/rail_inactive.png")
@@ -21,6 +22,7 @@ function update_transport_chart(type) {
 
 function update_econ_chart(type) {
     d3.selectAll('#line_chart_econ svg').remove();
+    d3.selectAll('#line_chart_econ_legend *').remove();
     if (type === "import") {
         $("#import_button").attr("src", "images/import_active.png")
         $("#export_button").attr("src", "images/export_inactive.png")
@@ -35,7 +37,7 @@ function update_econ_chart(type) {
 
 function draw_lines(param) {
     const container = $(param.target)
-    const margin = {top: 0, right: 55, bottom: 60, left: 10}
+    const margin = {top: 0, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
     let svg = d3.select(param.target)
@@ -123,54 +125,79 @@ function draw_lines(param) {
                 .tickSizeOuter(0)
             );
 
+        let line_stroke_width = 0;
+        let dot_stroke_width = 0;
+        let line_class = ""
+        let dot_class = ""
         for (let i = n_data - 1, k = 0; i >= 0; i--, k++) {
             if (i === 0) {
-                svg.append("path")
-                    .datum(data[i])
-                    .attr("fill", "none")
-                    .attr("stroke", param.line_colors[i])
-                    .attr("stroke-width", 3)
-                    .attr("d", d3.line()
-                        .x(function (d) {
-                            return x(d.date)
-                        })
-                        .y(function (d) {
-                            return y(d.value)
-                        }))
+                line_stroke_width = 2.3;
+                dot_stroke_width = 2.0;
+                line_class = "legend_line_main";
+                dot_class = "legend_dot_main";
             } else {
-                //console.log(i + ":")
-                //console.log(data[i])
-                svg.append("path")
-                    .datum(data[i])
-                    .attr("fill", "none")
-                    .attr("stroke", param.line_colors[i])
-                    .attr("stroke-width", 1.5)
-                    .attr("d", d3.line()
-                        .x(function (d) {
-                            return x(d.date)
-                        })
-                        .y(function (d) {
-                            return y(d.value)
-                        })
-                    )
+                line_stroke_width = 1.8;
+                dot_stroke_width = 1.6;
+                line_class = "legend_line";
+                dot_class = "legend_dot";
             }
+            //console.log(i + ":")
+            //console.log(data[i])
+            svg.append("path")
+                .datum(data[i])
+                .attr("fill", "none")
+                .attr("stroke", param.line_colors[i])
+                .attr("stroke-width", line_stroke_width)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return x(d.date)
+                    })
+                    .y(function (d) {
+                        return y(d.value)
+                    })
+                )
 
-            svg.append("rect")
-                .attr('class', 'legend_line')
-                .attr("width", 20)
-                .attr("height", 2)
-                .style("fill", param.line_colors[i])
-                .attr('class', 'axis_label')
-                .attr('x', div_width * k + 60)
-                .attr('y', height + 45)
-                .attr("r", 6)
+            svg.selectAll(".dots")
+                .data(data[i])
+                .enter()
+                .append("circle")
+                .attr("fill", param.line_colors[i])
+                .attr("stroke", param.line_colors[i])
+                .attr("cx", function(d) { return x(d.date) })
+                .attr("cy", function(d) { return y(d.value) })
+                .attr("r", dot_stroke_width)
 
-            svg.append("text")
-                .attr('class', 'legend_text')
-                .text(param.line_legends[i])
-                .style("font-size", "15px")
-                .attr('x', div_width * k + 60 + 30)
-                .attr('y', height + 51)
+            // svg.append("rect")
+            //     .attr('class', 'legend_line')
+            //     .attr("width", 20)
+            //     .attr("height", 2)
+            //     .style("fill", param.line_colors[i])
+            //     .attr('class', 'axis_label')
+            //     .attr('x', div_width * k + 60)
+            //     .attr('y', height + 45)
+            //     .attr("r", 6)
+            //
+            // svg.append("text")
+            //     .attr('class', 'legend_text')
+            //     .text(param.line_legends[i])
+            //     .style("font-size", "15px")
+            //     .attr('x', div_width * k + 60 + 30)
+            //     .attr('y', height + 51)
+
+            let legend = d3.select(param.target + "_legend");
+            let legend_block = legend.append("div")
+                .attr("class", "legend_block flexrow flexnone");
+            let legend_line_box = legend_block.append("div")
+                .attr("class", "center_parent legend_line_box flexnone");
+            legend_line_box.append("div")
+                .attr("class", "center_box " + line_class)
+                .style("background-color", param.line_colors[i]);
+            legend_line_box.append("div")
+                .attr("class", "center_box " + dot_class)
+                .style("background-color", param.line_colors[i]);
+            legend_block.append("div")
+                .attr("class", "flexnone")
+                .html(param.line_legends[i])
         }
 
         month_width = width / 11

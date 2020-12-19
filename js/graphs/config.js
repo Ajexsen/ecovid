@@ -3,10 +3,11 @@ const state_data_prefix = "data/rki/bundesland/rki_DE-"
 const rki_dateFormat = "%Y-%m-%d";
 const genders = ["M", "W"]
 const types = ["c", "d"]
-const line_colors = ["#E3E2DF", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
+const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 //const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 
-const month_format = d3.timeFormat("%b");
+const month_format_abbr = d3.timeFormat("%b");
+const month_format = d3.timeFormat("%B");
 const day_fomat = d3.timeFormat("%d");
 
 let data_all = {}
