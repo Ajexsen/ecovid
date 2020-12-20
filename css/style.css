@@ -725,3 +725,8 @@ body {
     height: 6px;
     border-radius: 3px;
 }
+
+text.event_txt_label{
+    color: var(--burgundy);
+    font-size: 0.7vw;
+}

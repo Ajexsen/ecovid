@@ -204,6 +204,27 @@ function draw_lines(param) {
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])
         }
+        
+        if("event_lines" in param){
+            events = param.event_lines
+            for (var key in events) {
+                let x_pos = x(d3.timeParse("%m-%d")(key))
+                svg.append("line")
+                    .attr("x1", x_pos)
+                    .attr("x2", x_pos)
+                    .attr("y1", 0)
+                    .attr("y2", height)
+                    .attr("stroke-width", 2)
+                    .attr("stroke", "black")
+                    .attr("stroke-dasharray", "3");
+                svg.append("text")
+                    .attr("class", "event_txt_label")
+                    .attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
+                    .text(events[key])
+            }     
+        }
+        
+       
 
         let month_width = width / 11
         let f_width = new Array(12).fill(month_width)
