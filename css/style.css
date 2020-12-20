@@ -58,8 +58,8 @@
     --offwhite: #E3E2DF;
     --offwhite2: #dddbd7;
     --burgundy: #5D001E;
-    --burgundy30: #5D001E30;
-    --burgundy15: #5D001E15;
+    --burgundy-light: #5D001E30;
+    --burgundy-lighter: #5D001E20;
     --pink: #E3AFBC;
     --magenta: #9A1750;
     --axis-width: 3px;
@@ -358,10 +358,9 @@ body {
     -webkit-appearance: none;
     appearance: none;
     width: var(--slider-thumb-width);
-    /*height: 100px;*/
-    /*background: #7e0010;*/
     cursor: ew-resize;
-    box-shadow: -2000px 0 0 2000px var(--burgundy30);
+    border: none;
+    box-shadow: -2000px 0 0 2000px var(--burgundy-light);
     background: repeating-linear-gradient(
             0deg,
             #7e0010,
@@ -376,6 +375,7 @@ body {
     /*background: #7e0010;*/
     cursor: ew-resize;
     margin: 0;
+    border: none;
     background: repeating-linear-gradient(
             0deg,
             #7e0010,
@@ -386,7 +386,7 @@ body {
 }
 
 .slider_thumb::-moz-range-progress {
-    background-color: #666;
+    background-color: var(--burgundy-light);
 }
 
 #line_chart_slider {
@@ -617,7 +617,7 @@ body {
 }
 
 .chart_bar {
-    box-shadow: -2000px 0 0 2000px var(--burgundy30);
+    box-shadow: -2000px 0 0 2000px var(--burgundy-light);
     background: repeating-linear-gradient(
             0deg,
             #7e0010,
@@ -627,11 +627,12 @@ body {
     )
 }
 
-div.tooltip {
+.tooltip {
     color: #EEE;
     border-radius: 3px;
     background: #444444BB;
     border: 2px solid #696969;
+    outline: 1px solid transparent;
     position: absolute;
     padding: 4px 8px 4px 8px;
     font-size: 10px;
@@ -643,17 +644,13 @@ div.tooltip {
     z-index: 50;
 }
 
-/*.tooltip:not(.tip-4){*/
-/*    !*display:none;*!*/
-/*}*/
-
-.focus_container:hover div.tooltip {
+.focus_container:hover .tooltip {
     opacity: 1;
     transition: opacity 200ms;
 }
 
 .focus {
-    background-color: var(--burgundy15);
+    background-color: var(--burgundy-lighter);
     opacity: 0;
     height: 100%;
 }

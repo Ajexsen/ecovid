@@ -141,8 +141,6 @@ function draw_lines(param) {
                 line_class = "legend_line";
                 dot_class = "legend_dot";
             }
-            //console.log(i + ":")
-            //console.log(data[i])
             svg.append("path")
                 .datum(data[i])
                 .attr("fill", "none")
@@ -167,23 +165,6 @@ function draw_lines(param) {
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
 
-            // svg.append("rect")
-            //     .attr('class', 'legend_line')
-            //     .attr("width", 20)
-            //     .attr("height", 2)
-            //     .style("fill", param.line_colors[i])
-            //     .attr('class', 'axis_label')
-            //     .attr('x', div_width * k + 60)
-            //     .attr('y', height + 45)
-            //     .attr("r", 6)
-            //
-            // svg.append("text")
-            //     .attr('class', 'legend_text')
-            //     .text(param.line_legends[i])
-            //     .style("font-size", "15px")
-            //     .attr('x', div_width * k + 60 + 30)
-            //     .attr('y', height + 51)
-
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
                 .attr("class", "legend_block flexrow flexnone");
@@ -200,78 +181,48 @@ function draw_lines(param) {
                 .html(param.line_legends[i])
         }
 
-        month_width = width / 11
+        let month_width = width / 11
         let f_width = new Array(12).fill(month_width)
         f_width[0] = f_width[11] = 0.5 * month_width
         let f_x_pos = f_width.slice(0)
         f_x_pos.pop()
         f_x_pos.unshift(0)
         f_x_pos = d3.cumsum(f_x_pos)
-        /*console.log("f_width")
-        console.log(f_width)
-        console.log("f_x_pos")
-        console.log(f_x_pos)*/
 
-        // let focus = svg
-        //     .append('g')
-        //     .append('rect')
-        //     .style("fill", "#5D001E30")
-        //     .style("opacity", 0)
-        let focus = d3.select(param.target + "_focus");  // new
-        let parent = d3.select(param.target + "_container");  // new
-        // let tooltip = d3.select(param.target).append("div")
-        //     .attr("class", "tooltip")
-        //     .style("opacity", 0);
-        let tooltip = d3.select(param.target + "_tooltip");  // new
+        let focus = d3.select(param.target + "_focus");
+        let parent = d3.select(param.target + "_container");
+        let tooltip = d3.select(param.target + "_tooltip");
+        // let tooltip_container = d3.select(param.target + "_tooltip_containr");
 
-        // svg
-        parent  // new
-            // .on('mouseover', (event) => {
-                // focus.style("opacity", 1)
-                // tooltip.transition().delay(0).style("opacity", 1);
-            // })
+        parent
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
                 const p_month = Math.round(x0 / month_width)
                 if (p_month < 12) {
                     let values = []
-                    for (n = 0; n < n_data; n++) {
-                        data_point = data[n][p_month]
+                    for (let n = 0; n < n_data; n++) {
+                        let data_point = data[n][p_month]
                         if (data_point === undefined) {
                             values[n] = "N/A"
                         } else {
                             values[n] = Math.round(data_point.value * 100) / 100
                         }
                     }
-
-                    // let tooltip_html = '<p id="tip-' + p_month + '" class="tooltip">' + (p_month + 1) + '<br>'
-                    let tooltip_html = (month_format(d3.timeParse("%m")(p_month + 1))) + '<br>'  // new
+                    let tooltip_html = (month_format(d3.timeParse("%m")(p_month + 1))) + '<br>'
                     for (let i = 0; i < n_data; i++) {
                         tooltip_html += "<b>" + param.line_legends[i] + "</b>: " + values[i] + "<br>"
                     }
-                    // tooltip_html += '</p>'
 
                     tooltip.html(tooltip_html);
-                    tooltip  // new
-                        // .style("left", f_x_pos[p_month] + 1.3 * f_width[p_month] + "px")
-                        .style("left", f_x_pos[p_month] + 0.2 * f_width[p_month] + "px")  // new
-                        // .style("top", y0 + 60 + "px")
-                        .style("top", y0 - $(param.target + "_tooltip").innerHeight() - 30 + "px")  // new
-                        // .transition().delay(200).style("opacity", 1);
+                    tooltip
+                        .style("left", f_x_pos[p_month] + 0.2 * f_width[p_month] + "px")
+                        .style("top", y0 - $(param.target + "_tooltip").innerHeight() - 30 + "px")
 
                     focus
-                        // .attr("width", f_width[p_month])
-                        .style("width", f_width[p_month] + "px")  // new
-                        // .attr("height", height)
-                        // .attr("x", f_x_pos[p_month])
-                        .style("transform", "translateX(" + f_x_pos[p_month] + "px)")  // new
-                        // .attr("y", 0)
+                        .style("width", f_width[p_month] + "px")
+                        .style("transform", "translateX(" + f_x_pos[p_month] + "px)");
                 }
             })
-            // .on('mouseout', (event) => {
-                // focus.style("opacity", 0)
-                // tooltip.transition().delay(0).style("opacity", 0);
-            // })
     })
 }
