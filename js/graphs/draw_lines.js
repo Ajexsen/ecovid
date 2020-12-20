@@ -1,17 +1,25 @@
 function update_transport_chart(type) {
+    if(type === transport_type){
+        return
+    }
+    
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
+    
     if (type === "flight") {
+        transport_type = "flight"
         $("#flight_button").attr("src", "images/flight_active.png")
         $("#rail_button").attr("src", "images/rail_inactive.png")
         $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_flight
     } else if (type === "rail") {
+        transport_type = "rail"
         $("#flight_button").attr("src", "images/flight_inactive.png")
         $("#rail_button").attr("src", "images/rail_active.png")
         $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_rail
     } else if (type === "bike") {
+        transport_type = "bike"
         $("#flight_button").attr("src", "images/flight_inactive.png")
         $("#rail_button").attr("src", "images/rail_inactive.png")
         $("#bike_button").attr("src", "images/bike_active.png")
@@ -21,19 +29,29 @@ function update_transport_chart(type) {
 }
 
 function update_econ_chart(type) {
+    if(type === econ_type){
+        return
+    }    
+    
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
+    
     if (type === "import") {
+        econ_type = "import"
         $("#import_button").attr("src", "images/import_active.png")
         $("#export_button").attr("src", "images/export_inactive.png")
         econ_param = line_param_import
     } else if (type === "export") {
+        econ_type = "export"
         $("#import_button").attr("src", "images/import_inactive.png")
         $("#export_button").attr("src", "images/export_active.png")
         econ_param = line_param_export
     }
     draw_lines(econ_param)
 }
+
+let transport_type = "flight"
+let econ_type = "import"
 
 function draw_lines(param) {
     const container = $(param.target)
@@ -164,6 +182,12 @@ function draw_lines(param) {
                 .attr("cx", function(d) { return x(d.date) })
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
+                //.on('mouseover', function (d, i) {
+                //    console.log("dot dot dot ...")
+                //    d3.select(this).transition()
+                //          .duration('100')
+                //          .attr("r", 7);
+                //})                
 
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
