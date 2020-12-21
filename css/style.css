@@ -56,7 +56,8 @@
 
 :root {
     --offwhite: #E3E2DF;
-    --offwhite2: #dddbd7;
+    --offwhite_dark: #dddbd7;
+    --offwhite_darker: #d0cfcc;
     --burgundy: #5D001E;
     --burgundy-light: #5D001E30;
     --burgundy-lighter: #5D001E20;
@@ -269,7 +270,7 @@ body {
 }
 
 .stat {
-    /*background-color: var(--offwhite2);*/
+    /*background-color: var(--offwhite_dark);*/
     height: fit-content;
     /*margin: 0 0 10px 0;*/
     padding: 0 1.5vw 0 1.5vw;
@@ -334,7 +335,7 @@ body {
 }
 
 .slider_containter {
-    margin: 40px calc(55px - var(--slider-thumb-width)) 18px calc(60px + var(--axis-width) - 1px);
+    margin: 40px calc(55px - var(--slider-thumb-width)) 18px calc(60px + var(--axis-width) - 2px);
     overflow: hidden;
 }
 
@@ -550,6 +551,10 @@ body {
     opacity: 30%;
 }
 
+.line_grey {
+    stroke: var(--offwhite_darker);
+}
+
 .tick {
     color: var(--burgundy);
     font-weight: 100;
@@ -582,6 +587,11 @@ body {
 .dot {
     fill: #ffab00;
     stroke: #fff;
+}
+
+.dot_case {
+    fill: var(--magenta);
+    stroke: var(--magenta);
 }
 
 .focus circle {
@@ -628,10 +638,10 @@ body {
 }
 
 .tooltip {
-    color: #EEE;
-    border-radius: 3px;
-    background: #444444BB;
-    border: 2px solid #696969;
+    color: var(--burgundy);
+    /*border-radius: 3px;*/
+    background: var(--offwhite);
+    border: 1px solid var(--burgundy);
     outline: 1px solid transparent;
     position: absolute;
     padding: 4px 8px 4px 8px;
