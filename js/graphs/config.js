@@ -10,6 +10,15 @@ const month_format_abbr = d3.timeFormat("%b");
 const month_format = d3.timeFormat("%B");
 const day_fomat = d3.timeFormat("%d");
 
+// still needs to be checked, and updated.
+event_timeline = {
+    //"01-01": "Jan",
+    //"02-01": "Feb",
+    "03-23": "First lockdown",
+    "11-02": "Partial lockdown",
+    //"12-13": "Second lockdown", // doesn't fit in chart
+}
+
 let data_all = {}
 let data_rows = {};
 let bar_chart_config = {};
@@ -72,6 +81,8 @@ const line_param_case = {
 
 };
 
+
+
 // use bike as dummy
 const line_param_flight = {
     target: "#line_chart_transport",
@@ -80,6 +91,7 @@ const line_param_flight = {
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
+    event_lines: event_timeline,
     x: "month",
     y: "count"
 };
@@ -92,6 +104,7 @@ const line_param_rail = {
     data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
     line_legends: ["2018", "2020", "2017", "2019"],
     line_colors: line_colors,
+    event_lines: event_timeline,
     x: "month",
     y: "count"
 };
@@ -103,6 +116,7 @@ const line_param_bike = {
     data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
     line_legends: ["2020", "2019", "2018", "2017"],
     line_colors: line_colors,
+    event_lines: event_timeline,
     x: "month",
     y: "count"
 };
@@ -116,6 +130,7 @@ const line_param_import = {
     line_legends: ["2020", "2019", "2018", "2017"],
     //line_legends: ["2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008"],
     line_colors: line_colors,
+    event_lines: event_timeline,
     x: "Monat",
     y: "Import"
 };
@@ -129,6 +144,7 @@ const line_param_export = {
     line_legends: ["2020", "2019", "2018", "2017"],
     //line_legends: ["2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008"],
     line_colors: line_colors,
+    event_lines: event_timeline,
     x: "Monat",
     y: "Export"
 };
