@@ -254,8 +254,8 @@ function draw_lines(param) {
 
                     tooltip.html(tooltip_html);
                     tooltip
-                        .style("left", f_x_pos[p_month] + 0.2 * f_width[p_month] + "px")
-                        .style("top", y0 - $(param.target + "_tooltip").innerHeight() - 30 + "px")
+                        .style("left", f_x_pos[p_month] + 0.6 * f_width[p_month] + "px")
+                        .style("top", y0 + 20 + "px")
 
                     focus
                         .style("width", f_width[p_month] + "px")

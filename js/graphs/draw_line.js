@@ -4,6 +4,21 @@ function draw_line(param) {
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
+    let range = +param.end;
+    // let new_range = 0;
+    // let n_data = +$("#date_slider").attr("max");
+    // if (range <= 100)
+    //     new_range = 100 * 1.5
+    // else if (range >= n_data / 1.5) {
+    //     new_range = n_data;
+    // }
+    // else
+    //     new_range = ((range - 100) * (n_data - 100) / (n_data / 1.5 - 100 * 1.5)) + 100 * 1.5
+    // let data_slice = param.src.slice(0, new_range + 1);
+    let data_highlight = param.src.slice(0, range + 1);
+    let data_grey = param.src.slice(range, param.src.length + 1);
+    // let data_slice = param.src;
+
     let svg = d3.select(param.target)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -31,8 +46,9 @@ function draw_line(param) {
     let y_left = d3.scaleLinear()
         .domain([0, d3.max(param.src, function (d) {
             return +d[param.data1.y];
-        })])
+        }) + 0])
         .range([height, 0]);
+
     svg.append("g")
         .attr("class", "tick")
         .call(d3.axisLeft(y_left)
@@ -40,14 +56,19 @@ function draw_line(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
-            // .tickFormat(d3.format("s"))
         );
+
+    // console.log(data_slice)
+    // console.log(d3.max(data_slice, function (d) {
+    //     return +d[param.data2.y];
+    // }))
 
     let y_right = d3.scaleLinear()
         .domain([0, d3.max(param.src, function (d) {
             return +d[param.data2.y];
-        })])
+        }) + 0])
         .range([height, 0]);
+
     svg.append("g")
         .attr("transform", "translate(" + width + ", 0)")
         .attr("class", "tick")
@@ -60,7 +81,7 @@ function draw_line(param) {
         );
 
     svg.append("path")
-        .datum(param.src)
+        .datum(data_highlight)
         .attr("class", "area_total")
         .attr("d", d3.area()
             .x(function (d) {
@@ -73,7 +94,7 @@ function draw_line(param) {
         );
 
     svg.append("path")
-        .datum(data_all)
+        .datum(data_highlight)
         .attr("class", "line line_total")
         .attr("d", d3.line()
             .x(function (d) {
@@ -85,20 +106,32 @@ function draw_line(param) {
         );
 
     svg.append("path")
-        .datum(param.src)
-        .attr("class", "area_new")
-        .attr("d", d3.area()
+        .datum(data_grey)
+        .attr("class", "line line_grey")
+        .attr("d", d3.line()
             .x(function (d) {
                 return x(d[param.x])
             })
-            .y0(height)
-            .y1(function (d) {
-                return y_left(d[param.data1.y])
+            .y(function (d) {
+                return y_right(d[param.data2.y])
             })
         );
 
+    // svg.append("path")
+    //     .datum(data_highlight)
+    //     .attr("class", "area_new")
+    //     .attr("d", d3.area()
+    //         .x(function (d) {
+    //             return x(d[param.x])
+    //         })
+    //         .y0(height)
+    //         .y1(function (d) {
+    //             return y_left(d[param.data1.y])
+    //         })
+    //     );
+
     svg.append("path")
-        .datum(param.src)
+        .datum(data_highlight)
         .attr("class", "line line_new")
         .attr("d", d3.line()
             .x(function (d) {
@@ -108,6 +141,27 @@ function draw_line(param) {
                 return y_left(d[param.data1.y])
             })
         )
+
+    svg.append("path")
+        .datum(data_grey)
+        .attr("class", "line line_grey")
+        .attr("d", d3.line()
+            .x(function (d) {
+                return x(d[param.x])
+            })
+            .y(function (d) {
+                return y_left(d[param.data1.y])
+            })
+        )
+
+    svg.selectAll(".dots")
+        .data(data_highlight.slice(data_highlight.length - 1, data_highlight.length))
+        .enter()
+        .append("circle")
+        .attr("class", "dot_case")
+        .attr("cx", function(d) { return x(d[param.x]) })
+        .attr("cy", function(d) { return y_left(d[param.data1.y]) })
+        .attr("r", 3)
 
     svg.append('text')
         .attr('class', 'chart_title')

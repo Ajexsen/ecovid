@@ -6,6 +6,8 @@ function getDate(value) {
 function updateDate(value) {
     d3.selectAll('#onerightmiddle svg').remove();
     let date = getDate(value);
+    line_param_death.end = value;
+    line_param_case.end = value;
     bar_param_case_m.date = date
     bar_param_case_w.date = date
     bar_param_death_m.date = date
@@ -21,15 +23,28 @@ function updateStats() {
     set_text_statistic(text_stat_para)
 }
 
+function updateLineChart() {
+    d3.selectAll('#oneright svg').remove();
+    draw_line(line_param_death)
+    draw_line(line_param_case)
+}
+
 function refresh_on_date_change(value) {
+    // let slider = d3.select("#date_slider");
+    // let slider_container = $("#slider_containter");
+    // let left_threshold = 100;
+    // let right_threshold = slider.attr("max") / 1.5;
+    // let new_value = Math.max(Math.min(value, right_threshold), left_threshold)
+    // let new_width = slider_container.innerWidth() / (new_value * 1.5 / slider.attr("max"));
+    // slider.style("width", new_width + "px")
+    // console.log(value / slider.attr("max"))
     updateDate(value)
+    updateLineChart();
     updateStats()
 }
 
 function refresh_on_resize() {
-    d3.selectAll('#oneright svg').remove();
-    draw_line(line_param_death)
-    draw_line(line_param_case)
+    updateLineChart()
     updateStats()
     
     d3.selectAll('#content_sec1 svg').remove();
@@ -102,7 +117,6 @@ function init_graph() {
     }).then(function (data) {
         data_all = data
         data_rows = d3.index(data, d => d.date);
-        // console.log(data_rows)
     }).then(function () {
         const dates = Array.from(data_rows.keys())
         const last_day = dates[dates.length - 1]
@@ -128,18 +142,19 @@ function init_graph() {
                 });
             })
         });
-        
+        refresh_on_state_change();
+
         line_param_flight.datasets = read_datasets(line_param_flight)
         line_param_rail.datasets = read_datasets(line_param_rail)
         line_param_bike.datasets = read_datasets(line_param_bike)
         line_param_import.datasets = read_datasets(line_param_import)
         line_param_export.datasets = read_datasets(line_param_export)
-        
+
         const slider = $("#date_slider");
         slider.attr('max', data_all.length - 1);
         let date = slider.val()
-        updateDate(date);
-        refresh_on_state_change();
+        // updateDate(date);
+        refresh_on_date_change(date)
         refresh_on_resize();
     })
 }
