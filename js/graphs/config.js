@@ -154,6 +154,11 @@ const line_param_export = {
     datasets: []
 };
 
+const histogram_param_DE = {
+    target: ".de_hist",
+    src: "data/rki/rki_DE-newcase.csv"
+}
+
 // remember which data is currently used
 let transport_param = line_param_flight
 let econ_param = line_param_import

@@ -108,6 +108,7 @@ function draw_lines(param) {
             .range([0, width]);
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
+            //.domain([0, max])
             .range([height, 0]);
 
         function test() {

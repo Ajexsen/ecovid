@@ -52,6 +52,9 @@ function refresh_on_resize() {
     
     d3.selectAll('#content_sec2 svg').remove();
     draw_lines(econ_param)
+    
+    d3.selectAll('.de_hist svg').remove();
+    draw_histogram(histogram_param_DE)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
