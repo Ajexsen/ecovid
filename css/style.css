@@ -334,8 +334,8 @@ body {
     width: 100%;
 }
 
-.slider_containter {
-    margin: 40px calc(55px - var(--slider-thumb-width)) 18px calc(60px + var(--axis-width) - 2px);
+.line_chart_overlay {
+    margin: 0px calc(55px - var(--slider-thumb-width)) 25px calc(60px + var(--axis-width) - 2px);
     overflow: hidden;
 }
 
@@ -365,9 +365,9 @@ body {
     background: repeating-linear-gradient(
             0deg,
             #7e0010,
-            #7e0010 7px,
-            transparent 7px,
-            transparent 14px
+            #7e0010 6px,
+            transparent 6px,
+            transparent 12px
     )
 }
 
@@ -380,9 +380,9 @@ body {
     background: repeating-linear-gradient(
             0deg,
             #7e0010,
-            #7e0010 10px,
-            transparent 10px,
-            transparent 20px
+            #7e0010 6px,
+            transparent 6px,
+            transparent 12px
     )
 }
 
@@ -402,7 +402,7 @@ body {
 #onerightmiddle {
     /*background-color: aqua;*/
     /*border: solid var(--burgundy) 1px;*/
-    margin-bottom: 2vw;
+    margin-bottom: 3vw;
     /*overflow-y: hidden;*/
 }
 
@@ -736,7 +736,16 @@ body {
     border-radius: 3px;
 }
 
-text.event_txt_label{
+.event_txt_label{
+    position: absolute;
     color: var(--burgundy);
     font-size: 0.7vw;
+}
+
+#place_holder_event {
+    height: 85px;
+}
+
+#line_chart_slider_top {
+    overflow-y: visible;
 }

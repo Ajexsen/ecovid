@@ -140,12 +140,16 @@
                 <!--                                </div>-->
 
                 <div id="onerightbottom" class="flex3">
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="line_chart_area" class="line_chart_overlay flex1"></div>
+                    </div>
                     <div class="float fullheight_p fullwidth_p flexcolumn">
+                        <div id="place_holder_event" class="flexnone"></div>
                         <div id="line_chart_slider_top" class="flex1"></div>
                         <div id="line_chart_slider_bottom" class="flex1"></div>
                     </div>
-                    <div class="fullheight_p fullwidth_p flexcolumn">
-                        <div id="slider_containter" class="slider_containter flex1">
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="slider_containter" class="line_chart_overlay flex1">
                             <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
                                    oninput="refresh_on_date_change(this.value)">
                         </div>

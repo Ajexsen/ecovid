@@ -14,9 +14,9 @@ const day_fomat = d3.timeFormat("%d");
 event_timeline = {
     //"01-01": "Jan",
     //"02-01": "Feb",
-    "03-23": "First lockdown",
-    "11-02": "Partial lockdown",
-    //"12-13": "Second lockdown", // doesn't fit in chart
+    "2020-03-23": "First lockdown",
+    "2020-11-02": "Partial lockdown",
+    "2020-12-13": "Second lockdown", // doesn't fit in chart
 }
 
 let data_all = {}
@@ -56,6 +56,7 @@ const line_param_death = {
     title: "Deaths",
     legend: true,
     x: "date_parse",
+    event_lines: event_timeline,
     data1: {
         y: "new_deaths",
         y_scale: 1

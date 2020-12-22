@@ -1,6 +1,6 @@
 function draw_line(param) {
     const container = $(param.target)
-    const margin = {top: 40, right: 55, bottom: 18, left: 60}
+    const margin = {top: 0, right: 55, bottom: 25, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
@@ -57,11 +57,6 @@ function draw_line(param) {
                 .tickSizeOuter(0)
                 .tickPadding(10)
         );
-
-    // console.log(data_slice)
-    // console.log(d3.max(data_slice, function (d) {
-    //     return +d[param.data2.y];
-    // }))
 
     let y_right = d3.scaleLinear()
         .domain([0, d3.max(param.src, function (d) {
@@ -170,6 +165,42 @@ function draw_line(param) {
         .attr("transform", "translate(-45, 0) rotate(-90)")
         .attr('text-anchor', 'middle')
         .text(param.title);
+
+    if ("event_lines" in param) {
+        // const parent_id = d3.select(param.target).node().parentNode.id;
+        const event_area = $("#line_chart_area");
+        let event_width = event_area.innerWidth(),
+            event_height = event_area.innerHeight();
+
+        let event = d3.select("#line_chart_area")
+            .append("svg")
+            .attr("width", event_width)
+            .attr("height", event_height)
+            .append("g")
+            // .attr("transform",
+            //     "translate(" + margin.left + "," + margin.top + ")");
+
+        let events = param.event_lines;
+        for (let key in events) {
+            let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
+            // console.log(x)
+            event.append("line")
+                .attr("x1", x_pos)
+                .attr("x2", x_pos)
+                .attr("y1", 0)
+                .attr("y2", event_height)
+                .attr("stroke-width", 1)
+                .attr("stroke", "black")
+                .attr("stroke-dasharray", "4")
+                .style("transform", "translateY(" + (-0) + "px)");
+            let text = event.append("div")
+            text
+                .attr("class", "event_txt_label")
+                .style("left", (x_pos - 5) + "px")
+                .style("transform", (x_pos - 5) + "px")
+                .text(events[key])
+        }
+    }
 
     if (param.legend) {
         svg.append('text')
