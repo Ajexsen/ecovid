@@ -52,6 +52,9 @@ function refresh_on_resize() {
     
     d3.selectAll('#content_sec2 svg').remove();
     draw_lines(econ_param)
+    
+    d3.selectAll('.de_hist svg').remove();
+    draw_histogram(histogram_param_DE)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
@@ -73,6 +76,21 @@ function refresh_on_state_change() {
     text_stat_para.src = data_rows;
     line_param_death.src = data_all;
     line_param_case.src = data_all;
+}
+
+function read_datasets(param){
+    let datasets = []
+    const n_data = param.data_files.length
+    for (let i = 0; i < n_data; i++) {
+        path = param.src + param.data_files[i]
+        datasets[i] = d3.csv(path, function (d) {
+            return {
+                date: d3.timeParse("%m")(d[param.x]),
+                value: d[param.y]
+            }
+        })
+    }
+    return datasets
 }
 
 function init_graph() {
@@ -128,6 +146,13 @@ function init_graph() {
             })
         });
         refresh_on_state_change();
+
+        line_param_flight.datasets = read_datasets(line_param_flight)
+        line_param_rail.datasets = read_datasets(line_param_rail)
+        line_param_bike.datasets = read_datasets(line_param_bike)
+        line_param_import.datasets = read_datasets(line_param_import)
+        line_param_export.datasets = read_datasets(line_param_export)
+
         const slider = $("#date_slider");
         slider.attr('max', data_all.length - 1);
         let date = slider.val()

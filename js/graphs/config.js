@@ -94,7 +94,8 @@ const line_param_flight = {
     line_colors: line_colors,
     event_lines: event_timeline,
     x: "month",
-    y: "count"
+    y: "count",
+    datasets: []
 };
 
 // use bike as dummy
@@ -107,7 +108,8 @@ const line_param_rail = {
     line_colors: line_colors,
     event_lines: event_timeline,
     x: "month",
-    y: "count"
+    y: "count",
+    datasets: []
 };
 
 const line_param_bike = {
@@ -119,7 +121,8 @@ const line_param_bike = {
     line_colors: line_colors,
     event_lines: event_timeline,
     x: "month",
-    y: "count"
+    y: "count",
+    datasets: []
 };
 
 const line_param_import = {
@@ -133,7 +136,8 @@ const line_param_import = {
     line_colors: line_colors,
     event_lines: event_timeline,
     x: "Monat",
-    y: "Import"
+    y: "Import",
+    datasets: []
 };
 
 const line_param_export = {
@@ -147,8 +151,14 @@ const line_param_export = {
     line_colors: line_colors,
     event_lines: event_timeline,
     x: "Monat",
-    y: "Export"
+    y: "Export",
+    datasets: []
 };
+
+const histogram_param_DE = {
+    target: ".de_hist",
+    src: "data/rki/rki_DE-newcase.csv"
+}
 
 // remember which data is currently used
 let transport_param = line_param_flight

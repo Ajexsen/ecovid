@@ -1,45 +1,53 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 0, right: 0, bottom: 0, left: 0},
-        width = container.innerWidth() - margin.left - margin.right,
-        height = container.innerHeight() - margin.top - margin.bottom;
-    console.log(height)
+    const margin = {top: 0, right: 50, bottom: 20, left: 40}
+    let width = container.innerWidth() - margin.left - margin.right,
+        height = container.innerHeight() - margin.top - margin.bottom
 
-    let dataset = [5, 10, 13, 19, 21];
-    let barPadding = 1;
-    let svg = d3.select(param.target)
+    let barPadding = 10;
+    let svg = d3.selectAll(param.target)
         .append('svg')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+            "translate(" + margin.left + "," + margin.top + ")")
 
-    let xScale = d3.scaleBand()
-        .domain(d3.range(dataset.length))
-        .range([0, width]);
+    d3.csv(param.src, function(data){
+        return {
+            month: d3.timeParse("%m")(data.month),
+            value: data.new_case,
+        }
+    }).then(function(d){
+        console.log(d)
+        const d_length = 11
+        const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        
+        let x = d3.scaleBand()
+            .domain(month_tag)
+            .range([0, width])
+            
+        let y = d3.scaleLinear()
+            .domain([0, d3.max(d, function(d) { return +d.value; })])
+            .range([height, 0])
 
-    let yScale = d3.scaleLinear()
-        .domain([0, d3.max(dataset)])
-        .range([height, 0]);
+        svg.selectAll("rect")
+            .data(d)
+            .enter()
+            .append("rect")
+            .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
+            .attr("y", function(d){return y(d.value)})
+            .attr("fill", "#5D001E")
+            .attr("width", width / d_length - barPadding)
+            .attr("height", function(d){return height - y(d.value);});
 
-    let xAxis = d3.axisBottom().scale(xScale)
-    let yAxis = d3.axisLeft().scale(yScale)
+        svg.append("g")
+            .attr("transform", "translate(0, " + height + ")")
+            .attr("class", "tick")
+            .call(d3.axisBottom(x)
+                .tickSizeInner(0)
+                .tickSizeOuter(2)
+                .tickPadding(10)
+            )
 
-    // svg.selectAll("rect")
-    //     .data(dataset)
-    //     .enter()
-    //     .append("rect")
-    //     .attr("x", function(d, i){return xScale(i)})
-    //     .attr("y", function(d){return height - yScale(d)})
-    //     .attr("fill", "#5D001E")
-    //     .attr("width", width / dataset.length - barPadding)
-    //     .attr("height", function(d){return yScale(d);});
-
-    svg.append("g")
-        .attr("transform", "translate(0, " + margin.top + ")")
-        .call(xAxis);
-
-    svg.append("g")
-        .attr("transform", "translate( 0, 0)")
-        .call(yAxis)
+    })
 }

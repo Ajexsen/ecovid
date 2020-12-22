@@ -54,6 +54,10 @@ let transport_type = "flight"
 let econ_type = "import"
 
 function draw_lines(param) {
+    t = d3.transition()
+        .duration(300)
+        .ease(d3.easeLinear);    
+    
     const container = $(param.target)
     const margin = {top: 30, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -66,19 +70,12 @@ function draw_lines(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
 
-    // Fill up svg for mouse event
-    svg.append("rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .style("opacity", 0)
-        .attr("fill", "black")
-
     const n_data = param.data_files.length
     const div_width = width / n_data
-    let datasets = []
+    let datasets = param.datasets
+    
 
-
-    for (let i = 0; i < n_data; i++) {
+/*     for (let i = 0; i < n_data; i++) {
         path = param.src + param.data_files[i]
         datasets[i] = d3.csv(path, function (d) {
             return {
@@ -86,7 +83,7 @@ function draw_lines(param) {
                 value: d[param.y]
             }
         })
-    }
+    } */
 
     Promise.all(datasets).then(function (data) {
         // data[0] will contain file1.csv
@@ -111,6 +108,7 @@ function draw_lines(param) {
             .range([0, width]);
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
+            //.domain([0, max])
             .range([height, 0]);
 
         function test() {
@@ -125,7 +123,7 @@ function draw_lines(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
                 .tickFormat(d3.timeFormat("%b"))
-            );
+            )
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
@@ -134,14 +132,14 @@ function draw_lines(param) {
                 .tickSizeInner(-width)
                 .tickSizeOuter(0)
                 .tickPadding(10)
-            );
+            )
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y)
                 .ticks(0)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
-            );
+            )
 
         let line_stroke_width = 0;
         let dot_stroke_width = 0;
@@ -161,6 +159,7 @@ function draw_lines(param) {
             }
             svg.append("path")
                 .datum(data[i])
+                .transition(t)
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
