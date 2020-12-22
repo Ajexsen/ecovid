@@ -54,6 +54,10 @@ let transport_type = "flight"
 let econ_type = "import"
 
 function draw_lines(param) {
+    t = d3.transition()
+        .duration(300)
+        .ease(d3.easeLinear);    
+    
     const container = $(param.target)
     const margin = {top: 0, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -118,7 +122,7 @@ function draw_lines(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
                 .tickFormat(d3.timeFormat("%b"))
-            );
+            )
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
@@ -127,14 +131,14 @@ function draw_lines(param) {
                 .tickSizeInner(-width)
                 .tickSizeOuter(0)
                 .tickPadding(10)
-            );
+            )
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y)
                 .ticks(0)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
-            );
+            )
 
         let line_stroke_width = 0;
         let dot_stroke_width = 0;
@@ -154,6 +158,7 @@ function draw_lines(param) {
             }
             svg.append("path")
                 .datum(data[i])
+                .transition(t)
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
