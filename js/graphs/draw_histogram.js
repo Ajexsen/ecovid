@@ -50,24 +50,26 @@ function draw_histogram(param) {
             )
         
         // add event timeline
-/*         if("event_lines" in param){
+        if("event_lines" in param){
             events = param.event_lines
             for (var key in events) {
-                let x_pos = x(d3.timeParse("%m-%d")(key))
+                let date = d3.timeParse("%m-%d")(key)
+                let x_pos = x(month_tag[date.getMonth()]) + x(month_tag[1])*(date.getDate()/30)
                 svg.append("line")
                     .attr("x1", x_pos)
                     .attr("x2", x_pos)
-                    .attr("y1", 0)
+                    .attr("y1", 20)
                     .attr("y2", height)
                     .attr("stroke-width", 2)
-                    .attr("stroke", "black")
+                    .attr("stroke", "grey")
                     .attr("stroke-dasharray", "3");
                 svg.append("text")
                     .attr("class", "event_txt_label")
-                    .attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
+                    //.attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
+                    .attr("transform", "translate("+ x_pos +",10)")
                     .text(events[key])
             }     
-        } */        
+        }        
 
     })
 }

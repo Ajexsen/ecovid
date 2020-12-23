@@ -12,11 +12,9 @@ const day_fomat = d3.timeFormat("%d");
 
 // still needs to be checked, and updated.
 event_timeline = {
-    //"01-01": "Jan",
-    //"02-01": "Feb",
     "03-23": "First lockdown",
-    "11-02": "Partial lockdown",
-    //"12-13": "Second lockdown", // doesn't fit in chart
+    //"11-02": "Partial lockdown",
+    "12-13": "Second lockdown",
 }
 
 let data_all = {}
