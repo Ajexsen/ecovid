@@ -18,7 +18,7 @@ function draw_histogram(param) {
             value: data.new_case,
         }
     }).then(function(d){
-        console.log(d)
+        //console.log(d)
         const d_length = 11
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         
@@ -48,6 +48,26 @@ function draw_histogram(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
             )
+        
+        // add event timeline
+/*         if("event_lines" in param){
+            events = param.event_lines
+            for (var key in events) {
+                let x_pos = x(d3.timeParse("%m-%d")(key))
+                svg.append("line")
+                    .attr("x1", x_pos)
+                    .attr("x2", x_pos)
+                    .attr("y1", 0)
+                    .attr("y2", height)
+                    .attr("stroke-width", 2)
+                    .attr("stroke", "black")
+                    .attr("stroke-dasharray", "3");
+                svg.append("text")
+                    .attr("class", "event_txt_label")
+                    .attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
+                    .text(events[key])
+            }     
+        } */        
 
     })
 }

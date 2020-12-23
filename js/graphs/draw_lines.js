@@ -71,19 +71,8 @@ function draw_lines(param) {
             "translate(" + margin.left + "," + margin.top + ")")
 
     const n_data = param.data_files.length
-    const div_width = width / n_data
+    const month_width = width / 12
     let datasets = param.datasets
-    
-
-/*     for (let i = 0; i < n_data; i++) {
-        path = param.src + param.data_files[i]
-        datasets[i] = d3.csv(path, function (d) {
-            return {
-                date: d3.timeParse("%m")(d[param.x]),
-                value: d[param.y]
-            }
-        })
-    } */
 
     Promise.all(datasets).then(function (data) {
         // data[0] will contain file1.csv
@@ -100,20 +89,30 @@ function draw_lines(param) {
         const max = Math.max(...data_max)
         const min = Math.min(...data_min)
         const buf = (max - min) * 0.1
-
-        const x = d3.scaleTime()
+        
+/*
+            const x = d3.scaleTime()
             .domain(d3.extent(data[1], function (d) {
                 return d.date;
             }))
             .range([0, width]);
+            
+            const x = d3.scaleTime()
+                .domain([new Date(1900, 0, 1), new Date(1900, 11, 31)])
+                .range([0, width]);            
+            
+*/
+            
+        const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        
+        const x = d3.scaleBand()
+            .domain(month_tag)
+            .range([0, width])
+            
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
             //.domain([0, max])
             .range([height, 0]);
-
-        function test() {
-            console.log("test")
-        }
 
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
@@ -122,7 +121,6 @@ function draw_lines(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(2)
                 .tickPadding(10)
-                .tickFormat(d3.timeFormat("%b"))
             )
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
@@ -165,7 +163,7 @@ function draw_lines(param) {
                 .attr("stroke-width", line_stroke_width)
                 .attr("d", d3.line()
                     .x(function (d) {
-                        return x(d.date)
+                        return x(month_tag[d.date.getMonth()]) + (month_width/2)
                     })
                     .y(function (d) {
                         return y(d.value)
@@ -178,15 +176,11 @@ function draw_lines(param) {
                 .append("circle")
                 .attr("fill", param.line_colors[i])
                 .attr("stroke", param.line_colors[i])
-                .attr("cx", function(d) { return x(d.date) })
+                .attr("cx", function(d) { 
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2) 
+                })
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
-                //.on('mouseover', function (d, i) {
-                //    console.log("dot dot dot ...")
-                //    d3.select(this).transition()
-                //          .duration('100')
-                //          .attr("r", 7);
-                //})                
 
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
@@ -203,35 +197,14 @@ function draw_lines(param) {
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])
         }
-        
-        if("event_lines" in param){
-            events = param.event_lines
-            for (var key in events) {
-                let x_pos = x(d3.timeParse("%m-%d")(key))
-                svg.append("line")
-                    .attr("x1", x_pos)
-                    .attr("x2", x_pos)
-                    .attr("y1", 0)
-                    .attr("y2", height)
-                    .attr("stroke-width", 2)
-                    .attr("stroke", "black")
-                    .attr("stroke-dasharray", "3");
-                svg.append("text")
-                    .attr("class", "event_txt_label")
-                    .attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
-                    .text(events[key])
-            }     
-        }
-        
-       
 
-        let month_width = width / 11
-        let f_width = new Array(12).fill(month_width)
+        //let month_width = width / 12
+/*         let f_width = new Array(12).fill(month_width)
         f_width[0] = f_width[11] = 0.5 * month_width
         let f_x_pos = f_width.slice(0)
         f_x_pos.pop()
         f_x_pos.unshift(0)
-        f_x_pos = d3.cumsum(f_x_pos)
+        f_x_pos = d3.cumsum(f_x_pos) */
 
         let focus = d3.select(param.target + "_focus");
         let parent = d3.select(param.target + "_container");
@@ -260,12 +233,14 @@ function draw_lines(param) {
 
                     tooltip.html(tooltip_html);
                     tooltip
-                        .style("left", f_x_pos[p_month] + 0.6 * f_width[p_month] + "px")
+                        //.style("left", f_x_pos[p_month] + 0.6 * f_width[p_month] + "px")
+                        .style("left", month_width * (p_month+0.6) + "px")
                         .style("top", y0 + 20 + "px")
 
                     focus
-                        .style("width", f_width[p_month] + "px")
-                        .style("transform", "translateX(" + f_x_pos[p_month] + "px)");
+                        //.style("width", f_width[p_month] + "px")
+                        .style("width", month_width + "px")
+                        .style("transform", "translateX(" + month_width * p_month + "px)");
                 }
             })
     })

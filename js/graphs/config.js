@@ -91,7 +91,6 @@ const line_param_flight = {
     data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    event_lines: event_timeline,
     x: "month",
     y: "count",
     datasets: []
@@ -105,7 +104,6 @@ const line_param_rail = {
     data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
     line_legends: ["2018", "2020", "2017", "2019"],
     line_colors: line_colors,
-    event_lines: event_timeline,
     x: "month",
     y: "count",
     datasets: []
@@ -118,7 +116,6 @@ const line_param_bike = {
     data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
     line_legends: ["2020", "2019", "2018", "2017"],
     line_colors: line_colors,
-    event_lines: event_timeline,
     x: "month",
     y: "count",
     datasets: []
@@ -133,7 +130,6 @@ const line_param_import = {
     line_legends: ["2020", "2019", "2018", "2017"],
     //line_legends: ["2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008"],
     line_colors: line_colors,
-    event_lines: event_timeline,
     x: "Monat",
     y: "Import",
     datasets: []
@@ -148,7 +144,6 @@ const line_param_export = {
     line_legends: ["2020", "2019", "2018", "2017"],
     //line_legends: ["2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008"],
     line_colors: line_colors,
-    event_lines: event_timeline,
     x: "Monat",
     y: "Export",
     datasets: []
@@ -156,6 +151,7 @@ const line_param_export = {
 
 const histogram_param_DE = {
     target: ".de_hist",
+    event_lines: event_timeline,
     src: "data/rki/rki_DE-newcase.csv"
 }
 
