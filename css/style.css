@@ -737,7 +737,6 @@ body {
 }
 
 .event_txt_label{
-    position: absolute;
     color: var(--burgundy);
     font-size: 0.7vw;
 }
