@@ -1,6 +1,6 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 0, right: 50, bottom: 20, left: 40}
+    const margin = {top: 0, right: 50, bottom: 30, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
@@ -15,17 +15,18 @@ function draw_histogram(param) {
     d3.csv(param.src, function(data){
         return {
             month: d3.timeParse("%m")(data.month),
+            // month_text: d3.timeParse("%b")(data.month),
             value: data.new_case,
         }
     }).then(function(d){
         console.log(d)
         const d_length = 11
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        
+
         let x = d3.scaleBand()
             .domain(month_tag)
             .range([0, width])
-            
+
         let y = d3.scaleLinear()
             .domain([0, d3.max(d, function(d) { return +d.value; })])
             .range([height, 0])

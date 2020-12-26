@@ -59,7 +59,7 @@ function draw_lines(param) {
         .ease(d3.easeLinear);    
     
     const container = $(param.target)
-    const margin = {top: 30, right: 50, bottom: 25, left: 10}
+    const margin = {top: 70, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
     let svg = d3.select(param.target)

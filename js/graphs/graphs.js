@@ -44,17 +44,14 @@ function refresh_on_date_change(value) {
 }
 
 function refresh_on_resize() {
+    d3.selectAll('.section_content svg').remove();
+
     updateLineChart()
     updateStats()
-    
-    d3.selectAll('#content_sec1 svg').remove();
-    draw_lines(transport_param)
-    
-    d3.selectAll('#content_sec2 svg').remove();
-    draw_lines(econ_param)
-    
-    d3.selectAll('.de_hist svg').remove();
+
     draw_histogram(histogram_param_DE)
+    draw_lines(transport_param)
+    draw_lines(econ_param)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
@@ -156,7 +153,6 @@ function init_graph() {
         const slider = $("#date_slider");
         slider.attr('max', data_all.length - 1);
         let date = slider.val()
-        // updateDate(date);
         refresh_on_date_change(date)
         refresh_on_resize();
     })

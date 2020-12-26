@@ -52,7 +52,7 @@ function draw_line(param) {
     svg.append("g")
         .attr("class", "tick")
         .call(d3.axisLeft(y_left)
-                .ticks(5)
+                .ticks(3)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -68,7 +68,7 @@ function draw_line(param) {
         .attr("transform", "translate(" + width + ", 0)")
         .attr("class", "tick")
         .call(d3.axisRight(y_right)
-                .ticks(5)
+                .ticks(3)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
@@ -112,18 +112,18 @@ function draw_line(param) {
             })
         );
 
-    // svg.append("path")
-    //     .datum(data_highlight)
-    //     .attr("class", "area_new")
-    //     .attr("d", d3.area()
-    //         .x(function (d) {
-    //             return x(d[param.x])
-    //         })
-    //         .y0(height)
-    //         .y1(function (d) {
-    //             return y_left(d[param.data1.y])
-    //         })
-    //     );
+    svg.append("path")
+        .datum(data_highlight)
+        .attr("class", "area_new")
+        .attr("d", d3.area()
+            .x(function (d) {
+                return x(d[param.x])
+            })
+            .y0(height)
+            .y1(function (d) {
+                return y_left(d[param.data1.y])
+            })
+        );
 
     svg.append("path")
         .datum(data_highlight)

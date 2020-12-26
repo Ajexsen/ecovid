@@ -749,3 +749,7 @@ body {
 #line_chart_slider_top {
     overflow-y: visible;
 }
+
+.de_hist {
+    overflow: hidden;
+}
