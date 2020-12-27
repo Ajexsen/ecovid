@@ -1,8 +1,14 @@
+/**
+* Switches line chart data source and redraw on button click. (For transportation chart)
+* @param {string} name of the data source
+*/
 function update_transport_chart(type) {
+    // if current line same as button click, do nothing.
     if(type === transport_type){
         return
     }
     
+    // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
     
@@ -25,14 +31,20 @@ function update_transport_chart(type) {
         $("#bike_button").attr("src", "images/bike_active.png")
         transport_param = line_param_bike
     }
-    draw_lines(transport_param)
+    draw_multiline(transport_param)
 }
 
+/**
+* Switches line chart data source and redraw on button click. (For economic chart)
+* @param {string} name of the data source
+*/
 function update_econ_chart(type) {
+    // if current line same as button click, do nothing.
     if(type === econ_type){
         return
     }    
     
+    // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
     
@@ -47,17 +59,24 @@ function update_econ_chart(type) {
         $("#export_button").attr("src", "images/export_active.png")
         econ_param = line_param_export
     }
-    draw_lines(econ_param)
+    draw_multiline(econ_param)
 }
 
+// define default type
 let transport_type = "flight"
 let econ_type = "import"
 
-function draw_lines(param) {
+/**
+* Draws a chart with multiple line from different files.
+* @param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
+*/
+function draw_multiline(param) {
+    // define transition for data switch
     t = d3.transition()
         .duration(300)
         .ease(d3.easeLinear);    
     
+    // setup prep - get container and create svg
     const container = $(param.target)
     const margin = {top: 70, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -70,13 +89,17 @@ function draw_lines(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
 
+    // define global var
     const n_data = param.data_files.length
     const month_width = width / 12
     let datasets = param.datasets
 
+    // load all preread data
     Promise.all(datasets).then(function (data) {
         // data[0] will contain file1.csv
         // data[1] will contain file2.csv
+
+        // find max & min for y-axis scaling
         data_min = Array.from({length: n_data},
             (_, n) => d3.min(data[n], function (d) {
                 return +d.value;
@@ -88,32 +111,22 @@ function draw_lines(param) {
             }))
         const max = Math.max(...data_max)
         const min = Math.min(...data_min)
+
+        // add 10% buffering for better visual effect
         const buf = (max - min) * 0.1
-
-/*
-            const x = d3.scaleTime()
-            .domain(d3.extent(data[1], function (d) {
-                return d.date;
-            }))
-            .range([0, width]);
-
-            const x = d3.scaleTime()
-                .domain([new Date(1900, 0, 1), new Date(1900, 11, 31)])
-                .range([0, width]);
-
-*/
 
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+        // set x, y-axis
         const x = d3.scaleBand()
             .domain(month_tag)
             .range([0, width])
 
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
-            //.domain([0, max])
             .range([height, 0]);
 
+        // add x-axis ticks/labels
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
             .attr("class", "tick")
@@ -122,6 +135,8 @@ function draw_lines(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
             )
+
+        // add y-axis ticks/labels on the right
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
@@ -131,6 +146,8 @@ function draw_lines(param) {
                 .tickSizeOuter(0)
                 .tickPadding(10)
             )
+
+        // add plain y-axis line on the left
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y)
@@ -139,11 +156,15 @@ function draw_lines(param) {
                 .tickSizeOuter(0)
             )
 
+
         let line_stroke_width = 0;
         let dot_stroke_width = 0;
         let line_class = ""
         let dot_class = ""
-        for (let i = n_data - 1, k = 0; i >= 0; i--, k++) {
+
+        // iterate through all dataset and draw line
+        for (let i = n_data - 1; i >= 0; i--) {
+            // if first line -> make thicker (latest year: 2020)
             if (i === 0) {
                 line_stroke_width = 2.3;
                 dot_stroke_width = 2.0;
@@ -155,9 +176,13 @@ function draw_lines(param) {
                 line_class = "legend_line";
                 dot_class = "legend_dot";
             }
+
+            // add line with data points
             svg.append("path")
                 .datum(data[i])
                 .transition(t)
+                .attr("id", "line_" + param.title + "_" + param.line_legends[i])
+                .attr("class", param.title + "_lines")
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
@@ -170,10 +195,29 @@ function draw_lines(param) {
                     })
                 )
 
+            // add line from dots to dot labels on top
+            svg.selectAll(".dot_line")
+                .data(data[i])
+                .enter()
+                .append('line')
+                .attr("class", param.title + "_dot_lines dot_lines dot_line_" + param.title + "_" + param.line_legends[i])
+                .style("stroke", "grey")
+                .style("stroke-width", 1)
+                .attr("x1", function(d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                })
+                .attr("y1", 15)
+                .attr("x2", function(d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                })
+                .attr("y2", function(d) { return y(d.value) })
+
+            // add dots on data points
             svg.selectAll(".dots")
                 .data(data[i])
                 .enter()
                 .append("circle")
+                .attr("class", param.title + "_dots dot_" + param.title + "_" + param.line_legends[i])
                 .attr("fill", param.line_colors[i])
                 .attr("stroke", param.line_colors[i])
                 .attr("cx", function(d) {
@@ -182,8 +226,23 @@ function draw_lines(param) {
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
 
+            // add dot labels on top
+            svg.selectAll(".text")
+                .data(data[i])
+                .enter()
+                .append("text")
+                .attr("class", "dlabs "+ param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
+                .attr("x", function(d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                })
+                .attr("y", 10)//function(d) { return y(d.value) })
+                .text(function(d) { return Math.round(d.value*100)/100 })
+
+
+            // add line legend
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
+                .attr("id", "legend_" + param.title + "_" + param.line_legends[i])
                 .attr("class", "legend_block flexrow flexnone");
             let legend_line_box = legend_block.append("div")
                 .attr("class", "center_parent legend_line_box flexnone");
@@ -196,28 +255,49 @@ function draw_lines(param) {
             legend_block.append("div")
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])
+
+            // add legend hover effect
+            d3.select("#legend_" + param.title + "_" + param.line_legends[i])
+                .on('mousemove', (event) => {
+                    // hide all lines & dots
+                    d3.selectAll("."+ param.title +"_lines").style("opacity", 0.07)
+                    d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)
+
+                    // unhide selected line & dots
+                    d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                })
+                .on('mouseout', (event) => {
+                    // unhide all lines & dots
+                    d3.selectAll("." + param.title +"_lines").style("opacity", 1)
+                    d3.selectAll("." + param.title +"_dots").style("opacity", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0)
+                    d3.selectAll("." + param.title + "_dot_lines").style("opacity", 0)
+                })
+
         }
 
-        //let month_width = width / 12
-/*         let f_width = new Array(12).fill(month_width)
-        f_width[0] = f_width[11] = 0.5 * month_width
-        let f_x_pos = f_width.slice(0)
-        f_x_pos.pop()
-        f_x_pos.unshift(0)
-        f_x_pos = d3.cumsum(f_x_pos) */
-
+        // get tooltips elements
         let focus = d3.select(param.target + "_focus");
         focus.style("width", month_width + "px");
         let parent = d3.select(param.target + "_container");
         let tooltip = d3.select(param.target + "_tooltip");
 
+        // add tooltips hover effect
         parent
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
-                const p_month = Math.round(x0 / month_width)
-                if (p_month < 12) {
+
+                // calc mouse pointed month
+                const p_month = Math.floor(x0 / month_width)
+
+                if (p_month < 12 && x0 >= 0) {
                     let values = []
+
+                    // iter through all datasets to get value from pointed month
                     for (let n = 0; n < n_data; n++) {
                         let data_point = data[n][p_month]
                         if (data_point === undefined) {
@@ -226,6 +306,8 @@ function draw_lines(param) {
                             values[n] = Math.round(data_point.value * 100) / 100
                         }
                     }
+
+
                     let tooltip_html = (month_format(d3.timeParse("%m")(p_month + 1))) + '<br>'
                     for (let i = 0; i < n_data; i++) {
                         tooltip_html += "<b>" + param.line_legends[i] + "</b>: " + values[i] + "<br>"

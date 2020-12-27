@@ -705,6 +705,7 @@ body {
     width: fit-content;
     /*display: inline-block;*/
     margin: 0 12px 0 12px;
+    padding: 10px 15px 10px 15px;
     color: var(--burgundy);
 }
 
@@ -751,4 +752,28 @@ body {
 
 .de_hist {
     overflow: hidden;
+}
+
+.de_hist svg rect{
+    fill: var(--burgundy);
+}
+
+
+.de_hist svg rect:hover ~ text.hist_label{
+    display: block;
+}
+
+text.hist_label {
+    display: none;
+    fill: var(--burgundy);
+    font-size: 0.7vw;
+}
+
+text.dlabs{
+    font-size: 0.5vw;
+    opacity: 0;
+}
+
+.dot_lines{
+    opacity: 0;
 }

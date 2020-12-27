@@ -50,8 +50,8 @@ function refresh_on_resize() {
     updateStats()
 
     draw_histogram(histogram_param_DE)
-    draw_lines(transport_param)
-    draw_lines(econ_param)
+    draw_multiline(transport_param)
+    draw_multiline(econ_param)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
