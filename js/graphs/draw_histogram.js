@@ -1,14 +1,15 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 0, right: 50, bottom: 20, left: 40}
+    const margin = {top: 25, right: 50, bottom: 25, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
     let barPadding = 10;
     let svg = d3.selectAll(param.target)
-        .append('svg')
+        .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
 
@@ -18,7 +19,6 @@ function draw_histogram(param) {
             value: data.new_case,
         }
     }).then(function(d){
-        //console.log(d)
         const d_length = 11
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         
@@ -46,6 +46,7 @@ function draw_histogram(param) {
             .attr("class", "hist_label")
             .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
             .attr("y", function(d){return y(d.value)})
+            .attr("transform", "translate(3, -3)")
             .text(function(d) { return d.value; });            
             
 
@@ -62,7 +63,7 @@ function draw_histogram(param) {
             .attr('class', 'chart_title')
             .attr('x', -height / 2)
             .attr('y', 0)
-            .attr("transform", "translate(10, 0) rotate(-90)")
+            .attr("transform", "translate(-15, 0) rotate(-90)")
             .attr('text-anchor', 'middle')
             .text(param.title)
         

@@ -71,6 +71,7 @@ function draw_multiline(param) {
     const margin = {top: 0, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
+        
     let svg = d3.select(param.target)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
