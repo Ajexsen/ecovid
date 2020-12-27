@@ -6,9 +6,10 @@ function draw_histogram(param) {
 
     let barPadding = 10;
     let svg = d3.selectAll(param.target)
-        .append('svg')
+        .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     d3.csv(param.src, function(data){
@@ -18,7 +19,6 @@ function draw_histogram(param) {
             value: data.new_case,
         }
     }).then(function(d){
-        //console.log(d)
         const d_length = 11
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -46,7 +46,8 @@ function draw_histogram(param) {
             .attr("class", "hist_label")
             .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
             .attr("y", function(d){return y(d.value)})
-            .text(function(d) { return d.value; });            
+            .attr("transform", "translate(3, -3)")
+            .text(function(d) { return d.value; });
             
 
         svg.append("g")
@@ -58,6 +59,14 @@ function draw_histogram(param) {
                 .tickPadding(10)
             )
         
+        svg.append('text')
+            .attr('class', 'chart_title')
+            .attr('x', -height / 2)
+            .attr('y', 0)
+            .attr("transform", "translate(-15, 0) rotate(-90)")
+            .attr('text-anchor', 'middle')
+            .text(param.title)
+
         // add event timeline
         if("event_lines" in param){
             events = param.event_lines

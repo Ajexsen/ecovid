@@ -3,32 +3,27 @@
 * @param type {string} name of the data source
 */
 function update_transport_chart(type) {
-    // if current line same as button click, do nothing.
-    if(type === transport_type){
-        return
-    }
-    
     // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
     
     if (type === "flight") {
+        $("#flight_button").prop('disabled', true);
+        $("#rail_button").prop('disabled', false)
+        $("#bike_button").prop('disabled', false)   
         transport_type = "flight"
-        $("#flight_button").attr("src", "images/flight_active.png")
-        $("#rail_button").attr("src", "images/rail_inactive.png")
-        $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_flight
     } else if (type === "rail") {
+        $("#flight_button").prop('disabled', false)
+        $("#rail_button").prop('disabled', true)
+        $("#bike_button").prop('disabled', false)         
         transport_type = "rail"
-        $("#flight_button").attr("src", "images/flight_inactive.png")
-        $("#rail_button").attr("src", "images/rail_active.png")
-        $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_rail
     } else if (type === "bike") {
+        $("#flight_button").prop('disabled', false)
+        $("#rail_button").prop('disabled', false)
+        $("#bike_button").prop('disabled', true)         
         transport_type = "bike"
-        $("#flight_button").attr("src", "images/flight_inactive.png")
-        $("#rail_button").attr("src", "images/rail_inactive.png")
-        $("#bike_button").attr("src", "images/bike_active.png")
         transport_param = line_param_bike
     }
     draw_multiline(transport_param)
@@ -39,24 +34,19 @@ function update_transport_chart(type) {
 * @param type {string} name of the data source
 */
 function update_econ_chart(type) {
-    // if current line same as button click, do nothing.
-    if(type === econ_type){
-        return
-    }    
-    
     // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
     
     if (type === "import") {
+        $("#import_button").prop('disabled', true)
+        $("#export_button").prop('disabled', false)         
         econ_type = "import"
-        $("#import_button").attr("src", "images/import_active.png")
-        $("#export_button").attr("src", "images/export_inactive.png")
         econ_param = line_param_import
     } else if (type === "export") {
+        $("#import_button").prop('disabled', false)
+        $("#export_button").prop('disabled', true)          
         econ_type = "export"
-        $("#import_button").attr("src", "images/import_inactive.png")
-        $("#export_button").attr("src", "images/export_active.png")
         econ_param = line_param_export
     }
     draw_multiline(econ_param)
@@ -81,6 +71,7 @@ function draw_multiline(param) {
     const margin = {top: 70, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
+        
     let svg = d3.select(param.target)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -186,6 +177,7 @@ function draw_multiline(param) {
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
+                //.transition()
                 .attr("d", d3.line()
                     .x(function (d) {
                         return x(month_tag[d.date.getMonth()]) + (month_width/2)
