@@ -3,20 +3,26 @@
 * @param {string} name of the data source
 */
 function update_transport_chart(type) {
-    // if current line same as button click, do nothing.
-    if(type === transport_type) return;
-    
     // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
     
     if (type === "flight") {
+        $("#flight_button").prop('disabled', true);
+        $("#rail_button").prop('disabled', false)
+        $("#bike_button").prop('disabled', false)   
         transport_type = "flight"
         transport_param = line_param_flight
     } else if (type === "rail") {
+        $("#flight_button").prop('disabled', false)
+        $("#rail_button").prop('disabled', true)
+        $("#bike_button").prop('disabled', false)         
         transport_type = "rail"
         transport_param = line_param_rail
     } else if (type === "bike") {
+        $("#flight_button").prop('disabled', false)
+        $("#rail_button").prop('disabled', false)
+        $("#bike_button").prop('disabled', true)         
         transport_type = "bike"
         transport_param = line_param_bike
     }
@@ -28,17 +34,18 @@ function update_transport_chart(type) {
 * @param {string} name of the data source
 */
 function update_econ_chart(type) {
-    // if current line same as button click, do nothing.
-    if(type === econ_type) return;
-    
     // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
     
     if (type === "import") {
+        $("#import_button").prop('disabled', true)
+        $("#export_button").prop('disabled', false)         
         econ_type = "import"
         econ_param = line_param_import
     } else if (type === "export") {
+        $("#import_button").prop('disabled', false)
+        $("#export_button").prop('disabled', true)          
         econ_type = "export"
         econ_param = line_param_export
     }

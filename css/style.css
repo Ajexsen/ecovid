@@ -534,39 +534,28 @@ body {
   box-shadow: none;
 }
 
-#flight_button{    
+
+#flight_button {    
     background:url('../images/flight_inactive.png') center center / cover;
 }
 
-button#flight_button:hover{
+#flight_button:hover, #flight_button:disabled {
     background:url('../images/flight_active.png') center center / cover;
 }
 
-button#flight_button:active{
-    background:url('../images/flight_active.png') center center / cover;
-}
-
-#rail_button{
+#rail_button {
     background:url('../images/rail_inactive.png') center center / cover;
 }
 
-#rail_button:hover{
+#rail_button:hover, #rail_button:disabled {
     background:url('../images/rail_active.png') center center / cover;
 }
 
-#rail_button:active{
-    background:url('../images/rail_active.png') center center / cover;
-}
-
-#bike_button{
+#bike_button {
     background:url('../images/bike_inactive.png') center center / cover;
 }
 
-#bike_button:hover{
-    background:url('../images/bike_active.png') center center / cover;
-}
-
-#bike_button:active {
+#bike_button:hover, #bike_button:disabled {
     background:url('../images/bike_active.png') center center / cover;
 }
 
@@ -574,23 +563,15 @@ button#flight_button:active{
     background:url('../images/import_inactive.png') center center / cover;
 }
 
-#import_button:hover{
+#import_button:hover, #import_button:disabled {
     background:url('../images/import_active.png') center center / cover;
 }
 
-#import_button:active {
-    background:url('../images/import_active.png') center center / cover;
-}
-
-#export_button{
+#export_button {
     background:url('../images/export_inactive.png') center center / cover;
 }
 
-#export_button:hover{
-    background:url('../images/export_active.png') center center / cover;
-}
-
-#export_button:active {
+#export_button:hover, #export_button:disabled{
     background:url('../images/export_active.png') center center / cover;
 }
 
