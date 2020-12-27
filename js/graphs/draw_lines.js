@@ -207,9 +207,9 @@ function draw_lines(param) {
         f_x_pos = d3.cumsum(f_x_pos) */
 
         let focus = d3.select(param.target + "_focus");
+        focus.style("width", month_width + "px");
         let parent = d3.select(param.target + "_container");
         let tooltip = d3.select(param.target + "_tooltip");
-        // let tooltip_container = d3.select(param.target + "_tooltip_containr");
 
         parent
             .on('mousemove', (event) => {
@@ -233,14 +233,10 @@ function draw_lines(param) {
 
                     tooltip.html(tooltip_html);
                     tooltip
-                        //.style("left", f_x_pos[p_month] + 0.6 * f_width[p_month] + "px")
                         .style("left", month_width * (p_month+0.6) + "px")
                         .style("top", y0 + 20 + "px")
 
-                    focus
-                        //.style("width", f_width[p_month] + "px")
-                        .style("width", month_width + "px")
-                        .style("transform", "translateX(" + month_width * p_month + "px)");
+                    focus.style("transform", "translateX(" + month_width * p_month + "px)");
                 }
             })
     })

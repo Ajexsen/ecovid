@@ -46,11 +46,21 @@ function init_page() {
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
+        showLabels: true,
         backgroundColor: null,
         enableZoom: false,
-        showTooltip: false,
+        // showTooltip: false,
         onRegionClick: function (element, code, region) {
+        },
+        onLabelShow: function(event, label, code) {
+            label.text("Aaa")
+        },
+        onRegionSelect: function(event, code, region) {
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
+            init_graph();
+        },
+        onRegionDeselect: function(event, code, region) {
+            data_source = de_data_source;
             init_graph();
         }
     });

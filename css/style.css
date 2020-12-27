@@ -148,7 +148,7 @@ body {
 
 .map_svg .jqvmap-region {
     stroke: var(--burgundy);
-    stroke-width: 4px;
+    stroke-width: 3px;
     stroke-opacity: 100%;
     fill: var(--offwhite);
     fill-opacity: 90%;
@@ -163,22 +163,22 @@ body {
     fill-opacity: 90% !important;
 }
 
-.jqvmap-label {
-    position: absolute;
-    display: none;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background: #292929;
-    color: white;
-    /*font-family: sans-serif, Verdana;*/
-    font-size: smaller;
-    padding: 3px;
-    pointer-events: none;
+.jqvmap-pin {
+    color: var(--burgundy);
+    font-size: 1vw;
 }
 
 .jqvmap-region {
     cursor: pointer;
+}
+
+.jqvmap-label, .jqvmap-pin {
+    pointer-events: none;
+}
+
+.jqvmap-ajax_response {
+    width: 100%;
+    height: 100%;
 }
 
 .logo {
@@ -335,7 +335,7 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 0px calc(55px - var(--slider-thumb-width)) 25px calc(60px + var(--axis-width) - 2px);
+    margin: 0 calc(55px - var(--slider-thumb-width)) 25px 60px;
     overflow: hidden;
 }
 
