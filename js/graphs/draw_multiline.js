@@ -1,8 +1,14 @@
+/**
+* Switches line chart data source and redraw on button click. (For transportation chart)
+* @param {string} name of the data source
+*/
 function update_transport_chart(type) {
+    // if current line same as button click, do nothing.
     if(type === transport_type){
         return
     }
     
+    // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
     
@@ -28,11 +34,17 @@ function update_transport_chart(type) {
     draw_multiline(transport_param)
 }
 
+/**
+* Switches line chart data source and redraw on button click. (For economic chart)
+* @param {string} name of the data source
+*/
 function update_econ_chart(type) {
+    // if current line same as button click, do nothing.
     if(type === econ_type){
         return
     }    
     
+    // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
     
@@ -50,14 +62,21 @@ function update_econ_chart(type) {
     draw_multiline(econ_param)
 }
 
+// define default type
 let transport_type = "flight"
 let econ_type = "import"
 
+/**
+* Draws a chart with multiple line from different files.
+* @param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
+*/
 function draw_multiline(param) {
+    // define transition for data switch
     t = d3.transition()
         .duration(300)
         .ease(d3.easeLinear);    
     
+    // setup prep - get container and create svg
     const container = $(param.target)
     const margin = {top: 0, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
@@ -70,13 +89,17 @@ function draw_multiline(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
 
+    // define global var
     const n_data = param.data_files.length
-    const month_width = width / 12
+    const month_width = width / n_data
     let datasets = param.datasets
 
+    // load all preread data
     Promise.all(datasets).then(function (data) {
         // data[0] will contain file1.csv
         // data[1] will contain file2.csv
+        
+        // find max & min for y-axis scaling
         data_min = Array.from({length: n_data},
             (_, n) => d3.min(data[n], function (d) {
                 return +d.value;
@@ -88,23 +111,13 @@ function draw_multiline(param) {
             }))
         const max = Math.max(...data_max)
         const min = Math.min(...data_min)
+        
+        // add 10% buffering for better visual effect
         const buf = (max - min) * 0.1
         
-/*
-            const x = d3.scaleTime()
-            .domain(d3.extent(data[1], function (d) {
-                return d.date;
-            }))
-            .range([0, width]);
-            
-            const x = d3.scaleTime()
-                .domain([new Date(1900, 0, 1), new Date(1900, 11, 31)])
-                .range([0, width]);            
-            
-*/
-            
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         
+        // set x, y-axis
         const x = d3.scaleBand()
             .domain(month_tag)
             .range([0, width])
@@ -113,6 +126,7 @@ function draw_multiline(param) {
             .domain([min - buf, max + buf])
             .range([height, 0]);
 
+        // add x-axis ticks/labels
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
             .attr("class", "tick")
@@ -121,6 +135,8 @@ function draw_multiline(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
             )
+        
+        // add y-axis ticks/labels on the right
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
             .attr("class", "tick")
@@ -130,6 +146,8 @@ function draw_multiline(param) {
                 .tickSizeOuter(0)
                 .tickPadding(10)
             )
+            
+        // add plain y-axis line on the left
         svg.append("g")
             .attr("class", "tick")
             .call(d3.axisLeft(y)
@@ -138,11 +156,15 @@ function draw_multiline(param) {
                 .tickSizeOuter(0)
             )      
 
+        
         let line_stroke_width = 0;
         let dot_stroke_width = 0;
         let line_class = ""
         let dot_class = ""
+        
+        // iterate through all dataset and draw line
         for (let i = n_data - 1; i >= 0; i--) {
+            // if first line -> make thicker (latest year: 2020)
             if (i === 0) {
                 line_stroke_width = 2.3;
                 dot_stroke_width = 2.0;
@@ -154,6 +176,8 @@ function draw_multiline(param) {
                 line_class = "legend_line";
                 dot_class = "legend_dot";
             }
+            
+            // add line with data points
             svg.append("path")
                 .datum(data[i])
                 .transition(t)
@@ -170,7 +194,8 @@ function draw_multiline(param) {
                         return y(d.value)
                     })
                 )
-                
+            
+            // add line from dots to dot labels on top
             svg.selectAll(".dot_line")
                 .data(data[i])
                 .enter()
@@ -186,7 +211,8 @@ function draw_multiline(param) {
                     return x(month_tag[d.date.getMonth()]) + (month_width/2) 
                 })
                 .attr("y2", function(d) { return y(d.value) })                
-
+            
+            // add dots on data points
             svg.selectAll(".dots")
                 .data(data[i])
                 .enter()
@@ -199,7 +225,8 @@ function draw_multiline(param) {
                 })
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
-
+            
+            // add dot labels on top
             svg.selectAll(".text")
                 .data(data[i])
                 .enter()
@@ -211,22 +238,8 @@ function draw_multiline(param) {
                 .attr("y", 10)//function(d) { return y(d.value) })
                 .text(function(d) { return Math.round(d.value*100)/100 })
 
-/*
-            svg.append("text")
-                .data(data[i])
-                .transition(t)
-                .attr("class", param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
-                .attr("dx", function (d) {
-                        return x(month_tag[d.date.getMonth()]) + (month_width/2)
-                    })
-                .attr("dy", function (d) {
-                        return y(d.value)
-                    })
-                .text(function (d) {
-                        return Math.round(d.value*100)/100
-                    }) */
 
-
+            // add line legend
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
                 .attr("id", "legend_" + param.title + "_" + param.line_legends[i])
@@ -243,7 +256,7 @@ function draw_multiline(param) {
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])                        
 
-            
+            // add legend hover effect
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     // hide all lines & dots
@@ -266,17 +279,24 @@ function draw_multiline(param) {
             
         }
 
+        // get tooltips elements
         let focus = d3.select(param.target + "_focus");
         let parent = d3.select(param.target + "_container");
         let tooltip = d3.select(param.target + "_tooltip");
-
+        
+        // add tooltips hover effect
         parent
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
+                
+                // calc mouse pointed month
                 const p_month = Math.floor(x0 / month_width)
+                
                 if (p_month < 12 && x0 >= 0) {
                     let values = []
+                    
+                    // iter through all datasets to get value from pointed month
                     for (let n = 0; n < n_data; n++) {
                         let data_point = data[n][p_month]
                         if (data_point === undefined) {
@@ -285,6 +305,8 @@ function draw_multiline(param) {
                             values[n] = Math.round(data_point.value * 100) / 100
                         }
                     }
+                    
+                    
                     let tooltip_html = (month_format(d3.timeParse("%m")(p_month + 1))) + '<br>'
                     for (let i = 0; i < n_data; i++) {
                         tooltip_html += "<b>" + param.line_legends[i] + "</b>: " + values[i] + "<br>"
