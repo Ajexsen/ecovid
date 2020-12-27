@@ -25,7 +25,7 @@ function update_transport_chart(type) {
         $("#bike_button").attr("src", "images/bike_active.png")
         transport_param = line_param_bike
     }
-    draw_lines(transport_param)
+    draw_multiline(transport_param)
 }
 
 function update_econ_chart(type) {
@@ -47,13 +47,13 @@ function update_econ_chart(type) {
         $("#export_button").attr("src", "images/export_active.png")
         econ_param = line_param_export
     }
-    draw_lines(econ_param)
+    draw_multiline(econ_param)
 }
 
 let transport_type = "flight"
 let econ_type = "import"
 
-function draw_lines(param) {
+function draw_multiline(param) {
     t = d3.transition()
         .duration(300)
         .ease(d3.easeLinear);    
