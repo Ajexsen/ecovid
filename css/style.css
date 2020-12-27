@@ -740,3 +740,18 @@ body {
     color: var(--burgundy);
     font-size: 0.7vw;
 }
+
+.de_hist svg rect{
+    fill: var(--burgundy);
+}
+
+
+.de_hist svg rect:hover ~ text.hist_label{
+    display: block;
+}
+
+text.hist_label {
+    display: none;
+    fill: var(--burgundy);
+    font-size: 0.7vw;
+}

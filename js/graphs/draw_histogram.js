@@ -36,15 +36,17 @@ function draw_histogram(param) {
             .append("rect")
             .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
             .attr("y", function(d){return y(d.value)})
-            .attr("fill", "#5D001E")
             .attr("width", width / d_length - barPadding)
-            .attr("height", function(d){return height - y(d.value);}).on('mousemove', (event, i) => {
-                svg.append("text")
-                    .attr("class", "histogram_number")
-                    .attr("transform", "translate("+ x(month_tag[i]) + (barPadding/2) +"," + y(d.value) + ")")
-                    .text(d.value)        
-                
-            })
+            .attr("height", function(d){return height - y(d.value);})
+            
+        svg.selectAll("text")
+            .data(d)
+            .enter()
+            .append("text")
+            .attr("class", "hist_label")
+            .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
+            .attr("y", function(d){return y(d.value)})
+            .text(function(d) { return d.value; });            
             
 
         svg.append("g")
