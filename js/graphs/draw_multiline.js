@@ -111,7 +111,6 @@ function draw_multiline(param) {
             
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
-            //.domain([0, max])
             .range([height, 0]);
 
         svg.append("g")
@@ -198,24 +197,15 @@ function draw_multiline(param) {
                 .html(param.line_legends[i])
         }
 
-        //let month_width = width / 12
-/*         let f_width = new Array(12).fill(month_width)
-        f_width[0] = f_width[11] = 0.5 * month_width
-        let f_x_pos = f_width.slice(0)
-        f_x_pos.pop()
-        f_x_pos.unshift(0)
-        f_x_pos = d3.cumsum(f_x_pos) */
-
         let focus = d3.select(param.target + "_focus");
         let parent = d3.select(param.target + "_container");
         let tooltip = d3.select(param.target + "_tooltip");
-        // let tooltip_container = d3.select(param.target + "_tooltip_containr");
 
         parent
             .on('mousemove', (event) => {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
-                const p_month = Math.round(x0 / month_width)
+                const p_month = Math.floor(x0 / month_width)
                 if (p_month < 12) {
                     let values = []
                     for (let n = 0; n < n_data; n++) {
@@ -233,12 +223,10 @@ function draw_multiline(param) {
 
                     tooltip.html(tooltip_html);
                     tooltip
-                        //.style("left", f_x_pos[p_month] + 0.6 * f_width[p_month] + "px")
                         .style("left", month_width * (p_month+0.6) + "px")
                         .style("top", y0 + 20 + "px")
 
                     focus
-                        //.style("width", f_width[p_month] + "px")
                         .style("width", month_width + "px")
                         .style("transform", "translateX(" + month_width * p_month + "px)");
                 }
