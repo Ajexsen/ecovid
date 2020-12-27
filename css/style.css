@@ -159,22 +159,30 @@ body {
     fill-opacity: 50%;
 }
 
+.jqvmap-region-selected {
+    fill-opacity: 90%;
+}
+
+.jqvmap-region-unselected {
+    fill-opacity: 50%;
+}
+
 .map_svg .jqvmap-region:hover {
     fill-opacity: 90% !important;
 }
 
 .jqvmap-pin {
     color: var(--burgundy);
-    font-size: 1vw;
+    font-size: 0.8vw;
 }
 
 .jqvmap-region {
     cursor: pointer;
 }
 
-.jqvmap-label, .jqvmap-pin {
-    pointer-events: none;
-}
+/*.jqvmap-label, .jqvmap-pin {*/
+/*    pointer-events: none;*/
+/*}*/
 
 .jqvmap-ajax_response {
     width: 100%;
@@ -639,9 +647,8 @@ body {
 
 .tooltip {
     color: var(--burgundy);
-    /*border-radius: 3px;*/
+    border: none;
     background: var(--offwhite);
-    border: 1px solid var(--burgundy);
     outline: 1px solid transparent;
     position: absolute;
     padding: 4px 8px 4px 8px;
@@ -650,22 +657,24 @@ body {
     pointer-events: none;
     white-space: nowrap;
     opacity: 0;
-    transition: opacity 200ms;
+    /*transition: opacity 200ms;*/
     z-index: 50;
 }
 
 .focus_container:hover .tooltip {
     opacity: 1;
-    transition: opacity 200ms;
+    /*transition: opacity 200ms;*/
+    border: 1px solid var(--burgundy);
 }
 
 .focus {
     background-color: var(--burgundy-lighter);
     opacity: 0;
     height: 100%;
+    /*transition: transform 500ms;*/
 }
 
-.focus:hover {
+.focus_container:hover .focus {
     opacity: 0.6;
 }
 
@@ -757,7 +766,6 @@ body {
 .de_hist svg rect{
     fill: var(--burgundy);
 }
-
 
 .de_hist svg rect:hover ~ text.hist_label{
     display: block;

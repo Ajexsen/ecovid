@@ -1,6 +1,6 @@
 /**
 * Switches line chart data source and redraw on button click. (For transportation chart)
-* @param {string} name of the data source
+* @param type {string} name of the data source
 */
 function update_transport_chart(type) {
     // if current line same as button click, do nothing.
@@ -36,7 +36,7 @@ function update_transport_chart(type) {
 
 /**
 * Switches line chart data source and redraw on button click. (For economic chart)
-* @param {string} name of the data source
+* @param type {string} name of the data source
 */
 function update_econ_chart(type) {
     // if current line same as button click, do nothing.
@@ -68,7 +68,7 @@ let econ_type = "import"
 
 /**
 * Draws a chart with multiple line from different files.
-* @param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
+* @param param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
 */
 function draw_multiline(param) {
     // define transition for data switch

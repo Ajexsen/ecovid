@@ -9,8 +9,7 @@ function draw_histogram(param) {
         .append('svg')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     d3.csv(param.src, function(data){
         return {
