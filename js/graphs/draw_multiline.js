@@ -136,7 +136,7 @@ function draw_multiline(param) {
                 .ticks(0)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
-            )
+            )      
 
         let line_stroke_width = 0;
         let dot_stroke_width = 0;
@@ -170,6 +170,22 @@ function draw_multiline(param) {
                         return y(d.value)
                     })
                 )
+                
+            svg.selectAll(".dot_line")
+                .data(data[i])
+                .enter()
+                .append('line')
+                .attr("class", param.title + "_dot_lines dot_lines dot_line_" + param.title + "_" + param.line_legends[i])
+                .style("stroke", "grey")
+                .style("stroke-width", 1)
+                .attr("x1", function(d) { 
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2) 
+                })
+                .attr("y1", 15)
+                .attr("x2", function(d) { 
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2) 
+                })
+                .attr("y2", function(d) { return y(d.value) })                
 
             svg.selectAll(".dots")
                 .data(data[i])
@@ -183,6 +199,33 @@ function draw_multiline(param) {
                 })
                 .attr("cy", function(d) { return y(d.value) })
                 .attr("r", dot_stroke_width)
+
+            svg.selectAll(".text")
+                .data(data[i])
+                .enter()
+                .append("text")
+                .attr("class", "dlabs "+ param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
+                .attr("x", function(d) { 
+                    return x(month_tag[d.date.getMonth()]) + (month_width/2) 
+                })
+                .attr("y", 10)//function(d) { return y(d.value) })
+                .text(function(d) { return Math.round(d.value*100)/100 })
+
+/*
+            svg.append("text")
+                .data(data[i])
+                .transition(t)
+                .attr("class", param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
+                .attr("dx", function (d) {
+                        return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                    })
+                .attr("dy", function (d) {
+                        return y(d.value)
+                    })
+                .text(function (d) {
+                        return Math.round(d.value*100)/100
+                    }) */
+
 
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
@@ -199,17 +242,26 @@ function draw_multiline(param) {
             legend_block.append("div")
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])                        
+
             
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
+                    // hide all lines & dots
                     d3.selectAll("."+ param.title +"_lines").style("opacity", 0.07)
-                    d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)
+                    d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)                   
+                    
+                    // unhide selected line & dots
                     d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                 })
                 .on('mouseout', (event) => {
-                    d3.selectAll("."+ param.title +"_lines").style("opacity", 1)
-                    d3.selectAll("."+ param.title +"_dots").style("opacity", 1)
+                    // unhide all lines & dots
+                    d3.selectAll("." + param.title +"_lines").style("opacity", 1)
+                    d3.selectAll("." + param.title +"_dots").style("opacity", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0)
+                    d3.selectAll("." + param.title + "_dot_lines").style("opacity", 0)
                 })
             
         }
