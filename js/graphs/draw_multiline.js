@@ -91,7 +91,7 @@ function draw_multiline(param) {
 
     // define global var
     const n_data = param.data_files.length
-    const month_width = width / n_data
+    const month_width = width / 12
     let datasets = param.datasets
 
     // load all preread data
