@@ -142,7 +142,7 @@ function draw_multiline(param) {
         let dot_stroke_width = 0;
         let line_class = ""
         let dot_class = ""
-        for (let i = n_data - 1, k = 0; i >= 0; i--, k++) {
+        for (let i = n_data - 1; i >= 0; i--) {
             if (i === 0) {
                 line_stroke_width = 2.3;
                 dot_stroke_width = 2.0;
@@ -157,6 +157,8 @@ function draw_multiline(param) {
             svg.append("path")
                 .datum(data[i])
                 .transition(t)
+                .attr("id", "line_" + param.title + "_" + param.line_legends[i])
+                .attr("class", param.title + "_lines")
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
@@ -173,6 +175,7 @@ function draw_multiline(param) {
                 .data(data[i])
                 .enter()
                 .append("circle")
+                .attr("class", param.title + "_dots dot_" + param.title + "_" + param.line_legends[i])
                 .attr("fill", param.line_colors[i])
                 .attr("stroke", param.line_colors[i])
                 .attr("cx", function(d) { 
@@ -183,6 +186,7 @@ function draw_multiline(param) {
 
             let legend = d3.select(param.target + "_legend");
             let legend_block = legend.append("div")
+                .attr("id", "legend_" + param.title + "_" + param.line_legends[i])
                 .attr("class", "legend_block flexrow flexnone");
             let legend_line_box = legend_block.append("div")
                 .attr("class", "center_parent legend_line_box flexnone");
@@ -195,6 +199,23 @@ function draw_multiline(param) {
             legend_block.append("div")
                 .attr("class", "flexnone")
                 .html(param.line_legends[i])
+                
+            let line_i = d3.select("#line_" + param.title + "_" + param.line_legends[i])
+            let dots_i = d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i])
+            let legend_i = d3.select("#legend_" + param.title + "_" + param.line_legends[i])              
+            
+            legend_i
+                .on('mousemove', (event) => {
+                    d3.selectAll("."+ param.title +"_lines").style("opacity", 0.07)
+                    d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)
+                    line_i.style("opacity", 1)
+                    dots_i.style("opacity", 1)
+                })
+                .on('mouseout', (event) => {
+                    d3.selectAll("."+ param.title +"_lines").style("opacity", 1)
+                    d3.selectAll("."+ param.title +"_dots").style("opacity", 1)
+                })
+            
         }
 
         let focus = d3.select(param.target + "_focus");
