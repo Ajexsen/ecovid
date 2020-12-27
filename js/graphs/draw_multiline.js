@@ -206,7 +206,7 @@ function draw_multiline(param) {
                 x0 = d3.pointer(event)[0]
                 y0 = d3.pointer(event)[1]
                 const p_month = Math.floor(x0 / month_width)
-                if (p_month < 12) {
+                if (p_month < 12 && x0 >= 0) {
                     let values = []
                     for (let n = 0; n < n_data; n++) {
                         let data_point = data[n][p_month]
