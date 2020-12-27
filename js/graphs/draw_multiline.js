@@ -198,18 +198,14 @@ function draw_multiline(param) {
                 .style("background-color", param.line_colors[i]);
             legend_block.append("div")
                 .attr("class", "flexnone")
-                .html(param.line_legends[i])
-                
-            let line_i = d3.select("#line_" + param.title + "_" + param.line_legends[i])
-            let dots_i = d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i])
-            let legend_i = d3.select("#legend_" + param.title + "_" + param.line_legends[i])              
+                .html(param.line_legends[i])                        
             
-            legend_i
+            d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     d3.selectAll("."+ param.title +"_lines").style("opacity", 0.07)
                     d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)
-                    line_i.style("opacity", 1)
-                    dots_i.style("opacity", 1)
+                    d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                 })
                 .on('mouseout', (event) => {
                     d3.selectAll("."+ param.title +"_lines").style("opacity", 1)
