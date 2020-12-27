@@ -526,7 +526,74 @@ body {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border: none;
 }
+
+.line_button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#flight_button{    
+    background:url('../images/flight_inactive.png') center center / cover;
+}
+
+button#flight_button:hover{
+    background:url('../images/flight_active.png') center center / cover;
+}
+
+button#flight_button:active{
+    background:url('../images/flight_active.png') center center / cover;
+}
+
+#rail_button{
+    background:url('../images/rail_inactive.png') center center / cover;
+}
+
+#rail_button:hover{
+    background:url('../images/rail_active.png') center center / cover;
+}
+
+#rail_button:active{
+    background:url('../images/rail_active.png') center center / cover;
+}
+
+#bike_button{
+    background:url('../images/bike_inactive.png') center center / cover;
+}
+
+#bike_button:hover{
+    background:url('../images/bike_active.png') center center / cover;
+}
+
+#bike_button:active {
+    background:url('../images/bike_active.png') center center / cover;
+}
+
+#import_button{
+    background:url('../images/import_inactive.png') center center / cover;
+}
+
+#import_button:hover{
+    background:url('../images/import_active.png') center center / cover;
+}
+
+#import_button:active {
+    background:url('../images/import_active.png') center center / cover;
+}
+
+#export_button{
+    background:url('../images/export_inactive.png') center center / cover;
+}
+
+#export_button:hover{
+    background:url('../images/export_active.png') center center / cover;
+}
+
+#export_button:active {
+    background:url('../images/export_active.png') center center / cover;
+}
+
 
 .line {
     fill: none;

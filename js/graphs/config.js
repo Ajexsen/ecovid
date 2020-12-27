@@ -149,6 +149,7 @@ const line_param_export = {
 
 const histogram_param_DE = {
     target: ".de_hist",
+    title: "New Cases",
     event_lines: event_timeline,
     src: "data/rki/rki_DE-newcase.csv"
 }

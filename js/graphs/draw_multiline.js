@@ -4,9 +4,7 @@
 */
 function update_transport_chart(type) {
     // if current line same as button click, do nothing.
-    if(type === transport_type){
-        return
-    }
+    if(type === transport_type) return;
     
     // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
@@ -14,21 +12,12 @@ function update_transport_chart(type) {
     
     if (type === "flight") {
         transport_type = "flight"
-        $("#flight_button").attr("src", "images/flight_active.png")
-        $("#rail_button").attr("src", "images/rail_inactive.png")
-        $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_flight
     } else if (type === "rail") {
         transport_type = "rail"
-        $("#flight_button").attr("src", "images/flight_inactive.png")
-        $("#rail_button").attr("src", "images/rail_active.png")
-        $("#bike_button").attr("src", "images/bike_inactive.png")
         transport_param = line_param_rail
     } else if (type === "bike") {
         transport_type = "bike"
-        $("#flight_button").attr("src", "images/flight_inactive.png")
-        $("#rail_button").attr("src", "images/rail_inactive.png")
-        $("#bike_button").attr("src", "images/bike_active.png")
         transport_param = line_param_bike
     }
     draw_multiline(transport_param)
@@ -40,9 +29,7 @@ function update_transport_chart(type) {
 */
 function update_econ_chart(type) {
     // if current line same as button click, do nothing.
-    if(type === econ_type){
-        return
-    }    
+    if(type === econ_type) return;
     
     // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
@@ -50,13 +37,9 @@ function update_econ_chart(type) {
     
     if (type === "import") {
         econ_type = "import"
-        $("#import_button").attr("src", "images/import_active.png")
-        $("#export_button").attr("src", "images/export_inactive.png")
         econ_param = line_param_import
     } else if (type === "export") {
         econ_type = "export"
-        $("#import_button").attr("src", "images/import_inactive.png")
-        $("#export_button").attr("src", "images/export_active.png")
         econ_param = line_param_export
     }
     draw_multiline(econ_param)
@@ -186,6 +169,7 @@ function draw_multiline(param) {
                 .attr("fill", "none")
                 .attr("stroke", param.line_colors[i])
                 .attr("stroke-width", line_stroke_width)
+                //.transition()
                 .attr("d", d3.line()
                     .x(function (d) {
                         return x(month_tag[d.date.getMonth()]) + (month_width/2)

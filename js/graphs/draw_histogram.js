@@ -58,6 +58,14 @@ function draw_histogram(param) {
                 .tickPadding(10)
             )
         
+        svg.append('text')
+            .attr('class', 'chart_title')
+            .attr('x', -height / 2)
+            .attr('y', 0)
+            .attr("transform", "translate(10, 0) rotate(-90)")
+            .attr('text-anchor', 'middle')
+            .text(param.title)
+        
         // add event timeline
         if("event_lines" in param){
             events = param.event_lines
