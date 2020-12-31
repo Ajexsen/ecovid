@@ -800,7 +800,7 @@ body {
 }
 
 text.hist_label {
-    display: none;
+    /*display: none;*/
     fill: var(--burgundy);
     font-size: 0.7vw;
 }
