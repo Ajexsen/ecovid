@@ -104,7 +104,7 @@ def get_csv_bundesland(df, bundesland_id, path):
     df['NeuerFall'] = new_case
     df['NeuerTodesfall'] = new_death
     # df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
-    df.to_csv("{}{}".format(path,     ))
+    df.to_csv("{}{}".format(path, file_name))
     print("{} saved in path: {}".format(file_name, path))
     return df
 
@@ -122,7 +122,7 @@ data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis',
 data = data.drop(columns=['NeuGenesen', 'AnzahlGenesen', 'IstErkrankungsbeginn'])
 
 # date formating
-data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%Y-%m-%d')).dt.date
+data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%d/%m/%Y %H:%M')).dt.date
 
 # Data Beschreibung:
 # --- Anzahl Fälle der aktuellen Publikation als Summe(AnzahlFall), wenn NeuerFall in (0,1)
