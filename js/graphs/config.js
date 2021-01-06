@@ -155,5 +155,5 @@ const histogram_param_DE = {
 }
 
 // remember which data is currently used
-let transport_param = line_param_flight
+let transport_param = line_param_bike
 let econ_param = line_param_import
