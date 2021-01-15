@@ -1,6 +1,6 @@
 function draw_line(param) {
     const container = $(param.target)
-    const margin = {top: 0, right: 55, bottom: 25, left: 60}
+    const margin = {top: 5, right: 55, bottom: 25, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
