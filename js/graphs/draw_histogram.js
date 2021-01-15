@@ -66,7 +66,7 @@ function draw_histogram(param) {
             .enter()
             .append("text")
             .attr("class", "hist_label")
-            .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
+            .attr("x", function(d, i){return x(month_tag[i]) + (width / d_length - barPadding) / 2})
             .attr("y", function(d){return y(d.value)})
             .attr("transform", "translate(3, -3)")
             .text(function(d) { return d.value; });
