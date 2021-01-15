@@ -198,17 +198,20 @@ function draw_multiline(param) {
                 )
 
             // add line from dots to dot labels on top
+            const line_length = 50
+            const text_gap = 10
+
             svg.selectAll(".dot_line")
                 .data(data[i])
                 .enter()
                 .append('line')
                 .attr("class", param.title + "_dot_lines dot_lines dot_line_" + param.title + "_" + param.line_legends[i])
-                .style("stroke", "grey")
-                .style("stroke-width", 1)
+                // .style("stroke", "grey")
+                // .style("stroke-width", 1)
                 .attr("x1", function(d) {
                     return x(month_tag[d.date.getMonth()]) + (month_width/2)
                 })
-                .attr("y1", 15)
+                .attr("y1", function(d) { return Math.max(y(d.value) - line_length, 25)})
                 .attr("x2", function(d) {
                     return x(month_tag[d.date.getMonth()]) + (month_width/2)
                 })
@@ -237,7 +240,7 @@ function draw_multiline(param) {
                 .attr("x", function(d) {
                     return x(month_tag[d.date.getMonth()]) + (month_width/2)
                 })
-                .attr("y", 10)//function(d) { return y(d.value) })
+                .attr("y", function(d) { return Math.max(y(d.value) - line_length - text_gap, 25 - text_gap)})//function(d) { return y(d.value) })
                 .text(function(d) { return Math.round(d.value*100)/100 })
 
 
@@ -268,8 +271,8 @@ function draw_multiline(param) {
                     // unhide selected line & dots
                     d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
-                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
-                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.8)
+                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.6)
                 })
                 .on('mouseout', (event) => {
                     // unhide all lines & dots

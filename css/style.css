@@ -905,10 +905,16 @@ text.hist_label {
 }
 
 text.dlabs{
-    font-size: 0.5vw;
+    font-size: 0.7vw;
     opacity: 0;
+    font-weight: 300;
+    fill: var(--burgundy);
+    text-anchor: middle;
 }
 
 .dot_lines{
     opacity: 0;
+    stroke-dasharray: 2.2;
+    stroke-width: 1px;
+    stroke: var(--burgundy);
 }
