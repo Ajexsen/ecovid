@@ -155,19 +155,21 @@ body {
     pointer-events: auto;
 }
 
-.map_svg:hover .jqvmap-region {
-    fill-opacity: 50%;
+#map .map_svg:hover .jqvmap-region{
+    fill-opacity: 55%;
 }
 
-.jqvmap-region-selected {
-    fill-opacity: 90%;
+#map .jqvmap-region-unselected {
+    fill-opacity: 45% !important;
 }
 
-.jqvmap-region-unselected {
-    fill-opacity: 50%;
-}
+/*.jqvmap-region-selected {*/
+/*    fill-opacity: 90%;*/
+/*}*/
 
-.map_svg .jqvmap-region:hover {
+#map .map_svg .jqvmap-region:hover,
+#map .jqvmap-region-selected,
+#map .jqvmap-region-unselected:hover{
     fill-opacity: 90% !important;
 }
 
@@ -185,6 +187,23 @@ body {
 /*.jqvmap-label, .jqvmap-pin {*/
 /*    pointer-events: none;*/
 /*}*/
+
+.jqvmap-label {
+    position: absolute;
+
+
+    color: var(--burgundy);
+    /*border: none;*/
+    background: var(--offwhite);
+    /*outline: 1px solid transparent;*/
+    /*padding: 4px 8px 4px 8px;*/
+    padding: 1px;
+    font-size: 14px;
+    font-weight: 100;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 200;
+}
 
 .jqvmap-ajax_response {
     width: 100%;

@@ -46,24 +46,32 @@ function init_page() {
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
-        showLabels: true,
+        // showLabels: true,
         backgroundColor: null,
         enableZoom: false,
+        showTooltip: true,
         // pins: {
         //     "by": "pin_for_by"
         // },
         // pinMode: 'id',
-        // showTooltip: false,
         onRegionClick: function (element, code, region) {
         },
         // onLabelShow: function(event, label, code) {
-        //     label.text("Aaa")
+        //     label.html("Aaa");
         // },
         onRegionSelect: function(event, code, region) {
+            let states = $("#map .map_svg .jqvmap-region");
+            states.attr('class', 'jqvmap-region jqvmap-region-unselected');
+            let selected_state = $("#jqvmap1_" + code);
+            selected_state.attr('class', 'jqvmap-region jqvmap-region-selected');
+            console.log(selected_state)
+
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
             init_graph();
         },
         onRegionDeselect: function(event, code, region) {
+            let states = $("#map .map_svg .jqvmap-region");
+            states.attr('class', 'jqvmap-region');
             data_source = de_data_source;
             init_graph();
         }
