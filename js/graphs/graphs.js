@@ -154,7 +154,7 @@ function init_graph() {
         });
         refresh_on_state_change();
 
-        line_param_flight.datasets = read_datasets(line_param_flight)
+        line_param_air.datasets = read_datasets(line_param_air)
         line_param_rail.datasets = read_datasets(line_param_rail)
         line_param_road.datasets = read_datasets(line_param_road)
         line_param_water.datasets = read_datasets(line_param_water)

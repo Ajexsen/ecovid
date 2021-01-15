@@ -535,12 +535,12 @@ body {
 }
 
 
-#flight_button {    
-    background:url('../images/flight_inactive.png') center center / cover;
+#air_button {    
+    background:url('../images/air_inactive.png') center center / cover;
 }
 
-#flight_button:hover, #flight_button:disabled {
-    background:url('../images/flight_active.png') center center / cover;
+#air_button:hover, #air_button:disabled {
+    background:url('../images/air_active.png') center center / cover;
 }
 
 #rail_button {

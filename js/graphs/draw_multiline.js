@@ -7,29 +7,29 @@ function update_transport_chart(type) {
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
     
-    if (type === "flight") {
-        $("#flight_button").prop('disabled', true);
+    if (type === "air") {
+        $("#air_button").prop('disabled', true);
         $("#rail_button").prop('disabled', false)
         $("#road_button").prop('disabled', false)  
         $("#water_button").prop('disabled', false) 
-        transport_type = "flight"
-        transport_param = line_param_flight
+        transport_type = "air"
+        transport_param = line_param_air
     } else if (type === "rail") {
-        $("#flight_button").prop('disabled', false)
+        $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', true)
         $("#road_button").prop('disabled', false) 
         $("#water_button").prop('disabled', false)        
         transport_type = "rail"
         transport_param = line_param_rail
     } else if (type === "road") {
-        $("#flight_button").prop('disabled', false)
+        $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', false)
         $("#road_button").prop('disabled', true)  
         $("#water_button").prop('disabled', false)       
         transport_type = "road"
         transport_param = line_param_road
     } else if (type === "water") {
-        $("#flight_button").prop('disabled', false)
+        $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', false)
         $("#road_button").prop('disabled', false)  
         $("#water_button").prop('disabled', true)       
@@ -63,7 +63,7 @@ function update_econ_chart(type) {
 }
 
 // define default type
-let transport_type = "flight"
+let transport_type = "air"
 let econ_type = "import"
 
 /**

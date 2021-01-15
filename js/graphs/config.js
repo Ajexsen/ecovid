@@ -80,9 +80,9 @@ const line_param_case = {
 };
 
 
-const line_param_flight = {
+const line_param_air = {
     target: "#line_chart_transport",
-    title: "flight",
+    title: "air",
     src: "data/transport/air/",
     data_files: ["air_2017.csv", "air_2018.csv", "air_2019.csv", "air_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -168,5 +168,5 @@ const histogram_param_DE = {
 
 
 // remember which data is currently used
-let transport_param = line_param_road
+let transport_param = line_param_water
 let econ_param = line_param_import
