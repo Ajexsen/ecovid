@@ -80,44 +80,55 @@ const line_param_case = {
 };
 
 
-
-// use bike as dummy
 const line_param_flight = {
     target: "#line_chart_transport",
     title: "flight",
-    src: "data/transport/bicycle/",
-    data_files: ["b_2017.csv", "b_2018.csv", "b_2019.csv", "b_2020.csv"],
+    src: "data/transport/air/",
+    data_files: ["air_2017.csv", "air_2018.csv", "air_2019.csv", "air_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    x: "month",
-    y: "count",
+    x: "Monat",
+    y: "Air transport",
     datasets: []
 };
 
-// use bike as dummy
+
 const line_param_rail = {
     target: "#line_chart_transport",
     title: "rail",
-    src: "data/transport/bicycle/",
-    data_files: ["b_2018.csv", "b_2020.csv", "b_2017.csv", "b_2019.csv"],
-    line_legends: ["2018", "2020", "2017", "2019"],
+    src: "data/transport/rail/",
+    data_files: ["rail_2017.csv", "rail_2018.csv", "rail_2019.csv", "rail_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    x: "month",
-    y: "count",
+    x: "Monat",
+    y: "Rail transport",
     datasets: []
 };
 
+// TODO: change name to road
 const line_param_bike = {
     target: "#line_chart_transport",
     title: "bike",
-    src: "data/transport/bicycle/",
-    data_files: ["b_2020.csv", "b_2019.csv", "b_2018.csv", "b_2017.csv"],
-    line_legends: ["2020", "2019", "2018", "2017"],
+    src: "data/transport/road/",
+    data_files: ["road_2017.csv", "road_2018.csv", "road_2019.csv", "road_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
     line_colors: line_colors,
-    x: "month",
-    y: "count",
+    x: "Monat",
+    y: "Road transport",
     datasets: []
 };
+
+const line_param_water = {
+    target: "#line_chart_transport",
+    title: "water",
+    src: "data/transport/waterway/",
+    data_files: ["water_2017.csv", "water_2018.csv", "water_2019.csv", "water_2020.csv"],
+    line_legends: ["2017", "2018", "2019", "2020"],
+    line_colors: line_colors,
+    x: "Monat",
+    y: "Inland waterways transport",
+    datasets: []
+}
 
 const line_param_import = {
     target: "#line_chart_econ",

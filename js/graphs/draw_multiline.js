@@ -10,21 +10,31 @@ function update_transport_chart(type) {
     if (type === "flight") {
         $("#flight_button").prop('disabled', true);
         $("#rail_button").prop('disabled', false)
-        $("#bike_button").prop('disabled', false)   
+        $("#bike_button").prop('disabled', false)  
+        $("#water_button").prop('disabled', false) 
         transport_type = "flight"
         transport_param = line_param_flight
     } else if (type === "rail") {
         $("#flight_button").prop('disabled', false)
         $("#rail_button").prop('disabled', true)
-        $("#bike_button").prop('disabled', false)         
+        $("#bike_button").prop('disabled', false) 
+        $("#water_button").prop('disabled', false)        
         transport_type = "rail"
         transport_param = line_param_rail
     } else if (type === "bike") {
         $("#flight_button").prop('disabled', false)
         $("#rail_button").prop('disabled', false)
-        $("#bike_button").prop('disabled', true)         
+        $("#bike_button").prop('disabled', true)  
+        $("#water_button").prop('disabled', false)       
         transport_type = "bike"
         transport_param = line_param_bike
+    } else if (type === "water") {
+        $("#flight_button").prop('disabled', false)
+        $("#rail_button").prop('disabled', false)
+        $("#bike_button").prop('disabled', false)  
+        $("#water_button").prop('disabled', true)       
+        transport_type = "water"
+        transport_param = line_param_water
     }
     draw_multiline(transport_param)
 }
