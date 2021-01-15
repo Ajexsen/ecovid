@@ -1,6 +1,6 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 25, right: 50, bottom: 25, left: 40}
+    const margin = {top: 40, right: 50, bottom: 25, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
@@ -76,7 +76,7 @@ function draw_histogram(param) {
                 svg.append("line")
                     .attr("x1", x_pos)
                     .attr("x2", x_pos)
-                    .attr("y1", 20)
+                    .attr("y1", -20)
                     .attr("y2", height)
                     .attr("stroke-width", 2)
                     .attr("stroke", "grey")
@@ -84,7 +84,7 @@ function draw_histogram(param) {
                 svg.append("text")
                     .attr("class", "event_txt_label")
                     //.attr("transform", "translate("+ (x_pos-10) +",100) rotate(-90)")
-                    .attr("transform", "translate("+ x_pos +",10)")
+                    .attr("transform", "translate("+ (x_pos-30) +",-30)")
                     .text(events[key])
             }     
         }        

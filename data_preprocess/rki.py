@@ -122,7 +122,7 @@ data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis',
 data = data.drop(columns=['NeuGenesen', 'AnzahlGenesen', 'IstErkrankungsbeginn'])
 
 # date formating
-data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%d/%m/%Y %H:%M')).dt.date
+data['Meldedatum'] = (pd.to_datetime(data['Meldedatum'].str.strip(), format='%Y/%m/%d %H:%M')).dt.date
 
 # Data Beschreibung:
 # --- Anzahl Fälle der aktuellen Publikation als Summe(AnzahlFall), wenn NeuerFall in (0,1)
