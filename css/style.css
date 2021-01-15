@@ -559,6 +559,15 @@ body {
     background:url('../images/bike_active.png') center center / cover;
 }
 
+/*TODO: change images */
+#water_button {
+    background:url('../images/bike_inactive.png') center center / cover;
+}
+
+#water_button:hover, #water_button:disabled {
+    background:url('../images/bike_active.png') center center / cover;
+}
+
 #import_button{
     background:url('../images/import_inactive.png') center center / cover;
 }
