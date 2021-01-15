@@ -545,12 +545,12 @@ body {
 }
 
 
-#flight_button {    
-    background:url('../images/flight_inactive.png') center center / cover;
+#air_button {    
+    background:url('../images/air_inactive.png') center center / cover;
 }
 
-#flight_button:hover, #flight_button:disabled {
-    background:url('../images/flight_active.png') center center / cover;
+#air_button:hover, #air_button:disabled {
+    background:url('../images/air_active.png') center center / cover;
 }
 
 #rail_button {
@@ -561,12 +561,20 @@ body {
     background:url('../images/rail_active.png') center center / cover;
 }
 
-#bike_button {
-    background:url('../images/bike_inactive.png') center center / cover;
+#road_button {
+    background:url('../images/road_inactive.png') center center / cover;
 }
 
-#bike_button:hover, #bike_button:disabled {
-    background:url('../images/bike_active.png') center center / cover;
+#road_button:hover, #road_button:disabled {
+    background:url('../images/road_active.png') center center / cover;
+}
+
+#water_button {
+    background:url('../images/water_inactive.png') center center / cover;
+}
+
+#water_button:hover, #water_button:disabled {
+    background:url('../images/water_active.png') center center / cover;
 }
 
 #import_button{
@@ -822,7 +830,7 @@ body {
 }
 
 text.hist_label {
-    display: none;
+    /*display: none;*/
     fill: var(--burgundy);
     font-size: 0.7vw;
 }
