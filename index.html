@@ -8,7 +8,20 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<div id="preloadedImages">
+    <div id="preloadedImage01"></div>
+    <div id="preloadedImage02"></div>
+    <div id="preloadedImage03"></div>
+    <div id="preloadedImage04"></div>
+    <div id="preloadedImage05"></div>
+    <div id="preloadedImage06"></div>
+    <div id="preloadedImage07"></div>
+    <div id="preloadedImage08"></div>
+    <div id="preloadedImage09"></div>
+    <div id="preloadedImage10"></div>
+    <div id="preloadedImage11"></div>
+    <div id="preloadedImage12"></div>
+</div>
 <div id="bg" class="full_v bg">
     <div id="logo_burgundy" class="logo burgundy-text">XIV.</div>
     <div id="map_bg" class="fullheight_v map_bg map_container">
@@ -19,17 +32,17 @@
     <div id="section0" class="section fullheight_v flexrow_parent">
         <div id="oneleft" class="fullheight_v map_container flexleft">
             <div id="map" class="map">
-                <svg id="map_svg" class="map_svg"></svg>
+                <div id="map_svg" class="map_svg"></div>
             </div>
         </div>
-        <div id="onerightcontainter" class="fullheight_v flexright onerightcontainter">
+        <div id="onerightcontainter" class="fullheight_v flexright onerightcontainter section_content">
             <div id="oneright" class="flexcolumn oneright">
                 <div class="flexnone flexrow">
                     <div id="date" class="flexnone flexcolumn dateblock">
                         <div id="month" class="">-</div>
                         <div id="day" class="">-</div>
                     </div>
-                    <div id="onerighttop" class="flexnone flexrow">
+                    <div id="onerighttop" class="flex1 flexrow">
                         <div id="stat1" class="flex1 flexcolumn stat">
                             <div class="stat_title">Total Cases</div>
                             <div id="total_cases" class="stat_value">-</div>
@@ -53,96 +66,105 @@
                     </div>
                 </div>
                 <div id="onerightmiddle" class="flex2 flexrow">
-                    <div id="case_hist" class="flex1 flexcolumn hist_parent">
-                        <div class="gender flexnone flexrow">
+                    <div id="case_hist" class="flex1 hist_parent">
+                        <div class="gender flexrow float">
                             <div class="flex1 gender_text">Male</div>
                             <div class="flex1 gender_text">Female</div>
                         </div>
-                        <div class="flexrow flex1">
-                            <div class="flex1 center_parent">
-                                <div id="case_hist_left" class="bar_center_container center_box"></div>
-                            </div>
-                            <div class="flexnone hist_labels center_parent">
-                                <div id="case_hist_label"
-                                     class="flexcolumn hist_label_center bar_center_container center_box">
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">80+</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">60-79</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">30-59</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">15-34</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">5-14</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">0-4</div>
+                        <div class="flexcolumn fullheight_p">
+                            <div class="flexrow flex1">
+                                <div class="flex1 center_parent">
+                                    <div id="case_hist_left" class="bar_center_container center_box"></div>
+                                </div>
+                                <div class="flexnone hist_labels center_parent">
+                                    <div id="case_hist_label"
+                                         class="flexcolumn hist_label_center bar_center_container center_box">
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">80+</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">60-79</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">30-59</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">15-34</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">5-14</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">0-4</div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="flex1 center_parent">
+                                    <div id="case_hist_right" class="bar_center_container center_box"></div>
+                                </div>
                             </div>
-                            <div class="flex1 center_parent">
-                                <div id="case_hist_right" class="bar_center_container center_box"></div>
-                            </div>
+                            <div class="bar_title flexnone">Total Cases by Age and Gender</div>
                         </div>
-                        <div class="bar_title flexnone">Total Cases by Age and Gender</div>
                     </div>
-                    <div id="death_hist" class="flex1 flexcolumn hist_parent">
-                        <div class="gender flexnone flexrow">
+                    <div id="death_hist" class="flex1 hist_parent">
+                        <div class="gender flexrow float">
                             <div class="flex1 gender_text">Male</div>
                             <div class="flex1 gender_text">Female</div>
-                        </div>                        <div class="flexrow flex1">
-                            <div class="flex1 center_parent">
-                                <div id="death_hist_left" class="bar_center_container center_box"></div>
-                            </div>
-                            <div class="flexnone hist_labels center_parent">
-                                <div id="death_hist_label"
-                                     class="flexcolumn hist_label_center bar_center_container center_box">
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">80+</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">60-79</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">30-59</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">15-34</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">5-14</div>
-                                    </div>
-                                    <div class="flex1 hist_label">
-                                        <div class="hist_label_text">0-4</div>
+                        </div>
+                        <div class="flexcolumn fullheight_p">
+                            <div class="flexrow flex1">
+                                <div class="flex1 center_parent">
+                                    <div id="death_hist_left" class="bar_center_container center_box"></div>
+                                </div>
+                                <div class="flexnone hist_labels center_parent">
+                                    <div id="death_hist_label"
+                                         class="flexcolumn hist_label_center bar_center_container center_box">
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">80+</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">60-79</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">30-59</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">15-34</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">5-14</div>
+                                        </div>
+                                        <div class="flex1 hist_label">
+                                            <div class="hist_label_text">0-4</div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="flex1 center_parent">
+                                    <div id="death_hist_right" class="bar_center_container center_box"></div>
+                                </div>
                             </div>
-                            <div class="flex1 center_parent">
-                                <div id="death_hist_right" class="bar_center_container center_box"></div>
-                            </div>
+                            <div class="bar_title flexnone">Total Deaths by Age and Gender</div>
                         </div>
-                        <div class="bar_title flexnone">Total Deaths by Age and Gender</div>
                     </div>
                 </div>
 
-                <!--                <div id="tools">-->
-                <!--                    <button id="play-button">Play</button>-->
-                <!--                </div>-->
+                <!--                                <div id="tools">-->
+                <!--                                    <button id="play-button">Play</button>-->
+                <!--                                </div>-->
 
                 <div id="onerightbottom" class="flex3">
-                    <div class="float fullheight_p flexcolumn">
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="line_chart_area" class="line_chart_overlay flex1"></div>
+                    </div>
+                    <div class="float fullheight_p fullwidth_p flexcolumn">
+<!--                        <div id="place_holder_event" class="flexnone"></div>-->
                         <div id="line_chart_slider_top" class="flex1"></div>
                         <div id="line_chart_slider_bottom" class="flex1"></div>
                     </div>
-                    <div class="float fullheight_p slider flexcolumn">
-                        <div id="slider_containter" class="slider_containter flex1">
-                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347" value="0"
-                                   oninput="updateBarData(this.value)">
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="slider_containter" class="line_chart_overlay flex1">
+                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
+                                   oninput="refresh_on_date_change(this.value)">
                         </div>
                     </div>
                 </div>
@@ -150,42 +172,87 @@
         </div>
     </div>
     <div id="section1" class="section center_parent">
-        <div id="content_sec1" class="content_sec center_box flexcolumn">
+        <div id="content_sec1" class="content_sec center_box flexcolumn section_content">
             <div id="twotop" class="flexnone flexcolumn content_titles">
                 <div class="content_title fullwidth_p flexnone">COVID-19</div>
-                <div class="content_subtitle fullwidth_p flexnone">is affectinig the travel and tourism in Germany ...
+                <div class="content_subtitle fullwidth_p flexnone">is affectinig the goods transport in Germany ...
                 </div>
             </div>
-            <div id="lc_sec2" class="flex3 frame content_middle">
-<!--                <div id="line_chart_transport" class="flex1"></div>-->
+            <div id="lc_sec2" class="flex3 content_middle flexrow">
+                <div id="transport_buttons" class="line_buttons flexcolumn">
+                    <div class="flex1"></div>
+                    <button title="Water" class="line_button flexrow flexnone" id="water_button" onclick="update_transport_chart('water');" disabled></button>
+                    <button title="Air" class="line_button flexrow flexnone" id="air_button" onclick="update_transport_chart('air');"></button>
+                    <button title="Rail" class="line_button flexrow flexnone" id="rail_button" onclick="update_transport_chart('rail');"></button>
+                    <button title="Road" class="line_button flexrow flexnone" id="road_button" onclick="update_transport_chart('road');"></button>
+                </div>
+                <div class="flexcolumn flex1">
+                    <div id="transport_container" class="line_chart_impact_container flex1">
+                        <div id="line_chart_transport_container" class="float focus_container flexrow">
+                            <div id="line_chart_transport_focus" class="focus"></div>
+                            <div id="line_chart_transport_tooltip" class="tooltip"></div>
+                        </div>
+                        <div id="line_chart_transport" class="fullwidth_p fullheight_p line_chart_impact float"></div>
+                    </div>
+                    <div class="flexnone legend_box center_parent">
+                        <div id="line_chart_transport_legend" class="legend center_box flexrow"></div>
+                    </div>
+                </div>
             </div>
-            <div id="his_sec2" class="flex1 frame">
+            <div id="his_sec2" class="de_hist flex1">
             </div>
         </div>
     </div>
     <div id="section2" class="section center_parent">
-        <div id="content_sec2" class="content_sec center_box flexcolumn">
+        <div id="content_sec2" class="content_sec center_box flexcolumn section_content">
             <div id="prologue_sec2" class="flexnone flexcolumn content_titles">
                 <div class="content_title fullwidth_p flexnone">COVID-19</div>
-                <div class="content_subtitle fullwidth_p flexnone">is also affecting other econoimic indicators in
-                    Germany ...
+                <div class="content_subtitle fullwidth_p flexnone">is also affecting German foreign trade ...
                 </div>
             </div>
-            <div id="lc_sec3" class="flex3 frame content_middle">
+            <div id="lc_sec3" class="flex3 content_middle flexrow">
+                <div id="econ_buttons" class="line_buttons flexcolumn">
+                    <div class="flex1"></div>
+                    <button title="import" class="line_button flexrow flexnone" id="import_button" onclick="update_econ_chart('import');" disabled></button>
+                    <button title="export" class="line_button flexrow flexnone" id="export_button" onclick="update_econ_chart('export');"></button>               
+                </div>
+                <div class="flexcolumn flex1">
+                    <div id="economy_container" class="line_chart_impact_container flex1">
+                        <div id="line_chart_econ_container" class="float focus_container flexrow">
+                            <div id="line_chart_econ_focus" class="focus"></div>
+                            <div id="line_chart_econ_tooltip" class="tooltip"></div>
+                        </div>
+                        <div id="line_chart_econ" class="fullwidth_p fullheight_p line_chart_impact float"></div>
+                    </div>
+                    <div class="flexnone legend_box center_parent">
+                        <div id="line_chart_econ_legend" class="legend center_box flexrow"></div>
+                    </div>
+                </div>
             </div>
-            <div id="his_sec3" class="flex1 frame">
+            <div id="his_sec3" class="de_hist flex1">
             </div>
         </div>
     </div>
 </div>
+
+<!--<div style="display:none">-->
+<!--    <div id="pin_for_by" content="aaa"></div>-->
+<!--</div>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="js/jquery.vmap.js"></script>
 <script src="js/jquery.vmap.germany.js"></script>
 <script src="js/fullpage.js"></script>
-<script src="js/script.js"></script>
-<script src="js/diagrams.js"></script>
+<script src="js/graphs/config.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/graphs/draw_bar.js"></script>
+<script src="js/graphs/draw_histogram.js"></script>
+<script src="js/graphs/draw_line.js"></script>
+<script src="js/graphs/draw_multiline.js"></script>
+<script src="js/graphs/refresh_text.js"></script>
+<script src="js/graphs/graphs.js"></script>
+<script src="js/events.js"></script>
 
 </body>
 </html>
