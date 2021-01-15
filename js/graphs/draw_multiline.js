@@ -78,7 +78,7 @@ function draw_multiline(param) {
     
     // setup prep - get container and create svg
     const container = $(param.target)
-    const margin = {top: 70, right: 50, bottom: 25, left: 10}
+    const margin = {top: 0, right: 50, bottom: 25, left: 10}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
         

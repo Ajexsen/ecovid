@@ -30,6 +30,28 @@ function draw_histogram(param) {
             .domain([0, d3.max(d, function(d) { return +d.value; })])
             .range([height, 0])
 
+        // add event timeline
+        if("event_lines" in param){
+            events = param.event_lines
+            for (var key in events) {
+                let date = d3.timeParse("%m-%d")(key)
+                let x_pos = x(month_tag[date.getMonth()]) + x(month_tag[1])*0.5//(date.getDate()/30)
+                svg.append("line")
+                    .attr("x1", x_pos)
+                    .attr("x2", x_pos)
+                    .attr("y1", -20)
+                    .attr("y2", height)
+                    .attr("stroke-width", 1)
+                    .attr("stroke", "grey")
+                    .attr("stroke-dasharray", "3");
+                svg.append("text")
+                    .attr("class", "event_txt_label")
+                    .attr("transform", "translate("+ (x_pos-40) +",-30)")
+                    //.attr("transform", "translate("+ (x_pos+10) +",-20) rotate(90)")
+                    .text(events[key])
+            }
+        }
+
         svg.selectAll("rect")
             .data(d)
             .enter()
@@ -66,28 +88,5 @@ function draw_histogram(param) {
             .attr("transform", "translate(-15, 0) rotate(-90)")
             .attr('text-anchor', 'middle')
             .text(param.title)
-        
-        // add event timeline
-        if("event_lines" in param){
-            events = param.event_lines
-            for (var key in events) {
-                let date = d3.timeParse("%m-%d")(key)
-                let x_pos = x(month_tag[date.getMonth()]) + x(month_tag[1])*0.5//(date.getDate()/30)
-                svg.append("line")
-                    .attr("x1", x_pos)
-                    .attr("x2", x_pos)
-                    .attr("y1", -20)
-                    .attr("y2", height)
-                    .attr("stroke-width", 1)
-                    .attr("stroke", "grey")
-                    .attr("stroke-dasharray", "3");
-                svg.append("text")
-                    .attr("class", "event_txt_label")
-                    .attr("transform", "translate("+ (x_pos-40) +",-30)")
-                    //.attr("transform", "translate("+ (x_pos+10) +",-20) rotate(90)")
-                    .text(events[key])
-            }     
-        }        
-
     })
 }

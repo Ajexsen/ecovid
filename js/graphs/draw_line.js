@@ -166,41 +166,41 @@ function draw_line(param) {
         .attr('text-anchor', 'middle')
         .text(param.title);
 
-    if ("event_lines" in param) {
-        // const parent_id = d3.select(param.target).node().parentNode.id;
-        const event_area = $("#line_chart_area");
-        let event_width = event_area.innerWidth(),
-            event_height = event_area.innerHeight();
-
-        let event = d3.select("#line_chart_area")
-            .append("svg")
-            .attr("width", event_width)
-            .attr("height", event_height)
-            .append("g")
-            // .attr("transform",
-            //     "translate(" + margin.left + "," + margin.top + ")");
-
-        let events = param.event_lines;
-        for (let key in events) {
-            let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
-            // console.log(x)
-            event.append("line")
-                .attr("x1", x_pos)
-                .attr("x2", x_pos)
-                .attr("y1", 0)
-                .attr("y2", event_height)
-                .attr("stroke-width", 1)
-                .attr("stroke", "black")
-                .attr("stroke-dasharray", "4")
-                .style("transform", "translateY(" + (-0) + "px)");
-            let text = event.append("div")
-            text
-                .attr("class", "event_txt_label")
-                .style("left", (x_pos - 5) + "px")
-                .style("transform", (x_pos - 5) + "px")
-                .text(events[key])
-        }
-    }
+    // if ("event_lines" in param) {
+    //     // const parent_id = d3.select(param.target).node().parentNode.id;
+    //     const event_area = $("#line_chart_area");
+    //     let event_width = event_area.innerWidth(),
+    //         event_height = event_area.innerHeight();
+    //
+    //     let event = d3.select("#line_chart_area")
+    //         .append("svg")
+    //         .attr("width", event_width)
+    //         .attr("height", event_height)
+    //         .append("g")
+    //         // .attr("transform",
+    //         //     "translate(" + margin.left + "," + margin.top + ")");
+    //
+    //     let events = param.event_lines;
+    //     for (let key in events) {
+    //         let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
+    //         // console.log(x)
+    //         event.append("line")
+    //             .attr("x1", x_pos)
+    //             .attr("x2", x_pos)
+    //             .attr("y1", 0)
+    //             .attr("y2", event_height)
+    //             .attr("stroke-width", 1)
+    //             .attr("stroke", "black")
+    //             .attr("stroke-dasharray", "4")
+    //             .style("transform", "translateY(" + (-0) + "px)");
+    //         let text = event.append("div")
+    //         text
+    //             .attr("class", "event_txt_label")
+    //             .style("left", (x_pos - 5) + "px")
+    //             .style("transform", (x_pos - 5) + "px")
+    //             .text(events[key])
+    //     }
+    // }
 
     if (param.legend) {
         svg.append('text')
