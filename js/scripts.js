@@ -49,12 +49,16 @@ function init_page() {
         showLabels: true,
         backgroundColor: null,
         enableZoom: false,
+        // pins: {
+        //     "by": "pin_for_by"
+        // },
+        // pinMode: 'id',
         // showTooltip: false,
         onRegionClick: function (element, code, region) {
         },
-        onLabelShow: function(event, label, code) {
-            label.text("Aaa")
-        },
+        // onLabelShow: function(event, label, code) {
+        //     label.text("Aaa")
+        // },
         onRegionSelect: function(event, code, region) {
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
             init_graph();
