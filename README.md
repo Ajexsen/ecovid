@@ -20,7 +20,7 @@ Information Visualization for COVID-19 (Group 14)
   - all charts refreshed accordingly
   
 
-![屏幕快照 2021-01-15 10 23 03](https://user-images.githubusercontent.com/44232985/104714583-ae067f80-5725-11eb-8249-ceaba2f399bb.png)
+![image](https://user-images.githubusercontent.com/44232985/104714877-08074500-5726-11eb-96d1-95e94081805a.png)
 
 
 - Transport indices (air/rail/road/waterway)
@@ -30,7 +30,7 @@ Information Visualization for COVID-19 (Group 14)
 - Details in tooltip (mouse over)
 
 
-![屏幕快照 2021-01-15 10 23 38](https://user-images.githubusercontent.com/44232985/104714607-b494f700-5725-11eb-93b9-62f7a720b57b.png)
+![image](https://user-images.githubusercontent.com/44232985/104714853-0047a080-5726-11eb-89d9-69132e94de45.png)
 
 
 - German import and export from 2017 to 2020
