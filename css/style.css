@@ -74,6 +74,56 @@ body {
     font-family: "Gill Sans MT Pro", helvetica, sans-serif !important;
 }
 
+/* preload button image to prevent blinking at first hover*/
+#preloadedImage01{
+    background: url('../images/air_inactive.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage02{
+    background: url('../images/air_active.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage03{
+    background: url('../images/rail_inactive.png') no-repeat -9999px -9999px; 
+}
+
+#preloadedImage04{ 
+    background: url('../images/rail_active.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage05{
+    background: url('../images/road_inactive.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage06{
+    background: url('../images/road_active.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage07{
+    background: url('../images/water_inactive.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage08{
+    background: url('../images/water_active.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage09{
+    background: url('../images/import_inactive.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage10{
+    background: url('../images/import_active.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage11{
+    background: url('../images/export_inactive.png') no-repeat -9999px -9999px;
+}
+
+#preloadedImage12{
+    background: url('../images/export_active.png') no-repeat -9999px -9999px;
+}
+
+
 #fullpage {
     z-index: 10;
 }
