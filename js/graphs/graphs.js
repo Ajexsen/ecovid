@@ -156,8 +156,9 @@ function init_graph() {
 
         line_param_flight.datasets = read_datasets(line_param_flight)
         line_param_rail.datasets = read_datasets(line_param_rail)
-        line_param_bike.datasets = read_datasets(line_param_bike)
+        line_param_road.datasets = read_datasets(line_param_road)
         line_param_water.datasets = read_datasets(line_param_water)
+        
         line_param_import.datasets = read_datasets(line_param_import)
         line_param_export.datasets = read_datasets(line_param_export)
 

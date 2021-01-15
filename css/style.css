@@ -551,21 +551,20 @@ body {
     background:url('../images/rail_active.png') center center / cover;
 }
 
-#bike_button {
-    background:url('../images/bike_inactive.png') center center / cover;
+#road_button {
+    background:url('../images/road_inactive.png') center center / cover;
 }
 
-#bike_button:hover, #bike_button:disabled {
-    background:url('../images/bike_active.png') center center / cover;
+#road_button:hover, #road_button:disabled {
+    background:url('../images/road_active.png') center center / cover;
 }
 
-/*TODO: change images */
 #water_button {
-    background:url('../images/bike_inactive.png') center center / cover;
+    background:url('../images/water_inactive.png') center center / cover;
 }
 
 #water_button:hover, #water_button:disabled {
-    background:url('../images/bike_active.png') center center / cover;
+    background:url('../images/water_active.png') center center / cover;
 }
 
 #import_button{

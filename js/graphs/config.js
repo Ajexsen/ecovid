@@ -105,8 +105,7 @@ const line_param_rail = {
     datasets: []
 };
 
-// TODO: change name to road
-const line_param_bike = {
+const line_param_road = {
     target: "#line_chart_transport",
     title: "bike",
     src: "data/transport/road/",
@@ -167,6 +166,7 @@ const histogram_param_DE = {
     src: "data/rki/rki_DE-newcase.csv"
 }
 
+
 // remember which data is currently used
-let transport_param = line_param_bike
+let transport_param = line_param_road
 let econ_param = line_param_import
