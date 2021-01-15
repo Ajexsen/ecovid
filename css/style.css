@@ -383,6 +383,7 @@ body {
     color: var(--burgundy);
     position: relative;
     height: 16.667%;
+    text-anchor: middle;
 }
 
 .hist_labels {
