@@ -342,7 +342,7 @@ body {
 
 #day {
     border: solid var(--burgundy) 1px;
-    font-size: 1.9vw;
+    font-size: 1.7vw;
     padding: 0 6px 0 6px;
     color: var(--burgundy);
     /*font-weight: bold;*/
@@ -371,7 +371,7 @@ body {
 }
 
 .stat_value {
-    font-size: 1.9vw;
+    font-size: 1.7vw;
     font-weight: bold;
     white-space: nowrap;
 }
@@ -415,7 +415,7 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 0 calc(55px - var(--slider-thumb-width)) 25px 60px;
+    margin: 30px calc(55px - var(--slider-thumb-width)) 25px 60px;
     overflow: hidden;
 }
 
