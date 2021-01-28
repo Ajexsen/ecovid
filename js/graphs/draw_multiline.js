@@ -262,6 +262,7 @@ function draw_multiline(param) {
                 .html(param.line_legends[i])
 
             // add legend hover effect
+
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     // hide all lines & dots
@@ -273,6 +274,11 @@ function draw_multiline(param) {
                     d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.8)
                     d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.6)
+                    
+                    // always show line from 2020
+                    d3.select("#line_" + param.title + "_" + "2020").style("opacity", 1)
+                    d3.selectAll(".dot_" + param.title + "_" + "2020").style("opacity", 1)                    
+                    
                 })
                 .on('mouseout', (event) => {
                     // unhide all lines & dots
