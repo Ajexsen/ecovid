@@ -35,7 +35,7 @@ function draw_line(param) {
     let y_left = d3.scaleLinear()
         .domain([0, d3.max(param.src, function (d) {
             return +d[param.data1.y];
-        }) + 0])
+        }) * 1.1])
         .range([height, 0]);
 
     svg.append("g")
@@ -50,7 +50,7 @@ function draw_line(param) {
     let y_right = d3.scaleLinear()
         .domain([0, d3.max(param.src, function (d) {
             return +d[param.data2.y];
-        }) + 0])
+        }) * 1.1])
         .range([height, 0]);
 
     svg.append("g")
