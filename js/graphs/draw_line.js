@@ -5,19 +5,8 @@ function draw_line(param) {
         height = container.innerHeight() - margin.top - margin.bottom;
 
     let range = +param.end;
-    // let new_range = 0;
-    // let n_data = +$("#date_slider").attr("max");
-    // if (range <= 100)
-    //     new_range = 100 * 1.5
-    // else if (range >= n_data / 1.5) {
-    //     new_range = n_data;
-    // }
-    // else
-    //     new_range = ((range - 100) * (n_data - 100) / (n_data / 1.5 - 100 * 1.5)) + 100 * 1.5
-    // let data_slice = param.src.slice(0, new_range + 1);
     let data_highlight = param.src.slice(0, range + 1);
     let data_grey = param.src.slice(range, param.src.length + 1);
-    // let data_slice = param.src;
 
     let svg = d3.select(param.target)
         .append("svg")
@@ -52,10 +41,10 @@ function draw_line(param) {
     svg.append("g")
         .attr("class", "tick")
         .call(d3.axisLeft(y_left)
-                .ticks(3)
-                .tickSizeInner(0)
-                .tickSizeOuter(0)
-                .tickPadding(10)
+            .ticks(3)
+            .tickSizeInner(0)
+            .tickSizeOuter(0)
+            .tickPadding(10)
         );
 
     let y_right = d3.scaleLinear()
@@ -154,8 +143,12 @@ function draw_line(param) {
         .enter()
         .append("circle")
         .attr("class", "dot_case")
-        .attr("cx", function(d) { return x(d[param.x]) })
-        .attr("cy", function(d) { return y_left(d[param.data1.y]) })
+        .attr("cx", function (d) {
+            return x(d[param.x])
+        })
+        .attr("cy", function (d) {
+            return y_left(d[param.data1.y])
+        })
         .attr("r", 3)
 
     svg.append('text')
@@ -166,41 +159,39 @@ function draw_line(param) {
         .attr('text-anchor', 'middle')
         .text(param.title);
 
-    // if ("event_lines" in param) {
-    //     // const parent_id = d3.select(param.target).node().parentNode.id;
-    //     const event_area = $("#line_chart_area");
-    //     let event_width = event_area.innerWidth(),
-    //         event_height = event_area.innerHeight();
-    //
-    //     let event = d3.select("#line_chart_area")
-    //         .append("svg")
-    //         .attr("width", event_width)
-    //         .attr("height", event_height)
-    //         .append("g")
-    //         // .attr("transform",
-    //         //     "translate(" + margin.left + "," + margin.top + ")");
-    //
-    //     let events = param.event_lines;
-    //     for (let key in events) {
-    //         let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
-    //         // console.log(x)
-    //         event.append("line")
-    //             .attr("x1", x_pos)
-    //             .attr("x2", x_pos)
-    //             .attr("y1", 0)
-    //             .attr("y2", event_height)
-    //             .attr("stroke-width", 1)
-    //             .attr("stroke", "black")
-    //             .attr("stroke-dasharray", "4")
-    //             .style("transform", "translateY(" + (-0) + "px)");
-    //         let text = event.append("div")
-    //         text
-    //             .attr("class", "event_txt_label")
-    //             .style("left", (x_pos - 5) + "px")
-    //             .style("transform", (x_pos - 5) + "px")
-    //             .text(events[key])
-    //     }
-    // }
+    if ("event_lines" in param) {
+        const event_area = $("#line_chart_event");
+        let event_width = event_area.innerWidth(),
+            event_height = event_area.innerHeight();
+
+        let event_containter = d3.select("#line_chart_event")
+
+        let events = param.event_lines;
+        for (let key in events) {
+            let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
+            let text = event_containter.append("div")
+            text.attr("class", "event_txt_label")
+                .style("transform", "translateX(calc(" + (x_pos - 11) + "px - 100%)) rotate(-90deg)")
+                .text(events[key])
+        }
+
+        let event = event_containter
+            .append("svg")
+            .attr("width", event_width)
+            .attr("height", event_height)
+            .append("g")
+
+        for (let key in events) {
+            let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
+            event.append("line")
+                .attr("x1", x_pos)
+                .attr("x2", x_pos)
+                .attr("y1", 0)
+                .attr("y2", event_height)
+                .attr("class", "event_line")
+                .style("transform", "translateY(" + (-0) + "px)");
+        }
+    }
 
     if (param.legend) {
         svg.append('text')

@@ -415,7 +415,12 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 30px calc(55px - var(--slider-thumb-width)) 25px 60px;
+    margin: 95px calc(55px - var(--slider-thumb-width)) 25px 60px;
+    overflow: hidden;
+}
+
+#line_chart_event {
+    margin: 0 calc(55px - var(--slider-thumb-width)) 25px 60px;
     overflow: hidden;
 }
 
@@ -876,11 +881,22 @@ body {
 
 .event_txt_label{
     color: var(--burgundy);
-    font-size: 0.7vw;
+    font-size: 10px;
+    display: inline-block;
+    position: absolute;
+    transform-origin: top right;
+    line-height: 10px;
+}
+
+.event_line {
+    stroke: var(--burgundy);
+    stroke-width: 1px;
+    stroke-dasharray: 4px;
+    opacity: 90%;
 }
 
 #place_holder_event {
-    height: 85px;
+    height: 65px;
 }
 
 #line_chart_slider_top {

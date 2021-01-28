@@ -28,7 +28,7 @@ function init_page() {
     new fullpage('#fullpage', {
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['Overview', 'Travel', 'Economy'],
+        navigationTooltips: ['Overview', 'Transport', 'Trade'],
         scrollBar: true
     });
 

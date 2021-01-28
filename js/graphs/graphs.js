@@ -16,42 +16,35 @@ function updateDate(value) {
 }
 
 function updateStats() {
-    draw_bar(bar_param_case_m)
-    draw_bar(bar_param_case_w)
-    draw_bar(bar_param_death_m)
-    draw_bar(bar_param_death_w)
-    set_text_statistic(text_stat_para)
+    draw_bar(bar_param_case_m);
+    draw_bar(bar_param_case_w);
+    draw_bar(bar_param_death_m);
+    draw_bar(bar_param_death_w);
+    set_text_statistic(text_stat_para);
 }
 
 function updateLineChart() {
     d3.selectAll('#oneright svg').remove();
-    draw_line(line_param_death)
-    draw_line(line_param_case)
+    $(".line_chart_event").empty();
+    draw_line(line_param_death);
+    draw_line(line_param_case);
 }
 
 function refresh_on_date_change(value) {
-    // let slider = d3.select("#date_slider");
-    // let slider_container = $("#slider_containter");
-    // let left_threshold = 100;
-    // let right_threshold = slider.attr("max") / 1.5;
-    // let new_value = Math.max(Math.min(value, right_threshold), left_threshold)
-    // let new_width = slider_container.innerWidth() / (new_value * 1.5 / slider.attr("max"));
-    // slider.style("width", new_width + "px")
-    // console.log(value / slider.attr("max"))
-    updateDate(value)
+    updateDate(value);
     updateLineChart();
-    updateStats()
+    updateStats();
 }
 
 function refresh_on_resize() {
     d3.selectAll('.section_content svg').remove();
 
-    updateLineChart()
-    updateStats()
+    updateLineChart();
+    updateStats();
 
-    draw_histogram(histogram_param_DE)
-    draw_multiline(transport_param)
-    draw_multiline(econ_param)
+    draw_histogram(histogram_param_DE);
+    draw_multiline(transport_param);
+    draw_multiline(econ_param);
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
