@@ -415,13 +415,17 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 95px calc(55px - var(--slider-thumb-width)) 25px 60px;
+    margin: 75px calc(55px - var(--slider-thumb-width)) 25px 60px;
     overflow: hidden;
 }
 
 #line_chart_event {
     margin: 0 calc(55px - var(--slider-thumb-width)) 25px 60px;
     overflow: hidden;
+}
+
+#line_chart_graph {
+
 }
 
 #date_slider {
@@ -716,8 +720,17 @@ body {
 }
 
 .chart_title {
-    font-size: 16px;
+    font-size: 14px;
     fill: var(--burgundy);
+}
+
+.chart_caption {
+    font-size: 14px;
+    /*line-height: 14px;*/
+    height: 14px;
+    color: var(--burgundy);
+    text-align: center;
+    /*overflow: visible;*/
 }
 
 .overlay {
@@ -757,6 +770,7 @@ body {
     font-size: 10px;
     font-weight: bold;
     fill: var(--burgundy);
+    text-anchor: middle;
 }
 
 .legend_new {
@@ -884,8 +898,10 @@ body {
     font-size: 10px;
     display: inline-block;
     position: absolute;
-    transform-origin: top right;
+    transform-origin: bottom right;
     line-height: 10px;
+    max-width: 95px;
+    text-align: right;
 }
 
 .event_line {

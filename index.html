@@ -152,22 +152,23 @@
                 <!--                                    <button id="play-button">Play</button>-->
                 <!--                                </div>-->
 
-                <div id="onerightbottom" class="flex3">
-                    <div class="fullheight_p fullwidth_p flexcolumn float">
-                        <div id="line_chart_event" class="line_chart_event flex1"></div>
-                    </div>
-                    <div class="float fullheight_p fullwidth_p flexcolumn">
-                        <div id="place_holder_event" class="flexnone"></div>
-                        <div id="line_chart_slider_top" class="flex1"></div>
-                        <div id="line_chart_slider_bottom" class="flex1"></div>
-                    </div>
-                    <div class="fullheight_p fullwidth_p flexcolumn float">
-                        <div id="slider_containter" class="line_chart_overlay flex1">
-                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
-                                   oninput="refresh_on_date_change(this.value)">
+                <div id="onerightbottom" class="flex3 flexcolumn">
+                        <div class="fullheight_p fullwidth_p flexcolumn float">
+                            <div id="line_chart_event" class="line_chart_event flex1"></div>
                         </div>
-                    </div>
+                        <div class="float fullheight_p fullwidth_p flexcolumn">
+                            <div id="place_holder_event" class="flexnone"></div>
+                            <div id="line_chart_slider_top" class="flex1"></div>
+                            <div id="line_chart_slider_bottom" class="flex1"></div>
+                        </div>
+                        <div class="fullheight_p fullwidth_p flexcolumn float">
+                            <div id="slider_containter" class="line_chart_overlay flex1">
+                                <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
+                                       oninput="refresh_on_date_change(this.value)">
+                            </div>
+                        </div>
                 </div>
+                <div id="chart_caption" class="flexnone chart_caption">New and Cumulative Cases and Deaths</div>
             </div>
         </div>
     </div>
@@ -175,16 +176,21 @@
         <div id="content_sec1" class="content_sec center_box flexcolumn section_content">
             <div id="twotop" class="flexnone flexcolumn content_titles">
                 <div class="content_title fullwidth_p flexnone">COVID-19</div>
-                <div class="content_subtitle fullwidth_p flexnone">has affected the freight transport within Germany in 2020.
+                <div class="content_subtitle fullwidth_p flexnone">has affected the freight transport within Germany in
+                    2020.
                 </div>
             </div>
             <div id="lc_sec2" class="flex3 content_middle flexrow">
                 <div id="transport_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <button title="Water" class="line_button flexrow flexnone" id="water_button" onclick="update_transport_chart('water');" disabled></button>
-                    <button title="Air" class="line_button flexrow flexnone" id="air_button" onclick="update_transport_chart('air');"></button>
-                    <button title="Rail" class="line_button flexrow flexnone" id="rail_button" onclick="update_transport_chart('rail');"></button>
-                    <button title="Road" class="line_button flexrow flexnone" id="road_button" onclick="update_transport_chart('road');"></button>
+                    <button title="Water" class="line_button flexrow flexnone" id="water_button"
+                            onclick="update_transport_chart('water');" disabled></button>
+                    <button title="Air" class="line_button flexrow flexnone" id="air_button"
+                            onclick="update_transport_chart('air');"></button>
+                    <button title="Rail" class="line_button flexrow flexnone" id="rail_button"
+                            onclick="update_transport_chart('rail');"></button>
+                    <button title="Road" class="line_button flexrow flexnone" id="road_button"
+                            onclick="update_transport_chart('road');"></button>
                 </div>
                 <div class="flexcolumn flex1">
                     <div id="transport_container" class="line_chart_impact_container flex1">
@@ -213,8 +219,10 @@
             <div id="lc_sec3" class="flex3 content_middle flexrow">
                 <div id="econ_buttons" class="line_buttons flexcolumn">
                     <div class="flex1"></div>
-                    <button title="import" class="line_button flexrow flexnone" id="import_button" onclick="update_econ_chart('import');" disabled></button>
-                    <button title="export" class="line_button flexrow flexnone" id="export_button" onclick="update_econ_chart('export');"></button>               
+                    <button title="import" class="line_button flexrow flexnone" id="import_button"
+                            onclick="update_econ_chart('import');" disabled></button>
+                    <button title="export" class="line_button flexrow flexnone" id="export_button"
+                            onclick="update_econ_chart('export');"></button>
                 </div>
                 <div class="flexcolumn flex1">
                     <div id="economy_container" class="line_chart_impact_container flex1">

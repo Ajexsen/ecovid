@@ -1,6 +1,6 @@
 function draw_line(param) {
     const container = $(param.target)
-    const margin = {top: 30, right: 55, bottom: 25, left: 60}
+    const margin = {top: 10, right: 55, bottom: 25, left: 60}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
@@ -171,7 +171,7 @@ function draw_line(param) {
             let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
             let text = event_containter.append("div")
             text.attr("class", "event_txt_label")
-                .style("transform", "translateX(calc(" + (x_pos - 11) + "px - 100%)) rotate(-90deg)")
+                .style("transform", "translate(calc(" + (x_pos - 1) + "px - 100%), -100%) rotate(-90deg)")
                 .text(events[key])
         }
 
@@ -194,31 +194,42 @@ function draw_line(param) {
     }
 
     if (param.legend) {
-        svg.append('text')
+        const legend_container = $("#place_holder_event")
+        const legend_margin = {top: 10, right: 55, bottom: 10, left: 60}
+        let legend_width = legend_container.innerWidth() - legend_margin.left - legend_margin.right,
+            legend_height = legend_container.innerHeight() - legend_margin.top - legend_margin.bottom;
+
+        let legend_svg = d3.select("#place_holder_event")
+            .append("svg")
+            .attr("width", legend_width + legend_margin.left + legend_margin.right)
+            .attr("height", legend_height + legend_margin.top + legend_margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + legend_margin.left + "," + legend_margin.top + ")");
+
+        legend_svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', 0)
-            .attr('y', 0)
-            .attr("transform", "translate(-10, -20)")
+            .attr('y', legend_height -5)
             .text("New");
 
-        svg.append('text')
-            .attr('class', 'axis_label')
-            .attr('x', width)
-            .attr('y', 0)
-            .attr("transform", "translate(-10, -20)")
-            .text("Total");
-
-        svg.append("rect")
+        legend_svg.append("rect")
             .attr('class', 'legend_new')
             .attr("x", -10)
-            .attr("y", -14)
+            .attr("y", legend_height)
             .attr("width", 20)
             .attr("height", 3);
 
-        svg.append("rect")
+        legend_svg.append('text')
+            .attr('class', 'axis_label')
+            .attr('x', width)
+            .attr('y', legend_height -5)
+            .text("Total");
+
+        legend_svg.append("rect")
             .attr('class', 'legend_total')
             .attr("x", width - 10)
-            .attr("y", -14)
+            .attr("y", legend_height)
             .attr("width", 22)
             .attr("height", 3);
     }

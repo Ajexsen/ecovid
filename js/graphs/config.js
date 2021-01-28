@@ -13,7 +13,8 @@ const day_fomat = d3.timeFormat("%d");
 // still needs to be checked, and updated.
 event_timeline = {
     "2020-03-23": "First Lockdown",
-    //"11-02": "Partial Lockdown",
+    //"2020-11-02": "Partial Lockdown",
+    "2020-10-01": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
     "2020-12-13": "Second Lockdown",
 }
 
