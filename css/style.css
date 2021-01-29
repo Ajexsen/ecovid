@@ -951,13 +951,14 @@ body {
     line-height: 10px;
     max-width: 85px;
     text-align: right;
+    opacity: 90%;
 }
 
 .event_line {
     stroke: var(--burgundy);
     stroke-width: 1px;
     stroke-dasharray: 4px;
-    opacity: 90%;
+    opacity: 45%;
 }
 
 #place_holder_event {
