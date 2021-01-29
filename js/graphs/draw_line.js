@@ -16,6 +16,7 @@ function draw_line(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    let start = d3.timeParse("%Y-%m-%d")("2020-01-01")
     let x = d3.scaleTime()
         .domain(d3.extent(param.src, function (d) {
             return d[param.x];

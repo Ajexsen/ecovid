@@ -1,5 +1,5 @@
 function getDate(value) {
-    let start_date = d3.timeParse(rki_dateFormat)("2020-01-02")
+    let start_date = d3.timeParse(rki_dateFormat)("2020-01-01")
     return d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
 }
 
