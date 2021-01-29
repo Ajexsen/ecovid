@@ -71,34 +71,36 @@ let econ_type = "import"
 * @param param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
 */
 function draw_multiline(param) {
-    // define transition for data switch
-    t = d3.transition()
-        .duration(300)
-        .ease(d3.easeLinear);    
-    
-    // setup prep - get container and create svg
-    const container = $(param.target)
-    const margin = {top: 0, right: 50, bottom: 25, left: 10}
-    let width = container.innerWidth() - margin.left - margin.right,
-        height = container.innerHeight() - margin.top - margin.bottom;
-        
-    let svg = d3.select(param.target)
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")")
+    // load all preread data
 
-    // define global var
-    const n_data = param.data_files.length
-    const month_width = width / 12
     let datasets = param.datasets
 
-    // load all preread data
     Promise.all(datasets).then(function (data) {
         let caption = $(param.caption_target)
         caption.html(param.caption)
+
+        // define transition for data switch
+        let t = d3.transition()
+            .duration(300)
+            .ease(d3.easeLinear);
+
+        // setup prep - get container and create svg
+        const container = $(param.target)
+        const margin = {top: 0, right: 50, bottom: 25, left: 10}
+        let width = container.innerWidth() - margin.left - margin.right,
+            height = container.innerHeight() - margin.top - margin.bottom;
+
+        let svg = d3.select(param.target)
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")")
+
+        // define global var
+        const n_data = param.data_files.length
+        const month_width = width / 12
 
         // data[0] will contain file1.csv
         // data[1] will contain file2.csv
