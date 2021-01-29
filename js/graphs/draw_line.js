@@ -31,7 +31,7 @@ function draw_line(param) {
             .tickSizeOuter(2)
             .tickPadding(10)
             // .tickFormat(d3.timeFormat("%b"))
-            .tickFormat(function(date){
+            .tickFormat(function (date) {
                 if (d3.timeYear(date) < date) {
                     return d3.timeFormat('%b')(date);
                 } else {
