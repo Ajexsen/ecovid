@@ -101,7 +101,7 @@ function draw_multiline(param) {
         // data[1] will contain file2.csv
 
         // find max & min for y-axis scaling
-/*         data_min = Array.from({length: n_data},
+        data_min = Array.from({length: n_data},
             (_, n) => d3.min(data[n], function (d) {
                 return +d.value;
             }))
@@ -109,13 +109,13 @@ function draw_multiline(param) {
         data_max = Array.from({length: n_data},
             (_, n) => d3.max(data[n], function (d) {
                 return +d.value;
-            })) */
+            }))
          
-        //const max = Math.max(...data_max)
-        //const min = Math.min(...data_min)
+        const max = Math.max(...data_max)
+        const min = Math.min(...data_min)
         
-        const min = param.data_range[0]
-        const max = param.data_range[1]
+        // const min = param.data_range[0]
+        // const max = param.data_range[1]
 
         // add 10% buffering for better visual effect
         const buf = (max - min) * 0.1
