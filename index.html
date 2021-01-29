@@ -157,20 +157,20 @@
                 <!--                                </div>-->
 
                 <div id="onerightbottom" class="flex3 flexcolumn">
-                        <div class="fullheight_p fullwidth_p flexcolumn float">
-                            <div id="line_chart_event" class="line_chart_event flex1"></div>
+                    <div class="float fullheight_p fullwidth_p flexcolumn">
+                        <div id="place_holder_event" class="flexnone"></div>
+                        <div id="line_chart_slider_top" class="flex1"></div>
+                        <div id="line_chart_slider_bottom" class="flex1"></div>
+                    </div>
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="line_chart_event" class="line_chart_event flex1"></div>
+                    </div>
+                    <div class="fullheight_p fullwidth_p flexcolumn float">
+                        <div id="slider_containter" class="line_chart_overlay flex1">
+                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
+                                   oninput="refresh_on_date_change(this.value)">
                         </div>
-                        <div class="float fullheight_p fullwidth_p flexcolumn">
-                            <div id="place_holder_event" class="flexnone"></div>
-                            <div id="line_chart_slider_top" class="flex1"></div>
-                            <div id="line_chart_slider_bottom" class="flex1"></div>
-                        </div>
-                        <div class="fullheight_p fullwidth_p flexcolumn float">
-                            <div id="slider_containter" class="line_chart_overlay flex1">
-                                <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
-                                       oninput="refresh_on_date_change(this.value)">
-                            </div>
-                        </div>
+                    </div>
                 </div>
                 <div id="chart_caption" class="flexnone chart_caption">New and Cumulative Cases and Deaths</div>
             </div>
@@ -186,8 +186,9 @@
             </div>
             <div id="lc_sec2" class="flex3 content_middle flexrow">
                 <div id="transport_buttons" class="line_buttons flexcolumn">
-                    <div id="line_chart_title2_parent" class="line_chart_title_container fullwidth_p flex1 center_parent">
-<!--                        <div id="line_chart_title2" class="line_chart_title"></div>-->
+                    <div id="line_chart_title2_parent"
+                         class="line_chart_title_container fullwidth_p flex1 center_parent">
+                        <!--                        <div id="line_chart_title2" class="line_chart_title"></div>-->
                     </div>
                     <button title="Water" class="line_button flexrow flexnone" id="water_button"
                             onclick="update_transport_chart('water');"></button>
@@ -200,7 +201,9 @@
                 </div>
                 <div class="flexcolumn flex1">
                     <div id="transport_title" class="flexnone line_chart_title"></div>
-                    <div id="transport_unit" class="flexnone line_chart_unit">2019 = 100, seasonally and calendar adjusted</div>
+                    <div id="transport_unit" class="flexnone line_chart_unit">2019 = 100, seasonally and calendar
+                        adjusted
+                    </div>
                     <div id="transport_container" class="line_chart_impact_container flex1">
                         <div id="line_chart_transport_container" class="float focus_container flexrow">
                             <div id="line_chart_transport_focus" class="focus"></div>
@@ -226,8 +229,9 @@
             </div>
             <div id="lc_sec3" class="flex3 content_middle flexrow">
                 <div id="econ_buttons" class="line_buttons flexcolumn">
-                    <div id="line_chart_title3_parent" class="line_chart_title_container fullwidth_p flex1 center_parent">
-<!--                        <div id="line_chart_title3" class="line_chart_title"></div>-->
+                    <div id="line_chart_title3_parent"
+                         class="line_chart_title_container fullwidth_p flex1 center_parent">
+                        <!--                        <div id="line_chart_title3" class="line_chart_title"></div>-->
                     </div>
                     <button title="export" class="line_button flexrow flexnone" id="export_button"
                             onclick="update_econ_chart('export');"></button>
