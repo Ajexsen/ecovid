@@ -52,14 +52,18 @@
                             <div id="new_cases" class="stat_value">-</div>
                         </div>
                         <div id="stat3" class="flex1 stat">
+                            <div class="stat_title">7d Incidence</div>
+                            <div id="7_day" class="stat_value">-</div>
+                        </div>
+                        <div id="stat4" class="flex1 stat">
                             <div class="stat_title">Total Deaths</div>
                             <div id="total_deaths" class="stat_value">-</div>
                         </div>
-                        <div id="stat4" class="flex1 stat">
+                        <div id="stat5" class="flex1 stat">
                             <div class="stat_title">New Deaths</div>
                             <div id="new_deaths" class="stat_value">-</div>
                         </div>
-                        <div id="stat5" class="flex1 stat">
+                        <div id="stat6" class="flex1 stat">
                             <div class="stat_title">Death Rate</div>
                             <div id="death_rate" class="stat_value">-</div>
                         </div>
@@ -182,7 +186,9 @@
             </div>
             <div id="lc_sec2" class="flex3 content_middle flexrow">
                 <div id="transport_buttons" class="line_buttons flexcolumn">
-                    <div class="flex1"></div>
+                    <div id="line_chart_title2_parent" class="line_chart_title_container fullwidth_p flex1 center_parent">
+                        <div id="line_chart_title2" class="line_chart_title"></div>
+                    </div>
                     <button title="Water" class="line_button flexrow flexnone" id="water_button"
                             onclick="update_transport_chart('water');"></button>
                     <button title="Air" class="line_button flexrow flexnone" id="air_button"
@@ -218,7 +224,9 @@
             </div>
             <div id="lc_sec3" class="flex3 content_middle flexrow">
                 <div id="econ_buttons" class="line_buttons flexcolumn">
-                    <div class="flex1"></div>
+                    <div id="line_chart_title3_parent" class="line_chart_title_container fullwidth_p flex1 center_parent">
+                        <div id="line_chart_title3" class="line_chart_title"></div>
+                    </div>
                     <button title="export" class="line_button flexrow flexnone" id="export_button"
                             onclick="update_econ_chart('export');"></button>
                     <button title="import" class="line_button flexrow flexnone" id="import_button"

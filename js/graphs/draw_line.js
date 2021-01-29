@@ -210,7 +210,7 @@ function draw_line(param) {
         legend_svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', 0)
-            .attr('y', legend_height -5)
+            .attr('y', legend_height - 5)
             .text("New");
 
         legend_svg.append("rect")
@@ -223,7 +223,7 @@ function draw_line(param) {
         legend_svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', width)
-            .attr('y', legend_height -5)
+            .attr('y', legend_height - 5)
             .text("Total");
 
         legend_svg.append("rect")

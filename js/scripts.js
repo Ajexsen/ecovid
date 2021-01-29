@@ -1,7 +1,7 @@
 function step() {
     let targetValue = 300
-    let currentValue = document.getElementById("date_slider").value
-    refresh_on_date_change(currentValue);
+    currentValue = document.getElementById("date_slider").value
+    updateBarData(currentValue);
     document.getElementById("date_slider").value = parseInt(currentValue) + 1
 
     if (currentValue > targetValue) {
@@ -43,6 +43,11 @@ function init_page() {
         });
     });
 
+    let active_state
+    // let pins = {
+    //     "by": "Bayern",
+    //     "be": "Berlin"
+    // }
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
@@ -50,16 +55,15 @@ function init_page() {
         backgroundColor: null,
         enableZoom: false,
         showTooltip: true,
-        // pins: {
-        //     "by": "pin_for_by"
-        // },
-        // pinMode: 'id',
+        // pins: pins,
+        pinMode: 'content',
         onRegionClick: function (element, code, region) {
         },
         // onLabelShow: function(event, label, code) {
         //     label.html("Aaa");
         // },
-        onRegionSelect: function(event, code, region) {
+        onRegionSelect: function (event, code, region) {
+            // active_state = code
             let states = $("#map .map_svg .jqvmap-region");
             states.attr('class', 'jqvmap-region jqvmap-region-unselected');
             let selected_state = $("#jqvmap1_" + code);
@@ -69,7 +73,7 @@ function init_page() {
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
             init_graph();
         },
-        onRegionDeselect: function(event, code, region) {
+        onRegionDeselect: function (event, code, region) {
             let states = $("#map .map_svg .jqvmap-region");
             states.attr('class', 'jqvmap-region');
             data_source = de_data_source;

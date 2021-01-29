@@ -68,8 +68,8 @@ function refresh_on_state_change() {
     line_param_case.src = data_all;
 }
 
-function get_mid_month(date){
-    if(date.getMonth()+1 === 2){
+function get_mid_month(date) {
+    if (date.getMonth() + 1 === 2) {
         date.setDate(15)
     } else {
         date.setDate(16)
@@ -77,7 +77,7 @@ function get_mid_month(date){
     return date
 }
 
-function read_datasets(param){
+function read_datasets(param) {
     let datasets = []
     const n_data = param.data_files.length
     for (let i = 0; i < n_data; i++) {
@@ -150,7 +150,7 @@ function init_graph() {
         line_param_rail.datasets = read_datasets(line_param_rail)
         line_param_road.datasets = read_datasets(line_param_road)
         line_param_water.datasets = read_datasets(line_param_water)
-        
+
         line_param_import.datasets = read_datasets(line_param_import)
         line_param_export.datasets = read_datasets(line_param_export)
 
@@ -161,4 +161,5 @@ function init_graph() {
         refresh_on_resize();
     })
 }
+
 init_graph();

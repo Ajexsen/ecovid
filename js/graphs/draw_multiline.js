@@ -326,5 +326,18 @@ function draw_multiline(param) {
                     focus.style("transform", "translateX(" + month_width * p_month + "px)");
                 }
             })
+
+        let caption = $(param.caption_target)
+        let caption_parent = $(param.caption_target + "parent")
+        console.log(caption_parent.innerHeight())
+        caption.width = caption_parent.innerHeight()
+        caption.html(param.caption)
+        // svg.append('text')
+        //     .attr('class', 'chart_label')
+        //     .attr("transform", "rotate(90)")
+        //     .attr('x', height/2)
+        //     .attr('y', -width - 40)
+        //     .attr('text-anchor', 'middle')
+        //     .text(param.caption);
     })
 }

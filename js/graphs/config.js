@@ -13,9 +13,11 @@ const day_fomat = d3.timeFormat("%d");
 // still needs to be checked, and updated.
 event_timeline = {
     "2020-03-23": "First Lockdown",
+    "2020-04-12": "Easter",
     //"2020-11-02": "Partial Lockdown",
-    "2020-10-01": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
     "2020-12-13": "Second Lockdown",
+    "2020-12-25": "Christmas",
+    "2021-01-18": "New Mutation",
 }
 
 let data_all = {}
@@ -85,6 +87,8 @@ const line_param_case = {
 const line_param_air = {
     target: "#line_chart_transport",
     title: "air",
+    caption: "Air Transport",
+    caption_target: "#line_chart_title2",
     src: "data/transport/air/",
     data_files: ["air_2017.csv", "air_2018.csv", "air_2019.csv", "air_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -98,6 +102,8 @@ const line_param_air = {
 const line_param_rail = {
     target: "#line_chart_transport",
     title: "rail",
+    caption: "Rail Transport",
+    caption_target: "#line_chart_title2",
     src: "data/transport/rail/",
     data_files: ["rail_2017.csv", "rail_2018.csv", "rail_2019.csv", "rail_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -110,6 +116,8 @@ const line_param_rail = {
 const line_param_road = {
     target: "#line_chart_transport",
     title: "bike",
+    caption: "Road Transport",
+    caption_target: "#line_chart_title2",
     src: "data/transport/road/",
     data_files: ["road_2017.csv", "road_2018.csv", "road_2019.csv", "road_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -122,6 +130,8 @@ const line_param_road = {
 const line_param_water = {
     target: "#line_chart_transport",
     title: "water",
+    caption: "Waterways Transport",
+    caption_target: "#line_chart_title2",
     src: "data/transport/waterway/",
     data_files: ["water_2017.csv", "water_2018.csv", "water_2019.csv", "water_2020.csv"],
     line_legends: ["2017", "2018", "2019", "2020"],
@@ -134,6 +144,8 @@ const line_param_water = {
 const line_param_import = {
     target: "#line_chart_econ",
     title: "import",
+    caption: "Import",
+    caption_target: "#line_chart_title3",
     src: "data/econ/import/",
     // data_files: ["im_2020.csv", "im_2019.csv", "im_2018.csv", "im_2017.csv"],
     //data_files: ["im_2020.csv", "im_2019.csv", "im_2018.csv", "im_2017.csv", "im_2016.csv", "im_2015.csv", "im_2014.csv", "im_2013.csv", "im_2012.csv", "im_2011.csv", "im_2010.csv", "im_2009.csv", "im_2008.csv"],
@@ -150,6 +162,8 @@ const line_param_import = {
 const line_param_export = {
     target: "#line_chart_econ",
     title: "export",
+    caption: "Export",
+    caption_target: "#line_chart_title3",
     src: "data/econ/export/",
     data_files: ["ex_2017.csv", "ex_2018.csv", "ex_2019.csv", "ex_2020.csv"],
     //data_files: ["ex_2020.csv", "ex_2019.csv", "ex_2018.csv", "ex_2017.csv", "ex_2016.csv", "ex_2015.csv", "ex_2014.csv", "ex_2013.csv", "ex_2012.csv", "ex_2011.csv", "ex_2010.csv", "ex_2009.csv", "ex_2008.csv"],

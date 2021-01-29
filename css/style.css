@@ -75,51 +75,51 @@ body {
 }
 
 /* preload button image to prevent blinking at first hover*/
-#preloadedImage01{
+#preloadedImage01 {
     background: url('../images/air_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage02{
+#preloadedImage02 {
     background: url('../images/air_active.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage03{
-    background: url('../images/rail_inactive.png') no-repeat -9999px -9999px; 
+#preloadedImage03 {
+    background: url('../images/rail_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage04{ 
+#preloadedImage04 {
     background: url('../images/rail_active.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage05{
+#preloadedImage05 {
     background: url('../images/road_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage06{
+#preloadedImage06 {
     background: url('../images/road_active.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage07{
+#preloadedImage07 {
     background: url('../images/water_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage08{
+#preloadedImage08 {
     background: url('../images/water_active.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage09{
+#preloadedImage09 {
     background: url('../images/import_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage10{
+#preloadedImage10 {
     background: url('../images/import_active.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage11{
+#preloadedImage11 {
     background: url('../images/export_inactive.png') no-repeat -9999px -9999px;
 }
 
-#preloadedImage12{
+#preloadedImage12 {
     background: url('../images/export_active.png') no-repeat -9999px -9999px;
 }
 
@@ -205,7 +205,7 @@ body {
     pointer-events: auto;
 }
 
-#map .map_svg:hover .jqvmap-region{
+#map .map_svg:hover .jqvmap-region {
     fill-opacity: 55%;
 }
 
@@ -219,7 +219,7 @@ body {
 
 #map .map_svg .jqvmap-region:hover,
 #map .jqvmap-region-selected,
-#map .jqvmap-region-unselected:hover{
+#map .jqvmap-region-unselected:hover {
     fill-opacity: 90% !important;
 }
 
@@ -335,14 +335,14 @@ body {
     background: var(--burgundy);
     padding: 0 6px 0 6px;
     color: var(--offwhite);
-    font-size: 1.1vw;
+    font-size: 1.0vw;
     text-align: center;
     font-weight: 100;
 }
 
 #day {
     border: solid var(--burgundy) 1px;
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     padding: 0 6px 0 6px;
     color: var(--burgundy);
     /*font-weight: bold;*/
@@ -352,7 +352,7 @@ body {
     /*background-color: var(--offwhite_dark);*/
     height: fit-content;
     /*margin: 0 0 10px 0;*/
-    padding: 0 1.5vw 0 1.5vw;
+    padding: 0 1.2vw 0 1.2vw;
     color: var(--burgundy);
     border-left: solid var(--burgundy) 2px;
     /*border-right: solid var(--burgundy) 2px;*/
@@ -365,13 +365,13 @@ body {
 /*}*/
 
 .stat_title {
-    font-size: 1.1vw;
+    font-size: 1.0vw;
     font-weight: 300;
     white-space: nowrap;
 }
 
 .stat_value {
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     font-weight: bold;
     white-space: nowrap;
 }
@@ -511,13 +511,13 @@ body {
 .gender {
     /*margin-bottom: 2vw;*/
     /*position: relative;*/
-    font-size: 14px;
+    font-size: 12px;
     color: var(--burgundy);
     text-align: center;
 }
 
 .gender_text {
-    margin: 0 10px 0 10px;
+    margin: 0 9px 0 9px;
 }
 
 #onerightbottom {
@@ -619,57 +619,57 @@ body {
 }
 
 .line_button:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 
-#air_button {    
-    background:url('../images/air_inactive.png') center center / cover;
+#air_button {
+    background: url('../images/air_inactive.png') center center / cover;
 }
 
 #air_button:hover, #air_button:disabled {
-    background:url('../images/air_active.png') center center / cover;
+    background: url('../images/air_active.png') center center / cover;
 }
 
 #rail_button {
-    background:url('../images/rail_inactive.png') center center / cover;
+    background: url('../images/rail_inactive.png') center center / cover;
 }
 
 #rail_button:hover, #rail_button:disabled {
-    background:url('../images/rail_active.png') center center / cover;
+    background: url('../images/rail_active.png') center center / cover;
 }
 
 #road_button {
-    background:url('../images/road_inactive.png') center center / cover;
+    background: url('../images/road_inactive.png') center center / cover;
 }
 
 #road_button:hover, #road_button:disabled {
-    background:url('../images/road_active.png') center center / cover;
+    background: url('../images/road_active.png') center center / cover;
 }
 
 #water_button {
-    background:url('../images/water_inactive.png') center center / cover;
+    background: url('../images/water_inactive.png') center center / cover;
 }
 
 #water_button:hover, #water_button:disabled {
-    background:url('../images/water_active.png') center center / cover;
+    background: url('../images/water_active.png') center center / cover;
 }
 
-#import_button{
-    background:url('../images/import_inactive.png') center center / cover;
+#import_button {
+    background: url('../images/import_inactive.png') center center / cover;
 }
 
 #import_button:hover, #import_button:disabled {
-    background:url('../images/import_active.png') center center / cover;
+    background: url('../images/import_active.png') center center / cover;
 }
 
 #export_button {
-    background:url('../images/export_inactive.png') center center / cover;
+    background: url('../images/export_inactive.png') center center / cover;
 }
 
-#export_button:hover, #export_button:disabled{
-    background:url('../images/export_active.png') center center / cover;
+#export_button:hover, #export_button:disabled {
+    background: url('../images/export_active.png') center center / cover;
 }
 
 
@@ -722,6 +722,30 @@ body {
 .chart_title {
     font-size: 14px;
     fill: var(--burgundy);
+}
+
+.chart_label {
+    font-size: 14px;
+    fill: var(--burgundy);
+    /*transform: rotate(90deg);*/
+}
+
+.line_chart_title {
+    font-size: 14px;
+    line-height: 14px;
+    color: var(--burgundy);
+    /*text-align: center;*/
+    /*overflow: visible;*/
+    transform-origin: center center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    white-space: nowrap;
+}
+
+.line_chart_title_container {
+    /*overflow: hidden;*/
 }
 
 .chart_caption {
@@ -893,7 +917,7 @@ body {
     border-radius: 3px;
 }
 
-.event_txt_label{
+.event_txt_label {
     color: var(--burgundy);
     font-size: 10px;
     display: inline-block;
@@ -923,11 +947,11 @@ body {
     overflow: hidden;
 }
 
-.de_hist svg rect{
+.de_hist svg rect {
     fill: var(--burgundy);
 }
 
-.de_hist svg rect:hover ~ text.hist_label{
+.de_hist svg rect:hover ~ text.hist_label {
     display: block;
 }
 
@@ -937,7 +961,7 @@ text.hist_label {
     font-size: 0.7vw;
 }
 
-text.dlabs{
+text.dlabs {
     font-size: 0.7vw;
     opacity: 0;
     font-weight: 300;
@@ -945,7 +969,7 @@ text.dlabs{
     text-anchor: middle;
 }
 
-.dot_lines{
+.dot_lines {
     opacity: 0;
     stroke-dasharray: 2.2;
     stroke-width: 1px;
