@@ -110,8 +110,12 @@ function draw_multiline(param) {
             (_, n) => d3.max(data[n], function (d) {
                 return +d.value;
             }))
+         
         const max = Math.max(...data_max)
         const min = Math.min(...data_min)
+        
+        // const min = param.data_range[0]
+        // const max = param.data_range[1]
 
         // add 10% buffering for better visual effect
         const buf = (max - min) * 0.1
@@ -126,6 +130,7 @@ function draw_multiline(param) {
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
             .range([height, 0]);
+        
 
         // add x-axis ticks/labels
         svg.append("g")
@@ -262,6 +267,7 @@ function draw_multiline(param) {
                 .html(param.line_legends[i])
 
             // add legend hover effect
+
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     // hide all lines & dots
@@ -273,6 +279,11 @@ function draw_multiline(param) {
                     d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.8)
                     d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.6)
+                    
+                    // always show line from 2020
+                    d3.select("#line_" + param.title + "_" + "2020").style("opacity", 1)
+                    d3.selectAll(".dot_" + param.title + "_" + "2020").style("opacity", 1)                    
+                    
                 })
                 .on('mouseout', (event) => {
                     // unhide all lines & dots
