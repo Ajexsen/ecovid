@@ -12,12 +12,14 @@ const day_fomat = d3.timeFormat("%d");
 
 // still needs to be checked, and updated.
 event_timeline = {
-    "2020-03-23": "First Lockdown",
+    "2020-03-16": "Bavaria declares state of emergency",
+    // "2020-03-23": "1st Lockdown",
     "2020-04-12": "Easter",
-    //"2020-11-02": "Partial Lockdown",
-    "2020-12-13": "Second Lockdown",
+    "2020-11-02": "Partial lockdown",
+    "2020-12-13": "Hard lockdown",
     "2020-12-25": "Christmas",
-    "2021-01-18": "New Mutation",
+    "2021-01-06": "Lockdown tightened",
+    // "2021-01-18": "New Mutation",
 }
 
 let data_all = {}

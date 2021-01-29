@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/fullpage.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 <div id="preloadedImages">
@@ -169,6 +170,7 @@
                         <div id="slider_containter" class="line_chart_overlay flex1">
                             <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
                                    oninput="refresh_on_date_change(this.value)">
+                            <!--                            <div id="slider-range"></div>-->
                         </div>
                     </div>
                 </div>
@@ -190,14 +192,26 @@
                          class="line_chart_title_container fullwidth_p flex1 center_parent">
                         <!--                        <div id="line_chart_title2" class="line_chart_title"></div>-->
                     </div>
-                    <button title="Water" class="line_button flexrow flexnone" id="water_button"
-                            onclick="update_transport_chart('water');"></button>
+                    <div>
+                        <button title="Water" class="line_button flexrow flexnone" id="water_button"
+                                onclick="update_transport_chart('water');"></button>
+                        <div id="water_label" class="button_hint">waterways</div>
+                    </div>
+                    <div>
                     <button title="Air" class="line_button flexrow flexnone" id="air_button"
                             onclick="update_transport_chart('air');"></button>
+                        <div id="air_label" class="button_hint">air</div>
+                    </div>
+                    <div>
                     <button title="Rail" class="line_button flexrow flexnone" id="rail_button"
                             onclick="update_transport_chart('rail');"></button>
+                        <div id="rail_label" class="button_hint">rail</div>
+                    </div>
+                    <div>
                     <button title="Road" class="line_button flexrow flexnone" id="road_button"
                             onclick="update_transport_chart('road');" disabled></button>
+                        <div id="road_label" class="button_hint">road</div>
+                    </div>
                 </div>
                 <div class="flexcolumn flex1">
                     <div id="transport_title" class="flexnone line_chart_title"></div>
@@ -233,10 +247,16 @@
                          class="line_chart_title_container fullwidth_p flex1 center_parent">
                         <!--                        <div id="line_chart_title3" class="line_chart_title"></div>-->
                     </div>
+                    <div>
                     <button title="export" class="line_button flexrow flexnone" id="export_button"
                             onclick="update_econ_chart('export');"></button>
+                        <div id="export_label" class="button_hint">export</div>
+                    </div>
+                    <div>
                     <button title="import" class="line_button flexrow flexnone" id="import_button"
                             onclick="update_econ_chart('import');" disabled></button>
+                        <div id="import_label" class="button_hint">import</div>
+                    </div>
                 </div>
                 <div class="flexcolumn flex1">
                     <div id="economy_title" class="flexnone line_chart_title"></div>
@@ -264,6 +284,7 @@
 <!--</div>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="js/jquery.vmap.js"></script>
 <script src="js/jquery.vmap.germany.js"></script>
@@ -277,6 +298,5 @@
 <script src="js/graphs/refresh_text.js"></script>
 <script src="js/graphs/graphs.js"></script>
 <script src="js/events.js"></script>
-
 </body>
 </html>

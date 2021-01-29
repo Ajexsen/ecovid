@@ -672,6 +672,28 @@ body {
     background: url('../images/export_active.png') center center / cover;
 }
 
+.button_hint {
+    position: absolute;
+    height: 30px;
+    width: 85px;
+    background: var(--magenta);
+    line-height: 30px;
+    text-align: center;
+    color: var(--offwhite);
+    transform: translate(-85px, -30px);
+    font-weight: 300;
+    opacity: 0;
+}
+
+#water_button:hover + #water_label,
+#rail_button:hover + #rail_label,
+#air_button:hover + #air_label,
+#road_button:hover + #road_label,
+#import_button:hover + #import_label,
+#export_button:hover + #export_label {
+    opacity: 1;
+}
+
 
 .line {
     fill: none;
@@ -753,6 +775,7 @@ body {
     font-size: 14px;
     /*line-height: 14px;*/
     height: 14px;
+    margin-top: 5px;
     color: var(--burgundy);
     text-align: center;
     /*overflow: visible;*/
@@ -926,7 +949,7 @@ body {
     position: absolute;
     transform-origin: bottom right;
     line-height: 10px;
-    max-width: 95px;
+    max-width: 85px;
     text-align: right;
 }
 
