@@ -97,6 +97,9 @@ function draw_multiline(param) {
 
     // load all preread data
     Promise.all(datasets).then(function (data) {
+        let caption = $(param.caption_target)
+        caption.html(param.caption)
+
         // data[0] will contain file1.csv
         // data[1] will contain file2.csv
 
@@ -338,17 +341,5 @@ function draw_multiline(param) {
                 }
             })
 
-        let caption = $(param.caption_target)
-        let caption_parent = $(param.caption_target + "parent")
-        console.log(caption_parent.innerHeight())
-        caption.width = caption_parent.innerHeight()
-        caption.html(param.caption)
-        // svg.append('text')
-        //     .attr('class', 'chart_label')
-        //     .attr("transform", "rotate(90)")
-        //     .attr('x', height/2)
-        //     .attr('y', -width - 40)
-        //     .attr('text-anchor', 'middle')
-        //     .text(param.caption);
     })
 }

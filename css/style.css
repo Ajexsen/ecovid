@@ -731,17 +731,18 @@ body {
 }
 
 .line_chart_title {
-    font-size: 14px;
-    line-height: 14px;
+    font-size: 16px;
+    min-height: 16px;
     color: var(--burgundy);
-    /*text-align: center;*/
-    /*overflow: visible;*/
-    transform-origin: center center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    white-space: nowrap;
+    margin: 0 50px 3px 8px;
+}
+
+.line_chart_unit {
+    font-size: 14px;
+    min-height: 14px;
+    font-weight: 300;
+    color: var(--burgundy);
+    margin: 0 50px 10px 8px;
 }
 
 .line_chart_title_container {
