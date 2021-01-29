@@ -19,6 +19,7 @@ STATE_ID_NAME_MAP = {
        14: "Sachsen", 
        15: "Sachsen-Anhalt", 
        16: "Thüringen",
+       17: "Deutschland"
 }
 
 STATE_ID_ISONAME_MAP = {
@@ -38,9 +39,10 @@ STATE_ID_ISONAME_MAP = {
        14: "DE-SN", 
        15: "DE-ST", 
        16: "DE-TH",
+       0: "DE-all"
 }
 
-def get_csv_bundesland(df, bundesland_id, path):
+def get_csv_bundesland(df, pop, bundesland_id, path):
     file_name = "rki_.csv"
     
     # date index: from first date (min) to last date (max) in data
@@ -103,6 +105,8 @@ def get_csv_bundesland(df, bundesland_id, path):
     df = df.cumsum()
     df['NeuerFall'] = new_case
     df['NeuerTodesfall'] = new_death
+    df['7d_Fall'] = df['NeuerFall'].rolling(7, min_periods=1).sum()
+    df['7d_inzidenz'] = round(df['7d_Fall'] / pop, 1)
     # df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
     df.to_csv("{}{}".format(path, file_name))
     print("{} saved in path: {}".format(file_name, path))
@@ -112,6 +116,7 @@ def get_csv_bundesland(df, bundesland_id, path):
 # https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv
 
 # load data: don't upload full csv
+population_data = pd.read_csv("rki_bundesland_einwohner.csv")
 data = pd.read_csv("RKI_COVID19.csv")
 save_path = '..//data//rki//'
 
@@ -137,7 +142,8 @@ data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
 # generate csv for all states (include DE_all)
 for i in range(17):
-    get_csv_bundesland(data, i, save_path)
+    pop = float(population_data[population_data['bundesland_ab'] == STATE_ID_ISONAME_MAP[i]]['einwohner'])
+    kk = get_csv_bundesland(data, pop, i, save_path)
 
 # generate nation-wide csv (DE_all)
 # df = get_csv_bundesland(data, 0, save_path)
