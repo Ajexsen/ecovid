@@ -16,11 +16,10 @@ function draw_line(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    let start = d3.timeParse("%Y-%m-%d")("2020-01-01")
     let x = d3.scaleTime()
-        .domain([start, d3.max(param.src, function (d) {
+        .domain(d3.extent(param.src, function (d) {
             return d[param.x];
-        })])
+        }))
         .range([0, width]);
 
     svg.append("g")
@@ -31,7 +30,7 @@ function draw_line(param) {
             .tickSizeOuter(2)
             .tickPadding(10)
             // .tickFormat(d3.timeFormat("%b"))
-            .tickFormat(function (date) {
+            .tickFormat(function(date){
                 if (d3.timeYear(date) < date) {
                     return d3.timeFormat('%b')(date);
                 } else {
