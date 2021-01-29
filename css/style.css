@@ -888,6 +888,7 @@ body {
     margin: 0 12px 0 12px;
     padding: 10px 15px 10px 15px;
     color: var(--burgundy);
+    cursor: pointer;
 }
 
 .legend {
