@@ -1,7 +1,12 @@
 function draw_bar(param) {
     // set the dimensions and margins of the graph
     const container = $(param.target)
-    const margin = {top: 0, right: 0, bottom: 0, left: 0},
+    const margin = {
+            top: 0,
+            right: 0 * (param.direction === "right"),
+            bottom: 0,
+            left: 0 * (param.direction === "left")
+        },
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
@@ -57,4 +62,36 @@ function draw_bar(param) {
             return start;
         })
     }
+
+    svg.selectAll("text")
+        .data(array)
+        .enter()
+        .append("text")
+        .attr("class", function (d) {
+            let indicator = (param.direction === "right") === (x(d.value) < width / 2)
+            if (indicator) {
+                return "bar_label bar_label_dark";
+            } else {
+                return "bar_label bar_label_light";
+            }
+        })
+        .attr("x", function (d) {
+            return x(d.value);
+        })
+        .attr("y", function (d) {
+            return y(d.age);
+        })
+        .attr("height", y.bandwidth())
+        .attr("transform", function (d) {
+            let indicator = x(d.value) < width / 2
+            return "translate(" + 10 * (indicator - 0.5) + "," + y.bandwidth() / 2 + ")"
+        })
+        .text(function (d) {
+            return d.value;
+        })
+        .attr('text-anchor', function (d) {
+            if (x(d.value) > width / 2) return "end";
+            else return "start";
+        })
+        .attr("dominant-baseline", "middle")
 }

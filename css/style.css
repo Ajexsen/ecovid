@@ -963,6 +963,21 @@ text.hist_label {
     font-size: 0.7vw;
 }
 
+.bar_label {
+    font-size: 1.2vh;
+    /*line-height: 10px;*/
+    /*transform: translateY(50%);*/
+    font-weight: 300;
+}
+
+.bar_label_light {
+    fill: var(--offwhite);
+}
+
+.bar_label_dark {
+    fill: var(--burgundy);
+}
+
 text.dlabs {
     font-size: 0.7vw;
     opacity: 0;
