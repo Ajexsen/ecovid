@@ -4,8 +4,8 @@ Information Visualization for COVID-19 (Group 14)
 ## Goals
 - Overview of the COVID-19 pandemic outbreak and spreading in Germany
 - Explore the COVID-19 impact on economy over time
-  - impact on goods transport
-  - impact on German foreign trade
+  - impact on freight transport within germany (rail/road/train/flight)
+  - impact on German foreign trade (import/export)
 
 ## Features
 ![live version](https://i.ibb.co/nQR32Tg/Info-Vis-Group-14.png)
