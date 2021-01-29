@@ -101,7 +101,8 @@ function init_graph() {
             new_cases: +data["NeuerFall"],
             total_deaths: +data["AnzahlTodesfall"],
             new_deaths: +data["NeuerTodesfall"],
-            death_rate: Math.round(data["Todesrate"] * 100) / 100
+            death_rate: Math.round(data["Todesrate"] * 100) / 100,
+            _7d_incidence: +data["7d_inzidenz"]
         }
         genders.forEach(gender => {
             types.forEach(type => {

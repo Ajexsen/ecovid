@@ -10,6 +10,7 @@ function set_text_statistic(param) {
     $("#new_cases").html(select_date.new_cases);
     $("#total_deaths").html(select_date.total_deaths);
     $("#new_deaths").html(select_date.new_deaths);
+    $("#7_day").html(select_date._7d_incidence);
     if(isNaN(death_rate)){
         $("#death_rate").html("N/A");
     } else {
