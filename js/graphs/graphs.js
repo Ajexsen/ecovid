@@ -89,7 +89,7 @@ function read_datasets(param){
             }
         })
     }
-    return datasets
+    param.datasets = datasets
 }
 
 function init_graph() {
@@ -146,13 +146,13 @@ function init_graph() {
         });
         refresh_on_state_change();
 
-        line_param_air.datasets = read_datasets(line_param_air)
-        line_param_rail.datasets = read_datasets(line_param_rail)
-        line_param_road.datasets = read_datasets(line_param_road)
-        line_param_water.datasets = read_datasets(line_param_water)
+        read_datasets(line_param_air)
+        read_datasets(line_param_rail)
+        read_datasets(line_param_road)
+        read_datasets(line_param_water)
         
-        line_param_import.datasets = read_datasets(line_param_import)
-        line_param_export.datasets = read_datasets(line_param_export)
+        read_datasets(line_param_import)
+        read_datasets(line_param_export)        
 
         const slider = $("#date_slider");
         slider.attr('max', data_all.length - 1);

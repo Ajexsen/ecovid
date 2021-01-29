@@ -91,6 +91,7 @@ const line_param_air = {
     line_colors: line_colors,
     x: "Monat",
     y: "Air transport",
+    data_range: [80, 130],
     datasets: []
 };
 
@@ -104,6 +105,7 @@ const line_param_rail = {
     line_colors: line_colors,
     x: "Monat",
     y: "Rail transport",
+    data_range: [80, 130],
     datasets: []
 };
 
@@ -116,6 +118,7 @@ const line_param_road = {
     line_colors: line_colors,
     x: "Monat",
     y: "Road transport",
+    data_range: [80, 130],
     datasets: []
 };
 
@@ -128,6 +131,7 @@ const line_param_water = {
     line_colors: line_colors,
     x: "Monat",
     y: "Inland waterways transport",
+    data_range: [80, 130],
     datasets: []
 }
 
@@ -144,6 +148,7 @@ const line_param_import = {
     line_colors: line_colors,
     x: "Monat",
     y: "Import",
+    data_range: [70, 120],
     datasets: []
 };
 
@@ -158,6 +163,7 @@ const line_param_export = {
     line_colors: line_colors,
     x: "Monat",
     y: "Export",
+    data_range: [70, 120],
     datasets: []
 };
 
