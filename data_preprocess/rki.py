@@ -45,8 +45,13 @@ STATE_ID_ISONAME_MAP = {
 def get_csv_bundesland(df, pop, bundesland_id, path):
     file_name = "rki_.csv"
     
+    # fill 2020/01/01 with zeros
+    first_day_fill = (pd.to_datetime("2020/01/01".strip(), format='%Y/%m/%d')).date()
+    # df.loc[first_day_fill] = 0
+    
     # date index: from first date (min) to last date (max) in data
-    data_start_date = df['Meldedatum'].min()
+    # data_start_date = df['Meldedatum'].min()
+    data_start_date = first_day_fill
     data_end_date = df['Meldedatum'].max()
     indices = pd.date_range(start=data_start_date, end=data_end_date).date
     del data_start_date, data_end_date
@@ -107,6 +112,7 @@ def get_csv_bundesland(df, pop, bundesland_id, path):
     df['NeuerTodesfall'] = new_death
     df['7d_Fall'] = df['NeuerFall'].rolling(7, min_periods=1).sum()
     df['7d_inzidenz'] = round(df['7d_Fall'] / pop, 1)
+    
     # df['Todesrate'] = (df['AnzahlTodesfall']/df['AnzahlFall'])*100
     df.to_csv("{}{}".format(path, file_name))
     print("{} saved in path: {}".format(file_name, path))

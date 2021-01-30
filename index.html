@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
+
+<script type='text/javascript'>
+  function isItIE() {
+    user_agent = navigator.userAgent;
+    var is_it_ie = user_agent.indexOf("MSIE ") > -1 || user_agent.indexOf("Trident/") > -1;
+    return is_it_ie; 
+  }
+  if (isItIE()){
+      console.log('It is Internet Explorer');
+      window.location = "IE_sucks.html"
+  }
+</script>
+
 <div id="preloadedImages">
     <div id="preloadedImage01"></div>
     <div id="preloadedImage02"></div>
