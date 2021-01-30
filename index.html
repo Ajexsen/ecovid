@@ -44,13 +44,13 @@
                         <div id="day">-</div>
                     </div>
                     <div id="onerighttop" class="flex1 flexrow">
+                        <div id="stat3" class="flex1 stat">
+                            <div class="stat_title">7-d Incidence</div>
+                            <div id="7_day" class="stat_value">-</div>
+                        </div>
                         <div id="stat2" class="flex1 stat">
                             <div class="stat_title">New Cases</div>
                             <div id="new_cases" class="stat_value">-</div>
-                        </div>
-                        <div id="stat3" class="flex1 stat">
-                            <div class="stat_title">7d Incidence</div>
-                            <div id="7_day" class="stat_value">-</div>
                         </div>
                         <div id="stat1" class="flex1 flexcolumn stat">
                             <div class="stat_title">Total Cases</div>
@@ -168,9 +168,9 @@
                     </div>
                     <div class="fullheight_p fullwidth_p flexcolumn float">
                         <div id="slider_containter" class="line_chart_overlay flex1">
-                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"
-                                   oninput="refresh_on_date_change(this.value)">
-                            <!--                            <div id="slider-range"></div>-->
+                            <!--                            <input type="range" class="slider_thumb" id="date_slider" min="0" max="347"-->
+                            <!--                                   oninput="refresh_on_date_change(this.value)">-->
+                            <div id="slider-range"></div>
                         </div>
                     </div>
                 </div>
@@ -198,18 +198,18 @@
                         <div id="water_label" class="button_hint">waterways</div>
                     </div>
                     <div>
-                    <button title="Air" class="line_button flexrow flexnone" id="air_button"
-                            onclick="update_transport_chart('air');"></button>
+                        <button title="Air" class="line_button flexrow flexnone" id="air_button"
+                                onclick="update_transport_chart('air');"></button>
                         <div id="air_label" class="button_hint">air</div>
                     </div>
                     <div>
-                    <button title="Rail" class="line_button flexrow flexnone" id="rail_button"
-                            onclick="update_transport_chart('rail');"></button>
+                        <button title="Rail" class="line_button flexrow flexnone" id="rail_button"
+                                onclick="update_transport_chart('rail');"></button>
                         <div id="rail_label" class="button_hint">rail</div>
                     </div>
                     <div>
-                    <button title="Road" class="line_button flexrow flexnone" id="road_button"
-                            onclick="update_transport_chart('road');" disabled></button>
+                        <button title="Road" class="line_button flexrow flexnone" id="road_button"
+                                onclick="update_transport_chart('road');" disabled></button>
                         <div id="road_label" class="button_hint">road</div>
                     </div>
                 </div>
@@ -248,13 +248,13 @@
                         <!--                        <div id="line_chart_title3" class="line_chart_title"></div>-->
                     </div>
                     <div>
-                    <button title="export" class="line_button flexrow flexnone" id="export_button"
-                            onclick="update_econ_chart('export');"></button>
+                        <button title="export" class="line_button flexrow flexnone" id="export_button"
+                                onclick="update_econ_chart('export');"></button>
                         <div id="export_label" class="button_hint">export</div>
                     </div>
                     <div>
-                    <button title="import" class="line_button flexrow flexnone" id="import_button"
-                            onclick="update_econ_chart('import');" disabled></button>
+                        <button title="import" class="line_button flexrow flexnone" id="import_button"
+                                onclick="update_econ_chart('import');" disabled></button>
                         <div id="import_label" class="button_hint">import</div>
                     </div>
                 </div>

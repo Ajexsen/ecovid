@@ -25,12 +25,16 @@ function draw_bar(param) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    let select_date = param.src.get(param.date)
+    // console.log(param.date, param)
+    let select_date1 = param.src.get(param.date[0])
+    let select_date2 = param.src.get(param.date[1])
+    let data1 = select_date1[param.gender + param.type]
+    let data2 = select_date2[param.gender + param.type]
     let array = []
-    Object.entries(select_date[param.gender + param.type]).forEach(ele => {
+    Object.entries(data2).forEach(ele => {
         array.push({
             age: ele[0],
-            value: ele[1]
+            value: ele[1] - data1[ele[0]]
         });
     });
     // Scale the range of the data in the domains

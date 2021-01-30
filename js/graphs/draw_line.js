@@ -4,9 +4,11 @@ function draw_line(param) {
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
-    let range = +param.end;
-    let data_highlight = param.src.slice(0, range + 1);
-    let data_grey = param.src.slice(range, param.src.length + 1);
+    let start_date = +param.start;
+    let end_date = +param.end;
+    let data_grey1 = param.src.slice(0, start_date + 1);
+    let data_highlight = param.src.slice(start_date, end_date + 1);
+    let data_grey2 = param.src.slice(end_date, param.src.length + 1);
 
     let svg = d3.select(param.target)
         .append("svg")
@@ -73,6 +75,18 @@ function draw_line(param) {
         );
 
     svg.append("path")
+        .datum(data_grey1)
+        .attr("class", "line line_grey")
+        .attr("d", d3.line()
+            .x(function (d) {
+                return x(d[param.x])
+            })
+            .y(function (d) {
+                return y_right(d[param.data2.y])
+            })
+        );
+
+    svg.append("path")
         .datum(data_highlight)
         .attr("class", "area_total")
         .attr("d", d3.area()
@@ -98,7 +112,7 @@ function draw_line(param) {
         );
 
     svg.append("path")
-        .datum(data_grey)
+        .datum(data_grey2)
         .attr("class", "line line_grey")
         .attr("d", d3.line()
             .x(function (d) {
@@ -108,6 +122,18 @@ function draw_line(param) {
                 return y_right(d[param.data2.y])
             })
         );
+
+    svg.append("path")
+        .datum(data_grey1)
+        .attr("class", "line line_grey")
+        .attr("d", d3.line()
+            .x(function (d) {
+                return x(d[param.x])
+            })
+            .y(function (d) {
+                return y_left(d[param.data1.y])
+            })
+        )
 
     svg.append("path")
         .datum(data_highlight)
@@ -135,7 +161,7 @@ function draw_line(param) {
         )
 
     svg.append("path")
-        .datum(data_grey)
+        .datum(data_grey2)
         .attr("class", "line line_grey")
         .attr("d", d3.line()
             .x(function (d) {

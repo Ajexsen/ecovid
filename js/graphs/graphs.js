@@ -3,16 +3,19 @@ function getDate(value) {
     return d3.timeFormat(rki_dateFormat)(d3.timeDay.offset(start_date, value))
 }
 
-function updateDate(value) {
+function updateDate(value1, value2) {
     d3.selectAll('#onerightmiddle svg').remove();
-    let date = getDate(value);
-    line_param_death.end = value;
-    line_param_case.end = value;
-    bar_param_case_m.date = date
-    bar_param_case_w.date = date
-    bar_param_death_m.date = date
-    bar_param_death_w.date = date
-    text_stat_para.date = date
+    let date1 = getDate(value1);
+    let date2 = getDate(value2);
+    line_param_death.start = value1;
+    line_param_case.start = value1;
+    line_param_death.end = value2;
+    line_param_case.end = value2;
+    bar_param_case_m.date = [date1, date2]
+    bar_param_case_w.date = [date1, date2]
+    bar_param_death_m.date = [date1, date2]
+    bar_param_death_w.date = [date1, date2]
+    text_stat_para.date = [date1, date2]
 }
 
 function updateStats() {
@@ -30,8 +33,8 @@ function updateLineChart() {
     draw_line(line_param_case);
 }
 
-function refresh_on_date_change(value) {
-    updateDate(value);
+function refresh_on_date_change(value1, value2) {
+    updateDate(value1, value2);
     updateLineChart();
     updateStats();
 }
@@ -151,14 +154,27 @@ function init_graph() {
         read_datasets(line_param_rail)
         read_datasets(line_param_road)
         read_datasets(line_param_water)
-
         read_datasets(line_param_import)
         read_datasets(line_param_export)
 
-        const slider = $("#date_slider");
-        slider.attr('max', data_all.length - 1);
-        let date = slider.val()
-        refresh_on_date_change(date)
+        let day_pick = +getArg('d');
+        updateDate(0, day_pick)
+
+        $(function () {
+            let slider = $("#slider-range")
+            slider.slider({
+                range: true,
+                min: 0,
+                max: data_all.length - 1,
+                values: [0, day_pick],
+                slide: function (event, ui) {
+                    // console.log(slider.slider('values',0), slider.slider('values',1))
+                    refresh_on_date_change(ui.values[0], ui.values[1])
+                }
+            });
+            refresh_on_date_change(slider.slider('values',0), slider.slider('values',1))
+        });
+    }).then(function () {
         refresh_on_resize();
     })
 }

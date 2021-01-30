@@ -1,16 +1,18 @@
 function set_text_statistic(param) {
-    let select_date = data_rows.get(param.date)
-    let date = d3.timeParse(rki_dateFormat)(select_date.date)
-    let month = month_format_abbr(date)
-    let day = day_fomat(date)
-    let death_rate = Math.round(100 * 100 * select_date.total_deaths / select_date.total_cases) / 100
+    let select_date1 = data_rows.get(param.date[0])
+    let select_date2 = data_rows.get(param.date[1])
+    let date1 = d3.timeParse(rki_dateFormat)(select_date1.date)
+    let date2 = d3.timeParse(rki_dateFormat)(select_date2.date)
+    let month = month_format_abbr(date2)
+    let day = day_fomat(date2)
+    let death_rate = Math.round(100 * 100 * select_date2.total_deaths / select_date2.total_cases) / 100
     $("#month").html(month);
     $("#day").html(day);
-    $("#total_cases").html(select_date.total_cases);
-    $("#new_cases").html(select_date.new_cases);
-    $("#total_deaths").html(select_date.total_deaths);
-    $("#new_deaths").html(select_date.new_deaths);
-    $("#7_day").html(select_date._7d_incidence);
+    $("#total_cases").html(select_date2.total_cases - select_date1.total_cases);
+    $("#new_cases").html(select_date2.new_cases);
+    $("#total_deaths").html(select_date2.total_deaths - select_date1.total_deaths);
+    $("#new_deaths").html(select_date2.new_deaths);
+    $("#7_day").html(select_date2._7d_incidence);
     if(isNaN(death_rate)){
         $("#death_rate").html("N/A");
     } else {
