@@ -724,6 +724,7 @@ body {
 .tick {
     color: var(--burgundy);
     font-weight: 100;
+    opacity: 100% !important;
     /*visibility: hidden;*/
 }
 

@@ -18,7 +18,7 @@ function draw_line(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    let start = d3.timeParse("%Y-%m-%d")("2020-01-01")
+    // let start = d3.timeParse("%Y-%m-%d")("2020-01-01")
     let x = d3.scaleTime()
         .domain(d3.extent(param.src, function (d) {
             return d[param.x];
@@ -55,6 +55,7 @@ function draw_line(param) {
             .tickSizeInner(0)
             .tickSizeOuter(0)
             .tickPadding(10)
+            .tickFormat(d3.format(".1s"))
         );
 
     let y_right = d3.scaleLinear()
@@ -71,7 +72,7 @@ function draw_line(param) {
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
                 .tickPadding(10)
-            // .tickFormat(d3.format("s"))
+            .tickFormat(d3.format(".1s"))
         );
 
     svg.append("path")
