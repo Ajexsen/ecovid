@@ -5,6 +5,7 @@ function getDate(value) {
 
 function updateDate(value1, value2) {
     d3.selectAll('#onerightmiddle svg').remove();
+    let date0 = getDate(Math.max(0, value1 - 1));
     let date1 = getDate(value1);
     let date2 = getDate(value2);
     line_param_death.start = value1;
@@ -15,7 +16,7 @@ function updateDate(value1, value2) {
     bar_param_case_w.date = [date1, date2]
     bar_param_death_m.date = [date1, date2]
     bar_param_death_w.date = [date1, date2]
-    text_stat_para.date = [date1, date2]
+    text_stat_para.date = [date0, date1, date2]
 }
 
 function updateStats() {
