@@ -150,22 +150,32 @@ function draw_multiline(param) {
         // add y-axis ticks/labels on the right
         svg.append("g")
             .attr("transform", "translate(" + width + ", 0)")
-            .attr("class", "tick")
+            // .style("transform", "translate(0, 10)")
+            .attr("class", "tick inner_tick")
+            .style("text-anchor", "end")
+            // .attr("transform", "translate(0, 10)")
             .call(d3.axisRight(y)
                 .ticks(5)
                 .tickSizeInner(-width)
                 .tickSizeOuter(0)
-                .tickPadding(10)
+                .tickPadding(-4)
             )
+            .call(g => g.selectAll(".tick text")
+                .attr("dy", -4))
 
         // add plain y-axis line on the left
         svg.append("g")
-            .attr("class", "tick")
+            // .attr("transform", "translate(0, 5)")
+            .attr("class", "tick inner_tick")
+            .style("text-anchor", "start")
             .call(d3.axisLeft(y)
-                .ticks(0)
+                .ticks(5)
                 .tickSizeInner(0)
                 .tickSizeOuter(0)
+                .tickPadding(-4)
             )
+            .call(g => g.selectAll(".tick text")
+                .attr("dy", -4))
 
 
         let line_stroke_width = 0;

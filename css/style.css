@@ -728,6 +728,14 @@ body {
     /*visibility: hidden;*/
 }
 
+.inner_tick {
+    /*transform: translateY(10px);*/
+    padding-bottom: 10px;
+    font-size: 9px;
+    opacity: 90%;
+    font-weight: 300;
+}
+
 .tick line {
     opacity: 20%;
     /*stroke-width: 2px;*/
