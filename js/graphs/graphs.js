@@ -12,10 +12,10 @@ function updateDate(value1, value2) {
     line_param_case.start = value1;
     line_param_death.end = value2;
     line_param_case.end = value2;
-    bar_param_case_m.date = [date1, date2]
-    bar_param_case_w.date = [date1, date2]
-    bar_param_death_m.date = [date1, date2]
-    bar_param_death_w.date = [date1, date2]
+    bar_param_case_m.date = [date0, date2]
+    bar_param_case_w.date = [date0, date2]
+    bar_param_death_m.date = [date0, date2]
+    bar_param_death_w.date = [date0, date2]
     text_stat_para.date = [date0, date1, date2]
 }
 
