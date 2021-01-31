@@ -1,6 +1,6 @@
 function draw_line(param) {
     const container = $(param.target)
-    const margin = {top: 10, right: 55, bottom: 25, left: 60}
+    const margin = {top: 10, right: 55, bottom: 25, left: 55}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;
 
@@ -190,27 +190,26 @@ function draw_line(param) {
         .attr('class', 'chart_title')
         .attr('x', -height / 2)
         .attr('y', 0)
-        .attr("transform", "translate(-45, 0) rotate(-90)")
-        .attr('text-anchor', 'middle')
-        .text(param.title);
+        .text(param.title)
+        .style("transform", "translate(-45px, 0) rotate(-90deg)");
 
     if ("event_lines" in param) {
         const event_area = $("#line_chart_event");
         let event_width = event_area.innerWidth(),
             event_height = event_area.innerHeight();
 
-        let event_containter = d3.select("#line_chart_event")
+        let event_container = d3.select("#line_chart_event")
 
         let events = param.event_lines;
         for (let key in events) {
             let x_pos = x(d3.timeParse("%Y-%m-%d")(key))
-            let text = event_containter.append("div")
+            let text = event_container.append("div")
             text.attr("class", "event_txt_label")
                 .style("transform", "translate(calc(" + (x_pos - 1) + "px - 100%), -100%) rotate(-90deg)")
                 .text(events[key])
         }
 
-        let event = event_containter
+        let event = event_container
             .append("svg")
             .attr("width", event_width)
             .attr("height", event_height)

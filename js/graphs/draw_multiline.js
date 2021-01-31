@@ -1,38 +1,38 @@
 /**
-* Switches line chart data source and redraw on button click. (For transportation chart)
-* @param type {string} name of the data source
-*/
+ * Switches line chart data source and redraw on button click. (For transportation chart)
+ * @param type {string} name of the data source
+ */
 function update_transport_chart(type) {
     // remove all svg before redrawing
     d3.selectAll('#line_chart_transport svg').remove();
     d3.selectAll('#line_chart_transport_legend *').remove();
-    
+
     if (type === "air") {
         $("#air_button").prop('disabled', true);
         $("#rail_button").prop('disabled', false)
-        $("#road_button").prop('disabled', false)  
-        $("#water_button").prop('disabled', false) 
+        $("#road_button").prop('disabled', false)
+        $("#water_button").prop('disabled', false)
         transport_type = "air"
         transport_param = line_param_air
     } else if (type === "rail") {
         $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', true)
-        $("#road_button").prop('disabled', false) 
-        $("#water_button").prop('disabled', false)        
+        $("#road_button").prop('disabled', false)
+        $("#water_button").prop('disabled', false)
         transport_type = "rail"
         transport_param = line_param_rail
     } else if (type === "road") {
         $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', false)
-        $("#road_button").prop('disabled', true)  
-        $("#water_button").prop('disabled', false)       
+        $("#road_button").prop('disabled', true)
+        $("#water_button").prop('disabled', false)
         transport_type = "road"
         transport_param = line_param_road
     } else if (type === "water") {
         $("#air_button").prop('disabled', false)
         $("#rail_button").prop('disabled', false)
-        $("#road_button").prop('disabled', false)  
-        $("#water_button").prop('disabled', true)       
+        $("#road_button").prop('disabled', false)
+        $("#water_button").prop('disabled', true)
         transport_type = "water"
         transport_param = line_param_water
     }
@@ -40,22 +40,22 @@ function update_transport_chart(type) {
 }
 
 /**
-* Switches line chart data source and redraw on button click. (For economic chart)
-* @param type {string} name of the data source
-*/
+ * Switches line chart data source and redraw on button click. (For economic chart)
+ * @param type {string} name of the data source
+ */
 function update_econ_chart(type) {
     // remove all svg before redrawing
     d3.selectAll('#line_chart_econ svg').remove();
     d3.selectAll('#line_chart_econ_legend *').remove();
-    
+
     if (type === "import") {
         $("#import_button").prop('disabled', true)
-        $("#export_button").prop('disabled', false)         
+        $("#export_button").prop('disabled', false)
         econ_type = "import"
         econ_param = line_param_import
     } else if (type === "export") {
         $("#import_button").prop('disabled', false)
-        $("#export_button").prop('disabled', true)          
+        $("#export_button").prop('disabled', true)
         econ_type = "export"
         econ_param = line_param_export
     }
@@ -67,9 +67,9 @@ let transport_type = "air"
 let econ_type = "import"
 
 /**
-* Draws a chart with multiple line from different files.
-* @param param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
-*/
+ * Draws a chart with multiple line from different files.
+ * @param param {list} A list of parameter needed for drawing the corresponding svg (target, src, color, dataset, etc.)
+ */
 function draw_multiline(param) {
     // load all preread data
 
@@ -115,10 +115,10 @@ function draw_multiline(param) {
             (_, n) => d3.max(data[n], function (d) {
                 return +d.value;
             }))
-         
+
         const max = Math.max(...data_max)
         const min = Math.min(...data_min)
-        
+
         // const min = param.data_range[0]
         // const max = param.data_range[1]
 
@@ -135,7 +135,7 @@ function draw_multiline(param) {
         const y = d3.scaleLinear()
             .domain([min - buf, max + buf])
             .range([height, 0]);
-        
+
 
         // add x-axis ticks/labels
         svg.append("g")
@@ -210,7 +210,7 @@ function draw_multiline(param) {
                 //.transition()
                 .attr("d", d3.line()
                     .x(function (d) {
-                        return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                        return x(month_tag[d.date.getMonth()]) + (month_width / 2)
                     })
                     .y(function (d) {
                         return y(d.value)
@@ -228,14 +228,18 @@ function draw_multiline(param) {
                 .attr("class", param.title + "_dot_lines dot_lines dot_line_" + param.title + "_" + param.line_legends[i])
                 // .style("stroke", "grey")
                 // .style("stroke-width", 1)
-                .attr("x1", function(d) {
-                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                .attr("x1", function (d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width / 2)
                 })
-                .attr("y1", function(d) { return Math.max(y(d.value) - line_length, 25)})
-                .attr("x2", function(d) {
-                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                .attr("y1", function (d) {
+                    return Math.max(y(d.value) - line_length, 25)
                 })
-                .attr("y2", function(d) { return y(d.value) })
+                .attr("x2", function (d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width / 2)
+                })
+                .attr("y2", function (d) {
+                    return y(d.value)
+                })
 
             // add dots on data points
             svg.selectAll(".dots")
@@ -245,10 +249,12 @@ function draw_multiline(param) {
                 .attr("class", param.title + "_dots dot_" + param.title + "_" + param.line_legends[i])
                 .attr("fill", param.line_colors[i])
                 .attr("stroke", param.line_colors[i])
-                .attr("cx", function(d) {
-                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                .attr("cx", function (d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width / 2)
                 })
-                .attr("cy", function(d) { return y(d.value) })
+                .attr("cy", function (d) {
+                    return y(d.value)
+                })
                 .attr("r", dot_stroke_width)
 
             // add dot labels on top
@@ -256,12 +262,16 @@ function draw_multiline(param) {
                 .data(data[i])
                 .enter()
                 .append("text")
-                .attr("class", "dlabs "+ param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
-                .attr("x", function(d) {
-                    return x(month_tag[d.date.getMonth()]) + (month_width/2)
+                .attr("class", "dlabs " + param.title + "_dlabs dlab_" + param.title + "_" + param.line_legends[i])
+                .attr("x", function (d) {
+                    return x(month_tag[d.date.getMonth()]) + (month_width / 2)
                 })
-                .attr("y", function(d) { return Math.max(y(d.value) - line_length - text_gap, 25 - text_gap)})//function(d) { return y(d.value) })
-                .text(function(d) { return Math.round(d.value*100)/100 })
+                .attr("y", function (d) {
+                    return Math.max(y(d.value) - line_length - text_gap, 25 - text_gap)
+                })//function(d) { return y(d.value) })
+                .text(function (d) {
+                    return Math.round(d.value * 100) / 100
+                })
 
 
             // add line legend
@@ -286,24 +296,24 @@ function draw_multiline(param) {
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     // hide all lines & dots
-                    d3.selectAll("."+ param.title +"_lines").style("opacity", 0.07)
-                    d3.selectAll("."+ param.title +"_dots").style("opacity", 0.07)
+                    d3.selectAll("." + param.title + "_lines").style("opacity", 0.07)
+                    d3.selectAll("." + param.title + "_dots").style("opacity", 0.07)
 
                     // unhide selected line & dots
                     d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
                     d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.8)
                     d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.6)
-                    
+
                     // always show line from 2020
                     d3.select("#line_" + param.title + "_" + "2020").style("opacity", 1)
-                    d3.selectAll(".dot_" + param.title + "_" + "2020").style("opacity", 1)                    
-                    
+                    d3.selectAll(".dot_" + param.title + "_" + "2020").style("opacity", 1)
+
                 })
                 .on('mouseout', (event) => {
                     // unhide all lines & dots
-                    d3.selectAll("." + param.title +"_lines").style("opacity", 1)
-                    d3.selectAll("." + param.title +"_dots").style("opacity", 1)
+                    d3.selectAll("." + param.title + "_lines").style("opacity", 1)
+                    d3.selectAll("." + param.title + "_dots").style("opacity", 1)
                     d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0)
                     d3.selectAll("." + param.title + "_dot_lines").style("opacity", 0)
                 })
@@ -346,7 +356,7 @@ function draw_multiline(param) {
 
                     tooltip.html(tooltip_html);
                     tooltip
-                        .style("left", month_width * (p_month+0.6) + "px")
+                        .style("left", month_width * (p_month + 0.6) + "px")
                         .style("top", y0 + 20 + "px")
 
                     focus.style("transform", "translateX(" + month_width * p_month + "px)");

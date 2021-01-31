@@ -12,42 +12,56 @@ function draw_histogram(param) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    d3.csv(param.src, function(data){
+    d3.csv(param.src, function (data) {
         return {
             month: d3.timeParse("%m")(data.month),
             value: data.new_case,
         }
-    }).then(function(d){
+    }).then(function (d) {
         const d_length = 11
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
         let x = d3.scaleBand()
             .domain(month_tag)
             .range([0, width])
-            
+
         let y = d3.scaleLinear()
-            .domain([0, d3.max(d, function(d) { return +d.value; })])
+            .domain([0, d3.max(d, function (d) {
+                return +d.value;
+            })])
             .range([height, 0])
 
         svg.selectAll("rect")
             .data(d)
             .enter()
             .append("rect")
-            .attr("x", function(d, i){return x(month_tag[i]) + (barPadding/2)})
-            .attr("y", function(d){return y(d.value)})
+            .attr("x", function (d, i) {
+                return x(month_tag[i]) + (barPadding / 2)
+            })
+            .attr("y", function (d) {
+                return y(d.value)
+            })
             .attr("width", width / d_length - barPadding)
-            .attr("height", function(d){return height - y(d.value);})
-            
+            .attr("height", function (d) {
+                return height - y(d.value);
+            })
+
         svg.selectAll("text")
             .data(d)
             .enter()
             .append("text")
             .attr("class", "hist_label")
-            .attr("x", function(d, i){return x(month_tag[i]) + (width / d_length - barPadding) / 2})
-            .attr("y", function(d){return y(d.value)})
-            .attr("transform", "translate(3, -3)")
-            .text(function(d) { return d.value; });
-            
+            .attr("x", function (d, i) {
+                return x(month_tag[i]) + (width / d_length) / 2
+                // return x(month_tag[i])
+            })
+            .attr("y", function (d) {
+                return y(d.value)
+            })
+            .text(function (d) {
+                return d.value;
+            });
+
 
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
@@ -57,7 +71,7 @@ function draw_histogram(param) {
                 .tickSizeOuter(2)
                 .tickPadding(10)
             )
-        
+
         svg.append('text')
             .attr('class', 'chart_title')
             .attr('x', -height / 2)

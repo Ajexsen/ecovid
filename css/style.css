@@ -381,9 +381,10 @@ body {
     font-weight: 100;
     white-space: nowrap;
     color: var(--burgundy);
-    position: relative;
-    height: 16.667%;
+    /*position: relative;*/
+    /*height: 16.667%;*/
     text-anchor: middle;
+    transform: translateY(-3px);
 }
 
 .hist_labels {
@@ -415,12 +416,12 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 75px calc(55px - var(--axis-width) / 2) 25px calc(60px + var(--axis-width) / 2);
+    margin: 75px calc(55px - var(--axis-width) / 2) 25px calc(55px + var(--axis-width) / 2);
     /*overflow: hidden;*/
 }
 
 #line_chart_event {
-    margin: 0 calc(55px - var(--axis-width)) 25px calc(60px + var(--axis-width) / 2);
+    margin: 0 calc(55px - var(--axis-width)) 25px calc(55px + var(--axis-width) / 2);
     overflow: hidden;
 }
 
@@ -734,7 +735,7 @@ body {
 .inner_tick {
     /*transform: translateY(10px);*/
     padding-bottom: 10px;
-    font-size: 9px;
+    font-size: 8px;
     opacity: 90%;
     font-weight: 300;
 }
@@ -755,6 +756,8 @@ body {
 .chart_title {
     font-size: 14px;
     fill: var(--burgundy);
+    text-anchor: middle;
+    transform-origin: top center;
 }
 
 .chart_label {
@@ -996,6 +999,7 @@ text.hist_label {
     /*display: none;*/
     fill: var(--burgundy);
     font-size: 0.7vw;
+    /*text-anchor: middle;*/
 }
 
 .bar_label {

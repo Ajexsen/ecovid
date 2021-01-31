@@ -87,22 +87,6 @@ function read_datasets(param) {
     param.datasets = datasets
 }
 
-// updateDate(day0_pick, day1_pick)
-// $(document).ready(function () {
-//     $("#slider-range").slider({
-//         range: true,
-//         min: 0,
-//         max: data_all.length - 1,
-//         values: [day0_pick, day1_pick],
-//         slide: function (event, ui) {
-//             // console.log(slider.slider('values',0), slider.slider('values',1))
-//             day0_pick = ui.values[0]
-//             day1_pick = ui.values[1]
-//             // refresh_on_date_change(day0_pick, day1_pick)
-//         }
-//     });
-// });
-
 function render_graph() {
     d3.csv(data_source, function (data) {
         let rki_data = {
@@ -165,19 +149,16 @@ function render_graph() {
         read_datasets(line_param_import)
         read_datasets(line_param_export)
 
-        $(function () {
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: data_all.length - 1,
-                values: [day0_pick, day1_pick],
-                slide: function (event, ui) {
-                    // console.log(slider.slider('values',0), slider.slider('values',1))
-                    day0_pick = ui.values[0]
-                    day1_pick = ui.values[1]
-                    refresh_on_date_change(day0_pick, day1_pick)
-                }
-            });
+        $("#slider-range").slider({
+            range: true,
+            max: data_all.length - 1,
+            values: [day0_pick, day1_pick],
+            slide: function (event, ui) {
+                // console.log(slider.slider('values',0), slider.slider('values',1))
+                day0_pick = ui.values[0]
+                day1_pick = ui.values[1]
+                refresh_on_date_change(day0_pick, day1_pick)
+            }
         });
         refresh_on_date_change(day0_pick, day1_pick);
         refresh_on_resize();
