@@ -165,7 +165,6 @@ function render_graph() {
         read_datasets(line_param_import)
         read_datasets(line_param_export)
 
-        updateDate(day0_pick, day1_pick)
         $(function () {
             $("#slider-range").slider({
                 range: true,
@@ -180,7 +179,7 @@ function render_graph() {
                 }
             });
         });
-    }).then(function () {
+        refresh_on_date_change(day0_pick, day1_pick);
         refresh_on_resize();
     })
 }
