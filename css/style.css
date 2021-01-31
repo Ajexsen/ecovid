@@ -1064,7 +1064,7 @@ text.dlabs {
 }
 
 #msg_ie_container {
-    background: var(--offwhite);
+    background: #E3E2DF;
     /*display: table;*/
     z-index: 200;
     top: 0;
@@ -1087,5 +1087,5 @@ text.dlabs {
 #text_ie {
     /*font-family: Arial, Helvetica, sans-serif;*/
     font-size: 26px;
-    color: var(--burgundy);
+    color: #5D001E;
 }

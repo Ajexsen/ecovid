@@ -7,6 +7,8 @@ function browser_check() {
     if (isItIE()) {
         console.log('It is Internet Explorer');
         window.location = "IE_sucks.html"
+    } else {
+        console.log('It is not Internet Explorer');
     }
 }
 
