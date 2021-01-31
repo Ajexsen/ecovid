@@ -26,11 +26,12 @@ function getArg(name, url = window.location.href) {
 function browser_check() {
     let ua = window.navigator.userAgent;
     let msie = ua.indexOf("MSIE ");
-    $("#msg_ie_container").css("visibility", "hidden");
+    let msg_ie_container = $("#msg_ie_container")
+    msg_ie_container.css("visibility", "hidden");
     // If Internet Explorer
     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
         // alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
-        $("#msg_ie_container").css("visibility", "visible");
+        msg_ie_container.css("visibility", "visible");
     }
     return false;
 }
