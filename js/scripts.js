@@ -23,7 +23,24 @@ function getArg(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function browser_check() {
+    let ua = window.navigator.userAgent;
+    let msie = ua.indexOf("MSIE ");
+    $("#msg_ie_container").css("visibility", "hidden");
+    // If Internet Explorer
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        // alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+        $("#msg_ie_container").css("visibility", "visible");
+    }
+    return false;
+}
+
 function init_page() {
+    browser_check();
+
+    day0_pick = +getArg('d0');
+    day1_pick = +getArg('d1');
+
     //fullpage scrolling
     new fullpage('#fullpage', {
         navigation: true,
@@ -76,8 +93,5 @@ function init_page() {
     });
 
 }
-
-let day0_pick = +getArg('d0');
-let day1_pick = +getArg('d1');
 
 init_page();

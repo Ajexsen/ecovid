@@ -22,6 +22,8 @@ event_timeline = {
     // "2021-01-18": "New Mutation",
 }
 
+let day0_pick = 0;
+let day1_pick = 0;
 let data_all = {}
 let data_rows = {};
 let bar_chart_config = {};

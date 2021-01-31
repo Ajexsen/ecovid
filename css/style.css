@@ -1062,3 +1062,30 @@ text.dlabs {
     height: 100% !important;
     outline: 0 none !important;
 }
+
+#msg_ie_container {
+    background: var(--offwhite);
+    /*display: table;*/
+    z-index: 200;
+    top: 0;
+    left: 0;
+    position:fixed;
+    /*visibility: hidden;*/
+}
+
+#msg_ie {
+    bottom: 0;
+    height: 400px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+}
+
+#text_ie {
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-size: 26px;
+    color: var(--burgundy);
+}
