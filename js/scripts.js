@@ -42,12 +42,9 @@ function isItIE() {
 }
 
 function browser_check() {
-    let msg_ie_container = $("#msg_ie_container")
-    // msg_ie_container.css("visibility", "hidden");
-    if (isItIE()){
+    if (isItIE()) {
         console.log('It is Internet Explorer');
         window.location = "IE_sucks.html"
-        msg_ie_container.css("visibility", "visible");
     }
 }
 
