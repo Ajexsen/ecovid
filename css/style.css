@@ -597,9 +597,12 @@ body {
 }
 
 #fp-nav ul li .fp-tooltip {
-    line-height: 40px;
-    font-size: 18px;
+    line-height: 42px;
+    font-size: 16px;
     color: var(--burgundy);
+    justify-content: center;
+    /*background: #899779;*/
+    top: 0;
 }
 
 #fp-nav ul li .fp-tooltip {

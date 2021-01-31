@@ -29,7 +29,7 @@ function init_page() {
         navigation: true,
         navigationPosition: 'right',
         navigationTooltips: ['Overview', 'Transport', 'Trade'],
-        scrollBar: true
+        scrollBar: true,
     });
 
     //opacity of background
@@ -43,11 +43,6 @@ function init_page() {
         });
     });
 
-    let active_state
-    // let pins = {
-    //     "by": "Bayern",
-    //     "be": "Berlin"
-    // }
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
@@ -63,30 +58,26 @@ function init_page() {
         //     label.html("Aaa");
         // },
         onRegionSelect: function (event, code, region) {
-            // active_state = code
             let states = $("#map .map_svg .jqvmap-region");
             states.attr('class', 'jqvmap-region jqvmap-region-unselected');
             let selected_state = $("#jqvmap1_" + code);
             selected_state.attr('class', 'jqvmap-region jqvmap-region-selected');
-            console.log(selected_state)
+            // console.log(selected_state)
 
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
-            init_graph();
+            render_graph();
         },
         onRegionDeselect: function (event, code, region) {
             let states = $("#map .map_svg .jqvmap-region");
             states.attr('class', 'jqvmap-region');
             data_source = de_data_source;
-            init_graph();
+            render_graph();
         }
     });
 
-    // let day_pick = +getArg('d');
-    // const slider = $("#date_slider");
-    // slider.attr('max', data_all.length - 1);
-    // slider.val(day_pick);
-
 }
 
+let day0_pick = +getArg('d0');
+let day1_pick = +getArg('d1');
 
 init_page();

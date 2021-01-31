@@ -72,20 +72,11 @@ function refresh_on_state_change() {
     line_param_case.src = data_all;
 }
 
-function get_mid_month(date) {
-    if (date.getMonth() + 1 === 2) {
-        date.setDate(15)
-    } else {
-        date.setDate(16)
-    }
-    return date
-}
-
 function read_datasets(param) {
     let datasets = []
     const n_data = param.data_files.length
     for (let i = 0; i < n_data; i++) {
-        path = param.src + param.data_files[i]
+        let path = param.src + param.data_files[i]
         datasets[i] = d3.csv(path, function (d) {
             return {
                 date: d3.timeParse("%m")(d[param.x]),
@@ -96,7 +87,23 @@ function read_datasets(param) {
     param.datasets = datasets
 }
 
-function init_graph() {
+// updateDate(day0_pick, day1_pick)
+// $(document).ready(function () {
+//     $("#slider-range").slider({
+//         range: true,
+//         min: 0,
+//         max: data_all.length - 1,
+//         values: [day0_pick, day1_pick],
+//         slide: function (event, ui) {
+//             // console.log(slider.slider('values',0), slider.slider('values',1))
+//             day0_pick = ui.values[0]
+//             day1_pick = ui.values[1]
+//             // refresh_on_date_change(day0_pick, day1_pick)
+//         }
+//     });
+// });
+
+function render_graph() {
     d3.csv(data_source, function (data) {
         let rki_data = {
             date: data.Meldedatum,
@@ -158,25 +165,24 @@ function init_graph() {
         read_datasets(line_param_import)
         read_datasets(line_param_export)
 
-        let day_pick = +getArg('d');
-        updateDate(0, day_pick)
-
+        updateDate(day0_pick, day1_pick)
         $(function () {
-            let slider = $("#slider-range")
-            slider.slider({
+            $("#slider-range").slider({
                 range: true,
                 min: 0,
                 max: data_all.length - 1,
-                values: [0, day_pick],
+                values: [day0_pick, day1_pick],
                 slide: function (event, ui) {
                     // console.log(slider.slider('values',0), slider.slider('values',1))
-                    refresh_on_date_change(ui.values[0], ui.values[1])
+                    day0_pick = ui.values[0]
+                    day1_pick = ui.values[1]
+                    refresh_on_date_change(day0_pick, day1_pick)
                 }
             });
-            refresh_on_date_change(slider.slider('values',0), slider.slider('values',1))
         });
     }).then(function () {
         refresh_on_resize();
     })
 }
-init_graph();
+
+render_graph();

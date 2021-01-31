@@ -1,6 +1,6 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 15, right: 50, bottom: 25, left: 40}
+    const margin = {top: 15, right: 40, bottom: 25, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
