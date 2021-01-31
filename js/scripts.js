@@ -36,21 +36,7 @@ function getArg(name, url = window.location.href) {
 //     return false;
 // }
 
-function isItIE() {
-    let user_agent = navigator.userAgent;
-    return user_agent.indexOf("MSIE ") > -1 || user_agent.indexOf("Trident/") > -1;
-}
-
-function browser_check() {
-    if (isItIE()) {
-        console.log('It is Internet Explorer');
-        window.location = "IE_sucks.html"
-    }
-}
-
 function init_page() {
-    browser_check();
-
     day0_pick = +getArg('d0');
     day1_pick = +getArg('d1');
 
