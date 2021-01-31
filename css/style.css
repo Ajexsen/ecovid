@@ -1070,7 +1070,7 @@ text.dlabs {
     top: 0;
     left: 0;
     position:fixed;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 #msg_ie {

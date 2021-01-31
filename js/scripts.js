@@ -23,17 +23,32 @@ function getArg(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// function browser_check() {
+//     let ua = window.navigator.userAgent;
+//     let msie = ua.indexOf("MSIE ");
+//     let msg_ie_container = $("#msg_ie_container")
+//     msg_ie_container.css("visibility", "hidden");
+//     // If Internet Explorer
+//     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+//         // alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+//         msg_ie_container.css("visibility", "visible");
+//     }
+//     return false;
+// }
+
+function isItIE() {
+    let user_agent = navigator.userAgent;
+    return user_agent.indexOf("MSIE ") > -1 || user_agent.indexOf("Trident/") > -1;
+}
+
 function browser_check() {
-    let ua = window.navigator.userAgent;
-    let msie = ua.indexOf("MSIE ");
     let msg_ie_container = $("#msg_ie_container")
-    msg_ie_container.css("visibility", "hidden");
-    // If Internet Explorer
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-        // alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+    // msg_ie_container.css("visibility", "hidden");
+    if (isItIE()){
+        console.log('It is Internet Explorer');
+        window.location = "IE_sucks.html"
         msg_ie_container.css("visibility", "visible");
     }
-    return false;
 }
 
 function init_page() {
