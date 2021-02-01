@@ -1084,8 +1084,16 @@ text.dlabs {
     text-align: center;
 }
 
-#text_ie {
-    /*font-family: Arial, Helvetica, sans-serif;*/
+.text_ie {
+    margin: 30px;
     font-size: 26px;
     color: #5D001E;
+}
+
+#text_ie1 {
+    font-weight: 300;
+}
+
+#text_ie2 {
+    font-weight: bold;
 }

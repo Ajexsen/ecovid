@@ -59,10 +59,11 @@ function init_page() {
         });
     });
 
+    // let pins = {'by': 'tooltip_by'}
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
-        // showLabels: true,
+        showLabels: true,
         backgroundColor: null,
         enableZoom: false,
         showTooltip: true,
@@ -90,6 +91,7 @@ function init_page() {
             render_graph();
         }
     });
+
 
 }
 

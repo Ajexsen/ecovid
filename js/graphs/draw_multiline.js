@@ -296,26 +296,44 @@ function draw_multiline(param) {
             d3.select("#legend_" + param.title + "_" + param.line_legends[i])
                 .on('mousemove', (event) => {
                     // hide all lines & dots
-                    d3.selectAll("." + param.title + "_lines").style("opacity", 0.07)
-                    d3.selectAll("." + param.title + "_dots").style("opacity", 0.07)
-
-                    // unhide selected line & dots
-                    d3.select("#line_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
-                    d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i]).style("opacity", 1)
-                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.8)
-                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i]).style("opacity", 0.6)
+                    d3.selectAll("." + param.title + "_lines")
+                        .style("opacity", 0.07)
+                    d3.selectAll("." + param.title + "_dots")
+                        .style("opacity", 0.07)
 
                     // always show line from 2020
-                    d3.select("#line_" + param.title + "_" + "2020").style("opacity", 1)
-                    d3.selectAll(".dot_" + param.title + "_" + "2020").style("opacity", 1)
+                    d3.select("#line_" + param.title + "_" + "2020")
+                        .style("opacity", 1)
+                        .style("stroke-dasharray", 3)
+                    d3.selectAll(".dot_" + param.title + "_" + "2020")
+                        .style("opacity", 1)
+                        .style("stroke-width", 0.3)
+
+                    // unhide selected line & dots
+                    d3.select("#line_" + param.title + "_" + param.line_legends[i])
+                        .style("opacity", 1)
+                        .style("stroke-dasharray", 0)
+                    d3.selectAll(".dot_" + param.title + "_" + param.line_legends[i])
+                        .style("opacity", 1)
+                        .style("stroke-width", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i])
+                        .style("opacity", 0.8)
+                    d3.selectAll(".dot_line_" + param.title + "_" + param.line_legends[i])
+                        .style("opacity", 0.6)
 
                 })
                 .on('mouseout', (event) => {
                     // unhide all lines & dots
-                    d3.selectAll("." + param.title + "_lines").style("opacity", 1)
-                    d3.selectAll("." + param.title + "_dots").style("opacity", 1)
-                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i]).style("opacity", 0)
-                    d3.selectAll("." + param.title + "_dot_lines").style("opacity", 0)
+                    d3.selectAll("." + param.title + "_lines")
+                        .style("opacity", 1)
+                        .style("stroke-dasharray", 0)
+                    d3.selectAll("." + param.title + "_dots")
+                        .style("opacity", 1)
+                        .style("stroke-width", 1)
+                    d3.selectAll(".dlab_" + param.title + "_" + param.line_legends[i])
+                        .style("opacity", 0)
+                    d3.selectAll("." + param.title + "_dot_lines")
+                        .style("opacity", 0)
                 })
 
         }

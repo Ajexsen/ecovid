@@ -18,5 +18,4 @@ function set_text_statistic(param) {
     } else {
         $("#death_rate").html(death_rate + "%");
     }
-    
 }
