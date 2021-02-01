@@ -54,14 +54,14 @@
     font-display: swap;
 }
 
-@keyframes fade-in-move-down {
+@keyframes hint-fade-in {
   0% {
     opacity: 0;
     transform: translate(-60px, -30px);
   }
   100% {
     opacity: 1;
-    transform: translate(-85px, -30px);
+    transform: translate(-84px, -30px);
   }
 }
 
@@ -690,12 +690,13 @@ body {
 .button_hint {
     position: absolute;
     height: 30px;
-    width: 85px;
-    background: var(--magenta);
-    line-height: 30px;
-    text-align: center;
+    width: 75px;
+/*    width: 85px;
     color: var(--offwhite);
-    transform: translate(-85px, -30px);
+    background: var(--magenta);*/
+    color: var(--burgundy);
+    line-height: 30px;
+    text-align: right;
     font-weight: 300;
     opacity: 0;
     z-index: -1;
@@ -707,7 +708,7 @@ body {
 #road_button:hover + #road_label,
 #import_button:hover + #import_label,
 #export_button:hover + #export_label {
-    animation: fade-in-move-down 0.5s forwards;
+    animation: hint-fade-in 0.4s forwards;
 }
 
 .line {
