@@ -36,15 +36,16 @@
             <div id="map" class="map">
                 <div id="map_svg" class="map_svg"></div>
             </div>
+            <div id="map_title">7-day incidence</br>per 100,000 population</div>
         </div>
         <div id="onerightcontainter" class="fullheight_v flexright onerightcontainter section_content">
             <div id="oneright" class="flexcolumn oneright">
                 <div class="flexnone flexrow">
-                    <div id="date" class="flexnone flexcolumn dateblock">
-                        <div id="month">-</div>
-                        <div id="day">-</div>
+                    <div id="date1" class="flexnone flexcolumn dateblock">
+                        <div id="month1">n/a</div>
+                        <div id="day1">--</div>
                     </div>
-                    <div id="onerighttop" class="flex1 flexrow">
+                    <div id="onerighttop1" class="flex4 flexrow">
                         <div id="stat3" class="flex1 stat">
                             <div class="stat_title">7-d Incidence</div>
                             <div id="7_day" class="stat_value">-</div>
@@ -53,21 +54,30 @@
                             <div class="stat_title">New Cases</div>
                             <div id="new_cases" class="stat_value">-</div>
                         </div>
-                        <div id="stat1" class="flex1 flexcolumn stat">
-                            <div class="stat_title">Total Cases</div>
-                            <div id="total_cases" class="stat_value">-</div>
-                        </div>
                         <div id="stat5" class="flex1 stat">
                             <div class="stat_title">New Deaths</div>
                             <div id="new_deaths" class="stat_value">-</div>
                         </div>
-                        <div id="stat4" class="flex1 stat">
-                            <div class="stat_title">Total Deaths</div>
-                            <div id="total_deaths" class="stat_value">-</div>
-                        </div>
                         <div id="stat6" class="flex1 stat">
                             <div class="stat_title">Death Rate</div>
                             <div id="death_rate" class="stat_value">-</div>
+                        </div>
+                    </div>
+                    <div id="since_container" class="flexnone flexcolumn">
+                        <div id="since" class="fullwidth_p">since</div>
+                    </div>
+                    <div id="date2" class="flexnone flexcolumn dateblock">
+                        <div id="month2">n/a</div>
+                        <div id="day2">--</div>
+                    </div>
+                    <div id="onerighttop2" class="flex3 flexrow">
+                        <div id="stat1" class="flex1 flexcolumn stat">
+                            <div class="stat_title">Total Cases</div>
+                            <div id="total_cases" class="stat_value">-</div>
+                        </div>
+                        <div id="stat4" class="flex1 stat">
+                            <div class="stat_title">Total Deaths</div>
+                            <div id="total_deaths" class="stat_value">-</div>
                         </div>
                     </div>
                 </div>
@@ -301,6 +311,7 @@
 <script src="js/graphs/draw_line.js"></script>
 <script src="js/graphs/draw_multiline.js"></script>
 <script src="js/graphs/refresh_text.js"></script>
+<script src="js/graphs/mark_map.js"></script>
 <script src="js/graphs/graphs.js"></script>
 <script src="js/events.js"></script>
 </body>

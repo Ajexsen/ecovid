@@ -92,6 +92,14 @@ function init_page() {
         }
     });
 
+    for (let state of states) {
+        let map_label = d3.select("#jqvmap1_" + state + "_pin");
+        map_label.html("")
+        // map_label.attr("class", "center_parent");
+        // map_label.append("div")
+        //     .attr("id", "indicator_" + state)
+        //     .attr("class", "center_box map_indicator");
+    }
 
 }
 

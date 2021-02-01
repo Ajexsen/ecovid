@@ -12,6 +12,7 @@ function updateDate(value1, value2) {
     line_param_case.start = value1;
     line_param_death.end = value2;
     line_param_case.end = value2;
+    map_marker_param.date = value2;
     bar_param_case_m.date = [date0, date2]
     bar_param_case_w.date = [date0, date2]
     bar_param_death_m.date = [date0, date2]
@@ -25,6 +26,7 @@ function updateStats() {
     draw_bar(bar_param_death_m);
     draw_bar(bar_param_death_w);
     set_text_statistic(text_stat_para);
+    mark_map(map_marker_param)
 }
 
 function updateLineChart() {
@@ -49,6 +51,8 @@ function refresh_on_resize() {
     draw_histogram(histogram_param_DE);
     draw_multiline(transport_param);
     draw_multiline(econ_param);
+
+    // mark_map(map_marker_param)
 
     let thumb_height = $("#slider_containter").innerHeight()
     for (let j = 0; j < document.styleSheets[1].rules.length; j++) {
@@ -165,4 +169,20 @@ function render_graph() {
     })
 }
 
-render_graph();
+function init_graph() {
+    d3.csv(map_marker_param.src, function (data) {
+        let map_data = {}
+        for (let state of states) {
+            map_data[state] = +data["DE-" + state.toUpperCase()]
+        }
+        return map_data
+    }).then(function (data) {
+        map_marker_param.data = data;
+    }).then(function () {
+        render_graph()
+    });
+
+    // render_graph()
+}
+
+init_graph();
