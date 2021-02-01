@@ -707,7 +707,7 @@ body {
 #road_button:hover + #road_label,
 #import_button:hover + #import_label,
 #export_button:hover + #export_label {
-    animation: hint-fade-in 0.4s forwards;
+    animation: hint-fade-in 0.2s forwards;
 }
 
 .line {
