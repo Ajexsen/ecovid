@@ -8,33 +8,29 @@ Information Visualization for COVID-19 (Group 14)
   - impact on German foreign trade (import/export)
 
 ## Features
-![live version](https://i.ibb.co/nQR32Tg/Info-Vis-Group-14.png)
 
+![page1](https://user-images.githubusercontent.com/44232985/106525614-89135a00-64e4-11eb-90b8-35b726156ed0.png)
 
 - Overview of basic statistics in Germany (top)
+- 7-day incidence on map
 - Differences in age and gender (bar charts)
 - New/total cases/deaths (line charts)
 - Statistics of each state (click on the map)
+- Show state name when mouse over
 - The coronavirus chronicle: 
-  - date selection via range slider
+  - date selection (start and end) via range sliders
   - all charts refreshed accordingly
   
 
-![image](https://user-images.githubusercontent.com/44232985/104714877-08074500-5726-11eb-96d1-95e94081805a.png)
+![屏幕快照 2021-02-01 23 05 59](https://user-images.githubusercontent.com/44232985/106524592-13f35500-64e3-11eb-82ab-a7f73f706f65.png)
 
+![屏幕快照 2021-02-01 23 06 20](https://user-images.githubusercontent.com/44232985/106524663-2ec5c980-64e3-11eb-805b-77be7aa62158.png)
 
-- Transport indices (air/rail/road/waterway)
-- New cases as extra time indicator
-- Flexible selection of means of transport (click on the button) 
-- Highlight a single year (mouse over legend) 
+- Freight transport (air/rail/road/waterway) and German's foreign trade (import/export)
+- New cases as extra time indicator (bottom)
+- Flexible selection of means of transport or import/export (click on the button) and show name when hovering over button
+- Highlight a single year when hovering over legend (Line of 2020 will become dashed for comparision)
 - Details in tooltip (mouse over)
-
-
-![image](https://user-images.githubusercontent.com/44232985/104714853-0047a080-5726-11eb-89d9-69132e94de45.png)
-
-
-- German import and export from 2017 to 2020
-- Functions analogous to goods transport
 
 
 live demo: https://infovis14.netlify.app/
