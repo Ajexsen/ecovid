@@ -54,6 +54,17 @@
     font-display: swap;
 }
 
+@keyframes fade-in-move-down {
+  0% {
+    opacity: 0;
+    transform: translate(-60px, -30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-85px, -30px);
+  }
+}
+
 :root {
     --offwhite: #E3E2DF;
     --offwhite_dark: #dddbd7;
@@ -687,6 +698,7 @@ body {
     transform: translate(-85px, -30px);
     font-weight: 300;
     opacity: 0;
+    z-index: -1;
 }
 
 #water_button:hover + #water_label,
@@ -695,7 +707,7 @@ body {
 #road_button:hover + #road_label,
 #import_button:hover + #import_label,
 #export_button:hover + #export_label {
-    opacity: 1;
+    animation: fade-in-move-down 0.5s forwards;
 }
 
 .line {
