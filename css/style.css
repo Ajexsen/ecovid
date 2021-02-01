@@ -325,9 +325,9 @@ body {
     left: 0;
     bottom: 0;
     margin-left: 35px;
-    margin-bottom: 35px;
+    margin-bottom: 34px;
     color: var(--offwhite);
-    font-size: 16px;
+    font-size: 15px;
     /*font-weight: 300;*/
 }
 
