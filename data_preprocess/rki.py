@@ -147,11 +147,39 @@ data['gender_age'] = data['Geschlecht'] + "_" + data['Altersgruppe']
 data = data.drop(columns=['Geschlecht', 'Altersgruppe'])
 
 # generate csv for all states (include DE_all)
-for i in range(17):
-    pop = float(population_data[population_data['bundesland_ab'] == STATE_ID_ISONAME_MAP[i]]['einwohner'])
-    kk = get_csv_bundesland(data, pop, i, save_path)
+# for i in range(17):
+#     pop = float(population_data[population_data['bundesland_ab'] == STATE_ID_ISONAME_MAP[i]]['einwohner'])
+#     kk = get_csv_bundesland(data, pop, i, save_path)
 
 # generate nation-wide csv (DE_all)
 # df = get_csv_bundesland(data, 0, save_path)
+
+# generate 7d everyday per bundesland
+
+def d7_df():
+    df_all = pd.read_csv(save_path + 'rki_DE-all.csv')
+    file_name = "rki_7d_DE-all.csv"
+    
+    column_names = ['Meldedatum'].append(list(STATE_ID_ISONAME_MAP.values()))
+    df = pd.DataFrame(columns=column_names)
+    df['Meldedatum'] = df_all['Meldedatum']
+    df = df.fillna(0)
+    
+    for i in range(17):
+        land_name = STATE_ID_ISONAME_MAP[i]
+        if i == 0:
+            df[land_name] = df_all['7d_inzidenz'].copy()
+            # print(df_all['7d_inzidenz'])
+        else:
+            df_land = pd.read_csv("{}bundesland//rki_{}.csv".format(save_path, land_name))
+            df_land.index.name='Meldedatum'
+            df[land_name] = df_land['7d_inzidenz'].copy()
+    df.to_csv("{}{}".format(save_path, file_name), index = False)
+    print("{} saved in path: {}".format(file_name, save_path))
+
+
+d7_df()
+    
         
+
     
