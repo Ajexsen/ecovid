@@ -331,6 +331,40 @@ body {
     /*font-weight: 300;*/
 }
 
+.data_source {
+    position: absolute;
+    right: 57px;
+    bottom: 26px;
+    margin-top: 8px;
+    /*margin-right: 5px;*/
+    /*margin-bottom: 5px;*/
+    color: var(--burgundy);
+    background-color: var(--offwhite);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14px;
+}
+
+.data_source2 {
+    position: absolute;
+    right: 43px;
+    bottom: 2px;
+    background-color: var(--offwhite);
+    transform: translateY(-100%);
+    margin-top: 30px;
+    /*margin-right: 5px;*/
+    margin-bottom: 10px;
+    color: var(--burgundy);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14px;
+    opacity: 90%;
+}
+
+#transport {
+    position: relative;
+}
+
 .logo {
     font-size: 24px;
     font-weight: 800;
@@ -880,9 +914,10 @@ body {
 
 .chart_caption {
     font-size: 14px;
-    /*line-height: 14px;*/
+    line-height: 14px;
     height: 14px;
-    margin-top: 5px;
+    margin-top: 8px;
+    margin-left: 55px;
     color: var(--burgundy);
     text-align: center;
     /*overflow: visible;*/
