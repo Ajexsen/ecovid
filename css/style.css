@@ -884,7 +884,8 @@ body {
     font-size: 14px;
     fill: var(--burgundy);
     text-anchor: middle;
-    transform-origin: top center;
+    /*transform-origin: top center;*/
+    transform: translate(-45px, 0) rotate(-90deg);
 }
 
 .chart_label {

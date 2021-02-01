@@ -191,7 +191,7 @@ function draw_line(param) {
         .attr('x', -height / 2)
         .attr('y', 0)
         .text(param.title)
-        .style("transform", "translate(-45px, 0) rotate(-90deg)");
+        // .style("transform", "translate(-45px, 0) rotate(-90deg)");
 
     if ("event_lines" in param) {
         const event_area = $("#line_chart_event");
