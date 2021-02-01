@@ -669,6 +669,7 @@ body {
 
 .content_title {
     /*margin-top: 10px;*/
+    margin-left: 40px;
     margin-bottom: 0.5vh;
     font-size: 3.8vh;
     font-weight: bold;
@@ -677,6 +678,7 @@ body {
 
 .content_subtitle {
     /*margin-top: 5px;*/
+    margin-left: 40px;
     font-size: 2.3vh;
     font-weight: 100;
     color: var(--burgundy);
@@ -886,6 +888,14 @@ body {
     text-anchor: middle;
     /*transform-origin: top center;*/
     transform: translate(-45px, 0) rotate(-90deg);
+}
+
+.chart_title2 {
+    font-size: 14px;
+    fill: var(--burgundy);
+    text-anchor: middle;
+    transform-origin: top center;
+    transform: translate(-15px, 0) rotate(-90deg);
 }
 
 .chart_label {

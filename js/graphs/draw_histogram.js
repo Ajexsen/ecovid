@@ -73,11 +73,11 @@ function draw_histogram(param) {
             )
 
         svg.append('text')
-            .attr('class', 'chart_title')
+            .attr('class', 'chart_title2')
             .attr('x', -height / 2)
             .attr('y', 0)
             .attr("transform", "translate(-15, 0) rotate(-90)")
-            .attr('text-anchor', 'middle')
+            // .attr('text-anchor', 'middle')
             .text(param.title)
     })
 }
