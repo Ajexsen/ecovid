@@ -7,9 +7,10 @@ const line_colors = ["#707070", "#4BBDAD", "#F7B732", "#FD4A1E", "#5E0922", "#51
 //const line_colors = ["#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070", "#5E0922", "#FD4A1E", "#4BBDAD", "#F7B732", "#515D93", "#707070"]
 const states = ["sh","hh","ni","hb","nw","he","rp","bw","by","sl","be","bb","mv","sn","st","th"]
 
+const year_format = d3.timeFormat("%Y");
 const month_format_abbr = d3.timeFormat("%b");
 const month_format = d3.timeFormat("%B");
-const day_fomat = d3.timeFormat("%d");
+const day_format = d3.timeFormat("%d");
 
 // still needs to be checked, and updated.
 event_timeline = {

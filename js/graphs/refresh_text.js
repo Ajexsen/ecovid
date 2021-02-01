@@ -5,9 +5,9 @@ function set_text_statistic(param) {
     let date1 = d3.timeParse(rki_dateFormat)(select_date1.date)
     let date2 = d3.timeParse(rki_dateFormat)(select_date2.date)
     let month1 = month_format_abbr(date1)
-    let day1 = day_fomat(date1)
+    let day1 = day_format(date1)
     let month2 = month_format_abbr(date2)
-    let day2 = day_fomat(date2)
+    let day2 = day_format(date2)
     let death_rate = Math.round(100 * 100 * select_date2.total_deaths / select_date2.total_cases) / 100
     $("#month1").html(month2);
     $("#day1").html(day2);
