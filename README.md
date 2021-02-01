@@ -8,8 +8,8 @@ Information Visualization for COVID-19 (Group 14)
   - impact on German foreign trade (import/export)
 
 ## Features
-![屏幕快照 2021-02-01 23 05 16](https://user-images.githubusercontent.com/44232985/106524294-a515fc00-64e2-11eb-9e22-57b3bc052ed2.png)
 
+![page1](https://user-images.githubusercontent.com/44232985/106525614-89135a00-64e4-11eb-90b8-35b726156ed0.png)
 
 - Overview of basic statistics in Germany (top)
 - 7-day incidence on map
