@@ -191,6 +191,11 @@ body {
     background-color: var(--burgundy);
 }
 
+#map_deselect {
+    position: absolute;
+    z-index: 60;
+}
+
 .map_container {
     width: 40vw;
     height: 100vh !important;
@@ -198,6 +203,7 @@ body {
     align-items: center;
     justify-content: center;
     display: flex;
+    position: relative;
 }
 
 .map {
@@ -206,12 +212,14 @@ body {
     align-items: center;
     justify-content: center;
     display: flex;
+    z-index: 70;
+    pointer-events: none;
+    position: absolute;
 }
 
 .map_svg {
-    width: 100%;
-    height: 100%;
     pointer-events: none;
+    position: absolute;
 }
 
 .map_svg .jqvmap-region {
@@ -507,7 +515,7 @@ body {
     font-size: 1.5vw;
     font-weight: bold;
     white-space: nowrap;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .hist_label {
