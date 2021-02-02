@@ -55,7 +55,6 @@ function draw_histogram(param) {
             .attr("class", "hist_label")
             .attr("x", function (d, i) {
                 return x(month_tag[i]) + (width / d_length) / 2
-                // return x(month_tag[i])
             })
             .attr("y", function (d) {
                 return y(d.value)
@@ -78,8 +77,7 @@ function draw_histogram(param) {
             .attr('class', 'chart_title2')
             .attr('x', -height / 2)
             .attr('y', 0)
-            .attr("transform", "translate(-15, 0) rotate(-90)")
-            // .attr('text-anchor', 'middle')
+            // .attr("transform", "translate(-15, 0) rotate(-90)")
             .text(param.title)
     })
 }

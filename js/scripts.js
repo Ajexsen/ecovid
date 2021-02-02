@@ -23,19 +23,6 @@ function getArg(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-// function browser_check() {
-//     let ua = window.navigator.userAgent;
-//     let msie = ua.indexOf("MSIE ");
-//     let msg_ie_container = $("#msg_ie_container")
-//     msg_ie_container.css("visibility", "hidden");
-//     // If Internet Explorer
-//     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-//         // alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
-//         msg_ie_container.css("visibility", "visible");
-//     }
-//     return false;
-// }
-
 function init_page() {
     day0_pick = +getArg('d0');
     day1_pick = +getArg('d1');
@@ -59,7 +46,6 @@ function init_page() {
         });
     });
 
-    // let pins = {'by': 'tooltip_by'}
     //map
     jQuery('#map_svg').vectorMap({
         map: 'germany_en',
@@ -67,19 +53,14 @@ function init_page() {
         backgroundColor: null,
         enableZoom: false,
         showTooltip: true,
-        // pins: pins,
         pinMode: 'content',
         onRegionClick: function (element, code, region) {
         },
-        // onLabelShow: function(event, label, code) {
-        //     label.html("Aaa");
-        // },
         onRegionSelect: function (event, code, region) {
             let states = $("#map .map_svg .jqvmap-region");
             states.attr('class', 'jqvmap-region jqvmap-region-unselected');
             let selected_state = $("#jqvmap1_" + code);
             selected_state.attr('class', 'jqvmap-region jqvmap-region-selected');
-            // console.log(selected_state)
 
             data_source = state_data_prefix + code.toUpperCase() + '.csv';
             render_graph();
@@ -95,10 +76,6 @@ function init_page() {
     for (let state of states) {
         let map_label = d3.select("#jqvmap1_" + state + "_pin");
         map_label.html("")
-        // map_label.attr("class", "center_parent");
-        // map_label.append("div")
-        //     .attr("id", "indicator_" + state)
-        //     .attr("class", "center_box map_indicator");
     }
 
 }
