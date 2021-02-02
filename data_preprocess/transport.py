@@ -1,8 +1,8 @@
 import pandas as pd
 
-path = 'data/transport/'
+path = '../data/transport/'
 
-data = pd.read_csv('{}{}.csv'.format(path, 'raw_data/transport_indices'), sep=";")
+data = pd.read_csv('{}{}.csv'.format(path, 'raw_data/transport-index-subindices'), sep=";")
 data['Year'] = pd.DatetimeIndex(data['Monat']).year
 data['Monat'] = pd.DatetimeIndex(data['Monat']).month
 
