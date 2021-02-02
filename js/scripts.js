@@ -1,19 +1,3 @@
-function step() {
-    let targetValue = 300
-    currentValue = document.getElementById("date_slider").value
-    updateBarData(currentValue);
-    document.getElementById("date_slider").value = parseInt(currentValue) + 1
-
-    if (currentValue > targetValue) {
-        moving = false;
-        currentValue = 0;
-        clearInterval(timer);
-        // timer = 0;
-        playButton.text("Play");
-        console.log("Slider moving: " + moving);
-    }
-}
-
 function getArg(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -77,7 +61,6 @@ function init_page() {
         let map_label = d3.select("#jqvmap1_" + state + "_pin");
         map_label.html("")
     }
-
 }
 
 init_page();

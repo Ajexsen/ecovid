@@ -255,12 +255,12 @@ body {
     font-weight: 300;
     background: var(--burgundy);
     /*width: 40px;*/
-    text-anchor: middle;
-    text-align: center;
+    /*text-anchor: middle;*/
+    /*text-align: center;*/
     opacity: 90%;
     /*height: 40px;*/
     padding: 0 5px 0 5px;
-    display:inline-block;
+    /*display:inline-block;*/
 }
 
 #jqvmap1_be_pin {
@@ -948,6 +948,7 @@ body {
     margin-left: 55px;
     color: var(--burgundy);
     text-align: center;
+    display: inline-block;
     /*overflow: visible;*/
 }
 

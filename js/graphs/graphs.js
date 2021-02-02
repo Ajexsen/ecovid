@@ -37,6 +37,8 @@ function updateLineChart() {
 }
 
 function refresh_on_date_change(value1, value2) {
+    day0_pick = value1
+    day1_pick = value2
     updateDate(value1, value2);
     updateLineChart();
     updateStats();
@@ -158,10 +160,10 @@ function render_graph() {
             max: data_all.length - 1,
             values: [day0_pick, day1_pick],
             slide: function (event, ui) {
-                // console.log(slider.slider('values',0), slider.slider('values',1))
-                day0_pick = ui.values[0]
-                day1_pick = ui.values[1]
-                refresh_on_date_change(day0_pick, day1_pick)
+                refresh_on_date_change(ui.values[0], ui.values[1])
+            },
+            change: function (event, ui) {
+                refresh_on_date_change(ui.values[0], ui.values[1])
             }
         });
         refresh_on_date_change(day0_pick, day1_pick);
@@ -181,8 +183,6 @@ function init_graph() {
     }).then(function () {
         render_graph()
     });
-
-    // render_graph()
 }
 
 init_graph();
