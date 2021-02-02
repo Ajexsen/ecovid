@@ -5,6 +5,7 @@ function draw_histogram(param) {
         height = container.innerHeight() - margin.top - margin.bottom
 
     let barPadding = 10;
+    let bar_margin_bottom = 3
     let svg = d3.selectAll(param.target)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -38,7 +39,7 @@ function draw_histogram(param) {
                 return x(month_tag[i]) + (barPadding / 2)
             })
             .attr("y", function (d) {
-                return y(d.value) - 4
+                return y(d.value) - bar_margin_bottom
             })
             .attr("width", width / d_length - barPadding)
             .attr("height", function (d) {
@@ -54,7 +55,7 @@ function draw_histogram(param) {
                 return x(month_tag[i]) + (width / d_length) / 2
             })
             .attr("y", function (d) {
-                return y(d.value) - 4
+                return y(d.value) - bar_margin_bottom
             })
             .text(function (d) {
                 return d.value;
