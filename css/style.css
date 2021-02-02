@@ -183,6 +183,10 @@ body {
     align-items: stretch;
 }
 
+.flex_start {
+    align-items: flex-start;
+}
+
 .map_bg {
     background-color: var(--burgundy);
 }
@@ -333,14 +337,14 @@ body {
 
 .data_source {
     position: absolute;
-    right: 57px;
+    right: 56px;
     bottom: 26px;
     margin-top: 8px;
     /*margin-right: 5px;*/
     /*margin-bottom: 5px;*/
     color: var(--burgundy);
     background-color: var(--offwhite);
-    padding: 0 3px 0 3px;
+    padding: 0 2px 0 2px;
     font-size: 12px;
     font-weight: 300;
     line-height: 14px;
@@ -348,14 +352,14 @@ body {
 
 .data_source2 {
     position: absolute;
-    right: 43px;
+    right: 41px;
     bottom: 2px;
     background-color: var(--offwhite);
     transform: translateY(-100%);
     margin-top: 30px;
     /*margin-right: 5px;*/
     margin-bottom: 10px;
-    padding: 0 3px 0 3px;
+    padding: 0 2px 0 2px;
     color: var(--burgundy);
     font-size: 12px;
     font-weight: 300;
@@ -436,6 +440,7 @@ body {
 
 .dateblock {
     margin-right: 1.4vw;
+    /*width: 2.2vw;*/
 }
 
 #month1, #month2 {
@@ -452,6 +457,7 @@ body {
     font-size: 1.5vw;
     padding: 0 6px 0 6px;
     color: var(--burgundy);
+    text-align: center;
     /*font-weight: bold;*/
 }
 
@@ -501,6 +507,7 @@ body {
     font-size: 1.5vw;
     font-weight: bold;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .hist_label {

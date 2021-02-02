@@ -18,7 +18,6 @@ function draw_line(param) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    // let start = d3.timeParse("%Y-%m-%d")("2020-01-01")
     let x = d3.scaleTime()
         .domain(d3.extent(param.src, function (d) {
             return d[param.x];
@@ -32,8 +31,7 @@ function draw_line(param) {
             .tickSizeInner(0)
             .tickSizeOuter(2)
             .tickPadding(10)
-            // .tickFormat(d3.timeFormat("%b"))
-            .tickFormat(function(date){
+            .tickFormat(function (date) {
                 if (d3.timeYear(date) < date) {
                     return d3.timeFormat('%b')(date);
                 } else {
@@ -68,10 +66,10 @@ function draw_line(param) {
         .attr("transform", "translate(" + width + ", 0)")
         .attr("class", "tick")
         .call(d3.axisRight(y_right)
-                .ticks(3)
-                .tickSizeInner(0)
-                .tickSizeOuter(0)
-                .tickPadding(10)
+            .ticks(3)
+            .tickSizeInner(0)
+            .tickSizeOuter(0)
+            .tickPadding(10)
             .tickFormat(d3.format(".1s"))
         );
 
@@ -191,7 +189,6 @@ function draw_line(param) {
         .attr('x', -height / 2)
         .attr('y', 0)
         .text(param.title)
-        // .style("transform", "translate(-45px, 0) rotate(-90deg)");
 
     if ("event_lines" in param) {
         const event_area = $("#line_chart_event");
