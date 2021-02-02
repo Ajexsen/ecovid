@@ -18,7 +18,7 @@ function draw_histogram(param) {
             value: data.new_case,
         }
     }).then(function (d) {
-        const d_length = 11
+        const d_length = 12
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
         let x = d3.scaleBand()
@@ -75,7 +75,6 @@ function draw_histogram(param) {
             .attr('class', 'chart_title2')
             .attr('x', -height / 2)
             .attr('y', 0)
-            // .attr("transform", "translate(-15, 0) rotate(-90)")
             .text(param.title)
     })
 }
