@@ -9,7 +9,7 @@ Information Visualization for COVID-19 (Group 14)
 
 ## Features
 
-![page1](https://user-images.githubusercontent.com/44232985/106525614-89135a00-64e4-11eb-90b8-35b726156ed0.png)
+![image](https://user-images.githubusercontent.com/14870264/106538269-55dcc500-64fc-11eb-86fa-e7cfbd925346.png)
 
 - Overview of basic statistics in Germany (top)
 - 7-day incidence on map
@@ -22,9 +22,9 @@ Information Visualization for COVID-19 (Group 14)
   - all charts refreshed accordingly
   
 
-![屏幕快照 2021-02-01 23 05 59](https://user-images.githubusercontent.com/44232985/106524592-13f35500-64e3-11eb-82ab-a7f73f706f65.png)
+![image](https://user-images.githubusercontent.com/14870264/106538398-77d64780-64fc-11eb-8322-6275a68494c5.png)
 
-![屏幕快照 2021-02-01 23 06 20](https://user-images.githubusercontent.com/44232985/106524663-2ec5c980-64e3-11eb-805b-77be7aa62158.png)
+![image](https://user-images.githubusercontent.com/14870264/106538463-8a508100-64fc-11eb-87e4-bdcdaa66c325.png)
 
 - Freight transport (air/rail/road/waterway) and German's foreign trade (import/export)
 - New cases as extra time indicator (bottom)
