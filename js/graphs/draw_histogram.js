@@ -4,7 +4,7 @@ function draw_histogram(param) {
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
-    let barPadding = 10;
+    let barPadding = 9;
     let bar_margin_bottom = 3
     let svg = d3.selectAll(param.target)
         .append("svg")

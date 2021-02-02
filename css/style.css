@@ -519,7 +519,7 @@ body {
 }
 
 .hist_label {
-    font-size: 12px;
+    /*font-size: 12px;*/
     font-weight: 100;
     white-space: nowrap;
     color: var(--burgundy);
