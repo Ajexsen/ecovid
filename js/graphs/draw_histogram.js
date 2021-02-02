@@ -1,6 +1,6 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 15, right: 42, bottom: 25, left: 38}
+    const margin = {top: 15, right: 40, bottom: 25, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
@@ -18,7 +18,7 @@ function draw_histogram(param) {
             value: data.new_case,
         }
     }).then(function (d) {
-        const d_length = 11
+        const d_length = 12
         const month_tag = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
         let x = d3.scaleBand()
@@ -30,7 +30,9 @@ function draw_histogram(param) {
                 return +d.value;
             })])
             .range([height, 0])
-
+        console.log(x(month_tag[0]))
+        console.log(width)
+        console.log(width / d_length)
         svg.selectAll("rect")
             .data(d)
             .enter()
@@ -64,7 +66,7 @@ function draw_histogram(param) {
 
 
         svg.append("g")
-            .attr("transform", "translate(2, " + height + ")")
+            .attr("transform", "translate(0, " + height + ")")
             .attr("class", "tick")
             .call(d3.axisBottom(x)
                 .tickSizeInner(0)
