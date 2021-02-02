@@ -1,6 +1,6 @@
 function draw_histogram(param) {
     const container = $(param.target)
-    const margin = {top: 15, right: 40, bottom: 25, left: 40}
+    const margin = {top: 20, right: 40, bottom: 25, left: 40}
     let width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom
 
@@ -30,9 +30,6 @@ function draw_histogram(param) {
                 return +d.value;
             })])
             .range([height, 0])
-        console.log(x(month_tag[0]))
-        console.log(width)
-        console.log(width / d_length)
         svg.selectAll("rect")
             .data(d)
             .enter()
@@ -41,7 +38,7 @@ function draw_histogram(param) {
                 return x(month_tag[i]) + (barPadding / 2)
             })
             .attr("y", function (d) {
-                return y(d.value)
+                return y(d.value) - 4
             })
             .attr("width", width / d_length - barPadding)
             .attr("height", function (d) {
@@ -57,12 +54,11 @@ function draw_histogram(param) {
                 return x(month_tag[i]) + (width / d_length) / 2
             })
             .attr("y", function (d) {
-                return y(d.value)
+                return y(d.value) - 4
             })
             .text(function (d) {
                 return d.value;
             });
-
 
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
