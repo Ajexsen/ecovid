@@ -64,7 +64,7 @@ function draw_histogram(param) {
 
 
         svg.append("g")
-            .attr("transform", "translate(0, " + height + ")")
+            .attr("transform", "translate(2, " + height + ")")
             .attr("class", "tick")
             .call(d3.axisBottom(x)
                 .tickSizeInner(0)
