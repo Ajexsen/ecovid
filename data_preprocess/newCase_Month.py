@@ -18,7 +18,6 @@ for index, value in df.iterrows():
         months[value["Meldedatum"].month] = value["NeuerFall"]
 
 # covert month number to string and save it as csv
-test = months.items()
 out = pd.DataFrame(months.items(), columns=['month','new_case'])
 out['month'] = out['month'].apply(lambda x: calendar.month_abbr[x])
 out.to_csv("../data/rki/rki_DE-newcase.csv", index=False)
