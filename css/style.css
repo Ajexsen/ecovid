@@ -269,15 +269,15 @@ body {
     /*background-color: #256787;*/
 }
 
-#map_pin_be {
+#jqvmap1_be_pin {
     transform: translate(-1.7vw, -2.5vh) !important;
 }
 
-#map_pin_bb {
+#jqvmap1_bb_pin {
     transform: translate(1.1vw, 2.3vh) !important;
 }
 
-#map_pin_hh {
+#jqvmap1_hh_pin {
     transform: translate(0.4vw, 0.4vh) !important;
 }
 
@@ -472,28 +472,22 @@ body {
     /*padding: 0 6px 0 6px;*/
     color: var(--burgundy);
     text-align: center;
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*font-weight: bold;*/
 }
 
 #since {
-    /*position: absolute;*/
-    /*bottom: 2.5vw;*/
-    /*transform: rotate(-90deg);*/
-    transform: translateY(100%) rotate(-90deg);
+    position: absolute;
+    transform: translateX(-100%) rotate(-90deg);
     font-size: 14px;
     font-weight: 300;
     height: 14px;
     line-height: 14px;
-    rotation-point: left top;
+    transform-origin: right top;
     color: var(--burgundy);
+    display: inline-block;
+
 }
 
 #since_container {
-    /*position: relative;*/
     width: 14px;
     margin-right: 2px;
     margin-left: 0.2vw;
