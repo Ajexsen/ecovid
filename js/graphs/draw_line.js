@@ -226,7 +226,7 @@ function draw_line(param) {
 
     if (param.legend) {
         const legend_container = $("#place_holder_event")
-        const legend_margin = {top: 10, right: 55, bottom: 10, left: 60}
+        const legend_margin = {top: 10, right: 30, bottom: 10, left: 55}
         let legend_width = legend_container.innerWidth() - legend_margin.left - legend_margin.right,
             legend_height = legend_container.innerHeight() - legend_margin.top - legend_margin.bottom;
 
@@ -241,26 +241,26 @@ function draw_line(param) {
         legend_svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', 0)
-            .attr('y', legend_height - 5)
+            .attr('y', legend_height)
             .text("New");
 
         legend_svg.append("rect")
-            .attr('class', 'legend_new')
+            .attr('class', 'legend_p1 legend_new')
             .attr("x", -10)
-            .attr("y", legend_height)
+            .attr("y", legend_height + 5)
             .attr("width", 20)
             .attr("height", 3);
 
         legend_svg.append('text')
             .attr('class', 'axis_label')
             .attr('x', width)
-            .attr('y', legend_height - 5)
+            .attr('y', legend_height)
             .text("Total");
 
         legend_svg.append("rect")
-            .attr('class', 'legend_total')
-            .attr("x", width - 10)
-            .attr("y", legend_height)
+            .attr('class', 'legend_p1 legend_total')
+            .attr("x", width - 11)
+            .attr("y", legend_height + 5)
             .attr("width", 22)
             .attr("height", 3);
     }

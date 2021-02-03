@@ -15,7 +15,7 @@ function init_page() {
     new fullpage('#fullpage', {
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['Overview', 'Transport', 'Trade', 'About Us'],
+        navigationTooltips: ['Overview', 'Transport', 'Trade', 'About'],
         scrollBar: true,
     });
 

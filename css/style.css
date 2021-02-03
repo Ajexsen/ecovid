@@ -1021,6 +1021,11 @@ body {
     text-anchor: middle;
 }
 
+.legend_p1 {
+    /*position: absolute;*/
+    /*transform: translateX(-50%);*/
+}
+
 .legend_new {
     fill: var(--magenta);
 }
