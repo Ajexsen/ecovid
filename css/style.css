@@ -55,16 +55,14 @@
 }
 
 @keyframes hint-fade-in {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-60px, -30px, 0);
-    transform: translate3d(-60px, -30px, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translate3d(-84px, -30px, 0);
-    transform: translate3d(-84px, -30px, 0);
-  }
+    0% {
+        opacity: 0;
+        transform: translate3d(-60px, -30px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(-84px, -30px, 0);
+    }
 }
 
 :root {
@@ -90,6 +88,7 @@ body {
     font-family: "Gill Sans MT Pro", helvetica, sans-serif !important;
     color: var(--burgundy);
     /*font-weight: 300;*/
+    -webkit-transform-style: preserve-3d;
 }
 
 /* preload button image to prevent blinking at first hover*/
@@ -699,7 +698,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
 }
 
 .content_title {
