@@ -560,6 +560,10 @@ body {
 .bar_center_container {
     height: 65%;
     width: 100%;
+    position: absolute;
+    top: 50%;
+    /*left: 50%;*/
+    transform: translateY(-50%);
 }
 
 .line_chart_overlay {

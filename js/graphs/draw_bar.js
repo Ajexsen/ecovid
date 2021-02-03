@@ -42,8 +42,7 @@ function draw_bar(param) {
     let x = bar_chart_config[param.gender + param.type].x;
     let y = bar_chart_config[param.gender + param.type].y;
     x.range([start, end]);
-    y.range([height, 0])
-        .padding(0.07);
+    y.range([height, 0]).padding(0.07);
 
     // append the rectangles for the bar chart
     let bar = svg.selectAll(".bar")
@@ -58,13 +57,15 @@ function draw_bar(param) {
             return (start - x(d.value)) * direction;
         })
 
+    const bar_margin = 0
+
     if (param.direction === "left") {
         bar.attr("x", function (d) {
-            return x(d.value);
+            return x(d.value) - bar_margin;
         })
     } else {
         bar.attr("x", function () {
-            return start;
+            return start + bar_margin;
         })
     }
 
@@ -74,11 +75,8 @@ function draw_bar(param) {
         .append("text")
         .attr("class", function (d) {
             let indicator = (param.direction === "right") === (x(d.value) < width / 2)
-            if (indicator) {
-                return "bar_label bar_label_dark";
-            } else {
-                return "bar_label bar_label_light";
-            }
+            if (indicator) return "bar_label bar_label_dark";
+            else return "bar_label bar_label_light";
         })
         .attr("x", function (d) {
             return x(d.value);
