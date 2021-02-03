@@ -6,7 +6,7 @@ function isItIE() {
 function browser_check() {
     if (isItIE()) {
         console.log('It is Internet Explorer');
-        window.location = "redirect_ie.html"
+        window.location = "html/redirect_ie.html"
     }
 }
 
