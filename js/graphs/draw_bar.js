@@ -1,11 +1,12 @@
 function draw_bar(param) {
     // set the dimensions and margins of the graph
     const container = $(param.target)
+    const margin_side = 0
     const margin = {
             top: 0,
-            right: 0 * (param.direction === "right"),
+            right: margin_side * (param.direction === "right"),
             bottom: 0,
-            left: 0 * (param.direction === "left")
+            left: margin_side * (param.direction === "left")
         },
         width = container.innerWidth() - margin.left - margin.right,
         height = container.innerHeight() - margin.top - margin.bottom;

@@ -57,11 +57,13 @@
 @keyframes hint-fade-in {
   0% {
     opacity: 0;
-    transform: translate(-60px, -30px);
+    -webkit-transform: translate3d(-60px, -30px, 0);
+    transform: translate3d(-60px, -30px, 0);
   }
   100% {
     opacity: 1;
-    transform: translate(-84px, -30px);
+    -webkit-transform: translate3d(-84px, -30px, 0);
+    transform: translate3d(-84px, -30px, 0);
   }
 }
 
@@ -86,6 +88,8 @@ body {
     height: 100vh;
     overflow: hidden !important;
     font-family: "Gill Sans MT Pro", helvetica, sans-serif !important;
+    color: var(--burgundy);
+    /*font-weight: 300;*/
 }
 
 /* preload button image to prevent blinking at first hover*/
@@ -249,29 +253,31 @@ body {
     fill-opacity: 90% !important;
 }
 
-.jqvmap-pin {
+.map_pin {
     color: var(--offwhite);
     font-size: 0.9vw;
     font-weight: 300;
     background: var(--burgundy);
-    /*width: 40px;*/
-    /*text-anchor: middle;*/
-    /*text-align: center;*/
-    opacity: 90%;
-    /*height: 40px;*/
     padding: 0 5px 0 5px;
-    /*display:inline-block;*/
 }
 
-#jqvmap1_be_pin {
+.jqvmap-pin {
+    width: 5vw;
+    height: 5vh;
+    opacity: 90%;
+    position: relative;
+    /*background-color: #256787;*/
+}
+
+#map_pin_be {
     transform: translate(-1.3vw, -0.9vh) !important;
 }
 
-#jqvmap1_bb_pin {
+#map_pin_bb {
     transform: translate(1.5vw, 2.5vh) !important;
 }
 
-#jqvmap1_hh_pin {
+#map_pin_hh {
     transform: translate(0.7vw, 0.7vh) !important;
 }
 
@@ -345,7 +351,7 @@ body {
 
 .data_source {
     position: absolute;
-    right: 56px;
+    right: 31px;
     bottom: 26px;
     margin-top: 8px;
     /*margin-right: 5px;*/
@@ -404,7 +410,7 @@ body {
     display: block;
     position: absolute;
     /*margin: 35px 50px 35px 55px;*/
-    margin: 3.5vw 4vw 3.5vw 4vw;
+    margin: 3.6vw 5.5vw 3.5vw 4.2vw;
     height: auto;
     bottom: 0;
     top: 0;
@@ -448,24 +454,28 @@ body {
 
 .dateblock {
     margin-right: 1.4vw;
-    /*width: 2.2vw;*/
+    width: 2.2vw;
 }
 
-#month1, #month2 {
+.month {
     background: var(--burgundy);
-    padding: 0 6px 0 6px;
+    /*padding: 0 6px 0 6px;*/
     color: var(--offwhite);
-    font-size: 1.0vw;
+    font-size: 0.9vw;
     text-align: center;
     font-weight: 100;
 }
 
-#day1, #day2 {
+.day {
     border: solid var(--burgundy) 1px;
-    font-size: 1.5vw;
-    padding: 0 6px 0 6px;
+    font-size: 1.3vw;
+    /*padding: 0 6px 0 6px;*/
     color: var(--burgundy);
     text-align: center;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*left: 0;*/
+    /*right: 0;*/
     /*font-weight: bold;*/
 }
 
@@ -501,18 +511,18 @@ body {
     overflow: hidden;
 }
 
-/*.stat_last {*/
-/*    border-right: none;*/
-/*}*/
+.stat_last {
+    border-right: solid var(--burgundy) 2px;
+}
 
 .stat_title {
-    font-size: 1.0vw;
+    font-size: 0.9vw;
     font-weight: 300;
     white-space: nowrap;
 }
 
 .stat_value {
-    font-size: 1.5vw;
+    font-size: 1.3vw;
     font-weight: bold;
     white-space: nowrap;
     /*overflow: hidden;*/
@@ -559,12 +569,13 @@ body {
 }
 
 .line_chart_overlay {
-    margin: 75px calc(55px - var(--axis-width) / 2) 25px calc(55px + var(--axis-width) / 2);
+    margin: 75px calc(30px - var(--axis-width) / 2) 25px calc(55px + var(--axis-width) / 2);
     /*overflow: hidden;*/
 }
 
 #line_chart_event {
-    margin: 0 calc(55px - var(--axis-width)) 25px calc(55px + var(--axis-width) / 2);
+    margin: 0 calc(30px - var(--axis-width)) 25px calc(55px + var(--axis-width) / 2);
+    overflow: hidden;
     overflow: hidden;
 }
 
@@ -676,6 +687,14 @@ body {
 .content_sec {
     height: 85vh;
     width: 45vw;
+}
+
+.content_credit {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 300;
 }
 
 .center_box {
@@ -1062,7 +1081,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    margin: 0 50px 25px 10px;
+    margin: 5px 50px 25px 10px;
 }
 
 .line_chart_impact {

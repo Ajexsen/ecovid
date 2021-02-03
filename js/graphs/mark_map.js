@@ -1,7 +1,12 @@
 function mark_map(param) {
     for (let state of states) {
         let map_label = d3.select("#jqvmap1_" + state + "_pin");
-        map_label.html(param.data[param.date][state])
+        map_label.html("")
+        let map_label_container = map_label
+            .append("div")
+            .attr("id", "map_pin_" + state)
+            .attr("class", "map_pin center_box");
+        map_label_container.html(param.data[param.date][state])
 
         let map_title = d3.select("#map_title")
         let start_date = d3.timeParse(rki_dateFormat)("2020-01-01")

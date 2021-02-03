@@ -15,7 +15,7 @@ function init_page() {
     new fullpage('#fullpage', {
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['Overview', 'Transport', 'Trade'],
+        navigationTooltips: ['Overview', 'Transport', 'Trade', 'About Us'],
         scrollBar: true,
     });
 
@@ -60,6 +60,11 @@ function init_page() {
     for (let state of states) {
         let map_label = d3.select("#jqvmap1_" + state + "_pin");
         map_label.html("")
+        let map_label_container = map_label
+            .append("div")
+            .attr("id", "map_pin_" + state)
+            .attr("class", "map_pin center_box");
+        map_label_container.html("")
     }
 }
 
