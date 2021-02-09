@@ -14,7 +14,7 @@ const day_format = d3.timeFormat("%d");
 
 // still needs to be checked, and updated.
 event_timeline = {
-    "2020-03-16": "Bavaria declares state of emergency",
+    "2020-03-16": "Bavaria declares emergency",
     // "2020-03-23": "1st Lockdown",
     "2020-04-12": "Easter",
     "2020-11-02": "Partial lockdown",

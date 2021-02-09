@@ -89,6 +89,7 @@ body {
     color: var(--burgundy);
     /*font-weight: 300;*/
     -webkit-transform-style: preserve-3d;
+    /*font-smoothing: antialiased;*/
 }
 
 a, a:link, a:visited, a:hover {
@@ -303,7 +304,7 @@ a, a:link, a:visited, a:hover {
     /*padding: 1px;*/
     padding: 0 3px 0 3px;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 300;
     pointer-events: none;
     white-space: nowrap;
     z-index: 200;
@@ -366,6 +367,8 @@ a, a:link, a:visited, a:hover {
     font-size: 12px;
     font-weight: 300;
     line-height: 14px;
+    z-index: 100;
+    opacity: 80%;
 }
 
 .data_source2 {
@@ -467,7 +470,7 @@ a, a:link, a:visited, a:hover {
     color: var(--offwhite);
     font-size: 0.9vw;
     text-align: center;
-    font-weight: 100;
+    font-weight: 300;
 }
 
 .day {
@@ -528,7 +531,7 @@ a, a:link, a:visited, a:hover {
 
 .bar_center_label {
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 300;
     white-space: nowrap;
     color: var(--burgundy);
     /*position: relative;*/
@@ -539,7 +542,7 @@ a, a:link, a:visited, a:hover {
 
 .hist_label {
     /*font-size: 12px;*/
-    font-weight: 100;
+    font-weight: 300;
     white-space: nowrap;
     color: var(--burgundy);
     /*position: relative;*/
@@ -730,7 +733,7 @@ a, a:link, a:visited, a:hover {
     /*margin-top: 5px;*/
     margin-left: 40px;
     font-size: 2.3vh;
-    font-weight: 100;
+    font-weight: 300;
     color: var(--burgundy);
 }
 
@@ -915,7 +918,7 @@ a, a:link, a:visited, a:hover {
 
 .tick {
     color: var(--burgundy);
-    font-weight: 100;
+    font-weight: 300;
     opacity: 100% !important;
     /*visibility: hidden;*/
 }
@@ -1066,7 +1069,7 @@ a, a:link, a:visited, a:hover {
     position: absolute;
     padding: 4px 8px 4px 8px;
     font-size: 10px;
-    font-weight: 100;
+    font-weight: 300;
     pointer-events: none;
     white-space: nowrap;
     opacity: 0;
