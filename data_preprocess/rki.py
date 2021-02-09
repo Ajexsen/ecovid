@@ -1,5 +1,7 @@
 import pandas as pd
 import datetime
+import csv
+import calendar
 
 
 STATE_ID_NAME_MAP = {
@@ -139,6 +141,28 @@ def d7_df():
     df.to_csv("{}{}".format(save_path, file_name), index = False)
     print("{} saved in path: {}".format(file_name, save_path))
 
+
+def newCase_monthly():
+    # read rki whole rki DE data
+    df = pd.read_csv("../data/rki/rki_DE-all.csv", dayfirst=True, parse_dates=True)
+    df["Meldedatum"] = pd.to_datetime(df.Meldedatum, format='%Y-%m-%d')
+    
+    # only 2020     
+    df = df[df['Meldedatum'].dt.year == 2020]
+    
+    months = dict()
+    # do statistic of new cases for every month
+    for index, value in df.iterrows():
+        if value["Meldedatum"].month in months:
+            months[value["Meldedatum"].month] += value["NeuerFall"]
+        else:
+            months[value["Meldedatum"].month] = value["NeuerFall"]
+    
+    # covert month number to string and save it as csv
+    out = pd.DataFrame(months.items(), columns=['month','new_case'])
+    out['month'] = out['month'].apply(lambda x: calendar.month_abbr[x])
+    out.to_csv("../data/rki/rki_DE-newcase.csv", index=False)
+
 # TODO: download & update data (once per day)
 # https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv
 
@@ -174,6 +198,9 @@ for i in range(17):
 
 # generate nation-wide csv (DE_all)
 # df = get_csv_bundesland(data, 0, save_path)
+
+# new case nationwide monthly
+newCase_monthly()
 
 # generate 7d everyday per bundesland
 d7_df()
