@@ -473,7 +473,7 @@ body {
     text-align: center;
 }
 
-#since {
+#since, #stat_year1 {
     position: absolute;
     transform: translateX(-100%) rotate(-90deg);
     font-size: 14px;
@@ -486,7 +486,7 @@ body {
 
 }
 
-#since_container {
+#since_container, #stat_year1_container {
     width: 14px;
     margin-right: 2px;
     margin-left: 0.2vw;
@@ -519,6 +519,17 @@ body {
     font-weight: bold;
     white-space: nowrap;
     /*overflow: hidden;*/
+}
+
+.bar_center_label {
+    font-size: 12px;
+    font-weight: 100;
+    white-space: nowrap;
+    color: var(--burgundy);
+    /*position: relative;*/
+    /*height: 16.667%;*/
+    text-anchor: middle;
+    transform: translateY(0px);
 }
 
 .hist_label {
@@ -573,7 +584,7 @@ body {
 #line_chart_event {
     margin: 0 calc(30px - var(--axis-width)) 25px calc(55px + var(--axis-width) / 2);
     overflow: hidden;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #line_chart_graph {
