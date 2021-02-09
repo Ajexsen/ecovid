@@ -91,6 +91,11 @@ body {
     -webkit-transform-style: preserve-3d;
 }
 
+a, a:link, a:visited, a:hover {
+    text-decoration: none;
+    color: var(--burgundy);
+}
+
 /* preload button image to prevent blinking at first hover*/
 #preloadedImage01 {
     background: url('../images/air_inactive.png') no-repeat -9999px -9999px;
@@ -861,9 +866,9 @@ body {
     position: absolute;
     height: 30px;
     width: 75px;
-/*    width: 85px;
-    color: var(--offwhite);
-    background: var(--magenta);*/
+    /*    width: 85px;
+        color: var(--offwhite);
+        background: var(--magenta);*/
     color: var(--burgundy);
     line-height: 30px;
     text-align: right;
@@ -1268,7 +1273,7 @@ text.dlabs {
     z-index: 200;
     top: 0;
     left: 0;
-    position:fixed;
+    position: fixed;
     /*visibility: hidden;*/
 }
 
