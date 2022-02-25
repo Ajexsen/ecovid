@@ -172,7 +172,11 @@ data = pd.read_csv("RKI_COVID19.csv")
 save_path = '..//data//rki//'
 
 # remove unnecessary column
-data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis', 
+# data = data.drop(columns=['Landkreis', 'ObjectId', 'IdLandkreis', 
+#                          'Datenstand', 'Refdatum', 
+#                          'Altersgruppe2'])
+
+data = data.drop(columns=['Landkreis', 'FID', 'IdLandkreis', 
                           'Datenstand', 'Refdatum', 
                           'Altersgruppe2'])
 data = data.drop(columns=['NeuGenesen', 'AnzahlGenesen', 'IstErkrankungsbeginn'])
