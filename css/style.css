@@ -90,6 +90,7 @@ body {
     /*font-weight: 300;*/
     -webkit-transform-style: preserve-3d;
     /*font-smoothing: antialiased;*/
+    background-color: var(--offwhite);
 }
 
 a, a:link, a:visited, a:hover {
@@ -163,7 +164,7 @@ a, a:link, a:visited, a:hover {
 }
 
 .bg {
-    background-color: var(--offwhite);
+/*     background-color: var(--offwhite); */
     position: fixed;
     z-index: -200;
 }
